@@ -3,10 +3,11 @@ using UnityEngine.InputSystem;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Vector2Int m_position;
     void Start()
     {
-        
+        m_position = new Vector2Int(1, 1);
+
     }
 
     // Update is called once per frame
@@ -14,22 +15,26 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
-            Debug.Log("Up arrow key was pressed.");
+            m_position += Vector2Int.up;
+            transform.position = new Vector3(transform.position.x, m_position.y, transform.position.z);
         }
 
         if (Keyboard.current.downArrowKey.wasPressedThisFrame)
         {
-            Debug.Log("Down arrow key was pressed.");
+            m_position += Vector2Int.down;
+            transform.position = new Vector3(transform.position.x, m_position.y, transform.position.z);
         }
 
         if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
         {
-            Debug.Log("Left arrow key was pressed.");
+            m_position += Vector2Int.left;
+            transform.position = new Vector3(m_position.x, transform.position.y, transform.position.z);
         }
 
         if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
         {
-            Debug.Log("Right arrow key was pressed.");
+            m_position += Vector2Int.right;
+            transform.position = new Vector3(m_position.x, transform.position.y, transform.position.z);
         }
     }
 }
