@@ -3,38 +3,29 @@ using UnityEngine.InputSystem;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-    private Vector2Int m_position;
+    private Rigidbody2D rb;
+
     void Start()
     {
-        m_position = new Vector2Int(1, 1);
-
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Keyboard.current.upArrowKey.wasPressedThisFrame)
-        {
-            m_position += Vector2Int.up;
-            transform.position = new Vector3(transform.position.x, m_position.y, transform.position.z);
+    
+    void Update() {
+        // Upキーで前に進む
+        if (Keyboard.current.upArrowKey.wasPressedThisFrame) {
+            rb.MovePosition(transform.position + transform.forward * 10f * Time.deltaTime);
         }
-
-        if (Keyboard.current.downArrowKey.wasPressedThisFrame)
-        {
-            m_position += Vector2Int.down;
-            transform.position = new Vector3(transform.position.x, m_position.y, transform.position.z);
+        // Downキーで後ろに進む
+        if (Keyboard.current.downArrowKey.wasPressedThisFrame) {
+            rb.MovePosition(transform.position - transform.forward * 10f * Time.deltaTime);
         }
-
-        if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-        {
-            m_position += Vector2Int.left;
-            transform.position = new Vector3(m_position.x, transform.position.y, transform.position.z);
+        //right キーで右に進む
+        if (Keyboard.current.rightArrowKey.wasPressedThisFrame) {
+            rb.MovePosition(transform.position + transform.right * 10f * Time.deltaTime);
         }
-
-        if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
-        {
-            m_position += Vector2Int.right;
-            transform.position = new Vector3(m_position.x, transform.position.y, transform.position.z);
+        //left キーで左に進む
+        if (Keyboard.current.leftArrowKey.wasPressedThisFrame) {
+            rb.MovePosition(transform.position - transform.right * 10f * Time.deltaTime);
         }
     }
 }
