@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class NewMonoBehaviourScript : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private int speed = 50;
 
     void Start()
     {
@@ -11,21 +12,17 @@ public class NewMonoBehaviourScript : MonoBehaviour
     }
     
     void Update() {
-        // Upキーで前に進む
-        if (Keyboard.current.upArrowKey.wasPressedThisFrame) {
-            rb.MovePosition(transform.position + transform.forward * 10f * Time.deltaTime);
-        }
-        // Downキーで後ろに進む
-        if (Keyboard.current.downArrowKey.wasPressedThisFrame) {
-            rb.MovePosition(transform.position - transform.forward * 10f * Time.deltaTime);
-        }
-        //right キーで右に進む
-        if (Keyboard.current.rightArrowKey.wasPressedThisFrame) {
-            rb.MovePosition(transform.position + transform.right * 10f * Time.deltaTime);
-        }
-        //left キーで左に進む
-        if (Keyboard.current.leftArrowKey.wasPressedThisFrame) {
-            rb.MovePosition(transform.position - transform.right * 10f * Time.deltaTime);
-        }
+        Vector2 pos = rb.position;
+
+        if (Keyboard.current.upArrowKey.isPressed)
+            pos += Vector2.up * speed * Time.deltaTime;
+        if (Keyboard.current.downArrowKey.isPressed)
+            pos += Vector2.down * speed * Time.deltaTime;
+        if (Keyboard.current.rightArrowKey.isPressed)
+            pos += Vector2.right * speed * Time.deltaTime;
+        if (Keyboard.current.leftArrowKey.isPressed)
+            pos += Vector2.left * speed * Time.deltaTime;
+
+        rb.MovePosition(pos);
     }
 }
