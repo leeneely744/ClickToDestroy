@@ -3,10 +3,16 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private ScoreBoard scoreBoard;
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        scoreBoard = GameObject.Find("ScoreBoard")?.GetComponent<ScoreBoard>();
+        if (scoreBoard == null)
+        {
+            Debug.LogError("ScoreBoard not found");
+        }
     }
 
     void FixedUpdate()
@@ -29,7 +35,7 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.tag == "Goal")
         {
             Destroy(gameObject);
-            Debug.Log("Enemy destroyed");
+            scoreBoard.CalcHp(10);
         }
     }
 }
