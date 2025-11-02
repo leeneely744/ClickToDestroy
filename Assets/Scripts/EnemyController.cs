@@ -22,4 +22,14 @@ public class EnemyController : MonoBehaviour
 
         rb.MovePosition(pos);
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log($"Collision with {collision.gameObject.tag}");
+        if (collision.gameObject.tag == "Goal")
+        {
+            Destroy(gameObject);
+            Debug.Log("Enemy destroyed");
+        }
+    }
 }
