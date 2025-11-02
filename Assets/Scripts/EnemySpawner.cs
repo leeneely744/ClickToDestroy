@@ -11,7 +11,11 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        startTime = Time.time;
+        if (enemys.Length == 0)
+        {
+            return;
+        }
+
         InvokeRepeating(
             nameof(SpawnEnemy),
             0.0f,
@@ -20,9 +24,17 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        Debug.Log("SpawnEnemy");
-        // var randomIndex = Random.Range(0, enemys.Length);
-        // var newEnemy = Instantiate(enemys[randomIndex], transform.position, Quaternion.identity);
-        // newEnemy.transform.position = transform.position;
+        if (appearanceCount >= appearanceLimit)
+        {
+            return;
+        }
+
+        Instantiate(
+            enemys[Random.Range(0, enemys.Length)],
+            transform.position,
+            Quaternion.identity
+        );
+
+        appearanceCount++;
     }
 }
