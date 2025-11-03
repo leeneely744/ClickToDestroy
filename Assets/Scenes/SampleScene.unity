@@ -969,6 +969,7 @@ MonoBehaviour:
   appearanceCount: 0
   enemys:
   - {fileID: 7859811545660653944, guid: 41930401cec364dcfb3b82c00d623dbf, type: 3}
+  route: {fileID: 1366335554}
 --- !u!4 &1611633352
 Transform:
   m_ObjectHideFlags: 0
