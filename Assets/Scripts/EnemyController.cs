@@ -9,6 +9,15 @@ public class EnemyController : MonoBehaviour
     private int currentWaypointIndex = 0;
     private float speed = 2.0f;
 
+    void Start()
+    {
+        scoreBoard = GameObject.Find("ScoreBoard")?.GetComponent<ScoreBoard>();
+        if (scoreBoard == null)
+        {
+            Debug.LogError("ScoreBoard not found");
+        }
+    }
+
     void FixedUpdate()
     {
         if (waypoints == null || waypoints.Length == 0)
