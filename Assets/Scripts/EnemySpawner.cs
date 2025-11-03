@@ -7,6 +7,8 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject[] enemys;
 
+    public Route route;
+
     private float spawnInterval = 2.0f;
 
     void Start()
@@ -29,12 +31,14 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        Instantiate(
+        var enemy = Instantiate(
             enemys[Random.Range(0, enemys.Length)],
             transform.position,
             Quaternion.identity
         );
 
+        enemy.GetComponent<EnemyController>().SetRoute(route);
+        
         appearanceCount++;
     }
 }

@@ -2,40 +2,43 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    // private Rigidbody2D rb;
     private ScoreBoard scoreBoard;
 
-    void Start()
-    {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        scoreBoard = GameObject.Find("ScoreBoard")?.GetComponent<ScoreBoard>();
-        if (scoreBoard == null)
-        {
-            Debug.LogError("ScoreBoard not found");
-        }
-    }
+    private Transform[] waypoints;
+    private int currentWaypointIndex = 0;
+    private float speed = 2.0f;
 
     void FixedUpdate()
     {
-        Vector2 pos = rb.position;
-
-        pos += Vector2.right * 2 * Time.deltaTime;
-
-        if (pos.x > 10)
+        if (waypoints == null || waypoints.Length == 0)
         {
-            Destroy(gameObject);
+            return;
         }
 
-        rb.MovePosition(pos);
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            waypoints[currentWaypointIndex].position,
+            speed * Time.deltaTime
+        );
+
+        // 次のポイントへ向かう
+        if (Vector2.Distance(transform.position, waypoints[currentWaypointIndex].position) < 0.05f)
+        {
+            currentWaypointIndex++;
+
+            // 次のポイントがない場合はゴール
+            if (currentWaypointIndex >= waypoints.Length)
+            {
+                Destroy(gameObject);
+                scoreBoard.CalcHp(10);
+            }
+        }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    public void SetRoute(Route route)
     {
-        Debug.Log($"Collision with {collision.gameObject.tag}");
-        if (collision.gameObject.tag == "Goal")
-        {
-            Destroy(gameObject);
-            scoreBoard.CalcHp(10);
-        }
+        waypoints = route.waypoints;
+        transform.position = waypoints[0].position;
     }
 }
