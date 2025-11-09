@@ -9,6 +9,8 @@ public class EnemyController : MonoBehaviour
     private int currentWaypointIndex = 0;
     private float speed = 2.0f;
 
+    public int hp = 30;
+
     void Start()
     {
         scoreBoard = GameObject.Find("ScoreBoard")?.GetComponent<ScoreBoard>();
@@ -49,5 +51,15 @@ public class EnemyController : MonoBehaviour
     {
         waypoints = route.waypoints;
         transform.position = waypoints[0].position;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        if (hp <= 0)
+        {
+            Debug.Log($"Enemy destroyed: {gameObject.name}");
+            Destroy(gameObject);
+        }
     }
 }

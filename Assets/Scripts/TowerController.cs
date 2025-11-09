@@ -9,6 +9,9 @@ public class TowerController : MonoBehaviour
 
     private List<EnemyController> enemiesInRange = new List<EnemyController>();
 
+    public GameObject projectilePrefab;
+    public Transform firePoint;  // 砲弾の発射位置
+
     void Update()
     {
         attackTimer += Time.deltaTime;
@@ -26,7 +29,11 @@ public class TowerController : MonoBehaviour
 
     void Attack(EnemyController target)
     {
-        Debug.Log($"Tower attacking enemy: {target.gameObject.name}");
+        if (projectilePrefab == null) return;
+
+        GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+        Projectile p = bullet.GetComponent<Projectile>();
+        p.SetTarget(target.transform);
     }
 
     void OnTriggerEnter2D(Collider2D col)
