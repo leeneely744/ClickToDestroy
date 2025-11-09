@@ -5,6 +5,6 @@ public class TowerPlace : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Tower place clicked");
+        TowerSelectPanel.Instance.Show(transform.position);
     }
 }
