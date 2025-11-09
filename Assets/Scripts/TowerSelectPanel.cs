@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class TowerSelectPanel : MonoBehaviour
 {
     public static TowerSelectPanel Instance;
+    private Tilemap frontTilemap;
     private Vector3 currentSpawnPosition;
 
     [SerializeField] private GameObject bowTowerPrefab;
@@ -13,6 +15,13 @@ public class TowerSelectPanel : MonoBehaviour
     {
         Instance = this;
         gameObject.SetActive(false);
+
+        // frontTilemapを取得
+        var frontOjb = GameObject.Find("Front");
+        if (frontOjb != null)
+        {
+            frontTilemap = frontOjb.GetComponent<Tilemap>();
+        }
     }
 
     public void Show(Vector3 spawnPosition)
@@ -34,8 +43,13 @@ public class TowerSelectPanel : MonoBehaviour
 
     private void PlaceTower(GameObject prefab)
     {
-        Debug.Log("Placing tower at: " + currentSpawnPosition);
         Instantiate(prefab, currentSpawnPosition, Quaternion.identity);
         Hide();
+
+        // Front　Tilemapからタイルを消す
+        if (frontTilemap != null)
+        {
+            frontTilemap.SetTile(frontTilemap.WorldToCell(currentSpawnPosition), null);
+        }
     }
 }
