@@ -12,6 +12,23 @@ public class TowerController : MonoBehaviour
     public GameObject projectilePrefab;
     public Transform firePoint;  // 砲弾の発射位置
 
+    private bool isSelected = false;
+    private SpriteRenderer spriteRenderer;
+
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void OnSelected()
+    {
+        isSelected = !isSelected;
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = isSelected ? Color.yellow : Color.white;
+        }
+    }
+    
     void Update()
     {
         attackTimer += Time.deltaTime;
