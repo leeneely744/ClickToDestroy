@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class TowerController : MonoBehaviour
 {
-    public float range = 3f;
     public float attackInterval = 1.0f;
     private float attackTimer = 0f;
 
