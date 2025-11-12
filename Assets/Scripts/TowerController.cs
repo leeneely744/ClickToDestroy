@@ -13,19 +13,28 @@ public class TowerController : MonoBehaviour
     public Transform firePoint;  // 砲弾の発射位置
 
     private bool isSelected = false;
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer attackRangeRenderer;
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        Transform rangeCircle = transform.Find("AttackRangeCircle");
+        if (rangeCircle != null)
+        {
+            attackRangeRenderer = rangeCircle.GetComponent<SpriteRenderer>();
+        }
+
+        if (attackRangeRenderer != null)
+        {
+            attackRangeRenderer.enabled = false;
+        }
     }
 
     public void OnSelected()
     {
         isSelected = !isSelected;
-        if (spriteRenderer != null)
+        if (attackRangeRenderer != null)
         {
-            spriteRenderer.color = isSelected ? Color.yellow : Color.white;
+            attackRangeRenderer.enabled = isSelected;
         }
     }
     
