@@ -58,7 +58,6 @@ public class EnemyController : MonoBehaviour
         hp -= damage;
         if (hp <= 0)
         {
-            Debug.Log($"Enemy destroyed: {gameObject.name}");
             Destroy(gameObject);
         }
     }
