@@ -38,6 +38,19 @@ public class EnemyController : MonoBehaviour
         {
             currentWaypointIndex++;
 
+            // 現在のポイントよりも次のポイントのx座標が大きい場合、localScale.xを逆にする（デフォルトは左向きを想定）
+            if (currentWaypointIndex < waypoints.Length)
+            {
+                if (waypoints[currentWaypointIndex].position.x > transform.position.x)
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                }
+                else
+                {
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
+            }
+
             // 次のポイントがない場合はゴール
             if (currentWaypointIndex >= waypoints.Length)
             {
