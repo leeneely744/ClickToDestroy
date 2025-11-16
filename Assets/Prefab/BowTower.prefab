@@ -231,6 +231,7 @@ MonoBehaviour:
   attackInterval: 1
   projectilePrefab: {fileID: 6414521654039372358, guid: 43e6abde90e044ba28badbe494212f01, type: 3}
   firePoint: {fileID: 8865331217722455042}
+  projectileTravelTime: 0.2
 --- !u!58 &8573384346910751548
 CircleCollider2D:
   m_ObjectHideFlags: 0

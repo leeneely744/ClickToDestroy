@@ -7,9 +7,18 @@ public class Projectile : MonoBehaviour
 
     private Transform target;
 
-    public void SetTarget(Transform newTarget)
+    public void SetTarget(Transform newTarget, float desiredTravelTime = 0f)
     {
         target = newTarget;
+
+        if (target != null && desiredTravelTime > 0f)
+        {
+            float distance = Vector3.Distance(transform.position, target.position);
+            if (distance > 0.01f)
+            {
+                speed = distance / desiredTravelTime;
+            }
+        }
     }
 
     void Update()

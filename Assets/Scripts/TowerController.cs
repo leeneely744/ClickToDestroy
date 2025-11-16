@@ -11,6 +11,9 @@ public class TowerController : MonoBehaviour
     public GameObject projectilePrefab;
     public Transform firePoint;  // 砲弾の発射位置
 
+    [Tooltip("0 より大きい場合、弾はこの時間でターゲットへ到達できる速度に調整されます。")]
+    public float projectileTravelTime = 0f;
+
     private bool isSelected = false;
     private SpriteRenderer attackRangeRenderer;
 
@@ -67,7 +70,7 @@ public class TowerController : MonoBehaviour
 
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         Projectile p = bullet.GetComponent<Projectile>();
-        p.SetTarget(target.transform);
+        p.SetTarget(target.transform, projectileTravelTime);
     }
 
     void OnTriggerEnter2D(Collider2D col)
