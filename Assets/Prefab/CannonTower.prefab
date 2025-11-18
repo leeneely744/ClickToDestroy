@@ -104,8 +104,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f448f355087e74d35873e1ea78a86e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerController
-  range: 3
   attackInterval: 1
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  projectileTravelTime: 0
+  cost: 120
 --- !u!58 &-1637836066502720254
 CircleCollider2D:
   m_ObjectHideFlags: 0

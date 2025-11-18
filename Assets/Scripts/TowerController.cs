@@ -17,6 +17,8 @@ public class TowerController : MonoBehaviour
     private bool isSelected = false;
     private SpriteRenderer attackRangeRenderer;
 
+    public int cost = 70;
+
     // For player tracking (optional)
     // private Transform playerTransform;
     // private bool playerInsideRange = false;

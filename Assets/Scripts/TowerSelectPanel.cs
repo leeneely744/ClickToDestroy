@@ -6,6 +6,7 @@ public class TowerSelectPanel : MonoBehaviour
     public static TowerSelectPanel Instance;
     private Tilemap frontTilemap;
     private Vector3 currentSpawnPosition;
+    private Money moneyController;
 
     [SerializeField] private GameObject bowTowerPrefab;
     [SerializeField] private GameObject magicTowerPrefab;
@@ -21,6 +22,12 @@ public class TowerSelectPanel : MonoBehaviour
         if (frontOjb != null)
         {
             frontTilemap = frontOjb.GetComponent<Tilemap>();
+        }
+
+        moneyController = FindObjectOfType<Money>();
+        if (moneyController == null)
+        {
+            Debug.LogError("Money component not found. Please place Money UI (with Money.cs) in the scene.");
         }
     }
 
@@ -43,6 +50,16 @@ public class TowerSelectPanel : MonoBehaviour
 
     private void PlaceTower(GameObject prefab)
     {
+        int nowMoney = moneyController.money;
+        int towerCost = prefab.GetComponent<TowerController>().cost;
+
+        if (nowMoney < towerCost)
+        {
+            Debug.Log("Not enough money to place tower.");
+            return;
+        }
+        moneyController.SpendMoney(towerCost);
+        
         Instantiate(prefab, currentSpawnPosition, Quaternion.identity);
         Hide();
 

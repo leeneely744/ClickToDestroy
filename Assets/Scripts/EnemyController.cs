@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        scoreBoard = GameObject.Find("ScoreBoard")?.GetComponent<ScoreBoard>();
+        scoreBoard = GameObject.Find("GameCanvas")?.GetComponent<ScoreBoard>();
         if (scoreBoard == null)
         {
             Debug.LogError("ScoreBoard not found");
