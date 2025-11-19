@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // private Rigidbody2D rb;
     private ScoreBoard scoreBoard;
+    private Money moneyController;
 
     private Transform[] waypoints;
     private int currentWaypointIndex = 0;
     private float speed = 2.0f;
 
     public int hp = 30;
+    public int rewardMoney = 20;
 
     void Start()
     {
@@ -17,6 +18,11 @@ public class EnemyController : MonoBehaviour
         if (scoreBoard == null)
         {
             Debug.LogError("ScoreBoard not found");
+        }
+        moneyController = GameObject.FindObjectOfType<Money>();
+        if (moneyController == null)
+        {
+            Debug.LogError("Money controller not found");
         }
     }
 
@@ -72,6 +78,7 @@ public class EnemyController : MonoBehaviour
         if (hp <= 0)
         {
             Destroy(gameObject);
+            moneyController.AddMoney(rewardMoney);
         }
     }
 }

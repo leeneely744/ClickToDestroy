@@ -106,7 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae0382a08fac40e9ae8699f9c337194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  hp: 15
+  hp: 20
+  rewardMoney: 40
 --- !u!50 &6897481661266436583
 Rigidbody2D:
   serializedVersion: 5
