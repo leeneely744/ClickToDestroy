@@ -6,15 +6,17 @@ public class Money : MonoBehaviour
     public int money = 100;
     public TextMeshProUGUI moneyText;
 
+    public int CurrentMoney => money;
+
     void Start()
     {
-        moneyText.text = $"Money: {money}";
+        UpdateMoneyText();
     }
 
     public void AddMoney(int amount)
     {
         money += amount;
-        moneyText.text = $"Money: {money}";
+        UpdateMoneyText();
     }
 
     public bool SpendMoney(int amount)
@@ -22,9 +24,23 @@ public class Money : MonoBehaviour
         if (money >= amount)
         {
             money -= amount;
-            moneyText.text = $"Money: {money}";
+            UpdateMoneyText();
             return true;
         }
         return false;
+    }
+
+    public void ResetMoney(int value)
+    {
+        money = value;
+        UpdateMoneyText();
+    }
+
+    private void UpdateMoneyText()
+    {
+        if (moneyText != null)
+        {
+            moneyText.text = $"Money: {money}";
+        }
     }
 }

@@ -6,26 +6,46 @@ public class ScoreBoard : MonoBehaviour
     public int hp = 100;
     public TextMeshProUGUI hpText;
 
-    [SerializeField] private GameObject gameOverPanel;
+    public int CurrentHp => hp;
 
     void Start()
     {
-        hpText.text = $"HP: {hp}";
+        UpdateHpText();
     }
 
     public void CalcHp(int damage)
     {
         hp -= damage;
-        hpText.text = $"HP: {hp}";
+        UpdateHpText();
         if (hp <= 0)
         {
             GameOver();
         }
     }
 
+    public void ResetHp(int value)
+    {
+        hp = value;
+        UpdateHpText();
+    }
+
+    private void UpdateHpText()
+    {
+        if (hpText != null)
+        {
+            hpText.text = $"HP: {hp}";
+        }
+    }
+
     private void GameOver()
     {
-        gameOverPanel.SetActive(true);
-        Debug.Log("Game Over");
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.HandleGameOver();
+        }
+        else
+        {
+            Debug.Log("Game Over");
+        }
     }
 }
