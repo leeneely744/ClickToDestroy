@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     private Transform[] waypoints;
     private int currentWaypointIndex = 0;
     private float speed = 2.0f;
+    private EnemySpawner enemySpawner;
 
     public int hp = 30;
     public int rewardMoney = 20;
@@ -23,6 +24,11 @@ public class EnemyController : MonoBehaviour
         if (moneyController == null)
         {
             Debug.LogError("Money controller not found");
+        }
+        enemySpawner = GameObject.FindObjectOfType<EnemySpawner>();
+        if (enemySpawner == null)
+        {
+            Debug.LogError("EnemySpawner not found");
         }
     }
 
@@ -79,6 +85,14 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject);
             moneyController.AddMoney(rewardMoney);
+            enemySpawner.AddDestroyCount();
+            if (
+                enemySpawner.GetDestroyCount() == enemySpawner.appearanceLimit &&
+                scoreBoard.CurrentHp > 0
+            )
+            {
+                GameManager.Instance.HandleGameClear();
+            }
         }
     }
 }

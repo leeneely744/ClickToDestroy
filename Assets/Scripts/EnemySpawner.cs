@@ -4,6 +4,7 @@ public class EnemySpawner : MonoBehaviour
 {
     public int appearanceLimit = 10;
     public int appearanceCount = 0;
+    private int destroyCount = 0;
 
     public GameObject[] enemys;
 
@@ -40,5 +41,15 @@ public class EnemySpawner : MonoBehaviour
         enemy.GetComponent<EnemyController>().SetRoute(route);
         
         appearanceCount++;
+    }
+
+    public void AddDestroyCount()
+    {
+        destroyCount++;
+    }
+
+    public int GetDestroyCount()
+    {
+        return destroyCount;
     }
 }
