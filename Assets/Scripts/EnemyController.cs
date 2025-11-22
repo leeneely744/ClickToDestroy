@@ -4,31 +4,29 @@ public class EnemyController : MonoBehaviour
 {
     private ScoreBoard scoreBoard;
     private Money moneyController;
+    private EnemySpawner ownerSpawner;
 
     private Transform[] waypoints;
     private int currentWaypointIndex = 0;
     private float speed = 2.0f;
-    private EnemySpawner enemySpawner;
 
     public int hp = 30;
     public int rewardMoney = 20;
 
+    private bool hasRemovedFromSpawner;
+
     void Start()
     {
-        scoreBoard = GameObject.Find("GameCanvas")?.GetComponent<ScoreBoard>();
+        scoreBoard = FindObjectOfType<ScoreBoard>();
         if (scoreBoard == null)
         {
             Debug.LogError("ScoreBoard not found");
         }
-        moneyController = GameObject.FindObjectOfType<Money>();
+
+        moneyController = FindObjectOfType<Money>();
         if (moneyController == null)
         {
             Debug.LogError("Money controller not found");
-        }
-        enemySpawner = GameObject.FindObjectOfType<EnemySpawner>();
-        if (enemySpawner == null)
-        {
-            Debug.LogError("EnemySpawner not found");
         }
     }
 
@@ -45,12 +43,10 @@ public class EnemyController : MonoBehaviour
             speed * Time.deltaTime
         );
 
-        // 次のポイントへ向かう
         if (Vector2.Distance(transform.position, waypoints[currentWaypointIndex].position) < 0.05f)
         {
             currentWaypointIndex++;
 
-            // 現在のポイントよりも次のポイントのx座標が大きい場合、localScale.xを逆にする（デフォルトは左向きを想定）
             if (currentWaypointIndex < waypoints.Length)
             {
                 if (waypoints[currentWaypointIndex].position.x > transform.position.x)
@@ -63,11 +59,11 @@ public class EnemyController : MonoBehaviour
                 }
             }
 
-            // 次のポイントがない場合はゴール
             if (currentWaypointIndex >= waypoints.Length)
             {
+                scoreBoard?.CalcHp(10);
+                NotifySpawnerRemoved();
                 Destroy(gameObject);
-                scoreBoard.CalcHp(10);
             }
         }
     }
@@ -78,21 +74,30 @@ public class EnemyController : MonoBehaviour
         transform.position = waypoints[0].position;
     }
 
+    public void SetSpawner(EnemySpawner spawner)
+    {
+        ownerSpawner = spawner;
+    }
+
     public void TakeDamage(int damage)
     {
         hp -= damage;
         if (hp <= 0)
         {
+            moneyController?.AddMoney(rewardMoney);
+            NotifySpawnerRemoved();
             Destroy(gameObject);
-            moneyController.AddMoney(rewardMoney);
-            enemySpawner.AddDestroyCount();
-            if (
-                enemySpawner.GetDestroyCount() == enemySpawner.appearanceLimit &&
-                scoreBoard.CurrentHp > 0
-            )
-            {
-                GameManager.Instance.HandleGameClear();
-            }
         }
+    }
+
+    private void NotifySpawnerRemoved()
+    {
+        if (hasRemovedFromSpawner)
+        {
+            return;
+        }
+
+        ownerSpawner?.NotifyEnemyRemoved(this);
+        hasRemovedFromSpawner = true;
     }
 }

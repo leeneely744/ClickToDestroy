@@ -1,55 +1,120 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public int appearanceLimit = 10;
-    public int appearanceCount = 0;
-    private int destroyCount = 0;
-
-    public GameObject[] enemys;
-
-    public Route route;
-
-    private float spawnInterval = 2.0f;
-
-    void Start()
+    [System.Serializable]
+    public class SpawnInstruction
     {
-        if (enemys.Length == 0)
+        public GameObject enemyPrefab;
+        public int count = 1;
+        public float interval = 0.5f;
+    }
+
+    [System.Serializable]
+    public class WaveDefinition
+    {
+        public string waveName = "Wave";
+        public SpawnInstruction[] spawns;
+        public float delayBeforeNextWave = 2f;
+    }
+
+    [SerializeField] private WaveDefinition[] waves;
+    [SerializeField] private Route route;
+    [SerializeField] private float startDelay = 1f;
+    [SerializeField] private ScoreBoard scoreBoard;
+
+    private int activeEnemies = 0;
+    private bool isRunning;
+
+    private void Start()
+    {
+        if (waves == null || waves.Length == 0)
         {
+            Debug.LogWarning("EnemySpawner: waves are not configured");
             return;
         }
 
-        InvokeRepeating(
-            nameof(SpawnEnemy),
-            0.0f,
-            spawnInterval);
+        StartCoroutine(RunWaves());
     }
 
-    void SpawnEnemy()
+    private IEnumerator RunWaves()
     {
-        if (appearanceCount >= appearanceLimit)
+        isRunning = true;
+        yield return new WaitForSeconds(startDelay);
+
+        for (int waveIndex = 0; waveIndex < waves.Length; waveIndex++)
         {
-            return;
+            var wave = waves[waveIndex];
+            yield return StartCoroutine(SpawnWave(wave));
+
+            while (activeEnemies > 0)
+            {
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(wave.delayBeforeNextWave);
         }
 
-        var enemy = Instantiate(
-            enemys[Random.Range(0, enemys.Length)],
-            transform.position,
-            Quaternion.identity
-        );
+        while (activeEnemies > 0)
+        {
+            yield return null;
+        }
 
-        enemy.GetComponent<EnemyController>().SetRoute(route);
-        
-        appearanceCount++;
+        isRunning = false;
+        if (scoreBoard == null)
+        {
+            scoreBoard = FindObjectOfType<ScoreBoard>();
+        }
+
+        if (scoreBoard != null && scoreBoard.CurrentHp > 0)
+        {
+            GameManager.Instance?.HandleGameClear();
+        }
     }
 
-    public void AddDestroyCount()
+    private IEnumerator SpawnWave(WaveDefinition wave)
     {
-        destroyCount++;
+        if (wave.spawns == null)
+        {
+            yield break;
+        }
+
+        foreach (var instruction in wave.spawns)
+        {
+            if (instruction.enemyPrefab == null)
+            {
+                continue;
+            }
+
+            for (int i = 0; i < instruction.count; i++)
+            {
+                SpawnEnemy(instruction.enemyPrefab);
+                yield return new WaitForSeconds(Mathf.Max(0f, instruction.interval));
+            }
+        }
     }
 
-    public int GetDestroyCount()
+    private void SpawnEnemy(GameObject prefab)
     {
-        return destroyCount;
+        var enemy = Instantiate(prefab, transform.position, Quaternion.identity);
+        var controller = enemy.GetComponent<EnemyController>();
+        if (controller != null)
+        {
+            controller.SetRoute(route);
+            controller.SetSpawner(this);
+        }
+
+        activeEnemies++;
+    }
+
+    public void NotifyEnemyRemoved(EnemyController enemy)
+    {
+        activeEnemies = Mathf.Max(0, activeEnemies - 1);
+    }
+
+    public bool IsWaveRunning()
+    {
+        return isRunning;
     }
 }
