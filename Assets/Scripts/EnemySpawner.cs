@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
         public GameObject enemyPrefab;
         public int count = 1;
         public float interval = 0.5f;
+        public int routeIndex = 0;
     }
 
     [System.Serializable]
@@ -20,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     [SerializeField] private WaveDefinition[] waves;
-    [SerializeField] private Route route;
+    [SerializeField] private Route[] routes;
     [SerializeField] private float startDelay = 1f;
     [SerializeField] private ScoreBoard scoreBoard;
 
@@ -89,13 +90,13 @@ public class EnemySpawner : MonoBehaviour
 
             for (int i = 0; i < instruction.count; i++)
             {
-                SpawnEnemy(instruction.enemyPrefab);
+                SpawnEnemy(instruction.enemyPrefab, routes[instruction.routeIndex]);
                 yield return new WaitForSeconds(Mathf.Max(0f, instruction.interval));
             }
         }
     }
 
-    private void SpawnEnemy(GameObject prefab)
+    private void SpawnEnemy(GameObject prefab, Route route)
     {
         var enemy = Instantiate(prefab, transform.position, Quaternion.identity);
         var controller = enemy.GetComponent<EnemyController>();
