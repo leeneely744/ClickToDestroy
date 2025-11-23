@@ -16,18 +16,17 @@ public class TowerController : MonoBehaviour
 
     private bool isSelected = false;
     private SpriteRenderer attackRangeRenderer;
+    private Money moneyController;
+    private TowerPlace towerPlace;
 
-    public int cost = 70;
-
-    // For player tracking (optional)
-    // private Transform playerTransform;
-    // private bool playerInsideRange = false;
+    [SerializeField] public int cost = 70;
+    [SerializeField] private int sellRefund = 60;
+    [SerializeField] private int upgradeCost = 100;
+    private int maxLevel = 3;
+    private int currentLevel = 1;
 
     void Start()
     {
-        // For player tracking (optional)
-        // rangeCollider = GetComponent<CircleCollider2D>();
-        
         Transform rangeCircle = transform.Find("AttackRangeCircle");
         if (rangeCircle != null)
         {
@@ -38,6 +37,12 @@ public class TowerController : MonoBehaviour
         {
             attackRangeRenderer.enabled = false;
         }
+
+        moneyController = FindObjectOfType<Money>();
+        if (moneyController == null)
+        {
+            Debug.LogError("Money controller not found");
+        }
     }
 
     public void OnSelected()
@@ -47,6 +52,8 @@ public class TowerController : MonoBehaviour
         {
             attackRangeRenderer.enabled = isSelected;
         }
+
+        TowerActionPanel.Instance.Show(this);
     }
     
     void Update()
@@ -62,8 +69,6 @@ public class TowerController : MonoBehaviour
                 Attack(enemiesInRange[0]);
             }
         }
-
-        // TrackPlayerRange();
     }
 
     void Attack(EnemyController target)
@@ -99,31 +104,32 @@ public class TowerController : MonoBehaviour
         }
     }
 
-    // private void TrackPlayerRange()
-    // {
-    //     if (playerTransform == null)
-    //     {
-    //         GameObject playerObj = GameObject.Find("Player");
-    //         if (playerObj != null)
-    //         {
-    //             playerTransform = playerObj.transform;
-    //         }
-    //     }
+    public void SetTowerPlace(TowerPlace place)
+    {
+        towerPlace = place;
+    }
+    
+    public void SellTower()
+    {
+        if (moneyController == null)
+        {
+            Debug.LogError("Money controller not found");
+            return;
+        }
+        if (towerPlace == null)
+        {
+            Debug.LogError("TowerPlace not found");
+            return;
+        }
 
-    //     if (playerTransform == null || rangeCollider == null)
-    //     {
-    //         return;
-    //     }
+        moneyController.AddMoney(sellRefund);
+        towerPlace.SetOccupied(false);
 
-    //     float worldRadius = rangeCollider.radius * transform.lossyScale.x;
-    //     float distance = Vector2.Distance(transform.position, playerTransform.position);
-    //     bool isInside = distance <= worldRadius;
+        Destroy(gameObject);
+    }
 
-    //     if (isInside && !playerInsideRange)
-    //     {
-    //         Debug.Log($"Player entered range (distance {distance:F2}, radius {worldRadius:F2})");
-    //     }
-
-    //     playerInsideRange = isInside;
-    // }
+    public void UpgradeTower()
+    {
+        Debug.Log("UpgradeTower called");
+    }
 }

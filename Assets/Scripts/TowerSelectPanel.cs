@@ -55,10 +55,11 @@ public class TowerSelectPanel : MonoBehaviour
         }
         moneyController.SpendMoney(towerCost);
 
-        Instantiate(prefab, currentSpawnPosition, Quaternion.identity);
+        var newTowerObject =Instantiate(prefab, currentSpawnPosition, Quaternion.identity);
         if (currentTowerPlace != null)
         {
             currentTowerPlace.SetOccupied(true);
+            newTowerObject.GetComponent<TowerController>().SetTowerPlace(currentTowerPlace);
         }
         Hide();
     }
