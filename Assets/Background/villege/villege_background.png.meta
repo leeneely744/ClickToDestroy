@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1b829002c86a74f05912a7954ac19325
+guid: e460c5a84f471435aa6fb4d92b245fea
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9093409991366325881
-    second: road_4_0
+      213: 3780591309835632094
+    second: villege_background_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: road_4_0
+      name: villege_background_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 1280
+        height: 720
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7894f93bac7bdc180800000000000000
-      internalID: -9093409991366325881
+      spriteID: edd7eaf04cb577430800000000000000
+      internalID: 3780591309835632094
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      road_4_0: -9093409991366325881
+      villege_background_0: 3780591309835632094
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
