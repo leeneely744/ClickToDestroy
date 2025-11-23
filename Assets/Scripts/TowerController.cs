@@ -55,6 +55,15 @@ public class TowerController : MonoBehaviour
 
         TowerActionPanel.Instance.Show(this);
     }
+
+    public void TurnOffAttackRange()
+    {
+        isSelected = false;
+        if (attackRangeRenderer != null)
+        {
+            attackRangeRenderer.enabled = false;
+        }
+    }
     
     void Update()
     {

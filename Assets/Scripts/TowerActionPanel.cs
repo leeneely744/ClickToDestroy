@@ -29,6 +29,13 @@ public class TowerActionPanel : MonoBehaviour
 
     public void Hide()
     {
+        if (towerController == null)
+        {
+            Debug.LogError("TowerController not found");
+            return;
+        }
+        // 必ず攻撃範囲表示をオフにしてから towerController をクリアする
+        towerController.TurnOffAttackRange();
         towerController = null;
         gameObject.SetActive(false);
     }
