@@ -4,8 +4,8 @@ using UnityEngine.Tilemaps;
 public class TowerSelectPanel : MonoBehaviour
 {
     public static TowerSelectPanel Instance;
-    private Tilemap frontTilemap;
     private Vector3 currentSpawnPosition;
+    private TowerPlace currentTowerPlace;
     private Money moneyController;
 
     [SerializeField] private GameObject bowTowerPrefab;
@@ -17,13 +17,6 @@ public class TowerSelectPanel : MonoBehaviour
         Instance = this;
         gameObject.SetActive(false);
 
-        // frontTilemapを取得
-        var frontOjb = GameObject.Find("Front");
-        if (frontOjb != null)
-        {
-            frontTilemap = frontOjb.GetComponent<Tilemap>();
-        }
-
         moneyController = FindObjectOfType<Money>();
         if (moneyController == null)
         {
@@ -31,15 +24,17 @@ public class TowerSelectPanel : MonoBehaviour
         }
     }
 
-    public void Show(Vector3 spawnPosition)
+    public void Show(TowerPlace towerPlace)
     {
-        currentSpawnPosition = spawnPosition;
-        transform.position = Camera.main.WorldToScreenPoint(spawnPosition);
+        currentTowerPlace = towerPlace;
+        currentSpawnPosition = towerPlace.transform.position;
+        transform.position = Camera.main.WorldToScreenPoint(currentSpawnPosition);
         gameObject.SetActive(true);
     }
 
     public void Hide()
     {
+        currentTowerPlace = null;
         gameObject.SetActive(false);
     }
 
@@ -59,14 +54,12 @@ public class TowerSelectPanel : MonoBehaviour
             return;
         }
         moneyController.SpendMoney(towerCost);
-        
-        Instantiate(prefab, currentSpawnPosition, Quaternion.identity);
-        Hide();
 
-        // Front　Tilemapからタイルを消す
-        if (frontTilemap != null)
+        Instantiate(prefab, currentSpawnPosition, Quaternion.identity);
+        if (currentTowerPlace != null)
         {
-            frontTilemap.SetTile(frontTilemap.WorldToCell(currentSpawnPosition), null);
+            currentTowerPlace.SetOccupied(true);
         }
+        Hide();
     }
 }
