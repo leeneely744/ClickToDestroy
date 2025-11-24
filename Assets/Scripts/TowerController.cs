@@ -49,6 +49,8 @@ public class TowerController : MonoBehaviour
         {
             Debug.LogError("Money controller not found");
         }
+
+        ApplyStatus();
     }
 
     public void OnSelected()
