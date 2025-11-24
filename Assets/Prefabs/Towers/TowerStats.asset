@@ -15,19 +15,22 @@ MonoBehaviour:
   towerName: BowTowerStatus
   towerSprite: {fileID: 0}
   levels:
-  - level: 1
+  - levelIndex: 0
+    towerName: beginner archer
     cost: 100
     sellRefund: 90
     attackDamage: 10
     attackInterval: 1
     range: 1
-  - level: 2
+  - levelIndex: 0
+    towerName: trained archer
     cost: 110
     sellRefund: 100
     attackDamage: 20
     attackInterval: 0.7
     range: 1.2
-  - level: 2
+  - levelIndex: 0
+    towerName: great archer
     cost: 160
     sellRefund: 110
     attackDamage: 25

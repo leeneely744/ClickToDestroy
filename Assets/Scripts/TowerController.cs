@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class TowerController : MonoBehaviour
 {
-    public float attackInterval = 1.0f;
     private float attackTimer = 0f;
     private CircleCollider2D rangeCollider;
     private List<EnemyController> enemiesInRange = new List<EnemyController>();
@@ -19,11 +18,18 @@ public class TowerController : MonoBehaviour
     private Money moneyController;
     private TowerPlace towerPlace;
 
-    [SerializeField] public int cost = 70;
-    [SerializeField] private int sellRefund = 60;
-    [SerializeField] private int upgradeCost = 100;
-    private int maxLevel = 3;
-    private int currentLevel = 1;
+    /// <summary>
+    /// TowerStats
+    /// </summary>
+    [SerializeField] private TowerStats stats;
+    private int maxLevelIndex;
+    private int currentLevelIndex = 0;
+    private string towerName;
+    [HideInInspector] public int cost;
+    private int sellRefund;
+    private float attackDamage;
+    private float attackInterval;
+    private float range;
 
     void Start()
     {
@@ -140,5 +146,17 @@ public class TowerController : MonoBehaviour
     public void UpgradeTower()
     {
         Debug.Log("UpgradeTower called");
+    }
+
+    private void ApplyStatus()
+    {
+        var data = stats.levels[currentLevelIndex];
+        towerName = data.towerName;
+        cost = data.cost;
+        sellRefund = data.sellRefund;
+        attackDamage = data.attackDamage;
+        attackInterval = data.attackInterval;
+        range = data.range;
+        maxLevelIndex = stats.levels.Length - 1;
     }
 }
