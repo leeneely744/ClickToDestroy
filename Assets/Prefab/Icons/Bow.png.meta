@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8cd45d1ae13594dc5851304961b39ce2
+guid: 4a1093b44c2214a5180f3545f67ca109
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7856493677412862020
-    second: Bow_0
+      213: -1062408361809200952
+    second: "ico_8\u306E\u30B3\u30D2\u309A\u30FC_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bow_0
+      name: "ico_8\u306E\u30B3\u30D2\u309A\u30FC_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 31
-        height: 31
+        width: 171
+        height: 170
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb734b930a028f290800000000000000
-      internalID: -7856493677412862020
+      spriteID: 8c835fb49319141f0800000000000000
+      internalID: -1062408361809200952
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bow_0: -7856493677412862020
+      "ico_8\u306E\u30B3\u30D2\u309A\u30FC_0": -1062408361809200952
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
