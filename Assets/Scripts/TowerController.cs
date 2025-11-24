@@ -96,10 +96,10 @@ public class TowerController : MonoBehaviour
         Projectile p = bullet.GetComponent<Projectile>();
         p.SetTarget(target.transform, projectileTravelTime);
 
-        var animator = GetComponentInChildren<Animator>();
-        if (animator != null)
+        var archerAnimator = GetComponentInChildren<ArcherAnimatorController>();
+        if (archerAnimator != null)
         {
-            animator.SetTrigger("AttackTrigger");
+            archerAnimator.PlayAttack();
         }
     }
 
