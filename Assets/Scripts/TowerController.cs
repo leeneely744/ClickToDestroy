@@ -95,6 +95,12 @@ public class TowerController : MonoBehaviour
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         Projectile p = bullet.GetComponent<Projectile>();
         p.SetTarget(target.transform, projectileTravelTime);
+
+        var animator = GetComponentInChildren<Animator>();
+        if (animator != null)
+        {
+            animator.SetTrigger("AttackTrigger");
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col)
