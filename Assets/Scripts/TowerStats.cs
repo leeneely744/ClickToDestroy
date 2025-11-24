@@ -14,7 +14,6 @@ public class TowerLevel
     public int level;
     public int cost;
     public int sellRefund;
-    public int upgradeCost;
     public float attackDamage;
     public float attackInterval;
     public float range;
