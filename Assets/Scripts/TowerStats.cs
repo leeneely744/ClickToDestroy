@@ -9,7 +9,6 @@ public class TowerStats : ScriptableObject
 [System.Serializable]
 public class TowerLevel
 {
-    public int levelIndex;
     public string towerName;
     public Sprite towerSprite;
     public int cost;

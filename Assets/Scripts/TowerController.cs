@@ -17,13 +17,13 @@ public class TowerController : MonoBehaviour
     private SpriteRenderer attackRangeRenderer;
     private Money moneyController;
     private TowerPlace towerPlace;
+    private int levelIndex = 1;
 
     /// <summary>
     /// TowerStats
     /// </summary>
     [SerializeField] private TowerStats stats;
     private int maxLevelIndex;
-    private int currentLevelIndex = 0;
     private string towerName;
     [HideInInspector] public int cost;
     private int sellRefund;
@@ -50,6 +50,7 @@ public class TowerController : MonoBehaviour
             Debug.LogError("Money controller not found");
         }
 
+        levelIndex = InitialLevelIndex;
         ApplyStatus();
     }
 
@@ -158,7 +159,7 @@ public class TowerController : MonoBehaviour
 
     private void ApplyStatus()
     {
-        var data = stats.levels[currentLevelIndex];
+        var data = stats.levels[levelIndex];
         towerName = data.towerName;
         cost = data.cost;
         sellRefund = data.sellRefund;
@@ -167,4 +168,6 @@ public class TowerController : MonoBehaviour
         range = data.range;
         maxLevelIndex = stats.levels.Length - 1;
     }
+
+    protected virtual int InitialLevelIndex => 1;
 }

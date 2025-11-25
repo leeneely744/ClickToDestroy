@@ -13,24 +13,21 @@ MonoBehaviour:
   m_Name: TowerStats
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
-  - levelIndex: 0
-    towerName: beginner archer
+  - towerName: beginner archer
     towerSprite: {fileID: 0}
     cost: 100
     sellRefund: 90
     attackDamage: 10
     attackInterval: 1
     range: 1
-  - levelIndex: 0
-    towerName: trained archer
+  - towerName: trained archer
     towerSprite: {fileID: 4130640169021434097, guid: 3c6e7cd1f373b4a928bb05d2c0561464, type: 3}
     cost: 110
     sellRefund: 100
     attackDamage: 20
-    attackInterval: 0.7
+    attackInterval: 0.5
     range: 1.2
-  - levelIndex: 0
-    towerName: great archer
+  - towerName: great archer
     towerSprite: {fileID: 3465286685962602723, guid: 563b601c7eb764875b1915f59e975c8f, type: 3}
     cost: 160
     sellRefund: 110
