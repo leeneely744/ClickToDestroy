@@ -45,17 +45,23 @@ public class TowerSelectPanel : MonoBehaviour
 
     private void PlaceTower(GameObject prefab)
     {
-        int nowMoney = moneyController.money;
-        int towerCost = prefab.GetComponent<TowerController>().cost;
+        var towerComponent = prefab.GetComponent<TowerController>();
+        if (towerComponent == null)
+        {
+            Debug.LogError("Tower prefab does not contain TowerController component.");
+            return;
+        }
 
-        if (nowMoney < towerCost)
+        int towerCost = towerComponent.GetBuildCost();
+        Debug.Log($"[TowerSelectPanel] Try build {prefab.name} cost={towerCost}, current money={moneyController?.money}");
+
+        if (moneyController == null || !moneyController.SpendMoney(towerCost))
         {
             Debug.Log("Not enough money to place tower.");
             return;
         }
-        moneyController.SpendMoney(towerCost);
 
-        var newTowerObject =Instantiate(prefab, currentSpawnPosition, Quaternion.identity);
+        var newTowerObject = Instantiate(prefab, currentSpawnPosition, Quaternion.identity);
         if (currentTowerPlace != null)
         {
             currentTowerPlace.SetOccupied(true);

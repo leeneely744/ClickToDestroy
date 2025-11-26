@@ -17,7 +17,7 @@ public class TowerController : MonoBehaviour
     private SpriteRenderer attackRangeRenderer;
     private Money moneyController;
     private TowerPlace towerPlace;
-    private int levelIndex = 1;
+    private int levelIndex = 0;
 
     /// <summary>
     /// TowerStats
@@ -146,21 +146,30 @@ public class TowerController : MonoBehaviour
             return;
         }
 
-        moneyController.AddMoney(sellRefund);
+        moneyController.AddMoney(GetSellValue());
         towerPlace.SetOccupied(false);
 
         Destroy(gameObject);
     }
 
-    public void UpgradeTower()
+    public bool UpgradeTower()
     {
         var nextPrefab = NextLevelPrefab;
         if (nextPrefab == null || towerPlace == null)
         {
-            return;
+            return false;
         }
 
-        // ここでコストチェックや返金などを挟む予定
+        int upgradeCost = GetUpgradeCost();
+        Debug.Log($"[TowerController] Try upgrade {name} cost={upgradeCost}");
+        if (moneyController != null && upgradeCost > 0)
+        {
+            if (!moneyController.SpendMoney(upgradeCost))
+            {
+                Debug.Log("Not enough money to upgrade tower.");
+                return false;
+            }
+        }
 
         var newTowerObj = Instantiate(nextPrefab, transform.position, Quaternion.identity);
         var newController = newTowerObj.GetComponent<TowerController>();
@@ -170,11 +179,17 @@ public class TowerController : MonoBehaviour
         }
 
         Destroy(gameObject);
+        return true;
     }
 
     private void ApplyStatus()
     {
-        var data = stats.levels[levelIndex];
+        var data = GetLevelData(levelIndex);
+        if (data == null)
+        {
+            Debug.LogError($"Tower level data not found for index {levelIndex}");
+            return;
+        }
         towerName = data.towerName;
         cost = data.cost;
         sellRefund = data.sellRefund;
@@ -184,7 +199,50 @@ public class TowerController : MonoBehaviour
         maxLevelIndex = stats.levels.Length - 1;
     }
 
-    protected virtual int InitialLevelIndex => 1;
+    protected virtual int InitialLevelIndex => 0;
 
     public virtual GameObject NextLevelPrefab => null;
+
+    protected TowerLevel GetLevelData(int index)
+    {
+        if (stats == null || stats.levels == null)
+        {
+            return null;
+        }
+
+        if (index < 0 || index >= stats.levels.Length)
+        {
+            return null;
+        }
+
+        return stats.levels[index];
+    }
+
+    public int GetBuildCost()
+    {
+        var data = GetLevelData(InitialLevelIndex);
+        return data != null ? data.cost : 0;
+    }
+
+    public int GetUpgradeCost()
+    {
+        var next = NextLevelPrefab;
+        if (next == null)
+        {
+            return 0;
+        }
+
+        var controller = next.GetComponent<TowerController>();
+        if (controller == null)
+        {
+            return 0;
+        }
+
+        return controller.GetBuildCost();
+    }
+
+    public int GetSellValue()
+    {
+        return sellRefund;
+    }
 }
