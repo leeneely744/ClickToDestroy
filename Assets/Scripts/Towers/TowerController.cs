@@ -154,7 +154,22 @@ public class TowerController : MonoBehaviour
 
     public void UpgradeTower()
     {
-        Debug.Log("UpgradeTower called");
+        var nextPrefab = NextLevelPrefab;
+        if (nextPrefab == null || towerPlace == null)
+        {
+            return;
+        }
+
+        // ここでコストチェックや返金などを挟む予定
+
+        var newTowerObj = Instantiate(nextPrefab, transform.position, Quaternion.identity);
+        var newController = newTowerObj.GetComponent<TowerController>();
+        if (newController != null)
+        {
+            newController.SetTowerPlace(towerPlace);
+        }
+
+        Destroy(gameObject);
     }
 
     private void ApplyStatus()
@@ -170,4 +185,6 @@ public class TowerController : MonoBehaviour
     }
 
     protected virtual int InitialLevelIndex => 1;
+
+    public virtual GameObject NextLevelPrefab => null;
 }

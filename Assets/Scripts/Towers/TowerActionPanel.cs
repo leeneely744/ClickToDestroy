@@ -4,6 +4,7 @@ using UnityEngine.Tilemaps;
 public class TowerActionPanel : MonoBehaviour
 {
     public static TowerActionPanel Instance;
+    public GameObject nextLevelPrefab;
     private TowerController towerController;
 
     void Awake()

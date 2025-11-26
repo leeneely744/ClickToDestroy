@@ -293,6 +293,7 @@ MonoBehaviour:
   projectileTravelTime: 0.2
   stats: {fileID: 11400000, guid: 07fc9c25a541d450fb7c98203169ff76, type: 2}
   cost: 0
+  nextLevelPrefab: {fileID: 9021238356020073785, guid: 1aebc18f924a249009bec42b39315d00, type: 3}
 --- !u!1 &6477926604915546161
 GameObject:
   m_ObjectHideFlags: 0
