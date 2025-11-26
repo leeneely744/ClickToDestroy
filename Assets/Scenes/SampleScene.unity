@@ -3138,7 +3138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1422b5fcd6fb044b7827374afee8698c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Money
-  money: 100
+  money: 800
   moneyText: {fileID: 885598559}
 --- !u!1 &929415973
 GameObject:
@@ -4422,6 +4422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962ce0bdd2cf6419c9b4f4901bdac69c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerActionPanel
+  nextLevelPrefab: {fileID: 0}
 --- !u!114 &1455986143
 MonoBehaviour:
   m_ObjectHideFlags: 0

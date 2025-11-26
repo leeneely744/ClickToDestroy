@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Money : MonoBehaviour
 {
-    public int money = 100;
+    public int money = 800;
     public TextMeshProUGUI moneyText;
 
     public int CurrentMoney => money;
