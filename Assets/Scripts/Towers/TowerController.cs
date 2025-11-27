@@ -92,6 +92,11 @@ public class TowerController : MonoBehaviour
     void Attack(EnemyController target)
     {
         if (projectilePrefab == null) return;
+        if (firePoint == null)
+        {
+            Debug.LogError($"FirePoint is not assigned on {name}");
+            return;
+        }
 
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         Projectile p = bullet.GetComponent<Projectile>();
