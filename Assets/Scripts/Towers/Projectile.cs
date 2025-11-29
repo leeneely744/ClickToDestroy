@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private float maxLifetime = 10f;
     public float speed = 5f;
     public int damage = 10;
 
     private Transform target;
+    private float lifeTimer;
 
     public void SetTarget(Transform newTarget, float desiredTravelTime = 0f)
     {
@@ -23,6 +25,13 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
+        lifeTimer += Time.deltaTime;
+        if (lifeTimer >= maxLifetime)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         if (target == null)
         {
             Destroy(gameObject);
