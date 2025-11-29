@@ -166,7 +166,6 @@ public class TowerController : MonoBehaviour
         }
 
         int upgradeCost = GetUpgradeCost();
-        Debug.Log($"[TowerController] Try upgrade {name} cost={upgradeCost}");
         if (moneyController != null && upgradeCost > 0)
         {
             if (!moneyController.SpendMoney(upgradeCost))

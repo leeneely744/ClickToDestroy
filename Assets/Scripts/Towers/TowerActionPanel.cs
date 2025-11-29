@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using TMPro;
 
 public class TowerActionPanel : MonoBehaviour
 {
     public static TowerActionPanel Instance;
     public GameObject nextLevelPrefab;
     private TowerController towerController;
+    [SerializeField] private TMPro.TextMeshProUGUI upgradeCostText;
+    [SerializeField] private TMPro.TextMeshProUGUI sellRefundText;
 
     void Awake()
     {
@@ -26,6 +29,21 @@ public class TowerActionPanel : MonoBehaviour
         Vector3 screenPos = Camera.main.WorldToScreenPoint(towerController.transform.position);
         transform.position = screenPos;
         gameObject.SetActive(true);
+
+        // アップグレード金額表示
+        // TODO: 次のレベルのプレハブがない場合はアップグレード不可にする
+        int upgradeCost = towerController.GetUpgradeCost();
+        if (upgradeCostText != null)
+        {
+            upgradeCostText.text = upgradeCost.ToString();
+        }
+
+        // 売却金額表示
+        int sellRefund = towerController.GetSellValue();
+        if (sellRefundText != null)
+        {
+            sellRefundText.text = sellRefund.ToString();
+        }
     }
 
     public void Hide()
