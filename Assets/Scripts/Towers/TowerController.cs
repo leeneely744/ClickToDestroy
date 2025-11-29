@@ -31,12 +31,20 @@ public class TowerController : MonoBehaviour
     private float attackInterval;
     private float range;
 
-    void Start()
+    protected virtual void Start()
     {
         Transform rangeCircle = transform.Find("AttackRangeCircle");
+        if (rangeCircle == null)
+        {
+            Debug.LogWarning($"AttackRangeCircle not found on {name}");
+        }
         if (rangeCircle != null)
         {
             attackRangeRenderer = rangeCircle.GetComponent<SpriteRenderer>();
+            if (attackRangeRenderer != null)
+            {
+                Debug.Log($"AttackRangeCircle sprite on {name}: {attackRangeRenderer.sprite?.name}");
+            }
         }
 
         if (attackRangeRenderer != null)
@@ -89,7 +97,7 @@ public class TowerController : MonoBehaviour
         }
     }
 
-    void Attack(EnemyController target)
+    protected void Attack(EnemyController target)
     {
         if (projectilePrefab == null) return;
         if (firePoint == null)
