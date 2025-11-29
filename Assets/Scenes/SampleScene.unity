@@ -4636,19 +4636,19 @@ MonoBehaviour:
     delayBeforeNextWave: 3
   - waveName: Wave2
     spawns:
-    - enemyPrefab: {fileID: 6104006371954244119, guid: 73d248ed722934aa79e33237fc04ef0f, type: 3}
+    - enemyPrefab: {fileID: 177820667453449832, guid: 65c855c6bf85a4cf4b8b1e8b47303a0a, type: 3}
       count: 3
       interval: 1
       routeIndex: 1
     delayBeforeNextWave: 3
   - waveName: Wave3
     spawns:
-    - enemyPrefab: {fileID: 6104006371954244119, guid: 73d248ed722934aa79e33237fc04ef0f, type: 3}
+    - enemyPrefab: {fileID: 177820667453449832, guid: 65c855c6bf85a4cf4b8b1e8b47303a0a, type: 3}
       count: 3
       interval: 1
       routeIndex: 1
-    - enemyPrefab: {fileID: 7423166226787105532, guid: d19b65e0ae3a344f4947711f8a405d99, type: 3}
-      count: 3
+    - enemyPrefab: {fileID: 3982574313250373904, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
+      count: 5
       interval: 0.5
       routeIndex: 2
     delayBeforeNextWave: 3
