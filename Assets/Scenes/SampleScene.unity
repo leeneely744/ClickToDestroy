@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerSelectPanel
   bowTowerPrefab: {fileID: 3053749025544110697, guid: e43ffc0d4a0cc436f98eea6b7e3a4d22, type: 3}
-  magicTowerPrefab: {fileID: 8430679817658158876, guid: 3ccb2f63695154bee98f741c97d63058, type: 3}
+  magicTowerPrefab: {fileID: 2008618986784158227, guid: 8d84004cf5a2740dbba69de3ab7cab96, type: 3}
   cannonTowerPrefab: {fileID: 6498553677910256730, guid: 8af6fdee6db0c40eebc44e89d86105ca, type: 3}
 --- !u!1 &62950323
 GameObject:
