@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1305184277638692705}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.005, y: 0.13101326, z: 0}
+  m_LocalPosition: {x: -0.005, y: 0.335, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -123,10 +123,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4314545666847976093}
   - component: {fileID: 3762099636169939536}
-  - component: {fileID: 9084633416416210152}
   - component: {fileID: 3260627098826753904}
+  - component: {fileID: 1425620300762979728}
   m_Layer: 0
-  m_Name: Magic1
+  m_Name: Magic2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,7 +141,7 @@ Transform:
   m_GameObject: {fileID: 2008618986784158227}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.29, y: 2.69, z: 0}
+  m_LocalPosition: {x: -0.7195159, y: 2.8353138, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -198,7 +198,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6470460504253458178, guid: 153d7904e91554b238d316fae20f9c69, type: 3}
+  m_Sprite: {fileID: 2426446623490865320, guid: ecb7611f958d442c08188e833c01d055, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -209,24 +209,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9084633416416210152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008618986784158227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aa3dd5f7d8954ba79d48605ce30fb38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MagicTower1Controller
-  projectilePrefab: {fileID: 8683657668908243494, guid: 531056f54736f4fa487f569f273ab2b1, type: 3}
-  firePoint: {fileID: 4747791318048832225}
-  projectileTravelTime: 0.5
-  stats: {fileID: 11400000, guid: 07fc9c25a541d450fb7c98203169ff76, type: 2}
-  cost: 0
-  nextLevelPrefab: {fileID: 2008618986784158227, guid: a46969f7a777e41518f402d435d504c1, type: 3}
 --- !u!58 &3260627098826753904
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -263,6 +245,24 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.98
+--- !u!114 &1425620300762979728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008618986784158227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa8430b86ccc447d9896ffae116e1a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MagicTower2Controller
+  projectilePrefab: {fileID: 8683657668908243494, guid: 531056f54736f4fa487f569f273ab2b1, type: 3}
+  firePoint: {fileID: 4747791318048832225}
+  projectileTravelTime: 0.4
+  stats: {fileID: 11400000, guid: 911c8b1dc61934d689e798f6f2bece2f, type: 2}
+  cost: 0
+  nextLevelPrefab: {fileID: 1499013605453779945, guid: 3023ed95807cd4d018f4f85a8060a1c8, type: 3}
 --- !u!1 &3549987004200054331
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +288,7 @@ Transform:
   m_GameObject: {fileID: 3549987004200054331}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09000003, y: 0.21, z: 0}
+  m_LocalPosition: {x: 0.09000003, y: 0.346, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
