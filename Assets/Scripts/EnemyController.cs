@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     private Transform[] waypoints;
     private int currentWaypointIndex = 0;
     private float speed = 2.0f;
+    private Vector3 initialScale;
 
     public int hp = 30;
     public int rewardMoney = 20;
@@ -28,6 +29,9 @@ public class EnemyController : MonoBehaviour
         {
             Debug.LogError("Money controller not found");
         }
+
+        // Remember initial scale so we can flip left/right without resetting the intended size
+        initialScale = transform.localScale;
     }
 
     void FixedUpdate()
@@ -49,14 +53,8 @@ public class EnemyController : MonoBehaviour
 
             if (currentWaypointIndex < waypoints.Length)
             {
-                if (waypoints[currentWaypointIndex].position.x > transform.position.x)
-                {
-                    transform.localScale = new Vector3(-1, 1, 1);
-                }
-                else
-                {
-                    transform.localScale = new Vector3(1, 1, 1);
-                }
+                float direction = waypoints[currentWaypointIndex].position.x > transform.position.x ? 1f : -1f;
+                transform.localScale = new Vector3(Mathf.Abs(initialScale.x) * direction, initialScale.y, initialScale.z);
             }
 
             if (currentWaypointIndex >= waypoints.Length)
