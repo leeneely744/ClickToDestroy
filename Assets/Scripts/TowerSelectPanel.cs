@@ -11,6 +11,7 @@ public class TowerSelectPanel : MonoBehaviour
     [SerializeField] private GameObject bowTowerPrefab;
     [SerializeField] private GameObject magicTowerPrefab;
     [SerializeField] private GameObject cannonTowerPrefab;
+    [SerializeField] private GameObject guardianTowerPrefab;
 
     void Awake()
     {
@@ -42,6 +43,7 @@ public class TowerSelectPanel : MonoBehaviour
     public void OnSelectBow() => PlaceTower(bowTowerPrefab);
     public void OnSelectMagic() => PlaceTower(magicTowerPrefab);
     public void OnSelectCannon() => PlaceTower(cannonTowerPrefab);
+    public void OnSelectGuardian() => PlaceTower(guardianTowerPrefab);
 
     private void PlaceTower(GameObject prefab)
     {
@@ -53,7 +55,6 @@ public class TowerSelectPanel : MonoBehaviour
         }
 
         int towerCost = towerComponent.GetBuildCost();
-        Debug.Log($"[TowerSelectPanel] Try build {prefab.name} cost={towerCost}, current money={moneyController?.money}");
 
         if (moneyController == null || !moneyController.SpendMoney(towerCost))
         {

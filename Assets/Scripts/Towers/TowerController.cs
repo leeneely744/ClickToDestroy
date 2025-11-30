@@ -31,7 +31,7 @@ public class TowerController : MonoBehaviour
     private float attackInterval;
     private float range;
 
-    protected float AttackInterval => attackInterval;
+    public float AttackInterval => attackInterval;
 
     protected virtual void Start()
     {

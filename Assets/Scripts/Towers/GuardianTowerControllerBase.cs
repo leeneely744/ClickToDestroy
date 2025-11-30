@@ -5,6 +5,16 @@ public class GuardianTowerControllerBase : TowerController
 {
     protected int maxUnits;
     private Coroutine guardianSpawnRoutine;
+    protected int currentGuardianCount = 0;
+    protected virtual GameObject GuardianPrefab => null;
+    protected string[] guardianNames =
+    {
+        "Sato",
+        "Suzuki",
+        "Takahashi",
+        "Tanaka",
+        "Watanabe"
+    };
 
     protected override void Start()
     {
@@ -43,7 +53,7 @@ public class GuardianTowerControllerBase : TowerController
         // GuardianTower 派生クラスで具体的な生成ロジックを実装する
     }
 
-    public void OnGuardianDestroyed(int delaySeconds = 2)
+    public void OnGuardianDestroyed(float delaySeconds = 2)
     {
         // ガーディアンが破壊されたときに呼び出される
         ScheduleGuardianSpawn(delaySeconds); // 指定された秒数後に再生成をスケジュール
