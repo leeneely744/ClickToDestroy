@@ -65,7 +65,7 @@ public class EnemySpawner : MonoBehaviour
         isRunning = false;
         if (scoreBoard == null)
         {
-            scoreBoard = FindObjectOfType<ScoreBoard>();
+            scoreBoard = FindAnyObjectByType<ScoreBoard>();
         }
 
         if (scoreBoard != null && scoreBoard.CurrentHp > 0)

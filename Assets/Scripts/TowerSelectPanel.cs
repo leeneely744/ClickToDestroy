@@ -18,7 +18,7 @@ public class TowerSelectPanel : MonoBehaviour
         Instance = this;
         gameObject.SetActive(false);
 
-        moneyController = FindObjectOfType<Money>();
+        moneyController = FindAnyObjectByType<Money>();
         if (moneyController == null)
         {
             Debug.LogError("Money component not found. Please place Money UI (with Money.cs) in the scene.");

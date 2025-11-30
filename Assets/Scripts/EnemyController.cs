@@ -18,13 +18,13 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        scoreBoard = FindObjectOfType<ScoreBoard>();
+        scoreBoard = FindAnyObjectByType<ScoreBoard>();
         if (scoreBoard == null)
         {
             Debug.LogError("ScoreBoard not found");
         }
 
-        moneyController = FindObjectOfType<Money>();
+        moneyController = FindAnyObjectByType<Money>();
         if (moneyController == null)
         {
             Debug.LogError("Money controller not found");

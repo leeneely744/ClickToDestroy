@@ -43,9 +43,9 @@ public class TowerController : MonoBehaviour
         if (rangeCircle != null)
         {
             attackRangeRenderer = rangeCircle.GetComponent<SpriteRenderer>();
-            if (attackRangeRenderer != null)
+            if (attackRangeRenderer == null)
             {
-                Debug.Log($"AttackRangeCircle sprite on {name}: {attackRangeRenderer.sprite?.name}");
+                Debug.LogWarning($"SpriteRenderer not found on AttackRangeCircle of {name}");
             }
         }
 
@@ -54,7 +54,7 @@ public class TowerController : MonoBehaviour
             attackRangeRenderer.enabled = false;
         }
 
-        moneyController = FindObjectOfType<Money>();
+        moneyController = FindAnyObjectByType<Money>();
         if (moneyController == null)
         {
             Debug.LogError("Money controller not found");
