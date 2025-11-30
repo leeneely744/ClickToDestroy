@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GuardianTower3Controller : TowerController
+public class GuardianTower3Controller : GuardianTowerControllerBase
 {
     [SerializeField] private int maxSoldiers = 4;
 

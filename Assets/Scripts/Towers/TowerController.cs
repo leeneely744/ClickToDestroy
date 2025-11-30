@@ -30,7 +30,6 @@ public class TowerController : MonoBehaviour
     private float attackDamage;
     private float attackInterval;
     private float range;
-    private int maxUnits;
 
     protected virtual void Start()
     {
@@ -209,7 +208,6 @@ public class TowerController : MonoBehaviour
         attackDamage = data.attackDamage;
         attackInterval = data.attackInterval;
         range = data.range;
-        maxUnits = data.maxUnits;
         maxLevelIndex = stats.levels.Length - 1;
     }
 
@@ -260,8 +258,9 @@ public class TowerController : MonoBehaviour
         return sellRefund;
     }
 
-    public int GetMaxUnits()
+    public virtual int GetMaxUnits()
     {
-        return maxUnits;
+        return 0;
     }
+
 }
