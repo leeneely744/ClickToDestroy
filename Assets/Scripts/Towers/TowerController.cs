@@ -32,6 +32,7 @@ public class TowerController : MonoBehaviour
     private float range;
 
     public float AttackInterval => attackInterval;
+    protected TowerPlace CurrentTowerPlace => towerPlace;
 
     protected virtual void Start()
     {

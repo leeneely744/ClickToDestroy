@@ -2,26 +2,58 @@ using UnityEngine;
 
 public class GuardianController : MonoBehaviour
 {
+    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float stopDistance = 0.05f;
     private int hp = 100;
+    private bool hasMoveTarget;
+    private Vector3 moveTarget;
+    private bool isDead;
+    private GuardianTowerControllerBase ownerTower;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        
+        ownerTower = GetComponentInParent<GuardianTowerControllerBase>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (hp <= 0)
+        HandleMovement();
+        HandleDeath();
+    }
+
+    public void SetMoveTarget(Vector3 targetPosition)
+    {
+        moveTarget = targetPosition;
+        hasMoveTarget = true;
+    }
+
+    private void HandleMovement()
+    {
+        if (!hasMoveTarget)
         {
-            Destroy(gameObject);
-            GuardianTowerControllerBase guardianTower = GetComponentInParent<GuardianTowerControllerBase>();
-            if (guardianTower != null)
-            {
-                // AttackInterval 秒後にガーディアンを再生成
-                guardianTower.OnGuardianDestroyed(guardianTower.AttackInterval);
-            }
+            return;
         }
+
+        transform.position = Vector3.MoveTowards(transform.position, moveTarget, moveSpeed * Time.deltaTime);
+        if (Vector3.Distance(transform.position, moveTarget) <= stopDistance)
+        {
+            hasMoveTarget = false;
+        }
+    }
+
+    private void HandleDeath()
+    {
+        if (isDead || hp > 0)
+        {
+            return;
+        }
+
+        isDead = true;
+        if (ownerTower != null)
+        {
+            ownerTower.OnGuardianDestroyed(ownerTower.AttackInterval);
+        }
+
+        Destroy(gameObject);
     }
 }

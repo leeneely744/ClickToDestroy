@@ -1,11 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GuardianTowerControllerBase : TowerController
 {
-    protected int maxUnits;
+    [SerializeField] protected int maxSoldiers = 3;
     private Coroutine guardianSpawnRoutine;
-    protected int currentGuardianCount = 0;
     protected virtual GameObject GuardianPrefab => null;
     protected string[] guardianNames =
     {
@@ -19,14 +19,15 @@ public class GuardianTowerControllerBase : TowerController
     protected override void Start()
     {
         base.Start();
-        maxUnits = GetMaxUnits();
-        ScheduleGuardianSpawn(1.0f); // 1秒後にガーディアンを生成開始
+        ScheduleGuardianSpawn(0.0f); // 最初は即時生成
     }
 
     public override int GetMaxUnits()
     {
-        return maxUnits;
+        return MaxSoldiers;
     }
+
+    protected virtual int MaxSoldiers => maxSoldiers;
 
     protected void ScheduleGuardianSpawn(float delaySeconds = 0f)
     {
@@ -51,6 +52,41 @@ public class GuardianTowerControllerBase : TowerController
     protected virtual void SpawnGuardians()
     {
         // GuardianTower 派生クラスで具体的な生成ロジックを実装する
+    }
+
+    protected List<Vector3> BuildInitialGuardianPositions()
+    {
+        List<Vector3> positions = new List<Vector3>();
+        Transform anchorPoint = null;
+        if (CurrentTowerPlace != null)
+        {
+            anchorPoint = CurrentTowerPlace.transform.Find("InitialGuardianPoint");
+        }
+
+        Vector3 basePosition = anchorPoint != null ? anchorPoint.position : transform.position;
+        for (int i = 0; i < MaxSoldiers; i++)
+        {
+            Vector2 offset = Random.insideUnitCircle * 0.5f;
+            positions.Add(basePosition + new Vector3(offset.x, offset.y, 0f));
+        }
+
+        return positions;
+    }
+
+    protected void MoveGuardians(GuardianController[] guardians, IList<Vector3> targetPositions)
+    {
+        if (targetPositions == null || targetPositions.Count == 0)
+        {
+            Debug.LogWarning($"MoveGuardians called without target positions on {name}.");
+            return;
+        }
+
+        for (int i = 0; i < guardians.Length; i++)
+        {
+            GuardianController guardian = guardians[i];
+            Vector3 destination = targetPositions[i];
+            guardian.SetMoveTarget(destination);
+        }
     }
 
     public void OnGuardianDestroyed(float delaySeconds = 2)
