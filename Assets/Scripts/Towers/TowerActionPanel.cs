@@ -9,6 +9,7 @@ public class TowerActionPanel : MonoBehaviour
     private TowerController towerController;
     [SerializeField] private TMPro.TextMeshProUGUI upgradeCostText;
     [SerializeField] private TMPro.TextMeshProUGUI sellRefundText;
+    [SerializeField] private GameObject moveGuardianButton;
 
     void Awake()
     {
@@ -43,6 +44,13 @@ public class TowerActionPanel : MonoBehaviour
         if (sellRefundText != null)
         {
             sellRefundText.text = sellRefund.ToString();
+        }
+
+        // 衛兵移動ボタン表示
+        if (moveGuardianButton != null)
+        {
+            bool canMoveGuardians = towerController is GuardianTowerControllerBase;
+            moveGuardianButton.SetActive(canMoveGuardians);
         }
     }
 
