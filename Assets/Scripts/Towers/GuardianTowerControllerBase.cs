@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class GuardianTowerControllerBase : TowerController
 {
@@ -16,10 +18,22 @@ public class GuardianTowerControllerBase : TowerController
         "Watanabe"
     };
 
+    private bool isMoveModeActive;
+
     protected override void Start()
     {
         base.Start();
         ScheduleGuardianSpawn(0.0f); // 最初は即時生成
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if (isMoveModeActive)
+        {
+            HandleGuardianMoveInput();
+        }
     }
 
     public override int GetMaxUnits()
@@ -84,7 +98,7 @@ public class GuardianTowerControllerBase : TowerController
         for (int i = 0; i < guardians.Length; i++)
         {
             GuardianController guardian = guardians[i];
-            Vector3 destination = targetPositions[i];
+            Vector3 destination = targetPositions[Mathf.Min(i, targetPositions.Count - 1)];
             guardian.SetMoveTarget(destination);
         }
     }
@@ -95,16 +109,78 @@ public class GuardianTowerControllerBase : TowerController
         ScheduleGuardianSpawn(delaySeconds); // 指定された秒数後に再生成をスケジュール
     }
 
-    public void StartMoveMode()
+    public virtual void StartMoveMode()
     {
-        Debug.Log("Starting guardian move mode");
-        // 衛兵移動モードを開始する
+        isMoveModeActive = true;
+    }
 
-        // プレイヤーがタワーのAttackRangeCircle内部をクリックすると
-        // その場所に衛兵を移動させるようにする。
-        // もしクリックした場所がAttackRangeCircleの外側なら
-        // クリックした場所にバツマークを表示する。
+    protected virtual void ExitMoveMode()
+    {
+        isMoveModeActive = false;
+    }
 
-        // 移動が終わったら元のモードに戻す。
+    private void HandleGuardianMoveInput()
+    {
+        if (Mouse.current == null || !Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            return;
+        }
+
+        // スマホようにUIタッチも含めて無視する場合はInput.GetTouch(0).fingerIdを使う。
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null)
+        {
+            Debug.LogWarning("Main Camera not found while handling guardian move input.");
+            ExitMoveMode();
+            return;
+        }
+
+        Vector2 screenPosition = Mouse.current.position.ReadValue();
+        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, mainCamera.nearClipPlane));
+        worldPosition.z = 0f;
+
+        if (IsWithinMoveRange(worldPosition))
+        {
+            MoveGuardiansTo(worldPosition);
+            ExitMoveMode();
+        }
+        else
+        {
+            ShowInvalidMoveFeedback(worldPosition);
+        }
+    }
+
+    protected virtual bool IsWithinMoveRange(Vector3 targetPosition)
+    {
+        return Vector2.Distance(transform.position, targetPosition) <= AttackRange;
+    }
+
+    protected virtual void MoveGuardiansTo(Vector3 targetPosition)
+    {
+        GuardianController[] guardians = GetComponentsInChildren<GuardianController>();
+        if (guardians.Length == 0)
+        {
+            return;
+        }
+
+        var positions = new List<Vector3>();
+        for (int i = 0; i < guardians.Length; i++)
+        {
+            Vector2 offset = Random.insideUnitCircle * 0.4f;
+            positions.Add(targetPosition + new Vector3(offset.x, offset.y, 0f));
+        }
+
+        MoveGuardians(guardians, positions);
+    }
+
+    protected virtual void ShowInvalidMoveFeedback(Vector3 invalidPosition)
+    {
+        Debug.Log($"Invalid guardian move position {invalidPosition} for {name}");
+        // TODO: プレイヤーに無効な移動範囲であることをフィードバックするエフェクトなどを実装
     }
 }

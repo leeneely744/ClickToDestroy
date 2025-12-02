@@ -31,6 +31,7 @@ public class TowerController : MonoBehaviour
     private float attackInterval;
     private float range;
 
+    protected float AttackRange => range;
     public float AttackInterval => attackInterval;
     protected TowerPlace CurrentTowerPlace => towerPlace;
 
@@ -41,12 +42,18 @@ public class TowerController : MonoBehaviour
         {
             Debug.LogWarning($"AttackRangeCircle not found on {name}");
         }
-        if (rangeCircle != null)
+        else
         {
             attackRangeRenderer = rangeCircle.GetComponent<SpriteRenderer>();
             if (attackRangeRenderer == null)
             {
                 Debug.LogWarning($"SpriteRenderer not found on AttackRangeCircle of {name}");
+            }
+
+            rangeCollider = rangeCircle.GetComponent<CircleCollider2D>();
+            if (rangeCollider == null)
+            {
+                Debug.LogWarning($"CircleCollider2D not found on AttackRangeCircle of {name}");
             }
         }
 
@@ -85,7 +92,7 @@ public class TowerController : MonoBehaviour
         }
     }
     
-    void Update()
+    protected virtual void Update()
     {
         attackTimer += Time.deltaTime;
 
