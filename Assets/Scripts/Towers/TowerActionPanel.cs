@@ -94,4 +94,24 @@ public class TowerActionPanel : MonoBehaviour
 
         Hide();
     }
+
+    public void OnMoveGuardiansClick()
+    {
+        if (towerController == null)
+        {
+            Debug.LogError("TowerController not found");
+            return;
+        }
+
+        if (towerController is GuardianTowerControllerBase guardianTower)
+        {
+            guardianTower.StartMoveMode();
+            gameObject.SetActive(false);
+            Hide();
+        }
+        else
+        {
+            Debug.LogWarning("MoveGuardian button pressed on a non-guardian tower.");
+        }
+    }
 }

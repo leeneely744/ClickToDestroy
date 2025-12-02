@@ -94,4 +94,17 @@ public class GuardianTowerControllerBase : TowerController
         // ガーディアンが破壊されたときに呼び出される
         ScheduleGuardianSpawn(delaySeconds); // 指定された秒数後に再生成をスケジュール
     }
+
+    public void StartMoveMode()
+    {
+        Debug.Log("Starting guardian move mode");
+        // 衛兵移動モードを開始する
+
+        // プレイヤーがタワーのAttackRangeCircle内部をクリックすると
+        // その場所に衛兵を移動させるようにする。
+        // もしクリックした場所がAttackRangeCircleの外側なら
+        // クリックした場所にバツマークを表示する。
+
+        // 移動が終わったら元のモードに戻す。
+    }
 }
