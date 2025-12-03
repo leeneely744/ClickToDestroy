@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     public int rewardMoney = 20;
 
     private bool hasRemovedFromSpawner;
+    public bool IsDead => hp <= 0;
 
     void Start()
     {
