@@ -19,7 +19,7 @@ MonoBehaviour:
     sellRefund: 60
     attackDamage: 0
     attackInterval: 10
-    range: 1
+    range: 2.2
   - towerName: GuardianTower2
     towerSprite: {fileID: -6470460504253458178, guid: 662de6d0ec03a4ad7b266e75683821b1, type: 3}
     cost: 120
