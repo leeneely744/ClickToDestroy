@@ -14,10 +14,12 @@ public class GuardianController : MonoBehaviour
     private bool isDead;
     private GuardianTowerControllerBase ownerTower;
     private List<EnemyController> currentTargets = new List<EnemyController>();
+    private Animator animator;
 
     void Awake()
     {
         ownerTower = GetComponentInParent<GuardianTowerControllerBase>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -50,15 +52,20 @@ public class GuardianController : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (!hasMoveTarget)
+        bool isWalking = hasMoveTarget;
+        if (hasMoveTarget)
         {
-            return;
+            transform.position = Vector3.MoveTowards(transform.position, moveTarget, moveSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, moveTarget) <= stopDistance)
+            {
+                hasMoveTarget = false;
+                isWalking = false;
+            }
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, moveTarget, moveSpeed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, moveTarget) <= stopDistance)
+        if (animator != null)
         {
-            hasMoveTarget = false;
+            animator.SetBool("isWalking", isWalking);
         }
     }
 
@@ -90,8 +97,11 @@ public class GuardianController : MonoBehaviour
         if (target == null)
         {
             currentTargets.RemoveAt(0);
+            UpdateAttackAnimation(false);
             return;
         }
+
+        UpdateAttackAnimation(true);
 
         if (attackTimer >= attackInterval)
         {
@@ -101,6 +111,7 @@ public class GuardianController : MonoBehaviour
             if (target.hp <= 0)
             {
                 currentTargets.RemoveAt(0);
+                UpdateAttackAnimation(currentTargets.Count > 0);
             }
         }
     }
@@ -108,5 +119,21 @@ public class GuardianController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         hp -= damage;
+        if (hp <= 0 && animator != null)
+        {
+            animator.SetTrigger("Die");
+        }
+    }
+
+    private void UpdateAttackAnimation(bool isAttacking)
+    {
+        if (animator != null)
+        {
+            animator.SetBool("isAttacking", isAttacking);
+            if (isAttacking)
+            {
+                animator.SetBool("isWalking", false);
+            }
+        }
     }
 }

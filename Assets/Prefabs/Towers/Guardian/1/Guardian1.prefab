@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1001649392022526661}
   - component: {fileID: 8689339541346066729}
   - component: {fileID: 6687832937114471674}
+  - component: {fileID: -406011162563578349}
   m_Layer: 0
   m_Name: Guardian1
   m_TagString: Untagged
@@ -106,7 +107,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GuardianController
   moveSpeed: 3
   stopDistance: 0.05
-  attack: 10
+  hp: 100
+  attackDamage: 10
   attackInterval: 1
 --- !u!58 &6687832937114471674
 CircleCollider2D:
@@ -144,3 +146,25 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.3
+--- !u!95 &-406011162563578349
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3462640677572233118}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c48a55f0f173d45df8b6b4cfe67d4ae7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
