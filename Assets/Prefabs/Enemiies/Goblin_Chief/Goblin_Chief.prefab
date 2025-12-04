@@ -156,7 +156,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.3
+  m_Radius: 1.5
 --- !u!114 &8322440662431808167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   hp: 20
   rewardMoney: 40
+  attackInterval: 1.5
+  guardianDamage: 10
 --- !u!95 &2120597840953655053
 Animator:
   serializedVersion: 7

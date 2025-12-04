@@ -5,8 +5,8 @@ public class GuardianController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float stopDistance = 0.05f;
-    private int hp = 100;
-    public int attack = 10;
+    [SerializeField] private int hp = 100;
+    [SerializeField] private int attackDamage = 10;
     [SerializeField] private float attackInterval = 1.0f;
     private float attackTimer;
     private bool hasMoveTarget;
@@ -23,37 +23,22 @@ public class GuardianController : MonoBehaviour
     void Update()
     {
         HandleMovement();
+        HandleCombat();
         HandleDeath();
-
-        // 敵への攻撃処理などはここに追加
-        if (currentTargets.Count > 0)
-        {
-            attackTimer += Time.deltaTime;
-            EnemyController target = currentTargets[0];
-            if (target != null && !target.IsDead && attackTimer >= attackInterval)
-            {
-                Debug.Log("攻撃しました!");
-                target.TakeDamage(attack);
-                if (target.IsDead)
-                {
-                    Debug.Log("倒しました!");
-                    currentTargets.RemoveAt(0);
-                }
-                attackTimer = 0f;
-            }
-        }
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Enemy"))
+        if (!col.CompareTag("Enemy"))
         {
-            Debug.Log("敵を検出しました!");
-            EnemyController enemy = col.GetComponent<EnemyController>();
-            if (!currentTargets.Contains(enemy))
-            {
-                currentTargets.Add(enemy);
-            }
+            return;
+        }
+
+        EnemyController enemy = col.GetComponent<EnemyController>();
+        if (enemy != null && !currentTargets.Contains(enemy))
+        {
+            currentTargets.Add(enemy);
+            enemy.EngageGuardian(this);
         }
     }
 
@@ -91,5 +76,37 @@ public class GuardianController : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    private void HandleCombat()
+    {
+        if (currentTargets.Count == 0)
+        {
+            return;
+        }
+
+        attackTimer += Time.deltaTime;
+        EnemyController target = currentTargets[0];
+        if (target == null)
+        {
+            currentTargets.RemoveAt(0);
+            return;
+        }
+
+        if (attackTimer >= attackInterval)
+        {
+            attackTimer = 0f;
+            target.TakeDamage(attackDamage);
+            target.EngageGuardian(this);
+            if (target.hp <= 0)
+            {
+                currentTargets.RemoveAt(0);
+            }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
     }
 }

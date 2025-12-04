@@ -13,8 +13,13 @@ public class EnemyController : MonoBehaviour
 
     public int hp = 30;
     public int rewardMoney = 20;
+    [SerializeField] private float attackInterval = 1.5f;
+    [SerializeField] private int guardianDamage = 10;
 
     private bool hasRemovedFromSpawner;
+    private GuardianController engagedGuardian;
+    private float attackTimer;
+    private bool isEngaged;
     public bool IsDead => hp <= 0;
 
     void Start()
@@ -42,11 +47,14 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        transform.position = Vector2.MoveTowards(
-            transform.position,
-            waypoints[currentWaypointIndex].position,
-            speed * Time.deltaTime
-        );
+        if (!isEngaged)
+        {
+            transform.position = Vector2.MoveTowards(
+                transform.position,
+                waypoints[currentWaypointIndex].position,
+                speed * Time.deltaTime
+            );
+        }
 
         if (Vector2.Distance(transform.position, waypoints[currentWaypointIndex].position) < 0.05f)
         {
@@ -63,6 +71,19 @@ public class EnemyController : MonoBehaviour
                 scoreBoard?.CalcHp(10);
                 NotifySpawnerRemoved();
                 Destroy(gameObject);
+            }
+        }
+    }
+
+    void Update()
+    {
+        if (isEngaged && engagedGuardian != null)
+        {
+            attackTimer += Time.deltaTime;
+            if (attackTimer >= attackInterval)
+            {
+                attackTimer = 0f;
+                engagedGuardian.TakeDamage(guardianDamage);
             }
         }
     }
@@ -87,6 +108,13 @@ public class EnemyController : MonoBehaviour
             NotifySpawnerRemoved();
             Destroy(gameObject);
         }
+    }
+
+    public void EngageGuardian(GuardianController guardian)
+    {
+        engagedGuardian = guardian;
+        isEngaged = guardian != null;
+        attackTimer = 0f;
     }
 
     private void NotifySpawnerRemoved()
