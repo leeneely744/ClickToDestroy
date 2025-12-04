@@ -107,8 +107,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GuardianController
   moveSpeed: 3
   stopDistance: 0.05
-  hp: 100
-  attackDamage: 10
+  hp: 1
+  attackDamage: 1
   attackInterval: 1
 --- !u!58 &6687832937114471674
 CircleCollider2D:

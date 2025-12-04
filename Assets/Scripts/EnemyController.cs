@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
     private float attackTimer;
     private bool isEngaged;
     public bool IsDead => hp <= 0;
+    private Animator animator;
 
     void Start()
     {
@@ -38,6 +39,8 @@ public class EnemyController : MonoBehaviour
 
         // Remember initial scale so we can flip left/right without resetting the intended size
         initialScale = transform.localScale;
+        animator = GetComponent<Animator>();
+        UpdateAnimations();
     }
 
     void FixedUpdate()
@@ -106,6 +109,10 @@ public class EnemyController : MonoBehaviour
         {
             moneyController?.AddMoney(rewardMoney);
             NotifySpawnerRemoved();
+            if (animator != null)
+            {
+                animator.SetTrigger("Die");
+            }
             Destroy(gameObject);
         }
     }
@@ -115,6 +122,17 @@ public class EnemyController : MonoBehaviour
         engagedGuardian = guardian;
         isEngaged = guardian != null;
         attackTimer = 0f;
+        UpdateAnimations();
+    }
+
+    private void UpdateAnimations()
+    {
+        if (animator == null)
+        {
+            return;
+        }
+
+        animator.SetBool("isAttacking", isEngaged);
     }
 
     private void NotifySpawnerRemoved()
