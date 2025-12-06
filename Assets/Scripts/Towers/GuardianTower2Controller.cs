@@ -6,4 +6,7 @@ public class GuardianTower2Controller : GuardianTowerControllerBase
 
     protected override int InitialLevelIndex => 1;
     public override GameObject NextLevelPrefab => nextLevelPrefab;
+
+    [SerializeField] private GameObject guardianPrefab;
+    protected override GameObject GuardianPrefab => guardianPrefab;
 }
