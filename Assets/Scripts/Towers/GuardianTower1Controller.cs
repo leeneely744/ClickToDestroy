@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-    public class GuardianTower1Controller : GuardianTowerControllerBase
-    {
-        [SerializeField] private GameObject nextLevelPrefab;
-        [SerializeField] private GameObject guardianPrefab;
+public class GuardianTower1Controller : GuardianTowerControllerBase
+{
+    [SerializeField] private GameObject nextLevelPrefab;
+    [SerializeField] private GameObject guardianPrefab;
 
-        protected override int InitialLevelIndex => 0;
-        public override GameObject NextLevelPrefab => nextLevelPrefab;
+    protected override int InitialLevelIndex => 0;
+    public override GameObject NextLevelPrefab => nextLevelPrefab;
 
-        protected override GameObject GuardianPrefab => guardianPrefab;
+    protected override GameObject GuardianPrefab => guardianPrefab;
 
-        protected override void SpawnGuardians()
+    protected override void SpawnGuardians()
     {
         if (GuardianPrefab == null)
         {

@@ -45,6 +45,7 @@ public class GuardianTowerControllerBase : TowerController
 
     protected void ScheduleGuardianSpawn(float delaySeconds = 0f)
     {
+        Debug.Log($"Scheduling guardian spawn in {delaySeconds} seconds for {name}.");
         if (guardianSpawnRoutine != null)
         {
             StopCoroutine(guardianSpawnRoutine);
