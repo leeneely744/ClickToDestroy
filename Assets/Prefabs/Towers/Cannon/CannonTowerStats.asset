@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 083d8f40c8b924695a7ed87f06218765, type: 3}
+  m_Name: CannonTowerStats
+  m_EditorClassIdentifier: Assembly-CSharp::CannonTowerStats
+  levels:
+  - towerName: Level1
+    towerSprite: {fileID: 128889091407729587, guid: aaf4c47e45a734a5193736abea6890fb, type: 3}
+    cost: 120
+    sellRefund: 100
+    attackDamage: 60
+    attackInterval: 3
+    range: 1
+  - towerName: Level3
+    towerSprite: {fileID: 128889091407729587, guid: 016ef971d1a6b40fa8476f56f049e032, type: 3}
+    cost: 180
+    sellRefund: 120
+    attackDamage: 100
+    attackInterval: 3
+    range: 1
+  - towerName: Level3
+    towerSprite: {fileID: 128889091407729587, guid: 468f8226f4dc64faca715abd60062d2d, type: 3}
+    cost: 240
+    sellRefund: 180
+    attackDamage: 140
+    attackInterval: 3
+    range: 1
+  visuals:
+  - levelName: Level1
+    visualPrefab: {fileID: 8814583205318202462, guid: dd459b6f05a1c4f6d84acdea98a6c13c, type: 3}
+    animatorController: {fileID: 9100000, guid: 7745416bf1c404446bc10244e5fe5de4, type: 2}
+  - levelName: Level2
+    visualPrefab: {fileID: 3119685022683578252, guid: 93f8fb107f5b24a8d86d0075b6b20e8c, type: 3}
+    animatorController: {fileID: 9100000, guid: 4b84742e175da444f8fac409c804c57b, type: 2}
+  - levelName: Level3
+    visualPrefab: {fileID: 5538952185721153535, guid: db97b44a5f73d410f836cb72e5f02345, type: 3}
+    animatorController: {fileID: 9100000, guid: 005ed428bfffa4fd2b0915d124cd907d, type: 2}

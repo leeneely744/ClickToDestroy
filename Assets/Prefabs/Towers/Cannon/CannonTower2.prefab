@@ -118,7 +118,7 @@ Transform:
   m_GameObject: {fileID: 3119685022683578252}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.02, y: 2.56, z: 0}
+  m_LocalPosition: {x: 15.61, y: 2.9429438, z: 0}
   m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -236,7 +236,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2020050256651208380, guid: 5095dae1ef62a4faf9f64fa9fe940f3e, type: 3}
   firePoint: {fileID: 5738871543804652589}
   projectileTravelTime: 0.5
-  stats: {fileID: 0}
+  stats: {fileID: 11400000, guid: 6a1693e0ca04f4c47b5993cc7cf101a8, type: 2}
   cost: 0
   nextLevelPrefab: {fileID: 5538952185721153535, guid: db97b44a5f73d410f836cb72e5f02345, type: 3}
 --- !u!1 &4244911471617811868
