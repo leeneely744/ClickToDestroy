@@ -17,12 +17,12 @@ public class TowerController : MonoBehaviour
     private SpriteRenderer attackRangeRenderer;
     private Money moneyController;
     private TowerPlace towerPlace;
-    private int levelIndex = 0;
+    protected int levelIndex = 0;
 
     /// <summary>
     /// TowerStats
     /// </summary>
-    [SerializeField] private TowerStats stats;
+    [SerializeField] protected TowerStats stats;
     private int maxLevelIndex;
     private string towerName;
     [HideInInspector] public int cost;
@@ -31,6 +31,7 @@ public class TowerController : MonoBehaviour
     private float attackInterval;
     private float range;
 
+    protected TowerStats Stats => stats;
     protected float AttackRange => range;
     public float AttackInterval => attackInterval;
     protected TowerPlace CurrentTowerPlace => towerPlace;
@@ -69,7 +70,24 @@ public class TowerController : MonoBehaviour
         }
 
         levelIndex = InitialLevelIndex;
-        ApplyStatus();
+        ApplyInitStats();
+    }
+
+    private void ApplyInitStats()
+    {
+        var data = GetLevelData(levelIndex);
+        if (data == null)
+        {
+            Debug.LogError($"Tower level data not found for index {levelIndex}");
+            return;
+        }
+        towerName = data.towerName;
+        cost = data.cost;
+        sellRefund = data.sellRefund;
+        attackDamage = data.attackDamage;
+        attackInterval = data.attackInterval;
+        range = data.range;
+        maxLevelIndex = stats.levels.Length - 1;
     }
 
     public void OnSelected()
@@ -175,7 +193,7 @@ public class TowerController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public bool UpgradeTower()
+    public virtual bool UpgradeTower()
     {
         var nextPrefab = NextLevelPrefab;
         if (nextPrefab == null || towerPlace == null)
@@ -202,23 +220,6 @@ public class TowerController : MonoBehaviour
 
         Destroy(gameObject);
         return true;
-    }
-
-    private void ApplyStatus()
-    {
-        var data = GetLevelData(levelIndex);
-        if (data == null)
-        {
-            Debug.LogError($"Tower level data not found for index {levelIndex}");
-            return;
-        }
-        towerName = data.towerName;
-        cost = data.cost;
-        sellRefund = data.sellRefund;
-        attackDamage = data.attackDamage;
-        attackInterval = data.attackInterval;
-        range = data.range;
-        maxLevelIndex = stats.levels.Length - 1;
     }
 
     protected virtual int InitialLevelIndex => 0;

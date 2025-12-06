@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 016ef971d1a6b40fa8476f56f049e032
+guid: d9481eb4cfb0446ab94a302d39ec0eec
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 128889091407729587
-    second: U_0
+      213: -337227894256300814
+    second: CannonTower1_0
   - first:
-      213: -2025972371982694430
-    second: U_1
+      213: 2829984535836836365
+    second: CannonTower1_1
   - first:
-      213: -6384129593544478740
-    second: U_2
+      213: 2491744725756052590
+    second: CannonTower1_2
   - first:
-      213: -1680792986009665421
-    second: U_3
+      213: 3442068489198641772
+    second: CannonTower1_3
   - first:
-      213: -7748865169494307589
-    second: U_4
+      213: -7595394966724358766
+    second: CannonTower1_4
   - first:
-      213: 3052615473315302792
-    second: U_5
+      213: 8429761470121239760
+    second: CannonTower1_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,101 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: U_0
+      name: CannonTower1_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 0
-        width: 34
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3b3d7cc12f7e9c100800000000000000
-      internalID: 128889091407729587
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: U_1
-      rect:
-        serializedVersion: 2
-        x: 55
-        y: 4
-        width: 34
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2e7473b9cdc42e3e0800000000000000
-      internalID: -2025972371982694430
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: U_2
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 4
-        width: 34
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cefe8b095f30767a0800000000000000
-      internalID: -6384129593544478740
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: U_3
-      rect:
-        serializedVersion: 2
-        x: 151
-        y: 4
-        width: 34
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3700de73faf9ca8e0800000000000000
-      internalID: -1680792986009665421
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: U_4
-      rect:
-        serializedVersion: 2
-        x: 199
+        x: 11
         y: 2
-        width: 34
-        height: 37
+        width: 26
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bfc05effe20867490800000000000000
-      internalID: -7748865169494307589
+      spriteID: 2fc0082540de15bf0800000000000000
+      internalID: -337227894256300814
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: U_5
+      name: CannonTower1_1
       rect:
         serializedVersion: 2
-        x: 247
-        y: 0
-        width: 34
-        height: 39
+        x: 59
+        y: 2
+        width: 26
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,8 +152,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 88dc1da79911d5a20800000000000000
-      internalID: 3052615473315302792
+      spriteID: d02476201ff164720800000000000000
+      internalID: 2829984535836836365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CannonTower1_2
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 2
+        width: 26
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6484a150a4749220800000000000000
+      internalID: 2491744725756052590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CannonTower1_3
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 2
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c622047dd0fa4cf20800000000000000
+      internalID: 3442068489198641772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CannonTower1_4
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 2
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29dca97158cb79690800000000000000
+      internalID: -7595394966724358766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CannonTower1_5
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 2
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d4e9dfe4678cf470800000000000000
+      internalID: 8429761470121239760
       vertices: []
       indices: 
       edges: []
@@ -260,12 +260,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      U_0: 128889091407729587
-      U_1: -2025972371982694430
-      U_2: -6384129593544478740
-      U_3: -1680792986009665421
-      U_4: -7748865169494307589
-      U_5: 3052615473315302792
+      CannonTower1_0: -337227894256300814
+      CannonTower1_1: 2829984535836836365
+      CannonTower1_2: 2491744725756052590
+      CannonTower1_3: 3442068489198641772
+      CannonTower1_4: -7595394966724358766
+      CannonTower1_5: 8429761470121239760
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

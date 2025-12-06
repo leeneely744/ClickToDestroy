@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: aaf4c47e45a734a5193736abea6890fb
+guid: 9800861f0064b40fd963812665bc3244
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 128889091407729587
-    second: U_0
+      213: -6241970579842084961
+    second: CannonTower2_0
   - first:
-      213: -2025972371982694430
-    second: U_1
+      213: -9075234775628987986
+    second: CannonTower2_1
   - first:
-      213: -6384129593544478740
-    second: U_2
+      213: 1970228185817595866
+    second: CannonTower2_2
   - first:
-      213: -1680792986009665421
-    second: U_3
+      213: 5912817840638030190
+    second: CannonTower2_3
   - first:
-      213: -7748865169494307589
-    second: U_4
+      213: 2310735903046222625
+    second: CannonTower2_4
   - first:
-      213: 3052615473315302792
-    second: U_5
+      213: 401639594573572999
+    second: CannonTower2_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: U_0
+      name: CannonTower2_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 2
-        width: 26
-        height: 31
+        x: 7
+        y: 0
+        width: 34
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3b3d7cc12f7e9c100800000000000000
-      internalID: 128889091407729587
+      spriteID: f9fc21a34d01069a0800000000000000
+      internalID: -6241970579842084961
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: U_1
+      name: CannonTower2_1
       rect:
         serializedVersion: 2
-        x: 59
-        y: 2
-        width: 26
-        height: 31
+        x: 55
+        y: 4
+        width: 34
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2e7473b9cdc42e3e0800000000000000
-      internalID: -2025972371982694430
+      spriteID: ea1cc51ed0a4e0280800000000000000
+      internalID: -9075234775628987986
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: U_2
+      name: CannonTower2_2
       rect:
         serializedVersion: 2
-        x: 107
-        y: 2
-        width: 26
-        height: 43
+        x: 103
+        y: 4
+        width: 34
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cefe8b095f30767a0800000000000000
-      internalID: -6384129593544478740
+      spriteID: adfbe16a818a75b10800000000000000
+      internalID: 1970228185817595866
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: U_3
+      name: CannonTower2_3
       rect:
         serializedVersion: 2
-        x: 155
-        y: 2
-        width: 26
-        height: 31
+        x: 151
+        y: 4
+        width: 34
+        height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,20 +196,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3700de73faf9ca8e0800000000000000
-      internalID: -1680792986009665421
+      spriteID: e6172d4af7c8e0250800000000000000
+      internalID: 5912817840638030190
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: U_4
+      name: CannonTower2_4
       rect:
         serializedVersion: 2
-        x: 203
+        x: 199
         y: 2
-        width: 26
-        height: 31
+        width: 34
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,20 +218,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bfc05effe20867490800000000000000
-      internalID: -7748865169494307589
+      spriteID: 123cfce9f02611020800000000000000
+      internalID: 2310735903046222625
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: U_5
+      name: CannonTower2_5
       rect:
         serializedVersion: 2
-        x: 251
-        y: 2
-        width: 26
-        height: 31
+        x: 247
+        y: 0
+        width: 34
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,8 +240,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 88dc1da79911d5a20800000000000000
-      internalID: 3052615473315302792
+      spriteID: 78b2a425519e29500800000000000000
+      internalID: 401639594573572999
       vertices: []
       indices: 
       edges: []
@@ -260,12 +260,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      U_0: 128889091407729587
-      U_1: -2025972371982694430
-      U_2: -6384129593544478740
-      U_3: -1680792986009665421
-      U_4: -7748865169494307589
-      U_5: 3052615473315302792
+      CannonTower2_0: -6241970579842084961
+      CannonTower2_1: -9075234775628987986
+      CannonTower2_2: 1970228185817595866
+      CannonTower2_3: 5912817840638030190
+      CannonTower2_4: 2310735903046222625
+      CannonTower2_5: 401639594573572999
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
