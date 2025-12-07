@@ -15,7 +15,7 @@ public class TowerController : MonoBehaviour
 
     private bool isSelected = false;
     private SpriteRenderer attackRangeRenderer;
-    private Money moneyController;
+    protected Money moneyController;
     private TowerPlace towerPlace;
     protected int levelIndex = 0;
 
@@ -70,15 +70,15 @@ public class TowerController : MonoBehaviour
         }
 
         levelIndex = InitialLevelIndex;
-        ApplyInitStats();
+        ApplyStats(levelIndex);
     }
 
-    private void ApplyInitStats()
+    protected void ApplyStats(int index)
     {
-        var data = GetLevelData(levelIndex);
+        var data = GetLevelData(index);
         if (data == null)
         {
-            Debug.LogError($"Tower level data not found for index {levelIndex}");
+            Debug.LogError($"Tower level data not found for index {index}");
             return;
         }
         towerName = data.towerName;
@@ -88,6 +88,7 @@ public class TowerController : MonoBehaviour
         attackInterval = data.attackInterval;
         range = data.range;
         maxLevelIndex = stats.levels.Length - 1;
+        levelIndex = index;
     }
 
     public void OnSelected()
@@ -198,6 +199,7 @@ public class TowerController : MonoBehaviour
         var nextPrefab = NextLevelPrefab;
         if (nextPrefab == null || towerPlace == null)
         {
+            Debug.LogWarning($"[TowerController] Cannot upgrade {name}: nextPrefab={(nextPrefab == null ? "null" : nextPrefab.name)}, towerPlace={(towerPlace == null ? "null" : towerPlace.name)}");
             return false;
         }
 
@@ -207,6 +209,7 @@ public class TowerController : MonoBehaviour
             if (!moneyController.SpendMoney(upgradeCost))
             {
                 Debug.Log("Not enough money to upgrade tower.");
+                Debug.LogWarning($"[TowerController] Upgrade failed (lack of money) {name}: cost={upgradeCost}, money={moneyController.CurrentMoney}");
                 return false;
             }
         }
@@ -216,6 +219,10 @@ public class TowerController : MonoBehaviour
         if (newController != null)
         {
             newController.SetTowerPlace(towerPlace);
+        }
+        else
+        {
+            Debug.LogError($"[TowerController] Next prefab {nextPrefab.name} does not have TowerController");
         }
 
         Destroy(gameObject);
@@ -247,7 +254,7 @@ public class TowerController : MonoBehaviour
         return data != null ? data.cost : 0;
     }
 
-    public int GetUpgradeCost()
+    public virtual int GetUpgradeCost()
     {
         var next = NextLevelPrefab;
         if (next == null)
