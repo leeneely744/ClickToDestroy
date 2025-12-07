@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1108978056371446618}
   - component: {fileID: 4031333588909017373}
+  - component: {fileID: -1134245427596514683}
   m_Layer: 0
   m_Name: Bomb1
   m_TagString: Untagged
@@ -90,3 +91,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1134245427596514683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8839597572441139456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f544acf02617425c9315207792a4c1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  maxLifetime: 10
+  speed: 5
+  damage: 10
