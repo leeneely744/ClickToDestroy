@@ -5,6 +5,7 @@ public class CannonTowerController : TowerController
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject nextLevelPrefab;
 
+    private string attackTriggerName = "isAttack";
     private CannonTowerStats cannonStats;
 
     protected override int InitialLevelIndex => 0;
@@ -29,6 +30,12 @@ public class CannonTowerController : TowerController
         }
     }
 
+    protected override void Attack(EnemyController target)
+    {
+        base.Attack(target);
+        PlayAttackAnimation();
+    }
+
     private void ApplyAnimatorForLevel(int index)
     {
         if (animator == null)
@@ -45,6 +52,16 @@ public class CannonTowerController : TowerController
         {
             animator.runtimeAnimatorController = cannonStats.GetAnimatorForLevel(index);
         }
+    }
+
+    private void PlayAttackAnimation()
+    {
+        if (animator == null)
+        {
+            return;
+        }
+
+        animator.SetTrigger(attackTriggerName);
     }
 
 }

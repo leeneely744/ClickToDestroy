@@ -125,7 +125,7 @@ public class TowerController : MonoBehaviour
         }
     }
 
-    protected void Attack(EnemyController target)
+    protected virtual void Attack(EnemyController target)
     {
         if (projectilePrefab == null) return;
         if (firePoint == null)
