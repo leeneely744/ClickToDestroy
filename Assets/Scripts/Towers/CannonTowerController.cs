@@ -15,10 +15,6 @@ public class CannonTowerController : TowerController
         base.Start();
 
         attackTriggerHash = Animator.StringToHash(attackTriggerName);
-        if (animator == null)
-        {
-            animator = GetComponent<Animator>();
-        }
     }
 
     protected override void Attack(EnemyController target)
@@ -29,6 +25,7 @@ public class CannonTowerController : TowerController
 
     private void PlayAttackAnimation()
     {
+        var animator = GetComponent<Animator>();
         if (animator == null)
         {
             return;
