@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 3099266967791470093}
   - component: {fileID: -204603339942181064}
   m_Layer: 0
-  m_Name: CannonTower
+  m_Name: CannonTower3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,7 +287,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -337227894256300814, guid: d9481eb4cfb0446ab94a302d39ec0eec, type: 3}
+  m_Sprite: {fileID: 7188420754594208410, guid: 26c77630d89ac4f7aa33f07541337897, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -351,6 +351,7 @@ MonoBehaviour:
   projectileTravelTime: 0.5
   stats: {fileID: 11400000, guid: 6a1693e0ca04f4c47b5993cc7cf101a8, type: 2}
   cost: 0
+  animator: {fileID: 0}
   nextLevelPrefab: {fileID: 3119685022683578252, guid: 93f8fb107f5b24a8d86d0075b6b20e8c, type: 3}
 --- !u!95 &-204603339942181064
 Animator:
@@ -362,7 +363,7 @@ Animator:
   m_GameObject: {fileID: 8814583205318202462}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 005ed428bfffa4fd2b0915d124cd907d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
