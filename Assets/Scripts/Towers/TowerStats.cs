@@ -10,7 +10,6 @@ public class TowerStats : ScriptableObject
 public class TowerLevel
 {
     public string towerName;
-    public Sprite towerSprite;
     public int cost;
     public int sellRefund;
     public float attackDamage;
