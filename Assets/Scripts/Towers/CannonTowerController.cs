@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CannonTowerController : TowerController
 {
-    [SerializeField] private Animator animator;
     [SerializeField] private GameObject nextLevelPrefab;
 
     [SerializeField] private string attackTriggerName = "isAttack";
