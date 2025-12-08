@@ -349,10 +349,11 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8839597572441139456, guid: 08558378276c2421e9448c18f07e4dc9, type: 3}
   firePoint: {fileID: 1759327385394020954}
   projectileTravelTime: 0.5
-  stats: {fileID: 11400000, guid: 6a1693e0ca04f4c47b5993cc7cf101a8, type: 2}
+  stats: {fileID: 11400000, guid: e941322ea97714a2795044e12a486bf5, type: 2}
   cost: 0
   animator: {fileID: 0}
-  nextLevelPrefab: {fileID: 3119685022683578252, guid: 93f8fb107f5b24a8d86d0075b6b20e8c, type: 3}
+  nextLevelPrefab: {fileID: 8814583205318202462, guid: 164844deaa9944d73aa36771059842cc, type: 3}
+  attackTriggerName: isAttack
 --- !u!95 &-204603339942181064
 Animator:
   serializedVersion: 7

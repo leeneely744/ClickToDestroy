@@ -9,32 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 083d8f40c8b924695a7ed87f06218765, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b6755be0f5804a9cabef6a0959026b1, type: 3}
   m_Name: CannonTowerStats
-  m_EditorClassIdentifier: Assembly-CSharp::CannonTowerStats
+  m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
-  - towerName: Level1
-    towerSprite: {fileID: -337227894256300814, guid: d9481eb4cfb0446ab94a302d39ec0eec, type: 3}
-    cost: 120
-    sellRefund: 100
-    attackDamage: 100
-    attackInterval: 3
-    range: 1
-  - towerName: Level2
-    towerSprite: {fileID: -6241970579842084961, guid: 9800861f0064b40fd963812665bc3244, type: 3}
-    cost: 200
-    sellRefund: 120
-    attackDamage: 160
-    attackInterval: 3
-    range: 1
-  - towerName: Level3
-    towerSprite: {fileID: 7188420754594208410, guid: 26c77630d89ac4f7aa33f07541337897, type: 3}
-    cost: 280
-    sellRefund: 200
-    attackDamage: 220
-    attackInterval: 3
-    range: 1
-  animatorControllers:
-  - {fileID: 9100000, guid: 7745416bf1c404446bc10244e5fe5de4, type: 2}
-  - {fileID: 9100000, guid: 4b84742e175da444f8fac409c804c57b, type: 2}
-  - {fileID: 9100000, guid: 005ed428bfffa4fd2b0915d124cd907d, type: 2}
+  - towerName: 
+    towerSprite: {fileID: 0}
+    cost: 0
+    sellRefund: 0
+    attackDamage: 0
+    attackInterval: 0
+    range: 0
+  - towerName: 
+    towerSprite: {fileID: 0}
+    cost: 0
+    sellRefund: 0
+    attackDamage: 0
+    attackInterval: 0
+    range: 0
+  - towerName: 
+    towerSprite: {fileID: 0}
+    cost: 0
+    sellRefund: 0
+    attackDamage: 0
+    attackInterval: 0
+    range: 0
