@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9106427003501832100}
   - component: {fileID: 3482412303587038159}
+  - component: {fileID: 571846130876022052}
   m_Layer: 0
   m_Name: AttackRangeCircle
   m_TagString: Untagged
@@ -90,6 +91,42 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &571846130876022052
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155041333157883808}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
 --- !u!1 &1499013605453779945
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,6 +139,7 @@ GameObject:
   - component: {fileID: 877906371054496454}
   - component: {fileID: 7082889492444278821}
   - component: {fileID: 1094430651213213338}
+  - component: {fileID: 7327876594456491031}
   m_Layer: 0
   m_Name: MagicTower3
   m_TagString: Untagged
@@ -238,6 +276,33 @@ MonoBehaviour:
   projectileTravelTime: 0.3
   stats: {fileID: 11400000, guid: 911c8b1dc61934d689e798f6f2bece2f, type: 2}
   cost: 0
+--- !u!50 &7327876594456491031
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499013605453779945}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &4624471279693197055
 GameObject:
   m_ObjectHideFlags: 0
