@@ -6,6 +6,12 @@ public class Projectile : MonoBehaviour
     public float speed = 5f;
     public int damage = 10;
 
+    [Header("Splash settings (for Cannon, etc.)")]
+    [SerializeField] private float splashRadius = 0f; // 0 のときは範囲ダメージなし
+    [SerializeField, Range(0f, 1f)]
+    private float splashDamageRate = 0.5f; // 本体ダメージの何倍か（割合）
+    [SerializeField] private LayerMask enemyLayerMask; // Enemy 用レイヤー
+
     private Transform target;
     private float lifeTimer;
 
@@ -58,6 +64,47 @@ public class Projectile : MonoBehaviour
             enemy.TakeDamage(damage);
         }
 
+        // 範囲ダメージ（Cannon など）を適用
+        if (splashRadius > 0f && splashDamageRate > 0f)
+        {
+            ApplySplashDamage(enemy);
+        }
+
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// メインターゲット周辺の Enemy にも、damage × splashDamageRate のダメージを与える。
+    /// Cannon の砲弾など、範囲攻撃を持つ弾プレハブでのみ有効にする想定。
+    /// </summary>
+    private void ApplySplashDamage(EnemyController mainTarget)
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, splashRadius, enemyLayerMask);
+        foreach (var hit in hits)
+        {
+            var enemy = hit.GetComponent<EnemyController>();
+            if (enemy == null)
+            {
+                continue;
+            }
+
+            // メインターゲットはすでに通常ダメージを与えているのでスキップ（必要に応じて変更可）
+            if (enemy == mainTarget)
+            {
+                continue;
+            }
+
+            int splashDamage = Mathf.RoundToInt(damage * splashDamageRate);
+            enemy.TakeDamage(splashDamage);
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (splashRadius > 0f)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, splashRadius);
+        }
     }
 }

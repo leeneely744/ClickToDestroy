@@ -26,8 +26,6 @@ public class TowerActionPanel : MonoBehaviour
             return;
         }
 
-        Debug.Log($"[TowerActionPanel] Show for {towerController.name}");
-
         // UIの中心を塔の位置に合わせる
         Vector3 screenPos = Camera.main.WorldToScreenPoint(towerController.transform.position);
         transform.position = screenPos;
@@ -36,7 +34,6 @@ public class TowerActionPanel : MonoBehaviour
         // アップグレード金額表示
         // TODO: 次のレベルのプレハブがない場合はアップグレード不可にする
         int upgradeCost = towerController.GetUpgradeCost();
-        Debug.Log($"[TowerActionPanel] Upgrade cost for {towerController.name}: {upgradeCost}, nextPrefab: {towerController.NextLevelPrefab}");
         if (upgradeCostText != null)
         {
             upgradeCostText.text = upgradeCost.ToString();

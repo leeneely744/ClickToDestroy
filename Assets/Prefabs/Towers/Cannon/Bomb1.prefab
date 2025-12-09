@@ -106,3 +106,8 @@ MonoBehaviour:
   maxLifetime: 10
   speed: 2
   damage: 10
+  splashRadius: 0.7
+  splashDamageRate: 0.3
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
