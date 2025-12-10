@@ -1,4 +1,11 @@
 # AGENTS
+
+## 前提条件
+
+このリポジトリの名前は ClickToDestroy です。
+Issuesのページは https://github.com/leeneely744/ClickToDestroy/issues
+
+
 ## 必須指示
 - 日本語で回答する。
 - このプロジェクトはUnityの練習も兼ねているので、「どうしたら良いか？」という指示を受けたら、修正方針のヒントや方向性を示すだけにしてください。
