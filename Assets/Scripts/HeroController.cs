@@ -99,7 +99,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler
 
             if (animator != null)
             {
-                animator.SetBool("isRunning", isMoving);
+                animator.SetBool("isRunning", true);
             }
 
             transform.position = Vector3.MoveTowards(transform.position, moveTarget, moveSpeed * Time.deltaTime);
@@ -109,6 +109,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler
                 // 移動完了
                 isMoving = false;
                 moveInput = Vector2.zero;
+                animator?.SetBool("isRunning", false);
             }
         }
     }
@@ -210,9 +211,5 @@ public class HeroController : MonoBehaviour, IPointerClickHandler
         }
 
         animator.SetBool("isAttacking", isAttacking);
-        if (isAttacking)
-        {
-            animator.SetBool("isWalking", false);
-        }
     }
 }
