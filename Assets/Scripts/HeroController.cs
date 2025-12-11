@@ -1,8 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
-public class HeroController : MonoBehaviour
+// TODO(Hero 移動仕様メモ)
+// - Hero をクリックしたら「Hero移動モード」に入る（次のクリックで目的地を決める状態）
+// - 移動モード中にフィールド上を左クリックした位置を ScreenToWorldPoint でワールド座標に変換し、moveTarget(Vector3)として記録する
+//   - target = Camera.main.ScreenToWorldPoint(Input.mousePosition); target.z = transform.position.z; のように z は現在値に合わせる
+// - moveTarget が決まったら isMoving = true にして、isMoveMode = false（次のクリック待ち状態は終了）
+// - FixedUpdate で transform.position を Vector3.MoveTowards(transform.position, moveTarget, moveSpeed * Time.fixedDeltaTime) で移動させる
+// - Vector3.Distance(transform.position, moveTarget) <= stopDistance になったら移動完了とみなし、isMoving = false にする
+// - Animator がある場合、isMoving 中だけ isWalking フラグを true にし、停止時は false に戻す
+
+public class HeroController : MonoBehaviour, IPointerClickHandler
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3f;
@@ -21,6 +31,11 @@ public class HeroController : MonoBehaviour
     private Animator animator;
     private Vector2 moveInput;
 
+    private bool isMoving = false;
+    private bool isMoveMode = false;
+    private Vector3 moveTarget;
+    private float moveDistance = 0.05f;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,67 +45,80 @@ public class HeroController : MonoBehaviour
 
     void Update()
     {
-        ReadInput();
         HandleAttack();
-    }
-
-    void FixedUpdate()
-    {
         HandleMovement();
     }
-
-    private void ReadInput()
+    
+    public void OnPointerClick(PointerEventData eventData)
     {
-        if (Keyboard.current == null)
+        print($"Heroがクリックされました: {eventData.position}");
+        isMoveMode = !isMoveMode;
+    }
+
+    // 移動モードで移動先を指定する
+    private void HandleHeroMoveInput()
+    {
+        if (!isMoveMode)
         {
-            moveInput = Vector2.zero;
             return;
         }
 
-        Vector2 input = Vector2.zero;
-
-        if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed)
+        if (Mouse.current == null || !Mouse.current.leftButton.wasPressedThisFrame)
         {
-            input.y += 1f;
+            return;
         }
 
-        if (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed)
+        // スマホようにUIタッチも含めて無視する場合はInput.GetTouch(0).fingerIdを使う。
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
         {
-            input.y -= 1f;
+            return;
         }
 
-        if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null)
         {
-            input.x += 1f;
+            Debug.LogWarning("Main Camera not found while handling hero move input.");
+            return;
         }
 
-        if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
-        {
-            input.x -= 1f;
-        }
+        Vector2 screenPosition = Mouse.current.position.ReadValue();
+        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, mainCamera.nearClipPlane));
+        worldPosition.z = 0f;
 
-        moveInput = input.normalized;
+        moveTarget = worldPosition;
+        isMoving = true;
+        isMoveMode = false;
     }
 
     private void HandleMovement()
     {
-        if (rb == null)
+        if (isMoving)
         {
-            return;
-        }
+            Vector3 direction = (moveTarget - transform.position).normalized;
+            moveInput = new Vector2(direction.x, direction.y);
 
-        Vector2 newPosition = rb.position + moveInput * moveSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(newPosition);
+            if (animator != null)
+            {
+                animator.SetBool("isMoving", isMoving);
+            }
 
-        if (animator != null)
-        {
-            bool isMoving = moveInput.sqrMagnitude > 0.0001f;
-            animator.SetBool("isWalking", isMoving);
+            float distanceToTarget = Vector3.Distance(transform.position, moveTarget);
+            if (distanceToTarget <= moveDistance)
+            {
+                // 移動完了
+                isMoving = false;
+                moveInput = Vector2.zero;
+            }
         }
     }
 
     private void HandleAttack()
     {
+        if (isMoving)
+        {
+            return;
+        }
+
         if (enemiesInRange.Count == 0)
         {
             UpdateAttackAnimation(false);
@@ -122,6 +150,11 @@ public class HeroController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        if (isMoving)
+        {
+            return;
+        }
+
         if (!col.CompareTag("Enemy"))
         {
             return;
@@ -182,4 +215,3 @@ public class HeroController : MonoBehaviour
         }
     }
 }
-
