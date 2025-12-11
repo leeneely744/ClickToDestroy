@@ -47,18 +47,18 @@ public class HeroController : MonoBehaviour, IPointerClickHandler
     {
         HandleAttack();
         HandleMovement();
+        HandleHeroMoveInput();
     }
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        print($"Heroがクリックされました: {eventData.position}");
         isMoveMode = !isMoveMode;
     }
 
     // 移動モードで移動先を指定する
     private void HandleHeroMoveInput()
     {
-        if (!isMoveMode)
+        if (!isMoveMode || isMoving)
         {
             return;
         }
@@ -99,9 +99,10 @@ public class HeroController : MonoBehaviour, IPointerClickHandler
 
             if (animator != null)
             {
-                animator.SetBool("isMoving", isMoving);
+                animator.SetBool("isRunning", isMoving);
             }
 
+            transform.position = Vector3.MoveTowards(transform.position, moveTarget, moveSpeed * Time.deltaTime);
             float distanceToTarget = Vector3.Distance(transform.position, moveTarget);
             if (distanceToTarget <= moveDistance)
             {
