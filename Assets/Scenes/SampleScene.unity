@@ -5864,6 +5864,10 @@ PrefabInstance:
       propertyPath: attackDamage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3041425802671264223, guid: ac11cd74649834a4b9ebe6acffda93c1, type: 3}
+      propertyPath: attackInterval
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3782966484762149069, guid: ac11cd74649834a4b9ebe6acffda93c1, type: 3}
       propertyPath: m_LocalScale.x
       value: 1

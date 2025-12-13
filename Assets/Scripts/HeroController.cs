@@ -4,17 +4,15 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using Tags = Constants.Tags;
 
-// TODO(Hero 移動仕様メモ)
-// - Hero をクリックしたら「Hero移動モード」に入る（次のクリックで目的地を決める状態）
-// - 移動モード中にフィールド上を左クリックした位置を ScreenToWorldPoint でワールド座標に変換し、moveTarget(Vector3)として記録する
-//   - target = Camera.main.ScreenToWorldPoint(Input.mousePosition); target.z = transform.position.z; のように z は現在値に合わせる
-// - moveTarget が決まったら isMoving = true にして、isMoveMode = false（次のクリック待ち状態は終了）
-// - FixedUpdate で transform.position を Vector3.MoveTowards(transform.position, moveTarget, moveSpeed * Time.fixedDeltaTime) で移動させる
-// - Vector3.Distance(transform.position, moveTarget) <= stopDistance になったら移動完了とみなし、isMoving = false にする
-// - Animator がある場合、isMoving 中だけ isWalking フラグを true にし、停止時は false に戻す
-
 public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
 {
+    private static class AnimatorParams
+    {
+        public const string IsDead = "IsDead";
+        public const string IsRunning = "IsRunning";
+        public const string Attack = "Attack";
+    }
+
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3f;
 
@@ -123,7 +121,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
 
             if (animator != null)
             {
-                animator.SetBool("isRunning", true);
+                animator.SetBool(AnimatorParams.IsRunning, true);
             }
 
             transform.position = Vector3.MoveTowards(transform.position, moveTarget, moveSpeed * Time.deltaTime);
@@ -133,7 +131,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
                 // 移動完了
                 isMoving = false;
                 moveInput = Vector2.zero;
-                animator?.SetBool("isRunning", false);
+                animator?.SetBool(AnimatorParams.IsRunning, false);
             }
         }
     }
@@ -147,7 +145,6 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
 
         if (enemiesInRange.Count == 0)
         {
-            UpdateAttackAnimation(false);
             return;
         }
 
@@ -222,7 +219,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
             currentHp = 0;
             if (animator != null)
             {
-                animator.SetBool("IsDead", true);
+                animator.SetBool(AnimatorParams.IsDead, true);
             }
 
             // 死亡時は「死亡中」モーションを再生したいので、
@@ -240,7 +237,13 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
             return;
         }
 
-        animator.SetBool("isAttacking", isAttacking);
+        // 攻撃は単発モーションなので Trigger を使う
+        if (!isAttacking || animator == null)
+        {
+            return;
+        }
+
+        animator.SetTrigger(AnimatorParams.Attack);
     }
 
     /// <summary>
@@ -261,9 +264,8 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         // アニメーションパラメータのリセット
         if (animator != null)
         {
-            animator.SetBool("IsDead", false);
-            animator.SetBool("isRunning", false);
-            animator.SetBool("isAttacking", false);
+            animator.SetBool(AnimatorParams.IsDead, false);
+            animator.SetBool(AnimatorParams.IsRunning, false);
         }
     }
 
