@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using Tags = Constants.Tags;
 
 // TODO(Hero 移動仕様メモ)
 // - Hero をクリックしたら「Hero移動モード」に入る（次のクリックで目的地を決める状態）
@@ -161,7 +162,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
             return;
         }
 
-        if (!col.CompareTag("Enemy"))
+        if (!col.CompareTag(Tags.Enemy))
         {
             return;
         }
@@ -176,7 +177,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
 
     void OnTriggerExit2D(Collider2D col)
     {
-        if (!col.CompareTag("Enemy"))
+        if (!col.CompareTag(Tags.Enemy))
         {
             return;
         }

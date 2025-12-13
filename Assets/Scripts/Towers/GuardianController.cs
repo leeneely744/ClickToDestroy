@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Tags = Constants.Tags;
 
 public class GuardianController : MonoBehaviour, IDefender
 {
@@ -31,7 +32,7 @@ public class GuardianController : MonoBehaviour, IDefender
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (!col.CompareTag("Enemy"))
+        if (!col.CompareTag(Tags.Enemy))
         {
             return;
         }

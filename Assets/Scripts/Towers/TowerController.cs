@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Tags = Constants.Tags;
 
 public class TowerController : MonoBehaviour
 {
@@ -148,7 +149,7 @@ public class TowerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Enemy"))
+        if (col.CompareTag(Tags.Enemy))
         {
             EnemyController enemy = col.GetComponent<EnemyController>();
             if (!enemiesInRange.Contains(enemy))
@@ -160,7 +161,7 @@ public class TowerController : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D col)
     {
-        if (col.CompareTag("Enemy"))
+        if (col.CompareTag(Tags.Enemy))
         {
             EnemyController enemy = col.GetComponent<EnemyController>();
             if (enemiesInRange.Contains(enemy))
