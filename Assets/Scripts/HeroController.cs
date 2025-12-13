@@ -170,6 +170,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         if (enemy != null && !enemiesInRange.Contains(enemy))
         {
             enemiesInRange.Add(enemy);
+            enemy.EngageDefender(this);
         }
     }
 
