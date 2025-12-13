@@ -222,9 +222,9 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
             currentHp = 0;
             if (animator != null)
             {
-                animator.SetTrigger("Die");
+                animator.SetBool("IsDead", true);
             }
-            
+
             // 死亡時は「死亡中」モーションを再生したいので、
             // スクリプト自体は有効なままにしておく。
             isMoving = false;
@@ -261,7 +261,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         // アニメーションパラメータのリセット
         if (animator != null)
         {
-            animator.ResetTrigger("Die");
+            animator.SetBool("IsDead", false);
             animator.SetBool("isRunning", false);
             animator.SetBool("isAttacking", false);
         }
