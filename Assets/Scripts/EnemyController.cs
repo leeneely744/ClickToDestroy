@@ -14,10 +14,10 @@ public class EnemyController : MonoBehaviour
     public int hp = 30;
     public int rewardMoney = 20;
     [SerializeField] private float attackInterval = 1.5f;
-    [SerializeField] private int guardianDamage = 10;
+    [SerializeField] private int defenderDamage = 10;
 
     private bool hasRemovedFromSpawner;
-    private GuardianController engagedGuardian;
+    private IDefender engagedDefender;
     private float attackTimer;
     private bool isEngaged;
     public bool IsDead => hp <= 0;
@@ -80,14 +80,23 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (isEngaged && engagedGuardian != null)
+        if (!isEngaged || engagedDefender == null || engagedDefender.IsDead)
         {
-            attackTimer += Time.deltaTime;
-            if (attackTimer >= attackInterval)
+            if (isEngaged)
             {
-                attackTimer = 0f;
-                engagedGuardian.TakeDamage(guardianDamage);
+                // 交戦相手がいなくなった、もしくは倒れたら交戦状態を解除する
+                isEngaged = false;
+                engagedDefender = null;
+                UpdateAnimations();
             }
+            return;
+        }
+
+        attackTimer += Time.deltaTime;
+        if (attackTimer >= attackInterval)
+        {
+            attackTimer = 0f;
+            engagedDefender.TakeDamage(defenderDamage);
         }
     }
 
@@ -117,10 +126,10 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void EngageGuardian(GuardianController guardian)
+    public void EngageDefender(IDefender defender)
     {
-        engagedGuardian = guardian;
-        isEngaged = guardian != null;
+        engagedDefender = defender;
+        isEngaged = defender != null && !defender.IsDead;
         attackTimer = 0f;
         UpdateAnimations();
     }

@@ -12,7 +12,7 @@ using UnityEngine.EventSystems;
 // - Vector3.Distance(transform.position, moveTarget) <= stopDistance になったら移動完了とみなし、isMoving = false にする
 // - Animator がある場合、isMoving 中だけ isWalking フラグを true にし、停止時は false に戻す
 
-public class HeroController : MonoBehaviour, IPointerClickHandler
+public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3f;
@@ -94,6 +94,9 @@ public class HeroController : MonoBehaviour, IPointerClickHandler
     {
         if (isMoving)
         {
+            // 移動を開始したらすべての敵を攻撃対象から外す
+            enemiesInRange.Clear();
+
             Vector3 direction = (moveTarget - transform.position).normalized;
             moveInput = new Vector2(direction.x, direction.y);
 
@@ -133,6 +136,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler
             return;
         }
 
+        // ここから攻撃開始
         attackTimer = 0f;
 
         int targetCount = Mathf.Min(maxConcurrentTargets, enemiesInRange.Count);
@@ -212,4 +216,6 @@ public class HeroController : MonoBehaviour, IPointerClickHandler
 
         animator.SetBool("isAttacking", isAttacking);
     }
+
+    public bool IsDead => currentHp <= 0;
 }

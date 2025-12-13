@@ -1,7 +1,7 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class GuardianController : MonoBehaviour
+public class GuardianController : MonoBehaviour, IDefender
 {
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float stopDistance = 0.05f;
@@ -40,7 +40,7 @@ public class GuardianController : MonoBehaviour
         if (enemy != null && !currentTargets.Contains(enemy))
         {
             currentTargets.Add(enemy);
-            enemy.EngageGuardian(this);
+            enemy.EngageDefender(this);
         }
     }
 
@@ -107,7 +107,7 @@ public class GuardianController : MonoBehaviour
         {
             attackTimer = 0f;
             target.TakeDamage(attackDamage);
-            target.EngageGuardian(this);
+            target.EngageDefender(this);
             if (target.hp <= 0)
             {
                 currentTargets.RemoveAt(0);
@@ -124,6 +124,8 @@ public class GuardianController : MonoBehaviour
             animator.SetTrigger("Die");
         }
     }
+
+    public bool IsDead => hp <= 0 || isDead;
 
     private void UpdateAttackAnimation(bool isAttacking)
     {
