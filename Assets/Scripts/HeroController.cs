@@ -21,7 +21,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
     public bool IsDead => currentHp <= 0;
 
     private int currentHp;
-    private float attackTimer;
+    private float timeSinceLastAttack;
     private readonly List<EnemyController> enemiesInRange = new List<EnemyController>();
 
     private Rigidbody2D rb;
@@ -72,7 +72,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
             refreshTimer = 0f;
         }
 
-        HandleAttack();
+        TryAttack();
         HandleMovement();
         HandleHeroMoveInput();
     }
@@ -141,7 +141,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         }
     }
 
-    private void HandleAttack()
+    private void TryAttack()
     {
         if (isMoving)
         {
@@ -153,14 +153,14 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
             return;
         }
 
-        attackTimer += Time.deltaTime;
-        if (attackTimer < attackInterval)
+        timeSinceLastAttack += Time.deltaTime;
+        if (timeSinceLastAttack < attackInterval)
         {
             return;
         }
 
         // ここから攻撃開始
-        attackTimer = 0f;
+        timeSinceLastAttack = 0f;
 
         int targetCount = Mathf.Min(maxConcurrentTargets, enemiesInRange.Count);
         for (int i = 0; i < targetCount; i++)
@@ -174,7 +174,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
             enemy.TakeDamage(attackDamage);
         }
 
-        UpdateAttackAnimation(true);
+        TriggerAttackAnimation();
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -222,7 +222,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         if (currentHp <= 0)
         {
             currentHp = 0;
-            SwitcDead(true);
+            SwitchDead(true);
 
             // 死亡時は「死亡中」モーションを再生したいので、
             // スクリプト自体は有効なままにしておく。
@@ -230,17 +230,6 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
             isMoveMode = false;
             enemiesInRange.Clear();
         }
-    }
-
-    private void UpdateAttackAnimation(bool isAttacking)
-    {
-        // 攻撃は単発モーションなので Trigger を使う
-        if (!isAttacking)
-        {
-            return;
-        }
-
-        TriggerAttackAnimation();
     }
 
     /// <summary>
@@ -253,17 +242,17 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         currentHp = maxHp;
 
         // 攻撃用タイマー・移動状態をリセット
-        attackTimer = 0f;
+        timeSinceLastAttack = 0f;
         isMoving = false;
         isMoveMode = false;
         enemiesInRange.Clear();
 
         // アニメーションパラメータのリセット
-        SwitcDead(false);
+        SwitchDead(false);
         SwitchRunning(false);
     }
 
-    private void SwitcDead(bool isDead)
+    private void SwitchDead(bool isDead)
     {
         animator.SetBool(AnimatorParams.IsDead, isDead);
     }

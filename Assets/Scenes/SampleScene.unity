@@ -5928,6 +5928,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 4723107735738678597, guid: 918cf8ff8cde64d2e8bd99bc37765be3, type: 3}
+    - target: {fileID: 5663129182052747762, guid: ac11cd74649834a4b9ebe6acffda93c1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9008420848077629958, guid: ac11cd74649834a4b9ebe6acffda93c1, type: 3}
       propertyPath: m_Name
       value: Hero
