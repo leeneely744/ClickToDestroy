@@ -48,6 +48,24 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
 
     void Update()
     {
+        // 死亡中は復活タイマーだけ進める
+        if (IsDead)
+        {
+            refreshTimer += Time.deltaTime;
+            if (refreshTimer >= refreshTime)
+            {
+                refreshTimer = 0f;
+                Revive();
+            }
+            return;
+        }
+
+        // 生存中はタイマーをリセット
+        if (refreshTimer > 0f)
+        {
+            refreshTimer = 0f;
+        }
+
         HandleAttack();
         HandleMovement();
         HandleHeroMoveInput();
