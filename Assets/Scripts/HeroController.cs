@@ -4,15 +4,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using Tags = Constants.Tags;
 
+[RequireComponent(typeof(Animator))]
 public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
 {
-    private static class AnimatorParams
-    {
-        public const string IsDead = "IsDead";
-        public const string IsRunning = "IsRunning";
-        public const string Attack = "Attack";
-    }
-
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3f;
 
@@ -23,6 +17,8 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
     [SerializeField] private int maxConcurrentTargets = 1;
     [SerializeField] private float refreshTime = 5f;
     private float refreshTimer = 0f; // 死んでから何秒経ったか
+
+    public bool IsDead => currentHp <= 0;
 
     private int currentHp;
     private float attackTimer;
@@ -40,7 +36,19 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+
+        if (animator == null)
+        {
+            Debug.LogError("HeroController には Animator が必須です。", this);
+            enabled = false;
+            return;
+        }
+
         currentHp = maxHp;
     }
 
@@ -119,10 +127,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
             Vector3 direction = (moveTarget - transform.position).normalized;
             moveInput = new Vector2(direction.x, direction.y);
 
-            if (animator != null)
-            {
-                animator.SetBool(AnimatorParams.IsRunning, true);
-            }
+            SwitchRunning(true);
 
             transform.position = Vector3.MoveTowards(transform.position, moveTarget, moveSpeed * Time.deltaTime);
             float distanceToTarget = Vector3.Distance(transform.position, moveTarget);
@@ -131,7 +136,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
                 // 移動完了
                 isMoving = false;
                 moveInput = Vector2.zero;
-                animator?.SetBool(AnimatorParams.IsRunning, false);
+                SwitchRunning(false);
             }
         }
     }
@@ -217,10 +222,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         if (currentHp <= 0)
         {
             currentHp = 0;
-            if (animator != null)
-            {
-                animator.SetBool(AnimatorParams.IsDead, true);
-            }
+            SwitcDead(true);
 
             // 死亡時は「死亡中」モーションを再生したいので、
             // スクリプト自体は有効なままにしておく。
@@ -232,18 +234,13 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
 
     private void UpdateAttackAnimation(bool isAttacking)
     {
-        if (animator == null)
-        {
-            return;
-        }
-
         // 攻撃は単発モーションなので Trigger を使う
-        if (!isAttacking || animator == null)
+        if (!isAttacking)
         {
             return;
         }
 
-        animator.SetTrigger(AnimatorParams.Attack);
+        TriggerAttackAnimation();
     }
 
     /// <summary>
@@ -262,12 +259,29 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         enemiesInRange.Clear();
 
         // アニメーションパラメータのリセット
-        if (animator != null)
-        {
-            animator.SetBool(AnimatorParams.IsDead, false);
-            animator.SetBool(AnimatorParams.IsRunning, false);
-        }
+        SwitcDead(false);
+        SwitchRunning(false);
     }
 
-    public bool IsDead => currentHp <= 0;
+    private void SwitcDead(bool isDead)
+    {
+        animator.SetBool(AnimatorParams.IsDead, isDead);
+    }
+
+    private void SwitchRunning(bool isRunning)
+    {
+        animator.SetBool(AnimatorParams.IsRunning, isRunning);
+    }
+
+    private void TriggerAttackAnimation()
+    {
+        animator.SetTrigger(AnimatorParams.Attack);
+    }
+
+    private static class AnimatorParams
+    {
+        public const string IsDead = "IsDead";
+        public const string IsRunning = "IsRunning";
+        public const string Attack = "Attack";
+    }
 }
