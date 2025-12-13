@@ -5057,28 +5057,45 @@ MonoBehaviour:
   - waveName: Wave1
     spawns:
     - enemyPrefab: {fileID: 3982574313250373904, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
-      count: 5
-      interval: 0.5
       routeIndex: 0
-    delayBeforeNextWave: 3
+      timeFromWaveStart: 0.5
+    - enemyPrefab: {fileID: 3982574313250373904, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
+      routeIndex: 1
+      timeFromWaveStart: 1
+    - enemyPrefab: {fileID: 3982574313250373904, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
+      routeIndex: 2
+      timeFromWaveStart: 1
+    delayBeforeNextWave: 2
   - waveName: Wave2
     spawns:
     - enemyPrefab: {fileID: 177820667453449832, guid: 65c855c6bf85a4cf4b8b1e8b47303a0a, type: 3}
-      count: 3
-      interval: 1
+      routeIndex: 0
+      timeFromWaveStart: 0.5
+    - enemyPrefab: {fileID: 177820667453449832, guid: 65c855c6bf85a4cf4b8b1e8b47303a0a, type: 3}
       routeIndex: 1
-    delayBeforeNextWave: 3
+      timeFromWaveStart: 0.5
+    - enemyPrefab: {fileID: 177820667453449832, guid: 65c855c6bf85a4cf4b8b1e8b47303a0a, type: 3}
+      routeIndex: 2
+      timeFromWaveStart: 1
+    delayBeforeNextWave: 2
   - waveName: Wave3
     spawns:
-    - enemyPrefab: {fileID: 177820667453449832, guid: 65c855c6bf85a4cf4b8b1e8b47303a0a, type: 3}
-      count: 3
-      interval: 1
-      routeIndex: 1
     - enemyPrefab: {fileID: 3982574313250373904, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
-      count: 5
-      interval: 0.5
+      routeIndex: 0
+      timeFromWaveStart: 0.5
+    - enemyPrefab: {fileID: 3982574313250373904, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
+      routeIndex: 1
+      timeFromWaveStart: 1
+    - enemyPrefab: {fileID: 3982574313250373904, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
       routeIndex: 2
-    delayBeforeNextWave: 3
+      timeFromWaveStart: 1
+    - enemyPrefab: {fileID: 177820667453449832, guid: 65c855c6bf85a4cf4b8b1e8b47303a0a, type: 3}
+      routeIndex: 0
+      timeFromWaveStart: 2
+    - enemyPrefab: {fileID: 177820667453449832, guid: 65c855c6bf85a4cf4b8b1e8b47303a0a, type: 3}
+      routeIndex: 1
+      timeFromWaveStart: 2.2
+    delayBeforeNextWave: 2
   routes:
   - {fileID: 1366335554}
   - {fileID: 1134020462}

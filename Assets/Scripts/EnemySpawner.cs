@@ -3,13 +3,16 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    // どの敵（enemyPrefab）を、
+    // どのルート（routeIndex）で、
+    // ウェーブ開始から何秒後に（timeFromWaveStart）
+    // 出現させるかを定義する。
     [System.Serializable]
     public class SpawnInstruction
     {
         public GameObject enemyPrefab;
-        public int count = 1;
-        public float interval = 0.5f;
         public int routeIndex = 0;
+        public float timeFromWaveStart = 0.5f;
     }
 
     [System.Serializable]
@@ -49,6 +52,7 @@ public class EnemySpawner : MonoBehaviour
             var wave = waves[waveIndex];
             yield return StartCoroutine(SpawnWave(wave));
 
+            // 敵が全滅するまで待つ
             while (activeEnemies > 0)
             {
                 yield return null;
@@ -81,18 +85,30 @@ public class EnemySpawner : MonoBehaviour
             yield break;
         }
 
-        foreach (var instruction in wave.spawns)
+        // timeFromWaveStart の昇順に並び替える。
+        var instructions = wave.spawns;
+        System.Array.Sort(instructions, (a, b) => a.timeFromWaveStart.CompareTo(b.timeFromWaveStart));
+
+        float currentTime = 0f;
+        foreach (var instruction in instructions)
         {
             if (instruction.enemyPrefab == null)
             {
                 continue;
             }
-
-            for (int i = 0; i < instruction.count; i++)
+            
+            // 前回スポーンからの待ち時間を計算
+            float wait = instruction.timeFromWaveStart - currentTime;
+            if (wait > 0f)
             {
-                SpawnEnemy(instruction.enemyPrefab, routes[instruction.routeIndex]);
-                yield return new WaitForSeconds(Mathf.Max(0f, instruction.interval));
+                yield return new WaitForSeconds(wait);
+                currentTime += wait;
             }
+
+            // routeIndex が範囲外だった場合のガード
+            int index = Mathf.Clamp(instruction.routeIndex, 0, routes.Length - 1);
+            Route route = routes[index];
+            SpawnEnemy(instruction.enemyPrefab, route);
         }
     }
 
