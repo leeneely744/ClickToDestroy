@@ -23,6 +23,8 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
     [SerializeField] private int attackDamage = 10;
     [SerializeField] private float attackInterval = 0.8f;
     [SerializeField] private int maxConcurrentTargets = 1;
+    [SerializeField] private float refreshTime = 5f;
+    private float refreshTimer = 0f; // 死んでから何秒経ったか
 
     private int currentHp;
     private float attackTimer;
@@ -204,8 +206,12 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
             {
                 animator.SetTrigger("Die");
             }
-
-            enabled = false;
+            
+            // 死亡時は「死亡中」モーションを再生したいので、
+            // スクリプト自体は有効なままにしておく。
+            isMoving = false;
+            isMoveMode = false;
+            enemiesInRange.Clear();
         }
     }
 
@@ -217,6 +223,30 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         }
 
         animator.SetBool("isAttacking", isAttacking);
+    }
+
+    /// <summary>
+    /// Hero を復活させる処理をまとめたメソッド。
+    /// HP やアニメーション状態、内部フラグを初期状態に戻します。
+    /// </summary>
+    public void Revive()
+    {
+        // HP を最大値に戻す
+        currentHp = maxHp;
+
+        // 攻撃用タイマー・移動状態をリセット
+        attackTimer = 0f;
+        isMoving = false;
+        isMoveMode = false;
+        enemiesInRange.Clear();
+
+        // アニメーションパラメータのリセット
+        if (animator != null)
+        {
+            animator.ResetTrigger("Die");
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isAttacking", false);
+        }
     }
 
     public bool IsDead => currentHp <= 0;
