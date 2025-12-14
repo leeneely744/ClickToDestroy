@@ -14,23 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
   - towerName: MagicTower1
-    towerSprite: {fileID: -6470460504253458178, guid: 153d7904e91554b238d316fae20f9c69, type: 3}
-    cost: 120
-    sellRefund: 100
-    attackDamage: 120
-    attackInterval: 1
+    cost: 100
+    sellRefund: 80
+    attackDamage: 13
+    attackInterval: 1.5
     range: 1
   - towerName: MagicTower2
-    towerSprite: {fileID: 2426446623490865320, guid: ecb7611f958d442c08188e833c01d055, type: 3}
-    cost: 160
-    sellRefund: 120
-    attackDamage: 180
-    attackInterval: 1
+    cost: 140
+    sellRefund: 100
+    attackDamage: 33
+    attackInterval: 1.5
     range: 1
   - towerName: MagicTower3
-    towerSprite: {fileID: 7028616704906629411, guid: 4de392be9003c492a9757e85580c467d, type: 3}
-    cost: 230
-    sellRefund: 160
-    attackDamage: 240
-    attackInterval: 1
+    cost: 200
+    sellRefund: 140
+    attackDamage: 57
+    attackInterval: 1.5
     range: 1

@@ -14,23 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
   - towerName: CannonTower1
-    towerSprite: {fileID: -337227894256300814, guid: d9481eb4cfb0446ab94a302d39ec0eec, type: 3}
     cost: 120
     sellRefund: 100
-    attackDamage: 100
-    attackInterval: 2
+    attackDamage: 11
+    attackInterval: 3
     range: 1
   - towerName: CannonTower2
-    towerSprite: {fileID: -6241970579842084961, guid: 9800861f0064b40fd963812665bc3244, type: 3}
     cost: 180
     sellRefund: 120
-    attackDamage: 160
-    attackInterval: 2
+    attackDamage: 23
+    attackInterval: 3
     range: 1
   - towerName: CannonTower3
-    towerSprite: {fileID: 7188420754594208410, guid: 26c77630d89ac4f7aa33f07541337897, type: 3}
     cost: 240
     sellRefund: 180
-    attackDamage: 220
-    attackInterval: 2
+    attackDamage: 45
+    attackInterval: 3
     range: 1

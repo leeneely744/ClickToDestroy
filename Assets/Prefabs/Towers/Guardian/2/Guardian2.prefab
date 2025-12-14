@@ -108,8 +108,8 @@ MonoBehaviour:
   moveSpeed: 3
   stopDistance: 0.05
   hp: 100
-  attackDamage: 10
-  attackInterval: 1
+  attackDamage: 4
+  attackInterval: 1.7
 --- !u!58 &7828900379259044818
 CircleCollider2D:
   m_ObjectHideFlags: 0

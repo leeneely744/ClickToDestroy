@@ -14,23 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
   - towerName: GuardianTower1
-    towerSprite: {fileID: 6937817954938267909, guid: 13039d60b73c846eca1f14ab9f49cc77, type: 3}
     cost: 70
     sellRefund: 60
     attackDamage: 0
     attackInterval: 10
     range: 2.2
   - towerName: GuardianTower2
-    towerSprite: {fileID: -6470460504253458178, guid: 662de6d0ec03a4ad7b266e75683821b1, type: 3}
     cost: 120
     sellRefund: 70
     attackDamage: 0
-    attackInterval: 6
+    attackInterval: 8
     range: 1.2
   - towerName: GuardianTower3
-    towerSprite: {fileID: 3465286685962602723, guid: 1a501487d82584c74b1d342ede51d91b, type: 3}
     cost: 180
     sellRefund: 120
     attackDamage: 0
-    attackInterval: 3
+    attackInterval: 6
     range: 1.5
