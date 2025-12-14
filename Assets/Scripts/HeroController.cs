@@ -32,6 +32,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
     private bool isMoveMode = false;
     private Vector3 moveTarget;
     private float moveDistance = 0.05f;
+    [SerializeField] private HealthBarController healthBar;
 
     void Awake()
     {
@@ -50,6 +51,12 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         }
 
         currentHp = maxHp;
+        if (healthBar == null)
+        {
+            healthBar = GetComponentInChildren<HealthBarController>();
+        }
+
+        UpdateHealthBar();
     }
 
     void Update()
@@ -230,6 +237,8 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
             isMoveMode = false;
             enemiesInRange.Clear();
         }
+
+        UpdateHealthBar();
     }
 
     /// <summary>
@@ -250,6 +259,8 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         // アニメーションパラメータのリセット
         SwitchDead(false);
         SwitchRunning(false);
+
+        UpdateHealthBar();
     }
 
     private void SwitchDead(bool isDead)
@@ -272,5 +283,16 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         public const string IsDead = "IsDead";
         public const string IsRunning = "IsRunning";
         public const string Attack = "Attack";
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (healthBar == null)
+        {
+            return;
+        }
+
+        float ratio = maxHp > 0 ? (float)currentHp / maxHp : 0f;
+        healthBar.SetRatio(ratio);
     }
 }
