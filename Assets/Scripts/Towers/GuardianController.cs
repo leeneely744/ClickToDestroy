@@ -6,7 +6,7 @@ public class GuardianController : MonoBehaviour, IDefender
 {
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float stopDistance = 0.05f;
-    [SerializeField] private int hp = 100;
+    [SerializeField] private int maxHp = 100;
     [SerializeField] private int attackDamage = 10;
     [SerializeField] private float attackInterval = 1.0f;
     private float attackTimer;
@@ -14,13 +14,24 @@ public class GuardianController : MonoBehaviour, IDefender
     private Vector3 moveTarget;
     private bool isDead;
     private GuardianTowerControllerBase ownerTower;
+    private int currentHp;
     private List<EnemyController> currentTargets = new List<EnemyController>();
     private Animator animator;
+    [SerializeField] private HealthBarController healthBar;
 
     void Awake()
     {
         ownerTower = GetComponentInParent<GuardianTowerControllerBase>();
         animator = GetComponent<Animator>();
+
+        currentHp = maxHp;
+
+        if (healthBar == null)
+        {
+            healthBar = GetComponentInChildren<HealthBarController>();
+        }
+
+        UpdateHealthBar();
     }
 
     void Update()
@@ -72,7 +83,7 @@ public class GuardianController : MonoBehaviour, IDefender
 
     private void HandleDeath()
     {
-        if (isDead || hp > 0)
+        if (isDead || currentHp > 0)
         {
             return;
         }
@@ -119,14 +130,20 @@ public class GuardianController : MonoBehaviour, IDefender
 
     public void TakeDamage(int damage)
     {
-        hp -= damage;
-        if (hp <= 0 && animator != null)
+        if (currentHp <= 0)
+        {
+            return;
+        }
+
+        currentHp -= damage;
+        UpdateHealthBar();
+        if (currentHp <= 0 && animator != null)
         {
             animator.SetTrigger("Die");
         }
     }
 
-    public bool IsDead => hp <= 0 || isDead;
+    public bool IsDead => currentHp <= 0 || isDead;
 
     private void UpdateAttackAnimation(bool isAttacking)
     {
@@ -138,5 +155,16 @@ public class GuardianController : MonoBehaviour, IDefender
                 animator.SetBool("isWalking", false);
             }
         }
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (healthBar == null)
+        {
+            return;
+        }
+
+        float ratio = maxHp > 0 ? (float)currentHp / maxHp : 0f;
+        healthBar.SetRatio(ratio);
     }
 }
