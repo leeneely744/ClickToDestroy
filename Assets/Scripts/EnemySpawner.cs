@@ -29,10 +29,28 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private ScoreBoard scoreBoard;
 
     private int activeEnemies = 0;
-    private bool isRunning;
+
+    private void Awake()
+    {
+        if (scoreBoard == null)
+        {
+            scoreBoard = FindAnyObjectByType<ScoreBoard>();
+        }
+
+        if (scoreBoard == null)
+        {
+            Debug.LogError("EnemySpawner: ScoreBoard がシーンに存在しません。", this);
+            enabled = false;
+        }
+    }
 
     private void Start()
     {
+        if (!enabled)
+        {
+            return;
+        }
+
         if (waves == null || waves.Length == 0)
         {
             Debug.LogWarning("EnemySpawner: waves are not configured");
@@ -44,7 +62,6 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator RunWaves()
     {
-        isRunning = true;
         yield return new WaitForSeconds(startDelay);
 
         for (int waveIndex = 0; waveIndex < waves.Length; waveIndex++)
@@ -66,13 +83,7 @@ public class EnemySpawner : MonoBehaviour
             yield return null;
         }
 
-        isRunning = false;
-        if (scoreBoard == null)
-        {
-            scoreBoard = FindAnyObjectByType<ScoreBoard>();
-        }
-
-        if (scoreBoard != null && scoreBoard.CurrentHp > 0)
+        if (scoreBoard.CurrentHp > 0)
         {
             GameManager.Instance?.HandleGameClear();
         }
@@ -128,10 +139,5 @@ public class EnemySpawner : MonoBehaviour
     public void NotifyEnemyRemoved(EnemyController enemy)
     {
         activeEnemies = Mathf.Max(0, activeEnemies - 1);
-    }
-
-    public bool IsWaveRunning()
-    {
-        return isRunning;
     }
 }
