@@ -13,17 +13,15 @@ public class EnemyController : MonoBehaviour
 
     public int hp = 30;
     public int rewardMoney = 20;
-    [SerializeField] private float attackInterval = 1.5f;
-    [SerializeField] private int defenderDamage = 10;
 
     private bool hasRemovedFromSpawner;
-    private IDefender engagedDefender;
-    private float attackTimer;
-    private bool isEngaged;
-    public bool IsDead => hp <= 0;
-    private Animator animator;
 
-    void Start()
+    public bool IsDead => hp <= 0;
+
+    private Animator animator;
+    private EnemyAttackController attackController;
+
+    private void Start()
     {
         scoreBoard = FindAnyObjectByType<ScoreBoard>();
         if (scoreBoard == null)
@@ -39,16 +37,20 @@ public class EnemyController : MonoBehaviour
 
         // Remember initial scale so we can flip left/right without resetting the intended size
         initialScale = transform.localScale;
+
         animator = GetComponent<Animator>();
-        UpdateAnimations();
+        attackController = GetComponent<EnemyAttackController>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (waypoints == null || waypoints.Length == 0)
         {
             return;
         }
+
+        // 交戦中（攻撃コンポーネントが付いていて交戦状態）のときは移動しない
+        bool isEngaged = attackController != null && attackController.IsEngaged;
 
         if (!isEngaged)
         {
@@ -78,28 +80,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (!isEngaged || engagedDefender == null || engagedDefender.IsDead)
-        {
-            if (isEngaged)
-            {
-                // 交戦相手がいなくなった、もしくは倒れたら交戦状態を解除する
-                isEngaged = false;
-                engagedDefender = null;
-                UpdateAnimations();
-            }
-            return;
-        }
-
-        attackTimer += Time.deltaTime;
-        if (attackTimer >= attackInterval)
-        {
-            attackTimer = 0f;
-            engagedDefender.TakeDamage(defenderDamage);
-        }
-    }
-
     public void SetRoute(Route route)
     {
         waypoints = route.waypoints;
@@ -118,30 +98,14 @@ public class EnemyController : MonoBehaviour
         {
             moneyController?.AddMoney(rewardMoney);
             NotifySpawnerRemoved();
+
             if (animator != null)
             {
                 animator.SetTrigger("Die");
             }
+
             Destroy(gameObject);
         }
-    }
-
-    public void EngageDefender(IDefender defender)
-    {
-        engagedDefender = defender;
-        isEngaged = defender != null && !defender.IsDead;
-        attackTimer = 0f;
-        UpdateAnimations();
-    }
-
-    private void UpdateAnimations()
-    {
-        if (animator == null)
-        {
-            return;
-        }
-
-        animator.SetBool("isAttacking", isEngaged);
     }
 
     private void NotifySpawnerRemoved()
