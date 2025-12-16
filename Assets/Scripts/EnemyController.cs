@@ -108,6 +108,33 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 防衛ユニットとの交戦を開始する。
+    /// 実際の攻撃ロジックは EnemyAttackController に委譲される。
+    /// </summary>
+    public void EngageDefender(IDefender defender)
+    {
+        if (attackController == null)
+        {
+            return;
+        }
+
+        attackController.EngageDefender(defender);
+    }
+
+    /// <summary>
+    /// 防衛ユニットとの交戦を終了する。
+    /// </summary>
+    public void DisengageDefender()
+    {
+        if (attackController == null)
+        {
+            return;
+        }
+
+        attackController.Disengage();
+    }
+
     private void NotifySpawnerRemoved()
     {
         if (hasRemovedFromSpawner)
