@@ -33,7 +33,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
     private Vector3 moveTarget;
     private float moveDistance = 0.05f;
     [SerializeField] private HealthBarController healthBar;
-    [SerializeField] private bool canAttackFlying = false;
+    [SerializeField] private bool canAttackFlying = true;
 
     void Awake()
     {
