@@ -173,6 +173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   hp: 20
   rewardMoney: 3
+  isFlying: 0
+  healthBar: {fileID: 6739440418521551411}
 --- !u!114 &3480345430065870387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,3 +273,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4562253201063098372, guid: 1ed9b78d9465249b986d7b1844c3583b, type: 3}
   m_PrefabInstance: {fileID: 3285021664964441531}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6739440418521551411 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8075500134580479880, guid: 1ed9b78d9465249b986d7b1844c3583b, type: 3}
+  m_PrefabInstance: {fileID: 3285021664964441531}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ea2d0f19f759438eb6376d5a1e0862c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBarController

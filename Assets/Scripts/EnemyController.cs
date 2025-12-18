@@ -21,6 +21,8 @@ public class EnemyController : MonoBehaviour
 
     private Animator animator;
     private EnemyAttackController attackController;
+    [SerializeField] private HealthBarController healthBar;
+    private int maxHp;
 
     private void Start()
     {
@@ -41,6 +43,15 @@ public class EnemyController : MonoBehaviour
 
         animator = GetComponent<Animator>();
         attackController = GetComponent<EnemyAttackController>();
+
+        maxHp = hp;
+
+        if (healthBar == null)
+        {
+            healthBar = GetComponentInChildren<HealthBarController>();
+        }
+
+        UpdateHealthBar();
     }
 
     private void FixedUpdate()
@@ -95,6 +106,7 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         hp -= damage;
+        UpdateHealthBar();
         if (hp <= 0)
         {
             moneyController?.AddMoney(rewardMoney);
@@ -145,5 +157,16 @@ public class EnemyController : MonoBehaviour
 
         ownerSpawner?.NotifyEnemyRemoved(this);
         hasRemovedFromSpawner = true;
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (healthBar == null)
+        {
+            return;
+        }
+
+        float ratio = maxHp > 0 ? Mathf.Clamp01((float)hp / maxHp) : 0f;
+        healthBar.SetRatio(ratio);
     }
 }
