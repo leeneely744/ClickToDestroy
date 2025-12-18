@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   hp: 90
   rewardMoney: 12
+  isFlying: 1
 --- !u!95 &4042385357351616134
 Animator:
   serializedVersion: 7

@@ -18,6 +18,7 @@ public class GuardianController : MonoBehaviour, IDefender
     private List<EnemyController> currentTargets = new List<EnemyController>();
     private Animator animator;
     [SerializeField] private HealthBarController healthBar;
+    [SerializeField] private bool canAttackFlying = false;
 
     void Awake()
     {
@@ -49,7 +50,18 @@ public class GuardianController : MonoBehaviour, IDefender
         }
 
         EnemyController enemy = col.GetComponent<EnemyController>();
-        if (enemy != null && !currentTargets.Contains(enemy))
+        if (enemy == null)
+        {
+            return;
+        }
+
+        // 飛行ユニットを攻撃しない設定なら、そもそもターゲット登録しない
+        if (enemy.isFlying && !canAttackFlying)
+        {
+            return;
+        }
+
+        if (!currentTargets.Contains(enemy))
         {
             currentTargets.Add(enemy);
             enemy.EngageDefender(this);
@@ -110,6 +122,14 @@ public class GuardianController : MonoBehaviour, IDefender
         {
             currentTargets.RemoveAt(0);
             UpdateAttackAnimation(false);
+            return;
+        }
+
+        // 飛行ユニットを攻撃しない設定の場合、リストから外して次のターゲットへ
+        if (target.isFlying && !canAttackFlying)
+        {
+            currentTargets.RemoveAt(0);
+            UpdateAttackAnimation(currentTargets.Count > 0);
             return;
         }
 

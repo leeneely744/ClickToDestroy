@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
 
     public int hp = 30;
     public int rewardMoney = 20;
+    public bool isFlying = false;
 
     private bool hasRemovedFromSpawner;
 

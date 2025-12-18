@@ -33,6 +33,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
     private Vector3 moveTarget;
     private float moveDistance = 0.05f;
     [SerializeField] private HealthBarController healthBar;
+    [SerializeField] private bool canAttackFlying = false;
 
     void Awake()
     {
@@ -178,6 +179,11 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
                 continue;
             }
 
+            if (enemy.isFlying && !canAttackFlying)
+            {
+                continue;
+            }
+
             enemy.TakeDamage(attackDamage);
         }
 
@@ -197,7 +203,18 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         }
 
         EnemyController enemy = col.GetComponent<EnemyController>();
-        if (enemy != null && !enemiesInRange.Contains(enemy))
+        if (enemy == null)
+        {
+            return;
+        }
+
+        // 飛行ユニットを攻撃しない設定なら、そもそもターゲット登録しない
+        if (enemy.isFlying && !canAttackFlying)
+        {
+            return;
+        }
+
+        if (!enemiesInRange.Contains(enemy))
         {
             enemiesInRange.Add(enemy);
             enemy.EngageDefender(this);
