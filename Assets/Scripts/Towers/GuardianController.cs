@@ -56,7 +56,7 @@ public class GuardianController : MonoBehaviour, IDefender
         }
 
         // 飛行ユニットを攻撃しない設定なら、そもそもターゲット登録しない
-        if (enemy.isFlying && !canAttackFlying)
+        if (enemy.IsFlying && !canAttackFlying)
         {
             return;
         }
@@ -126,7 +126,7 @@ public class GuardianController : MonoBehaviour, IDefender
         }
 
         // 飛行ユニットを攻撃しない設定の場合、リストから外して次のターゲットへ
-        if (target.isFlying && !canAttackFlying)
+        if (target.IsFlying && !canAttackFlying)
         {
             currentTargets.RemoveAt(0);
             UpdateAttackAnimation(currentTargets.Count > 0);
@@ -140,7 +140,7 @@ public class GuardianController : MonoBehaviour, IDefender
             attackTimer = 0f;
             target.TakeDamage(attackDamage);
             target.EngageDefender(this);
-            if (target.hp <= 0)
+            if (target.IsDead)
             {
                 currentTargets.RemoveAt(0);
                 UpdateAttackAnimation(currentTargets.Count > 0);

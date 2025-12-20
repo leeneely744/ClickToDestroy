@@ -11,17 +11,19 @@ public class EnemyController : MonoBehaviour
     private float speed = 2.0f;
     private Vector3 initialScale;
 
-    public int hp = 30;
-    public int rewardMoney = 20;
-    public bool isFlying = false;
+    private int hp = 30;
+    private int rewardMoney = 20;
+    private bool isFlying = false;
 
     private bool hasRemovedFromSpawner;
 
     public bool IsDead => hp <= 0;
+    public bool IsFlying => isFlying;
 
     private Animator animator;
     private EnemyAttackController attackController;
     [SerializeField] private HealthBarController healthBar;
+    [SerializeField] private EnemyData enemyData;
     private int maxHp;
 
     private void Start()
@@ -44,7 +46,31 @@ public class EnemyController : MonoBehaviour
         animator = GetComponent<Animator>();
         attackController = GetComponent<EnemyAttackController>();
 
-        maxHp = hp;
+        // ScriptableObject が設定されていれば、そこから各種ステータスを初期化
+        if (enemyData != null)
+        {
+            maxHp = enemyData.maxHp;
+            hp = enemyData.maxHp;
+            speed = enemyData.moveSpeed;
+            isFlying = enemyData.isFlying;
+            rewardMoney = enemyData.rewardMoney;
+
+            // 攻撃関連も EnemyAttackController に適用
+            if (attackController != null)
+            {
+                attackController.ApplyData(enemyData);
+            }
+
+            // アニメーションのオーバーライドが指定されていれば適用
+            if (animator != null && enemyData.animatorOverride != null)
+            {
+                animator.runtimeAnimatorController = enemyData.animatorOverride;
+            }
+        }
+        else
+        {
+            maxHp = hp;
+        }
 
         if (healthBar == null)
         {

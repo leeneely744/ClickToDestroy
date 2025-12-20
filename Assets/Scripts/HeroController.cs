@@ -179,7 +179,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
                 continue;
             }
 
-            if (enemy.isFlying && !canAttackFlying)
+            if (enemy.IsFlying && !canAttackFlying)
             {
                 continue;
             }
@@ -209,7 +209,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         }
 
         // 飛行ユニットを攻撃しない設定なら、そもそもターゲット登録しない
-        if (enemy.isFlying && !canAttackFlying)
+        if (enemy.IsFlying && !canAttackFlying)
         {
             return;
         }

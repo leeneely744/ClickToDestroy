@@ -171,10 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae0382a08fac40e9ae8699f9c337194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  hp: 10
-  rewardMoney: 20
-  isFlying: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 2834913754742048433}
+  enemyData: {fileID: 11400000, guid: 407549285385c45f6be829a504878580, type: 2}
 --- !u!114 &3480345430065870387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,8 +185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e00ac89a47a4fe1990792c635f3e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAttackController
-  attackInterval: 1.5
-  defenderDamage: 10
 --- !u!95 &5948884396322274586
 Animator:
   serializedVersion: 7
@@ -276,6 +272,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b91eb0a58787a4246946e0c7609499ff, type: 3}
+--- !u!114 &2834913754742048433 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8075500134580479880, guid: b91eb0a58787a4246946e0c7609499ff, type: 3}
+  m_PrefabInstance: {fileID: 6288805859435553081}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ea2d0f19f759438eb6376d5a1e0862c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBarController
 --- !u!4 &7500237760168204605 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4562253201063098372, guid: b91eb0a58787a4246946e0c7609499ff, type: 3}

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class EnemyAttackController : MonoBehaviour
 {
-    [SerializeField] private float attackInterval = 1.5f;
-    [SerializeField] private int defenderDamage = 10;
+    private float attackInterval = 1.5f;
+    private int defenderDamage = 10;
 
     private IDefender engagedDefender;
     private float attackTimer;
@@ -68,5 +68,16 @@ public class EnemyAttackController : MonoBehaviour
     {
         if (animator == null) return;
         animator.SetBool("isAttacking", isEngaged);
+    }
+
+    public void ApplyData(EnemyData data)
+    {
+        if (data == null)
+        {
+            return;
+        }
+
+        defenderDamage = data.attackPower;
+        attackInterval = data.attackInterval;
     }
 }
