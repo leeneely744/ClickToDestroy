@@ -1,3 +1,5 @@
+using UnityEngine;
+
 [CreateAssetMenu(menuName = "Tower/TowerDefinition")]
 public class TowerDefinition : ScriptableObject
 {
@@ -18,7 +20,7 @@ public class TowerDefinition : ScriptableObject
     public bool hasLevel;
 
     // スキル
-    public SkillDefinition[] skills;
+    // public SkillDefinition[] skills;
 
     // Guardian系など
     public GameObject guardianPrefab;
