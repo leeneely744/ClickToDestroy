@@ -16,7 +16,6 @@ public class TowerLevel
     public string displayName;
 
     [Header("Visuals")]
-    public RuntimeAnimatorController animator;
     public AnimatorOverrideController animatorOverride;
     public Sprite icon;
 
