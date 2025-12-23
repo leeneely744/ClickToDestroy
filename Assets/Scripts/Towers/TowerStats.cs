@@ -9,10 +9,33 @@ public class TowerStats : ScriptableObject
 [System.Serializable]
 public class TowerLevel
 {
+    // TowerDefinition から移管した ID / 表示名 / 見た目など
+
+    [Header("Identity")]
+    public string towerId;
+    public string displayName;
+
+    [Header("Visuals")]
+    public RuntimeAnimatorController animator;
+    public AnimatorOverrideController animatorOverride;
+    public Sprite icon;
+
+    [Header("Numbers")]
     public string towerName;
     public int cost;
     public int sellRefund;
     public float attackDamage;
     public float attackInterval;
     public float range;
+
+    [Header("Flags")]
+    public bool isFusionTower;
+    public bool canBeFusionMaterial;
+    public bool hasLevel;
+
+    [Header("Guardian")]
+    public GameObject guardianPrefab;
+
+    // スキル
+    // public SkillDefinition[] skills;
 }
