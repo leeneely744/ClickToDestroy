@@ -16,6 +16,11 @@ public class TowerLevel
     public string displayName;
 
     [Header("Visuals")]
+    public TowerAnimationMode animationMode;
+    [Tooltip("animationMode が ChildAnimator の場合に参照する子オブジェクトのパス/名前")]
+    public string childAnimatorPath;
+    [Tooltip("攻撃時に Animator に送る Trigger 名")]
+    public string attackTriggerName;
     public AnimatorOverrideController animatorOverride;
     public Sprite icon;
 

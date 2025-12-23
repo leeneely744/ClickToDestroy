@@ -32,6 +32,11 @@ public class TowerController : MonoBehaviour
     private float attackInterval;
     private float range;
 
+    // アニメーション関連（TowerLevel から反映）
+    private TowerAnimationMode animationMode;
+    private string childAnimatorPath;
+    private string attackTriggerName;
+
     protected TowerStats Stats => stats;
     protected float AttackRange => range;
     public float AttackInterval => attackInterval;
@@ -88,6 +93,12 @@ public class TowerController : MonoBehaviour
         attackDamage = data.attackDamage;
         attackInterval = data.attackInterval;
         range = data.range;
+
+        // アニメーション設定
+        animationMode = data.animationMode;
+        childAnimatorPath = data.childAnimatorPath;
+        attackTriggerName = data.attackTriggerName;
+
         maxLevelIndex = stats.levels.Length - 1;
         levelIndex = index;
     }
@@ -140,10 +151,65 @@ public class TowerController : MonoBehaviour
         Projectile p = bullet.GetComponent<Projectile>();
         p.SetTarget(target.transform, projectileTravelTime);
 
-        var archerAnimator = GetComponentInChildren<ArcherAnimatorController>();
-        if (archerAnimator != null)
+        PlayAttackAnimation();
+    }
+
+    private void PlayAttackAnimation()
+    {
+        // TowerLevel 側に特別な指定がない場合は、従来どおり ArcherAnimatorController に委譲
+        if (animationMode == TowerAnimationMode.None)
         {
-            archerAnimator.PlayAttack();
+            var legacyArcher = GetComponentInChildren<ArcherAnimatorController>();
+            if (legacyArcher != null)
+            {
+                legacyArcher.PlayAttack();
+            }
+            return;
+        }
+
+        Animator targetAnimator = null;
+
+        switch (animationMode)
+        {
+            case TowerAnimationMode.SelfAnimator:
+                targetAnimator = GetComponent<Animator>();
+                break;
+
+            case TowerAnimationMode.ChildAnimator:
+                Transform animTransform = null;
+                if (!string.IsNullOrEmpty(childAnimatorPath))
+                {
+                    animTransform = transform.Find(childAnimatorPath);
+                }
+
+                if (animTransform != null)
+                {
+                    targetAnimator = animTransform.GetComponent<Animator>();
+                }
+                else
+                {
+                    // パス指定が無い/見つからない場合は子孫から最初の Animator を拾う（自分自身は除外）
+                    var animators = GetComponentsInChildren<Animator>();
+                    foreach (var anim in animators)
+                    {
+                        if (anim.gameObject != gameObject)
+                        {
+                            targetAnimator = anim;
+                            break;
+                        }
+                    }
+                }
+                break;
+        }
+
+        if (targetAnimator == null)
+        {
+            return;
+        }
+
+        if (!string.IsNullOrEmpty(attackTriggerName))
+        {
+            targetAnimator.SetTrigger(attackTriggerName);
         }
     }
 
