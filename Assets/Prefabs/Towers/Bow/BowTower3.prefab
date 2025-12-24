@@ -494,12 +494,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8427912772724200652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aafecce2381644e8be5b1adaab74452, type: 3}
+  m_Script: {fileID: 11500000, guid: 056b2a402fa51439eb25d80d95231d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowTower3Controller
   projectilePrefab: {fileID: 6414521654039372358, guid: 43e6abde90e044ba28badbe494212f01, type: 3}
   firePoint: {fileID: 9147358589367257189}
-  projectileTravelTime: 0.15
+  projectileTravelTime: 0.2
+  levelIndex: 2
   stats: {fileID: 11400000, guid: 07fc9c25a541d450fb7c98203169ff76, type: 2}
   cost: 0
 --- !u!50 &2927117045632188343

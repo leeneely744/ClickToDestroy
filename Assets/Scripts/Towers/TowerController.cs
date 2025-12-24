@@ -18,7 +18,7 @@ public class TowerController : MonoBehaviour
     private SpriteRenderer attackRangeRenderer;
     protected Money moneyController;
     private TowerPlace towerPlace;
-    protected int levelIndex = 0;
+    public int levelIndex = 0;
 
     /// <summary>
     /// TowerStats
@@ -31,11 +31,6 @@ public class TowerController : MonoBehaviour
     private float attackDamage;
     private float attackInterval;
     private float range;
-
-    // アニメーション関連（TowerLevel から反映）
-    private TowerAnimationMode animationMode;
-    private string childAnimatorPath;
-    private string attackTriggerName;
 
     protected TowerStats Stats => stats;
     protected float AttackRange => range;
@@ -75,7 +70,16 @@ public class TowerController : MonoBehaviour
             Debug.LogError("Money controller not found");
         }
 
-        levelIndex = InitialLevelIndex;
+        // レベルインデックスの決定
+        // - Bow のように「同じコントローラ＋Prefabごとに levelIndex を変える」ケースでは
+        //   インスペクタで設定された levelIndex をそのまま使う。
+        // - MagicTower2 など、サブクラス側で InitialLevelIndex を上書きしているケースでは
+        //   デフォルト値 0 のままなので、ここで InitialLevelIndex を採用する。
+        if (levelIndex == 0)
+        {
+            levelIndex = InitialLevelIndex;
+        }
+
         ApplyStats(levelIndex);
     }
 
@@ -93,11 +97,6 @@ public class TowerController : MonoBehaviour
         attackDamage = data.attackDamage;
         attackInterval = data.attackInterval;
         range = data.range;
-
-        // アニメーション設定
-        animationMode = data.animationMode;
-        childAnimatorPath = data.childAnimatorPath;
-        attackTriggerName = data.attackTriggerName;
 
         maxLevelIndex = stats.levels.Length - 1;
         levelIndex = index;
@@ -156,60 +155,11 @@ public class TowerController : MonoBehaviour
 
     private void PlayAttackAnimation()
     {
-        // TowerLevel 側に特別な指定がない場合は、従来どおり ArcherAnimatorController に委譲
-        if (animationMode == TowerAnimationMode.None)
+        // ひとまず従来どおり、子オブジェクトについている ArcherAnimatorController に委譲するだけに戻す
+        var legacyArcher = GetComponentInChildren<ArcherAnimatorController>();
+        if (legacyArcher != null)
         {
-            var legacyArcher = GetComponentInChildren<ArcherAnimatorController>();
-            if (legacyArcher != null)
-            {
-                legacyArcher.PlayAttack();
-            }
-            return;
-        }
-
-        Animator targetAnimator = null;
-
-        switch (animationMode)
-        {
-            case TowerAnimationMode.SelfAnimator:
-                targetAnimator = GetComponent<Animator>();
-                break;
-
-            case TowerAnimationMode.ChildAnimator:
-                Transform animTransform = null;
-                if (!string.IsNullOrEmpty(childAnimatorPath))
-                {
-                    animTransform = transform.Find(childAnimatorPath);
-                }
-
-                if (animTransform != null)
-                {
-                    targetAnimator = animTransform.GetComponent<Animator>();
-                }
-                else
-                {
-                    // パス指定が無い/見つからない場合は子孫から最初の Animator を拾う（自分自身は除外）
-                    var animators = GetComponentsInChildren<Animator>();
-                    foreach (var anim in animators)
-                    {
-                        if (anim.gameObject != gameObject)
-                        {
-                            targetAnimator = anim;
-                            break;
-                        }
-                    }
-                }
-                break;
-        }
-
-        if (targetAnimator == null)
-        {
-            return;
-        }
-
-        if (!string.IsNullOrEmpty(attackTriggerName))
-        {
-            targetAnimator.SetTrigger(attackTriggerName);
+            legacyArcher.PlayAttack();
         }
     }
 
@@ -298,7 +248,14 @@ public class TowerController : MonoBehaviour
 
     protected virtual int InitialLevelIndex => 0;
 
-    public virtual GameObject NextLevelPrefab => null;
+    public virtual GameObject NextLevelPrefab
+    {
+        get
+        {
+            var data = GetLevelData(levelIndex);
+            return data != null ? data.nextLevelPrefab : null;
+        }
+    }
 
     protected TowerLevel GetLevelData(int index)
     {
@@ -323,6 +280,18 @@ public class TowerController : MonoBehaviour
 
     public virtual int GetUpgradeCost()
     {
+        // まず TowerStats の「次レベル」のコストを優先して参照する
+        if (stats != null && stats.levels != null)
+        {
+            int nextIndex = levelIndex + 1;
+            var nextLevelData = GetLevelData(nextIndex);
+            if (nextLevelData != null)
+            {
+                return nextLevelData.cost;
+            }
+        }
+
+        // TowerStats から取得できなかった場合は、従来どおり nextPrefab の BuildCost にフォールバック
         var next = NextLevelPrefab;
         if (next == null)
         {

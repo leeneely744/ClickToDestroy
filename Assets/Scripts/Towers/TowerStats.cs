@@ -13,19 +13,10 @@ public class TowerLevel
 
     [Header("Identity")]
     public string towerId;
-    public string displayName;
-
-    [Header("Visuals")]
-    public TowerAnimationMode animationMode;
-    [Tooltip("animationMode が ChildAnimator の場合に参照する子オブジェクトのパス/名前")]
-    public string childAnimatorPath;
-    [Tooltip("攻撃時に Animator に送る Trigger 名")]
-    public string attackTriggerName;
-    public AnimatorOverrideController animatorOverride;
-    public Sprite icon;
+    public string towerName;
+    public GameObject nextLevelPrefab;
 
     [Header("Numbers")]
-    public string towerName;
     public int cost;
     public int sellRefund;
     public float attackDamage;

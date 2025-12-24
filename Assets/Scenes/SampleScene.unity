@@ -4993,7 +4993,7 @@ MonoBehaviour:
   waves:
   - waveName: Wave1
     spawns:
-    - enemyPrefab: {fileID: 5848397482713267585, guid: aa0fd7b90661d4f68b2256221ff69eb2, type: 3}
+    - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
       routeIndex: 0
       timeFromWaveStart: 0.5
     delayBeforeNextWave: 2

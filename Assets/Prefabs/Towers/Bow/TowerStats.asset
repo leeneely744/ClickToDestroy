@@ -14,10 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
   - towerId: bow1
-    displayName: BeginnerBow
-    animatorOverride: {fileID: 0}
-    icon: {fileID: -6470460504253458178, guid: c91c33e04142444df9a080033549ed98, type: 3}
     towerName: beginner archer
+    nextLevelPrefab: {fileID: 9021238356020073785, guid: 1aebc18f924a249009bec42b39315d00, type: 3}
     cost: 100
     sellRefund: 90
     attackDamage: 4
@@ -25,13 +23,11 @@ MonoBehaviour:
     range: 1
     isFusionTower: 0
     canBeFusionMaterial: 0
-    hasLevel: 0
+    hasLevel: 1
     guardianPrefab: {fileID: 0}
-  - towerId: 
-    displayName: 
-    animatorOverride: {fileID: 0}
-    icon: {fileID: 0}
+  - towerId: bow2
     towerName: trained archer
+    nextLevelPrefab: {fileID: 8427912772724200652, guid: f57451e6be7e444b086516409ec5ec63, type: 3}
     cost: 110
     sellRefund: 100
     attackDamage: 9
@@ -41,17 +37,15 @@ MonoBehaviour:
     canBeFusionMaterial: 0
     hasLevel: 0
     guardianPrefab: {fileID: 0}
-  - towerId: 
-    displayName: 
-    animatorOverride: {fileID: 0}
-    icon: {fileID: 0}
+  - towerId: bow3
     towerName: great archer
+    nextLevelPrefab: {fileID: 0}
     cost: 160
     sellRefund: 110
     attackDamage: 13
     attackInterval: 0.5
     range: 2
     isFusionTower: 0
-    canBeFusionMaterial: 0
-    hasLevel: 0
+    canBeFusionMaterial: 1
+    hasLevel: 1
     guardianPrefab: {fileID: 0}
