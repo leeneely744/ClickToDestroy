@@ -13,21 +13,36 @@ MonoBehaviour:
   m_Name: MagicTowerStats
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
-  - towerName: MagicTower1
+  - towerId: magic1
+    towerName: Beginner Magician
+    nextLevelPrefab: {fileID: 2008618986784158227, guid: a46969f7a777e41518f402d435d504c1, type: 3}
     cost: 100
     sellRefund: 80
-    attackDamage: 13
     attackInterval: 1.5
     range: 1
-  - towerName: MagicTower2
+    isFusionTower: 0
+    canBeFusionMaterial: 0
+    hasLevel: 1
+    guardianPrefab: {fileID: 0}
+  - towerId: magic2
+    towerName: Trained Magician
+    nextLevelPrefab: {fileID: 1499013605453779945, guid: 3023ed95807cd4d018f4f85a8060a1c8, type: 3}
     cost: 140
     sellRefund: 100
-    attackDamage: 33
     attackInterval: 1.5
     range: 1
-  - towerName: MagicTower3
+    isFusionTower: 0
+    canBeFusionMaterial: 0
+    hasLevel: 1
+    guardianPrefab: {fileID: 0}
+  - towerId: magic3
+    towerName: Great Magician
+    nextLevelPrefab: {fileID: 0}
     cost: 200
     sellRefund: 140
-    attackDamage: 57
     attackInterval: 1.5
     range: 1
+    isFusionTower: 0
+    canBeFusionMaterial: 1
+    hasLevel: 1
+    guardianPrefab: {fileID: 0}

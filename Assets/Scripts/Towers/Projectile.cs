@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float splashRadius = 0f; // 0 のときは範囲ダメージなし
     [SerializeField, Range(0f, 1f)]
     private float splashDamageRate = 0.5f; // 本体ダメージの何倍か（割合）
-    [SerializeField] private LayerMask enemyLayerMask; // Enemy 用レイヤー
+    [SerializeField] private LayerMask enemyLayerMask; // 範囲ダメージを与えたい敵がいるレイヤー
 
     private Transform target;
     private float lifeTimer;

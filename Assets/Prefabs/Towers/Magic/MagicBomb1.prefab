@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8920222284969929558}
   - component: {fileID: 8178243494021144041}
   m_Layer: 0
-  m_Name: MagicBomb
+  m_Name: MagicBomb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +107,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   maxLifetime: 2
   speed: 5
-  damage: 10
+  damage: 13
+  splashRadius: 0
+  splashDamageRate: 0.5
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!58 &8920222284969929558
 CircleCollider2D:
   m_ObjectHideFlags: 0
