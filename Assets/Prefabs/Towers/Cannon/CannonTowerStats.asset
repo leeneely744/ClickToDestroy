@@ -13,21 +13,39 @@ MonoBehaviour:
   m_Name: CannonTowerStats
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
-  - towerName: CannonTower1
+  - towerId: cannon1
+    towerName: beginnerCannon
+    nextLevelPrefab: {fileID: 8814583205318202462, guid: f0c053285d703420095d198e40af24d3, type: 3}
     cost: 120
     sellRefund: 100
     attackDamage: 11
     attackInterval: 3
     range: 1
-  - towerName: CannonTower2
+    isFusionTower: 0
+    canBeFusionMaterial: 0
+    hasLevel: 1
+    guardianPrefab: {fileID: 0}
+  - towerId: cannon2
+    towerName: TrainedCannon
+    nextLevelPrefab: {fileID: 8814583205318202462, guid: 164844deaa9944d73aa36771059842cc, type: 3}
     cost: 180
     sellRefund: 120
     attackDamage: 23
     attackInterval: 3
     range: 1
-  - towerName: CannonTower3
+    isFusionTower: 0
+    canBeFusionMaterial: 0
+    hasLevel: 1
+    guardianPrefab: {fileID: 0}
+  - towerId: cannon3
+    towerName: GreatCannon
+    nextLevelPrefab: {fileID: 0}
     cost: 240
     sellRefund: 180
     attackDamage: 45
     attackInterval: 3
     range: 1
+    isFusionTower: 0
+    canBeFusionMaterial: 1
+    hasLevel: 1
+    guardianPrefab: {fileID: 0}

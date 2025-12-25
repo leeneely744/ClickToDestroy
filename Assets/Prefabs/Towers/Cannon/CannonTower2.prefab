@@ -350,6 +350,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8839597572441139456, guid: 08558378276c2421e9448c18f07e4dc9, type: 3}
   firePoint: {fileID: 1759327385394020954}
   projectileTravelTime: 0.5
+  levelIndex: 1
   stats: {fileID: 11400000, guid: e941322ea97714a2795044e12a486bf5, type: 2}
   cost: 0
   nextLevelPrefab: {fileID: 8814583205318202462, guid: 164844deaa9944d73aa36771059842cc, type: 3}
