@@ -110,4 +110,4 @@ MonoBehaviour:
   splashDamageRate: 0.6
   enemyLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
