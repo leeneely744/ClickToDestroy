@@ -105,7 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   maxLifetime: 10
   speed: 2
-  damage: 10
+  damage: 30
   splashRadius: 1
   splashDamageRate: 0.6
   enemyLayerMask:
