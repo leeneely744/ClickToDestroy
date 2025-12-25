@@ -4998,19 +4998,19 @@ MonoBehaviour:
       timeFromWaveStart: 0.1
     - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
       routeIndex: 1
-      timeFromWaveStart: 0.1
+      timeFromWaveStart: 1
     - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
       routeIndex: 2
-      timeFromWaveStart: 0.1
+      timeFromWaveStart: 1
     - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
       routeIndex: 0
-      timeFromWaveStart: 0.2
+      timeFromWaveStart: 2
     - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
       routeIndex: 1
-      timeFromWaveStart: 0.2
+      timeFromWaveStart: 2
     - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
       routeIndex: 0
-      timeFromWaveStart: 0.3
+      timeFromWaveStart: 3
     delayBeforeNextWave: 2
   - waveName: Wave2
     spawns:

@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7571e2a46bd0247108c8dde091830339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CannonTowerController
-  projectilePrefab: {fileID: 8839597572441139456, guid: 08558378276c2421e9448c18f07e4dc9, type: 3}
+  projectilePrefab: {fileID: 2020050256651208380, guid: 5095dae1ef62a4faf9f64fa9fe940f3e, type: 3}
   firePoint: {fileID: 1759327385394020954}
   projectileTravelTime: 0.5
   levelIndex: 1
