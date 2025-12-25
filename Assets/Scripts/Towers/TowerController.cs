@@ -28,7 +28,6 @@ public class TowerController : MonoBehaviour
     private string towerName;
     [HideInInspector] public int cost;
     private int sellRefund;
-    private float attackDamage;
     private float attackInterval;
     private float range;
 
@@ -94,7 +93,6 @@ public class TowerController : MonoBehaviour
         towerName = data.towerName;
         cost = data.cost;
         sellRefund = data.sellRefund;
-        attackDamage = data.attackDamage;
         attackInterval = data.attackInterval;
         range = data.range;
 

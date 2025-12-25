@@ -19,7 +19,6 @@ public class TowerLevel
     [Header("Numbers")]
     public int cost;
     public int sellRefund;
-    public float attackDamage;
     public float attackInterval;
     public float range;
 
