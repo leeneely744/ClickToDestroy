@@ -100,6 +100,11 @@ public class TowerController : MonoBehaviour
         levelIndex = index;
     }
 
+    protected virtual void Update()
+    {
+        // GuardianTowerControllerBase でオーバーライドされる
+    }
+
     public void OnSelected()
     {
         isSelected = !isSelected;
