@@ -100,6 +100,98 @@ public class TowerController : MonoBehaviour
         levelIndex = index;
     }
 
+    protected virtual void Update()
+    {
+        attackTimer += Time.deltaTime;
+        TryAttack();
+    }
+
+    /// <summary>
+    /// 現在のクールダウンやターゲット状況を確認し、
+    /// 攻撃可能であれば Attack を呼び出す。
+    /// </summary>
+    protected virtual void TryAttack()
+    {
+        if (attackInterval <= 0f)
+        {
+            return;
+        }
+
+        if (attackTimer < attackInterval)
+        {
+            return;
+        }
+
+        if (enemiesInRange.Count <= 0)
+        {
+            return;
+        }
+
+        attackTimer = 0f;
+        Attack(enemiesInRange[0]);
+    }
+
+    /// <summary>
+    /// 実際の攻撃処理（弾生成とアニメ再生）を行う。
+    /// </summary>
+    protected virtual void Attack(EnemyController target)
+    {
+        if (projectilePrefab == null)
+        {
+            return;
+        }
+
+        if (firePoint == null)
+        {
+            Debug.LogError($"FirePoint is not assigned on {name}");
+            return;
+        }
+
+        Debug.Log($"[TowerController] {name} attacks {target?.name ?? "null"} with projectile {projectilePrefab.name}");
+
+        GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+        Projectile p = bullet.GetComponent<Projectile>();
+        if (p == null)
+        {
+            Debug.LogError($"[TowerController] Instantiated projectile from {projectilePrefab.name} has no Projectile component.");
+        }
+        else
+        {
+            Debug.Log($"[TowerController] Projectile component on {bullet.name}: damage={p.damage}, speed={p.speed}");
+            p.SetTarget(target != null ? target.transform : null, projectileTravelTime);
+        }
+
+        PlayAttackAnimation();
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (!col.CompareTag(Tags.Enemy))
+        {
+            return;
+        }
+
+        EnemyController enemy = col.GetComponent<EnemyController>();
+        if (enemy != null && !enemiesInRange.Contains(enemy))
+        {
+            enemiesInRange.Add(enemy);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (!col.CompareTag(Tags.Enemy))
+        {
+            return;
+        }
+
+        EnemyController enemy = col.GetComponent<EnemyController>();
+        if (enemy != null && enemiesInRange.Contains(enemy))
+        {
+            enemiesInRange.Remove(enemy);
+        }
+    }
+
     public void OnSelected()
     {
         isSelected = !isSelected;
@@ -119,37 +211,6 @@ public class TowerController : MonoBehaviour
             attackRangeRenderer.enabled = false;
         }
     }
-    
-    protected virtual void Update()
-    {
-        attackTimer += Time.deltaTime;
-
-        if (attackTimer >= attackInterval)
-        {
-            attackTimer = 0f;
-
-            if (enemiesInRange.Count > 0)
-            {
-                Attack(enemiesInRange[0]);
-            }
-        }
-    }
-
-    protected virtual void Attack(EnemyController target)
-    {
-        if (projectilePrefab == null) return;
-        if (firePoint == null)
-        {
-            Debug.LogError($"FirePoint is not assigned on {name}");
-            return;
-        }
-
-        GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-        Projectile p = bullet.GetComponent<Projectile>();
-        p.SetTarget(target.transform, projectileTravelTime);
-
-        PlayAttackAnimation();
-    }
 
     private void PlayAttackAnimation()
     {
@@ -158,30 +219,6 @@ public class TowerController : MonoBehaviour
         if (legacyArcher != null)
         {
             legacyArcher.PlayAttack();
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag(Tags.Enemy))
-        {
-            EnemyController enemy = col.GetComponent<EnemyController>();
-            if (!enemiesInRange.Contains(enemy))
-            {
-                enemiesInRange.Add(enemy);
-            }
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.CompareTag(Tags.Enemy))
-        {
-            EnemyController enemy = col.GetComponent<EnemyController>();
-            if (enemiesInRange.Contains(enemy))
-            {
-                enemiesInRange.Remove(enemy);
-            }
         }
     }
 
