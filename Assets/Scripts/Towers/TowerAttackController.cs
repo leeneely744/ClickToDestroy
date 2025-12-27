@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Tags = Constants.Tags;
 
 /// <summary>
 /// タワーの「攻撃する」責務だけを担当するコンポーネント。
@@ -12,6 +14,7 @@ public class TowerAttackController : MonoBehaviour
     private GameObject projectilePrefab;
     private Transform firePoint;
     private float projectileTravelTime = 0f;
+    private readonly List<EnemyController> enemiesInRange = new List<EnemyController>();
 
     public void Configure( float attackInterval, float range, GameObject projectilePrefab, Transform firePoint, float projectileTravelTime)
     {
@@ -32,24 +35,36 @@ public class TowerAttackController : MonoBehaviour
     private void Update()
     {
         attackTimer += Time.deltaTime;
-        if (attackTimer >= attackInterval)
-        {
-            attackTimer = 0f;
-            TryAttack();
-        }
+        TryAttack();
     }
 
     private void TryAttack()
     {
-        if (enemiesInRange.Count > 0)
+        if (attackInterval <= 0f)
         {
-            Attack(enemiesInRange[0]);
+            return;
         }
+
+        if (attackTimer < attackInterval)
+        {
+            return;
+        }
+
+        if (enemiesInRange.Count <= 0)
+        {
+            return;
+        }
+
+        attackTimer = 0f;
+        Attack(enemiesInRange[0]);
     }
 
     protected virtual void Attack(EnemyController target)
     {
-        if (projectilePrefab == null) return;
+        if (projectilePrefab == null)
+        {
+            return;
+        }
         if (firePoint == null)
         {
             Debug.LogError($"FirePoint is not assigned on {name}");
@@ -58,9 +73,26 @@ public class TowerAttackController : MonoBehaviour
 
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         Projectile p = bullet.GetComponent<Projectile>();
-        p.SetTarget(target.transform, projectileTravelTime);
+        if (p != null && target != null)
+        {
+            p.SetTarget(target.transform, projectileTravelTime);
+        }
 
         PlayAttackAnimation();
+    }
+
+    /// <summary>
+    /// 攻撃時のアニメーション再生。
+    /// ひとまず Bow と同様に、子オブジェクト上の ArcherAnimatorController に委譲する。
+    /// 必要に応じて後で塔ごとの実装に差し替え可能。
+    /// </summary>
+    private void PlayAttackAnimation()
+    {
+        var legacyArcher = GetComponentInChildren<ArcherAnimatorController>();
+        if (legacyArcher != null)
+        {
+            legacyArcher.PlayAttack();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -68,7 +100,7 @@ public class TowerAttackController : MonoBehaviour
         if (col.CompareTag(Tags.Enemy))
         {
             EnemyController enemy = col.GetComponent<EnemyController>();
-            if (!enemiesInRange.Contains(enemy))
+            if (enemy != null && !enemiesInRange.Contains(enemy))
             {
                 enemiesInRange.Add(enemy);
             }
@@ -80,7 +112,7 @@ public class TowerAttackController : MonoBehaviour
         if (col.CompareTag(Tags.Enemy))
         {
             EnemyController enemy = col.GetComponent<EnemyController>();
-            if (enemiesInRange.Contains(enemy))
+            if (enemy != null && enemiesInRange.Contains(enemy))
             {
                 enemiesInRange.Remove(enemy);
             }
@@ -88,4 +120,3 @@ public class TowerAttackController : MonoBehaviour
     }
 
 }
-
