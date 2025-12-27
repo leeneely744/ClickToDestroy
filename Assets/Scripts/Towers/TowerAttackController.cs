@@ -82,17 +82,12 @@ public class TowerAttackController : MonoBehaviour
     }
 
     /// <summary>
-    /// 攻撃時のアニメーション再生。
-    /// ひとまず Bow と同様に、子オブジェクト上の ArcherAnimatorController に委譲する。
-    /// 必要に応じて後で塔ごとの実装に差し替え可能。
+    /// 魔法や弓といったTowerの子オブジェクトがアニメーションを起こす場合と、砲台のようにTower本体がアニメーションを起こす場合がある。
+    /// ここでは virtual メソッドとして定義し、必要に応じて派生クラスでオーバーライドできるようにする。
     /// </summary>
-    private void PlayAttackAnimation()
+    protected virtual void PlayAttackAnimation()
     {
-        var legacyArcher = GetComponentInChildren<ArcherAnimatorController>();
-        if (legacyArcher != null)
-        {
-            legacyArcher.PlayAttack();
-        }
+        Debug.LogWarning($"PlayAttackAnimation not implemented in {name}");
     }
 
     private void OnTriggerEnter2D(Collider2D col)
