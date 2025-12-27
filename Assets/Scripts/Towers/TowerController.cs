@@ -103,32 +103,16 @@ public class TowerController : MonoBehaviour
     protected virtual void Update()
     {
         attackTimer += Time.deltaTime;
-        TryAttack();
-    }
 
-    /// <summary>
-    /// 現在のクールダウンやターゲット状況を確認し、
-    /// 攻撃可能であれば Attack を呼び出す。
-    /// </summary>
-    protected virtual void TryAttack()
-    {
-        if (attackInterval <= 0f)
+        if (attackTimer >= attackInterval)
         {
-            return;
-        }
+            attackTimer = 0f;
 
-        if (attackTimer < attackInterval)
-        {
-            return;
+            if (enemiesInRange.Count > 0)
+            {
+                Attack(enemiesInRange[0]);
+            }
         }
-
-        if (enemiesInRange.Count <= 0)
-        {
-            return;
-        }
-
-        attackTimer = 0f;
-        Attack(enemiesInRange[0]);
     }
 
     /// <summary>
@@ -164,31 +148,27 @@ public class TowerController : MonoBehaviour
         PlayAttackAnimation();
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if (!col.CompareTag(Tags.Enemy))
+        if (col.CompareTag(Tags.Enemy))
         {
-            return;
-        }
-
-        EnemyController enemy = col.GetComponent<EnemyController>();
-        if (enemy != null && !enemiesInRange.Contains(enemy))
-        {
-            enemiesInRange.Add(enemy);
+            EnemyController enemy = col.GetComponent<EnemyController>();
+            if (!enemiesInRange.Contains(enemy))
+            {
+                enemiesInRange.Add(enemy);
+            }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D col)
+    void OnTriggerExit2D(Collider2D col)
     {
-        if (!col.CompareTag(Tags.Enemy))
+        if (col.CompareTag(Tags.Enemy))
         {
-            return;
-        }
-
-        EnemyController enemy = col.GetComponent<EnemyController>();
-        if (enemy != null && enemiesInRange.Contains(enemy))
-        {
-            enemiesInRange.Remove(enemy);
+            EnemyController enemy = col.GetComponent<EnemyController>();
+            if (enemiesInRange.Contains(enemy))
+            {
+                enemiesInRange.Remove(enemy);
+            }
         }
     }
 
