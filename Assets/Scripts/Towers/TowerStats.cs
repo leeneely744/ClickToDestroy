@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Tower/TowerStats", fileName = "TowerStats")]
+[CreateAssetMenu(menuName = "TowerStats", fileName = "TowerStats")]
 public class TowerStats : ScriptableObject
 {
     public TowerLevel[] levels;

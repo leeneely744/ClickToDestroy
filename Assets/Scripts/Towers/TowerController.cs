@@ -25,7 +25,7 @@ public class TowerController : MonoBehaviour
     [SerializeField] protected TowerStats stats;
     private int maxLevelIndex;
     private string towerName;
-    [HideInInspector] public int cost;
+    [System.NonSerialized] public int cost;
     private int sellRefund;
     private float attackInterval;
     private float range;
