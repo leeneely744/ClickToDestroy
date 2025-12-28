@@ -8,11 +8,11 @@ using UnityEngine;
 public class TowerFusionRecipe : ScriptableObject
 {
     [Header("Ingredients (Tower IDs)")]
-    [Tooltip("合成先（ドラッグされる側）のタワー ID。例: guardian_lv3")]
-    public string baseTowerId;
+    [Tooltip("材料Aのタワー ID。例: guardian_lv3")]
+    public string towerAId;
 
-    [Tooltip("合成元（ドラッグしてくる側）のタワー ID。例: bow_lv3")]
-    public string materialTowerId;
+    [Tooltip("材料Bのタワー ID。例: bow_lv3")]
+    public string towerBId;
 
     [Header("Result")]
     [Tooltip("合成後に設置されるタワーのプレハブ。例: SamuraiTower")]
@@ -23,8 +23,8 @@ public class TowerFusionRecipe : ScriptableObject
     /// </summary>
     public bool Matches(string towerIdA, string towerIdB)
     {
-            return (towerIdA == baseTowerId && towerIdB == materialTowerId) ||
-                   (towerIdA == materialTowerId && towerIdB == baseTowerId);
+        return (towerIdA == towerAId && towerIdB == towerBId) ||
+            (towerIdA == towerBId && towerIdB == towerAId);
     }
 }
 

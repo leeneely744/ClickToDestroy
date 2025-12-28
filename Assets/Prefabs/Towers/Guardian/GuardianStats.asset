@@ -13,21 +13,36 @@ MonoBehaviour:
   m_Name: GuardianStats
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
-  - towerName: GuardianTower1
+  - towerId: guardian1
+    towerName: GuardianTower1
+    nextLevelPrefab: {fileID: 0}
     cost: 70
     sellRefund: 60
-    attackDamage: 0
     attackInterval: 10
     range: 2.2
-  - towerName: GuardianTower2
+    isFusionTower: 0
+    canBeFusionMaterial: 0
+    hasLevel: 1
+    guardianPrefab: {fileID: 3462640677572233118, guid: bf602f2d454a845d9853aaf3a866895c, type: 3}
+  - towerId: guadian2
+    towerName: GuardianTower2
+    nextLevelPrefab: {fileID: 0}
     cost: 120
     sellRefund: 70
-    attackDamage: 0
     attackInterval: 8
     range: 1.2
-  - towerName: GuardianTower3
+    isFusionTower: 0
+    canBeFusionMaterial: 0
+    hasLevel: 1
+    guardianPrefab: {fileID: 5031251932421842342, guid: cb7d3ed2343b843a4a04ee3c8beebc80, type: 3}
+  - towerId: guardian3
+    towerName: GuardianTower3
+    nextLevelPrefab: {fileID: 0}
     cost: 180
     sellRefund: 120
-    attackDamage: 0
     attackInterval: 6
     range: 1.5
+    isFusionTower: 0
+    canBeFusionMaterial: 1
+    hasLevel: 1
+    guardianPrefab: {fileID: 4919420860752385936, guid: 2187de5cd448948138815dca07895a02, type: 3}
