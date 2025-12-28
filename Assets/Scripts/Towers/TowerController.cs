@@ -30,7 +30,7 @@ public class TowerController : MonoBehaviour
     private float attackInterval;
     private float range;
 
-    protected TowerStats Stats => stats;
+    public TowerStats Stats => stats;
     protected float AttackRange => range;
     public float AttackInterval => attackInterval;
     protected TowerPlace CurrentTowerPlace => towerPlace;
