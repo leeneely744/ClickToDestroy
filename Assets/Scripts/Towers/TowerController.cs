@@ -4,7 +4,6 @@ using Tags = Constants.Tags;
 
 public class TowerController : MonoBehaviour
 {
-    private float attackTimer = 0f;
     private CircleCollider2D rangeCollider;
     private List<EnemyController> enemiesInRange = new List<EnemyController>();
 
@@ -80,6 +79,12 @@ public class TowerController : MonoBehaviour
         }
 
         ApplyStats(levelIndex);
+
+        var attackComponent = GetComponent<TowerAttackController>();
+        if (attackComponent != null)
+        {
+            attackComponent.Configure(attackInterval, range, projectilePrefab, firePoint, projectileTravelTime);
+        }
     }
 
     protected void ApplyStats(int index)

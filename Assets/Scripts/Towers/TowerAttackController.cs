@@ -56,6 +56,7 @@ public class TowerAttackController : MonoBehaviour
         }
 
         attackTimer = 0f;
+        Debug.Log($"TowerAttackController: Attack enemy {enemiesInRange[0].name}");
         Attack(enemiesInRange[0]);
     }
 
