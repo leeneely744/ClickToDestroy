@@ -111,7 +111,7 @@ MonoBehaviour:
   maxHp: 100
   attackDamage: 2
   attackInterval: 1
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 1261377254304999346}
   canAttackFlying: 0
 --- !u!58 &4587579045641984832
 CircleCollider2D:
@@ -240,6 +240,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef73574dcd01a41aeb45d199bb40aec3, type: 3}
+--- !u!114 &1261377254304999346 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8075500134580479880, guid: ef73574dcd01a41aeb45d199bb40aec3, type: 3}
+  m_PrefabInstance: {fileID: 7030329541177540666}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ea2d0f19f759438eb6376d5a1e0862c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBarController
 --- !u!4 &6827701562531625022 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4562253201063098372, guid: ef73574dcd01a41aeb45d199bb40aec3, type: 3}
