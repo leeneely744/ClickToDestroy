@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 3099266967791470093}
   - component: {fileID: -204603339942181064}
   - component: {fileID: 6286742619901454003}
+  - component: {fileID: 9081315021971003025}
   m_Layer: 0
   m_Name: CannonTower2
   m_TagString: Untagged
@@ -354,7 +355,6 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: e941322ea97714a2795044e12a486bf5, type: 2}
   cost: 0
   nextLevelPrefab: {fileID: 8814583205318202462, guid: 164844deaa9944d73aa36771059842cc, type: 3}
-  attackTriggerName: isAttack
 --- !u!95 &-204603339942181064
 Animator:
   serializedVersion: 7
@@ -404,3 +404,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &9081315021971003025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8814583205318202462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0cd8c86369ee4a2bad2b9ecf825c9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelfAnimatorAttackController
+  attackTriggerName: isAttack

@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 7973724020356999617}
   - component: {fileID: 3967471170116536286}
   - component: {fileID: 5210512800167972289}
+  - component: {fileID: -2929294426481012455}
   m_Layer: 0
   m_Name: BowTower2
   m_TagString: Untagged
@@ -530,3 +531,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-2929294426481012455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9021238356020073785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be02eb09bdd5f424985a32b04b7ec371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChildAnimatorAttackController
+  attackTriggerName: AttackTrigger

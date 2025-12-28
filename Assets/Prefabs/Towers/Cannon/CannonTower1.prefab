@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 3099266967791470093}
   - component: {fileID: -204603339942181064}
   - component: {fileID: 2225978112770074771}
+  - component: {fileID: -3112592313503251144}
   m_Layer: 0
   m_Name: CannonTower1
   m_TagString: Untagged
@@ -350,10 +351,10 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8839597572441139456, guid: 08558378276c2421e9448c18f07e4dc9, type: 3}
   firePoint: {fileID: 1759327385394020954}
   projectileTravelTime: 0.5
+  levelIndex: 0
   stats: {fileID: 11400000, guid: e941322ea97714a2795044e12a486bf5, type: 2}
   cost: 0
   nextLevelPrefab: {fileID: 8814583205318202462, guid: f0c053285d703420095d198e40af24d3, type: 3}
-  attackTriggerName: isAttack
 --- !u!95 &-204603339942181064
 Animator:
   serializedVersion: 7
@@ -403,3 +404,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-3112592313503251144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8814583205318202462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0cd8c86369ee4a2bad2b9ecf825c9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelfAnimatorAttackController
+  attackTriggerName: isAttack

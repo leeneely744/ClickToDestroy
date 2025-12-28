@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 877906371054496454}
   - component: {fileID: 1094430651213213338}
   - component: {fileID: 7327876594456491031}
+  - component: {fileID: -7549354254914784362}
   m_Layer: 0
   m_Name: MagicTower3
   m_TagString: Untagged
@@ -268,6 +269,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-7549354254914784362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499013605453779945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be02eb09bdd5f424985a32b04b7ec371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChildAnimatorAttackController
+  attackTriggerName: AttackTrigger
 --- !u!1 &4624471279693197055
 GameObject:
   m_ObjectHideFlags: 0

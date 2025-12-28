@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 3762099636169939536}
   - component: {fileID: 9084633416416210152}
   - component: {fileID: 7264937288215518562}
+  - component: {fileID: 8822336748456383796}
   m_Layer: 0
   m_Name: MagicTower1
   m_TagString: Untagged
@@ -224,6 +225,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8683657668908243494, guid: 531056f54736f4fa487f569f273ab2b1, type: 3}
   firePoint: {fileID: 4747791318048832225}
   projectileTravelTime: 0.5
+  levelIndex: 0
   stats: {fileID: 11400000, guid: 07fc9c25a541d450fb7c98203169ff76, type: 2}
   cost: 0
   nextLevelPrefab: {fileID: 2008618986784158227, guid: a46969f7a777e41518f402d435d504c1, type: 3}
@@ -254,6 +256,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8822336748456383796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008618986784158227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be02eb09bdd5f424985a32b04b7ec371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChildAnimatorAttackController
+  attackTriggerName: AttackTrigger
 --- !u!1 &3549987004200054331
 GameObject:
   m_ObjectHideFlags: 0
