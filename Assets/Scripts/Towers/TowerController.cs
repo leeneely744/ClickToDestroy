@@ -270,4 +270,19 @@ public class TowerController : MonoBehaviour
         return 0;
     }
 
+    public void DestroyTower()
+    {
+        towerPlace.SetOccupied(false);
+        Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// このタワーが紐づいている TowerPlace を返す。
+    /// （未設定の場合は null を返す）
+    /// </summary>
+    public TowerPlace GetTowerPlace()
+    {
+        return towerPlace;
+    }
+
 }

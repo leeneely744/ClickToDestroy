@@ -10,6 +10,7 @@ using UnityEngine.EventSystems;
 public class DragController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private TowerController tower;
+    private TowerFusionService fusionService;
 
     private void Awake()
     {
@@ -18,6 +19,8 @@ public class DragController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         {
             Debug.LogWarning($"[DragController] TowerController not found on {name}. This object will still log drag events, but fusion logic will not work.");
         }
+
+        fusionService = new TowerFusionService();
     }
 
     public void OnBeginDrag(PointerEventData eventData)

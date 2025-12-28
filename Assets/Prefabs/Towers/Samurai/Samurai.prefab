@@ -109,7 +109,7 @@ MonoBehaviour:
   moveSpeed: 3
   stopDistance: 0.05
   maxHp: 100
-  attackDamage: 2
+  attackDamage: 20
   attackInterval: 1
   healthBar: {fileID: 1261377254304999346}
   canAttackFlying: 0

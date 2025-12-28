@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f424f002a9e145f5b57ea440371ef09, type: 3}
-  m_Name: FusionRecipe
+  m_Name: Samurai
   m_EditorClassIdentifier: Assembly-CSharp::TowerFusionRecipe
-  baseTowerId: guardian3
-  materialTowerId: bow3
+  towerAId: bow3
+  towerBId: guardian3
   resultTowerPrefab: {fileID: 4701961274566390687, guid: 5948e972875a340a7bb868fe9dc58cf0, type: 3}

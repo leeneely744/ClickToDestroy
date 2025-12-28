@@ -23,4 +23,4 @@ MonoBehaviour:
     isFusionTower: 1
     canBeFusionMaterial: 0
     hasLevel: 0
-    guardianPrefab: {fileID: 0}
+    guardianPrefab: {fileID: 7543451457492691273, guid: 371e37e29671d4fdfafe570181749a8b, type: 3}
