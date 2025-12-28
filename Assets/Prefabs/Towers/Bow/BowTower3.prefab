@@ -380,6 +380,7 @@ GameObject:
   - component: {fileID: 3852581621350322367}
   - component: {fileID: 2927117045632188343}
   - component: {fileID: 3220460411466758477}
+  - component: {fileID: 187443262790037401}
   m_Layer: 0
   m_Name: BowTower3
   m_TagString: Untagged
@@ -503,7 +504,6 @@ MonoBehaviour:
   projectileTravelTime: 0.2
   levelIndex: 2
   stats: {fileID: 11400000, guid: 07fc9c25a541d450fb7c98203169ff76, type: 2}
-  cost: 0
 --- !u!50 &2927117045632188343
 Rigidbody2D:
   serializedVersion: 5
@@ -544,3 +544,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChildAnimatorAttackController
   attackTriggerName: AttackTrigger
+--- !u!114 &187443262790037401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8427912772724200652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96be6d542a7524ab2a63d66f575603c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragController

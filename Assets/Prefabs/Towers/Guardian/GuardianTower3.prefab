@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 7344271335862739459}
   - component: {fileID: 4873978810918559184}
   - component: {fileID: 2841479253694358753}
+  - component: {fileID: 1640962624473529526}
   m_Layer: 0
   m_Name: GuardianTower3
   m_TagString: Untagged
@@ -245,8 +246,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   firePoint: {fileID: 0}
   projectileTravelTime: 0
+  levelIndex: 0
   stats: {fileID: 11400000, guid: 63fdd5cf1fa804d04ba0d3b3702692ec, type: 2}
-  cost: 0
   maxSoldiers: 4
   initialLevelIndex: 2
   nextLevelPrefab: {fileID: 0}
@@ -279,6 +280,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1640962624473529526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7649151438900065757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96be6d542a7524ab2a63d66f575603c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragController
 --- !u!1 &8357914066803490804
 GameObject:
   m_ObjectHideFlags: 0
