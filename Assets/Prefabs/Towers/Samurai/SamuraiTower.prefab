@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 7513826462066614023}
   - component: {fileID: 220079918339468584}
   - component: {fileID: 5874102976597699992}
+  - component: {fileID: 1132333093245016851}
   m_Layer: 0
   m_Name: SamuraiTower
   m_TagString: Untagged
@@ -227,7 +228,7 @@ MonoBehaviour:
   maxSoldiers: 3
   initialLevelIndex: 0
   nextLevelPrefab: {fileID: 0}
-  guardianPrefab: {fileID: 0}
+  guardianPrefab: {fileID: 7543451457492691273, guid: 371e37e29671d4fdfafe570181749a8b, type: 3}
   heightScaleY: 1
 --- !u!50 &5874102976597699992
 Rigidbody2D:
@@ -256,6 +257,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &1132333093245016851
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701961274566390687}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6dc1ad6d86ed14feb9da86247f2560be, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8065308942015615109
 GameObject:
   m_ObjectHideFlags: 0
