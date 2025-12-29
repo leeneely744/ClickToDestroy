@@ -27,9 +27,6 @@ public class TowerLevel
     public bool canBeFusionMaterial;
     public bool hasLevel;
 
-    [Header("Guardian")]
-    public GameObject guardianPrefab;
-
     // スキル
     // public SkillDefinition[] skills;
 }
