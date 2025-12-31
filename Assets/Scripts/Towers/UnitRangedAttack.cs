@@ -13,10 +13,11 @@ public class UnitRangedAttack : MonoBehaviour
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float projectileTravelTime = 0f;
-    [SerializeField] private bool canAttackFlying = true;
+    [SerializeField] private string shotTriggerName = "Shot";
 
     private float attackTimer;
     private readonly List<EnemyController> enemiesInRange = new List<EnemyController>();
+    private Animator animator;
 
     public bool HasTarget => GetCurrentTarget() != null;
 
@@ -43,6 +44,11 @@ public class UnitRangedAttack : MonoBehaviour
         Attack(target);
     }
 
+    private void Awake()
+    {
+        animator = GetComponentInParent<Animator>();
+    }
+
     private void Attack(EnemyController target)
     {
         if (projectilePrefab == null)
@@ -57,12 +63,15 @@ public class UnitRangedAttack : MonoBehaviour
         {
             projectile.SetTarget(target.transform, projectileTravelTime);
         }
+
+        if (animator != null && !string.IsNullOrEmpty(shotTriggerName))
+        {
+            animator.SetTrigger(shotTriggerName);
+        }
     }
 
     public EnemyController GetCurrentTarget()
     {
-        EnemyController fallback = null;
-
         for (int i = enemiesInRange.Count - 1; i >= 0; i--)
         {
             var enemy = enemiesInRange[i];
@@ -72,23 +81,13 @@ public class UnitRangedAttack : MonoBehaviour
                 continue;
             }
 
-            if (!canAttackFlying && enemy.IsFlying)
-            {
-                continue;
-            }
-
             if (enemy.IsFlying)
             {
                 return enemy;
             }
-
-            if (fallback == null)
-            {
-                fallback = enemy;
-            }
         }
 
-        return fallback;
+        return null;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
