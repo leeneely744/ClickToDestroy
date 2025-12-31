@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 3295107962113773158}
   - component: {fileID: 3305554477650226865}
   - component: {fileID: 6039700385500761826}
-  - component: {fileID: 2459489219099927177}
+  - component: {fileID: 6268933042635256305}
   m_Layer: 0
   m_Name: AttackRangeCircle
   m_TagString: Untagged
@@ -159,7 +159,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &2459489219099927177
+--- !u!114 &6268933042635256305
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,12 +170,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5048c118bf24141b98094893078a3dd4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SamuraiRangedAttack
-  attackInterval: 2
+  m_EditorClassIdentifier: Assembly-CSharp::UnitRangedAttack
+  attackInterval: 1.5
   projectilePrefab: {fileID: 1498279427015312657, guid: 4ef6469425dab4813bb7c1da8ae9b9db, type: 3}
   firePoint: {fileID: 3386655781932064961}
   projectileTravelTime: 0.5
-  canAttackFlying: 1
+  canAttackFlying: 0
 --- !u!1 &7543451457492691273
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,8 +186,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2042483145025212971}
   - component: {fileID: 6557404330267960630}
-  - component: {fileID: 3774279803068645846}
   - component: {fileID: 4587579045641984832}
+  - component: {fileID: 3774279803068645846}
+  - component: {fileID: -3433456424574423364}
   - component: {fileID: 3579296673825872014}
   m_Layer: 0
   m_Name: Samurai
@@ -272,25 +273,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3774279803068645846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7543451457492691273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60b918d72a7214a4f81c0afb13e2093f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GuardianController
-  moveSpeed: 3
-  stopDistance: 0.05
-  maxHp: 100
-  attackDamage: 20
-  attackInterval: 1
-  healthBar: {fileID: 1261377254304999346}
-  canAttackFlying: 0
 --- !u!58 &4587579045641984832
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -327,6 +309,41 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.3
+--- !u!114 &3774279803068645846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7543451457492691273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b918d72a7214a4f81c0afb13e2093f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GuardianController
+  moveSpeed: 3
+  stopDistance: 0.05
+  maxHp: 100
+  attackDamage: 20
+  attackInterval: 1
+  healthBar: {fileID: 1261377254304999346}
+--- !u!114 &-3433456424574423364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7543451457492691273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5048c118bf24141b98094893078a3dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitRangedAttack
+  attackInterval: 1.5
+  projectilePrefab: {fileID: 1498279427015312657, guid: 4ef6469425dab4813bb7c1da8ae9b9db, type: 3}
+  firePoint: {fileID: 0}
+  projectileTravelTime: 0
+  canAttackFlying: 1
 --- !u!95 &3579296673825872014
 Animator:
   serializedVersion: 7

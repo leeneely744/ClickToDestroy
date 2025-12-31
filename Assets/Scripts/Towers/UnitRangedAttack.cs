@@ -61,6 +61,8 @@ public class UnitRangedAttack : MonoBehaviour
 
     public EnemyController GetCurrentTarget()
     {
+        EnemyController fallback = null;
+
         for (int i = enemiesInRange.Count - 1; i >= 0; i--)
         {
             var enemy = enemiesInRange[i];
@@ -75,10 +77,18 @@ public class UnitRangedAttack : MonoBehaviour
                 continue;
             }
 
-            return enemy;
+            if (enemy.IsFlying)
+            {
+                return enemy;
+            }
+
+            if (fallback == null)
+            {
+                fallback = enemy;
+            }
         }
 
-        return null;
+        return fallback;
     }
 
     private void OnTriggerEnter2D(Collider2D col)

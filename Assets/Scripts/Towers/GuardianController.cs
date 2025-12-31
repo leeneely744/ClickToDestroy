@@ -14,16 +14,17 @@ public class GuardianController : MonoBehaviour, IDefender
     private Vector3 moveTarget;
     private bool isDead;
     private GuardianTowerControllerBase ownerTower;
+    private UnitRangedAttack rangedAttack;
     private int currentHp;
     private List<EnemyController> currentTargets = new List<EnemyController>();
     private Animator animator;
     [SerializeField] private HealthBarController healthBar;
-    [SerializeField] private bool canAttackFlying = false;
 
     void Awake()
     {
         ownerTower = GetComponentInParent<GuardianTowerControllerBase>();
         animator = GetComponent<Animator>();
+        rangedAttack = GetComponentInChildren<UnitRangedAttack>();
 
         currentHp = maxHp;
 
@@ -44,23 +45,26 @@ public class GuardianController : MonoBehaviour, IDefender
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        // 敵であるか？
         if (!col.CompareTag(Tags.Enemy))
         {
             return;
         }
 
+        // すでに攻撃中か？
+        if (rangedAttack != null && rangedAttack.HasTarget)
+        {
+            return;
+        }
+
+        // EnemyController を取得
         EnemyController enemy = col.GetComponent<EnemyController>();
         if (enemy == null)
         {
             return;
         }
 
-        // 飛行ユニットを攻撃しない設定なら、そもそもターゲット登録しない
-        if (enemy.IsFlying && !canAttackFlying)
-        {
-            return;
-        }
-
+        // すでにリストに含まれているか？
         if (!currentTargets.Contains(enemy))
         {
             currentTargets.Add(enemy);
@@ -111,6 +115,12 @@ public class GuardianController : MonoBehaviour, IDefender
 
     private void HandleCombat()
     {
+        if (rangedAttack != null && rangedAttack.HasTarget)
+        {
+            UpdateAttackAnimation(false);
+            return;
+        }
+
         if (currentTargets.Count == 0)
         {
             return;
@@ -122,14 +132,6 @@ public class GuardianController : MonoBehaviour, IDefender
         {
             currentTargets.RemoveAt(0);
             UpdateAttackAnimation(false);
-            return;
-        }
-
-        // 飛行ユニットを攻撃しない設定の場合、リストから外して次のターゲットへ
-        if (target.IsFlying && !canAttackFlying)
-        {
-            currentTargets.RemoveAt(0);
-            UpdateAttackAnimation(currentTargets.Count > 0);
             return;
         }
 
