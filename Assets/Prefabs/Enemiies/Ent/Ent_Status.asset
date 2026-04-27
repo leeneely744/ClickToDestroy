@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHp: 10000
   attackPower: 200
-  moveSpeed: 0.2
+  moveSpeed: 0.8
   isFlying: 0
   rewardMoney: 1
   attackInterval: 1

@@ -1,12 +1,21 @@
 using System.Collections;
+using System.Collections.Generic;
+using TD.Spawning;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnemySpawner : MonoBehaviour
 {
-    // どの敵（enemyPrefab）を、
-    // どのルート（routeIndex）で、
-    // ウェーブ開始から何秒後に（timeFromWaveStart）
-    // 出現させるかを定義する。
+    // ====== 新フィールド ======
+    [Header("Level")]
+    [SerializeField] private LevelAsset level;
+
+    [Header("Refs")]
+    [SerializeField] private ScoreBoard scoreBoard;
+
+    // ====== Legacy フィールド（移行用に残してある。移行が完了したら削除可） ======
+    // 旧フィールド名 ("waves", "routes", "startDelay") から FormerlySerializedAs で
+    // データを引き継ぐ。エディタ上でのみ移行ツールから読み出す。
     [System.Serializable]
     public class SpawnInstruction
     {
@@ -23,10 +32,16 @@ public class EnemySpawner : MonoBehaviour
         public float delayBeforeNextWave = 2f;
     }
 
-    [SerializeField] private WaveDefinition[] waves;
-    [SerializeField] private Route[] routes;
-    [SerializeField] private float startDelay = 1f;
-    [SerializeField] private ScoreBoard scoreBoard;
+    [Header("Legacy (to be migrated)")]
+    [FormerlySerializedAs("waves")]
+    [SerializeField] private WaveDefinition[] legacyWaves;
+
+    [FormerlySerializedAs("routes")]
+    [SerializeField] private Route[] legacyRoutes;
+
+    [FormerlySerializedAs("startDelay")]
+    [SerializeField] private float legacyStartDelay = 1f;
+    // =================================================================
 
     private int activeEnemies = 0;
 
@@ -51,9 +66,12 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        if (waves == null || waves.Length == 0)
+        if (level == null || level.waves == null || level.waves.Length == 0)
         {
-            Debug.LogWarning("EnemySpawner: waves are not configured");
+            Debug.LogWarning(
+                "EnemySpawner: LevelAsset が割り当てられていません。" +
+                "Tools > TD > Migrate Selected EnemySpawner to LevelAsset から移行してください。",
+                this);
             return;
         }
 
@@ -62,11 +80,16 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator RunWaves()
     {
-        yield return new WaitForSeconds(startDelay);
+        yield return new WaitForSeconds(level.startDelay);
 
-        for (int waveIndex = 0; waveIndex < waves.Length; waveIndex++)
+        for (int waveIndex = 0; waveIndex < level.waves.Length; waveIndex++)
         {
-            var wave = waves[waveIndex];
+            var wave = level.waves[waveIndex];
+            if (wave == null)
+            {
+                continue;
+            }
+
             yield return StartCoroutine(SpawnWave(wave));
 
             // 敵が全滅するまで待つ
@@ -89,37 +112,43 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private IEnumerator SpawnWave(WaveDefinition wave)
+    private IEnumerator SpawnWave(WaveAsset wave)
     {
-        if (wave.spawns == null)
+        if (wave.groups == null || wave.groups.Length == 0)
         {
             yield break;
         }
 
-        // timeFromWaveStart の昇順に並び替える。
-        var instructions = wave.spawns;
-        System.Array.Sort(instructions, (a, b) => a.timeFromWaveStart.CompareTo(b.timeFromWaveStart));
-
-        float currentTime = 0f;
-        foreach (var instruction in instructions)
+        // SpawnGroup を 1 体ずつのスケジュールに展開してから時刻順にソートする。
+        var schedule = new List<(float time, GameObject prefab, Route route)>();
+        foreach (var g in wave.groups)
         {
-            if (instruction.enemyPrefab == null)
+            if (g.enemyPrefab == null || g.route == null)
             {
                 continue;
             }
-            
-            // 前回スポーンからの待ち時間を計算
-            float wait = instruction.timeFromWaveStart - currentTime;
+
+            int count = Mathf.Max(1, g.count);
+            float interval = Mathf.Max(0f, g.interval);
+            for (int i = 0; i < count; i++)
+            {
+                schedule.Add((g.startTime + interval * i, g.enemyPrefab, g.route));
+            }
+        }
+
+        schedule.Sort((a, b) => a.time.CompareTo(b.time));
+
+        float currentTime = 0f;
+        foreach (var s in schedule)
+        {
+            float wait = s.time - currentTime;
             if (wait > 0f)
             {
                 yield return new WaitForSeconds(wait);
                 currentTime += wait;
             }
 
-            // routeIndex が範囲外だった場合のガード
-            int index = Mathf.Clamp(instruction.routeIndex, 0, routes.Length - 1);
-            Route route = routes[index];
-            SpawnEnemy(instruction.enemyPrefab, route);
+            SpawnEnemy(s.prefab, s.route);
         }
     }
 
@@ -140,4 +169,12 @@ public class EnemySpawner : MonoBehaviour
     {
         activeEnemies = Mathf.Max(0, activeEnemies - 1);
     }
+
+#if UNITY_EDITOR
+    // ===== 移行ツール専用のアクセサ =====
+    public WaveDefinition[] GetLegacyWaves() => legacyWaves;
+    public Route[] GetLegacyRoutes() => legacyRoutes;
+    public float GetLegacyStartDelay() => legacyStartDelay;
+    public void AssignLevel(LevelAsset asset) { level = asset; }
+#endif
 }
