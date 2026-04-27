@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f69c8cd51e44e6ea077b291ebc0596, type: 3}
+  m_Name: 04_Wave4
+  m_EditorClassIdentifier: Assembly-CSharp::TD.Spawning.WaveAsset
+  waveName: Wave4
+  groups:
+  - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
+    route: {fileID: 0}
+    startTime: 0.1
+    count: 1
+    interval: 0.5
+  - enemyPrefab: {fileID: 1059105655554080900, guid: 948e7fb80f46b46b590439b4571d2642, type: 3}
+    route: {fileID: 0}
+    startTime: 1
+    count: 1
+    interval: 0.5
+  - enemyPrefab: {fileID: 1267072059790290196, guid: 4bdc48b7afb444b2db54c21041960fa6, type: 3}
+    route: {fileID: 0}
+    startTime: 1
+    count: 1
+    interval: 0.5
+  - enemyPrefab: {fileID: 5499577465775078312, guid: c3d62ecae6509430d871389ab23891eb, type: 3}
+    route: {fileID: 0}
+    startTime: 2
+    count: 1
+    interval: 0.5
+  - enemyPrefab: {fileID: 5848397482713267585, guid: aa0fd7b90661d4f68b2256221ff69eb2, type: 3}
+    route: {fileID: 0}
+    startTime: 2
+    count: 1
+    interval: 0.5
+  delayBeforeNextWave: 2
