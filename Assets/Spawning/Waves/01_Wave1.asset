@@ -15,37 +15,37 @@ MonoBehaviour:
   waveName: Wave1
   groups:
   - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-    route: {fileID: 0}
+    route: {fileID: 11400000, guid: e5e092312603f4142865242a066a5dba, type: 2}
     startTime: 0.1
     count: 1
     interval: 0.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-    route: {fileID: 0}
+    route: {fileID: 11400000, guid: b5b528869833e4bd6baa6580344cfaa2, type: 2}
     startTime: 1
     count: 1
     interval: 0.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-    route: {fileID: 0}
+    route: {fileID: 11400000, guid: 6a3981a94a661409fab23ef7bfedaf65, type: 2}
     startTime: 1
     count: 1
     interval: 0.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-    route: {fileID: 0}
+    route: {fileID: 11400000, guid: e5e092312603f4142865242a066a5dba, type: 2}
     startTime: 2
     count: 1
     interval: 0.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-    route: {fileID: 0}
+    route: {fileID: 11400000, guid: e5e092312603f4142865242a066a5dba, type: 2}
     startTime: 2
     count: 1
     interval: 0.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-    route: {fileID: 0}
+    route: {fileID: 11400000, guid: b5b528869833e4bd6baa6580344cfaa2, type: 2}
     startTime: 3
     count: 1
     interval: 0.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-    route: {fileID: 0}
+    route: {fileID: 11400000, guid: 6a3981a94a661409fab23ef7bfedaf65, type: 2}
     startTime: 3
     count: 1
     interval: 0.5

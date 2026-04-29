@@ -28,7 +28,9 @@ namespace TD.Spawning
     public class SpawnGroup
     {
         public GameObject enemyPrefab;
-        public Route route;
+
+        [Tooltip("出現させるルートを表す RouteAsset。シーン上の Route が同じ RouteAsset を持っている必要がある。")]
+        public RouteAsset route;
 
         [Tooltip("ウェーブ開始から最初の 1 体が出現するまでの秒数。")]
         public float startTime = 0f;

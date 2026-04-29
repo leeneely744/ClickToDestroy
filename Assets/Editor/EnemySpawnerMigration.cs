@@ -1,15 +1,64 @@
+using System.Collections.Generic;
 using System.IO;
 using TD.Spawning;
 using UnityEditor;
 using UnityEngine;
 
 /// <summary>
-/// 旧 EnemySpawner.WaveDefinition[] を、新しい LevelAsset / WaveAsset に変換するための
-/// エディタ拡張。シーン中の EnemySpawner を選択した状態でメニューを実行する。
+/// 旧 EnemySpawner.WaveDefinition[] を、新しい LevelAsset / WaveAsset / RouteAsset に
+/// 変換するためのエディタ拡張。
 /// </summary>
 public static class EnemySpawnerMigration
 {
-    private const string DefaultFolder = "Assets/Spawning";
+    [MenuItem("Tools/TD/Bind Scene Routes to RouteAssets")]
+    public static void BindRoutes()
+    {
+        var routes = Object.FindObjectsByType<Route>(FindObjectsSortMode.InstanceID);
+        if (routes.Length == 0)
+        {
+            EditorUtility.DisplayDialog("Bind Routes", "シーンに Route コンポーネントが見つかりません。", "OK");
+            return;
+        }
+
+        var folder = EditorUtility.SaveFolderPanel(
+            "RouteAsset の保存先を選択", "Assets", "");
+        if (string.IsNullOrEmpty(folder)) return;
+        if (!folder.StartsWith(Application.dataPath))
+        {
+            EditorUtility.DisplayDialog("Bind Routes", "Assets 配下のフォルダを選択してください。", "OK");
+            return;
+        }
+        var relFolder = "Assets" + folder.Substring(Application.dataPath.Length);
+        EnsureFolder(relFolder);
+
+        int created = 0;
+        int alreadyBound = 0;
+        foreach (var route in routes)
+        {
+            if (route.Asset != null) { alreadyBound++; continue; }
+
+            var asset = ScriptableObject.CreateInstance<RouteAsset>();
+            asset.description = $"Auto-generated for scene Route '{route.name}'";
+            var fileName = SanitizeFileName($"Route_{route.name}.asset");
+            var path = AssetDatabase.GenerateUniqueAssetPath(
+                Path.Combine(relFolder, fileName).Replace("\\", "/"));
+            AssetDatabase.CreateAsset(asset, path);
+
+            Undo.RecordObject(route, "Assign RouteAsset");
+            route.EditorAssignRouteAsset(asset);
+            EditorUtility.SetDirty(route);
+            created++;
+        }
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+
+        EditorUtility.DisplayDialog(
+            "Bind Routes",
+            $"完了。\n\n新規 RouteAsset: {created}\n既にバインド済み: {alreadyBound}",
+            "OK");
+    }
 
     [MenuItem("Tools/TD/Migrate Selected EnemySpawner to LevelAsset")]
     public static void Migrate()
@@ -38,29 +87,50 @@ public static class EnemySpawnerMigration
             return;
         }
 
-        // 保存先フォルダ
         var folder = EditorUtility.SaveFolderPanel(
-            "LevelAsset / WaveAsset の保存先を選択", "Assets", "");
-        if (string.IsNullOrEmpty(folder))
-        {
-            return;
-        }
+            "LevelAsset / WaveAsset / RouteAsset の保存先を選択", "Assets", "");
+        if (string.IsNullOrEmpty(folder)) return;
         if (!folder.StartsWith(Application.dataPath))
         {
-            EditorUtility.DisplayDialog(
-                "Migration",
-                "Assets 配下のフォルダを選択してください。",
-                "OK");
+            EditorUtility.DisplayDialog("Migration", "Assets 配下のフォルダを選択してください。", "OK");
             return;
         }
 
         var relFolder = "Assets" + folder.Substring(Application.dataPath.Length);
         EnsureFolder(relFolder);
-
         var wavesFolder = Path.Combine(relFolder, "Waves").Replace("\\", "/");
         EnsureFolder(wavesFolder);
+        var routesFolder = Path.Combine(relFolder, "Routes").Replace("\\", "/");
+        EnsureFolder(routesFolder);
 
-        // LevelAsset 本体
+        // === 1. 各 legacyRoute に対応する RouteAsset を確保する ===
+        var routeAssetMap = new Dictionary<Route, RouteAsset>();
+        if (legacyRoutes != null)
+        {
+            foreach (var route in legacyRoutes)
+            {
+                if (route == null) continue;
+                if (routeAssetMap.ContainsKey(route)) continue;
+
+                RouteAsset routeAsset = route.Asset;
+                if (routeAsset == null)
+                {
+                    routeAsset = ScriptableObject.CreateInstance<RouteAsset>();
+                    routeAsset.description = $"Auto-generated for scene Route '{route.name}'";
+                    var fileName = SanitizeFileName($"Route_{route.name}.asset");
+                    var path = AssetDatabase.GenerateUniqueAssetPath(
+                        Path.Combine(routesFolder, fileName).Replace("\\", "/"));
+                    AssetDatabase.CreateAsset(routeAsset, path);
+
+                    Undo.RecordObject(route, "Assign RouteAsset");
+                    route.EditorAssignRouteAsset(routeAsset);
+                    EditorUtility.SetDirty(route);
+                }
+                routeAssetMap[route] = routeAsset;
+            }
+        }
+
+        // === 2. WaveAsset / LevelAsset を生成 ===
         var level = ScriptableObject.CreateInstance<LevelAsset>();
         level.startDelay = startDelay;
         level.waves = new WaveAsset[legacyWaves.Length];
@@ -78,17 +148,21 @@ public static class EnemySpawnerMigration
                 for (int j = 0; j < src.spawns.Length; j++)
                 {
                     var s = src.spawns[j];
-                    Route route = null;
+                    RouteAsset routeAsset = null;
                     if (legacyRoutes != null && legacyRoutes.Length > 0 && s.routeIndex >= 0)
                     {
                         var idx = Mathf.Clamp(s.routeIndex, 0, legacyRoutes.Length - 1);
-                        route = legacyRoutes[idx];
+                        var route = legacyRoutes[idx];
+                        if (route != null && routeAssetMap.TryGetValue(route, out var ra))
+                        {
+                            routeAsset = ra;
+                        }
                     }
 
                     wave.groups[j] = new SpawnGroup
                     {
                         enemyPrefab = s.enemyPrefab,
-                        route = route,
+                        route = routeAsset,
                         startTime = s.timeFromWaveStart,
                         count = 1,
                         interval = 0.5f,
@@ -100,9 +174,9 @@ public static class EnemySpawnerMigration
                 wave.groups = new SpawnGroup[0];
             }
 
-            var fileName = SanitizeFileName($"{i + 1:00}_{wave.waveName}.asset");
+            var waveFileName = SanitizeFileName($"{i + 1:00}_{wave.waveName}.asset");
             var wavePath = AssetDatabase.GenerateUniqueAssetPath(
-                Path.Combine(wavesFolder, fileName).Replace("\\", "/"));
+                Path.Combine(wavesFolder, waveFileName).Replace("\\", "/"));
             AssetDatabase.CreateAsset(wave, wavePath);
             level.waves[i] = wave;
         }
@@ -118,7 +192,6 @@ public static class EnemySpawnerMigration
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        // EnemySpawner 側に新しい LevelAsset を割り当てる
         Undo.RecordObject(spawner, "Assign LevelAsset");
         spawner.AssignLevel(level);
         EditorUtility.SetDirty(spawner);
@@ -133,19 +206,16 @@ public static class EnemySpawnerMigration
         EditorUtility.DisplayDialog(
             "Migration",
             "移行が完了しました。\n\n" +
-            "・新規アセット: " + levelPath + "\n" +
-            "・WaveAsset 数: " + level.waves.Length + "\n\n" +
-            "Play して挙動を確認したのち、EnemySpawner の Legacy フィールド（waves / routes / startDelay）を空にして問題なければ、" +
-            "EnemySpawner.cs から legacy 定義を削除してください。",
+            "・Level: " + levelPath + "\n" +
+            "・WaveAsset 数: " + level.waves.Length + "\n" +
+            "・RouteAsset 数: " + routeAssetMap.Count + "\n\n" +
+            "Play して挙動を確認してください。",
             "OK");
     }
 
     private static void EnsureFolder(string assetPath)
     {
-        if (AssetDatabase.IsValidFolder(assetPath))
-        {
-            return;
-        }
+        if (AssetDatabase.IsValidFolder(assetPath)) return;
 
         var parent = Path.GetDirectoryName(assetPath).Replace("\\", "/");
         var leaf = Path.GetFileName(assetPath);

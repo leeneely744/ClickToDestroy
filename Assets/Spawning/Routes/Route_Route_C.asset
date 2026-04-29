@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a7773d4012314b1b9b18dd2cef1152c, type: 3}
+  m_Name: Route_Route_C
+  m_EditorClassIdentifier: Assembly-CSharp::TD.Spawning.RouteAsset
+  description: Auto-generated for scene Route 'Route_C'
