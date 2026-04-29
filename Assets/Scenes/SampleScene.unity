@@ -3129,6 +3129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a076f811067045c4abbdebcaad514fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Route
+  asset: {fileID: 11400000, guid: 6a3981a94a661409fab23ef7bfedaf65, type: 2}
   waypoints:
   - {fileID: 870567769}
   - {fileID: 1001406675}
@@ -3873,6 +3874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a076f811067045c4abbdebcaad514fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Route
+  asset: {fileID: 11400000, guid: b5b528869833e4bd6baa6580344cfaa2, type: 2}
   waypoints:
   - {fileID: 36533782}
   - {fileID: 1697404095}
@@ -4462,6 +4464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a076f811067045c4abbdebcaad514fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Route
+  asset: {fileID: 11400000, guid: e5e092312603f4142865242a066a5dba, type: 2}
   waypoints:
   - {fileID: 2080693949}
   - {fileID: 1741308430}
@@ -4990,7 +4993,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27cd018de7ffb4a24a38c9bfb4bd8575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  waves:
+  level: {fileID: 11400000, guid: 7970a3dc1d98b4fd9ada0461b2451600, type: 2}
+  scoreBoard: {fileID: 449612237}
+  legacyWaves:
   - waveName: Wave1
     spawns:
     - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
@@ -5081,12 +5086,11 @@ MonoBehaviour:
       routeIndex: 1
       timeFromWaveStart: 2
     delayBeforeNextWave: 2
-  routes:
+  legacyRoutes:
   - {fileID: 1366335554}
   - {fileID: 1134020462}
   - {fileID: 880367494}
-  startDelay: 1
-  scoreBoard: {fileID: 449612237}
+  legacyStartDelay: 1
 --- !u!4 &1611633352
 Transform:
   m_ObjectHideFlags: 0
