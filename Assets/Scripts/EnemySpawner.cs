@@ -2,46 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TD.Spawning;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class EnemySpawner : MonoBehaviour
 {
-    // ====== 新フィールド ======
     [Header("Level")]
     [SerializeField] private LevelAsset level;
 
     [Header("Refs")]
     [SerializeField] private ScoreBoard scoreBoard;
-
-    // ====== Legacy フィールド（移行用に残してある。移行が完了したら削除可） ======
-    // 旧フィールド名 ("waves", "routes", "startDelay") から FormerlySerializedAs で
-    // データを引き継ぐ。エディタ上でのみ移行ツールから読み出す。
-    [System.Serializable]
-    public class SpawnInstruction
-    {
-        public GameObject enemyPrefab;
-        public int routeIndex = 0;
-        public float timeFromWaveStart = 0.5f;
-    }
-
-    [System.Serializable]
-    public class WaveDefinition
-    {
-        public string waveName = "Wave";
-        public SpawnInstruction[] spawns;
-        public float delayBeforeNextWave = 2f;
-    }
-
-    [Header("Legacy (to be migrated)")]
-    [FormerlySerializedAs("waves")]
-    [SerializeField] private WaveDefinition[] legacyWaves;
-
-    [FormerlySerializedAs("routes")]
-    [SerializeField] private Route[] legacyRoutes;
-
-    [FormerlySerializedAs("startDelay")]
-    [SerializeField] private float legacyStartDelay = 1f;
-    // =================================================================
 
     private int activeEnemies = 0;
 
@@ -71,8 +39,7 @@ public class EnemySpawner : MonoBehaviour
         if (level == null)
         {
             Debug.LogWarning(
-                "EnemySpawner: LevelAsset が null です。Inspector で level フィールドに LevelAsset を割り当ててください。" +
-                "（legacyWaves ではなく level フィールドです）",
+                "EnemySpawner: LevelAsset が null です。Inspector で level フィールドに LevelAsset を割り当ててください。",
                 this);
             return;
         }
@@ -220,12 +187,4 @@ public class EnemySpawner : MonoBehaviour
     {
         activeEnemies = Mathf.Max(0, activeEnemies - 1);
     }
-
-#if UNITY_EDITOR
-    // ===== 移行ツール専用のアクセサ =====
-    public WaveDefinition[] GetLegacyWaves() => legacyWaves;
-    public Route[] GetLegacyRoutes() => legacyRoutes;
-    public float GetLegacyStartDelay() => legacyStartDelay;
-    public void AssignLevel(LevelAsset asset) { level = asset; }
-#endif
 }

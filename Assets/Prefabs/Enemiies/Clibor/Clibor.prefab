@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: enemyData
       value: 
       objectReference: {fileID: 11400000, guid: c4bb11cf5f0264b51a15b85b0fd73b98, type: 2}
+    - target: {fileID: 225436466700605373, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
+      propertyPath: wobbleAmplitude
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 225436466700605373, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
+      propertyPath: maxLateralOffset
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3982574313250373904, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
       propertyPath: m_Name
       value: Clibor
