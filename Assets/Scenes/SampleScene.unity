@@ -8556,102 +8556,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   level: {fileID: 11400000, guid: 7970a3dc1d98b4fd9ada0461b2451600, type: 2}
   scoreBoard: {fileID: 449612237}
-  legacyWaves:
-  - waveName: Wave1
-    spawns:
-    - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-      routeIndex: 0
-      timeFromWaveStart: 0.1
-    - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-      routeIndex: 1
-      timeFromWaveStart: 1
-    - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-      routeIndex: 2
-      timeFromWaveStart: 1
-    - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-      routeIndex: 0
-      timeFromWaveStart: 2
-    - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-      routeIndex: 1
-      timeFromWaveStart: 2
-    - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-      routeIndex: 0
-      timeFromWaveStart: 3
-    - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-      routeIndex: 0
-      timeFromWaveStart: 3
-    delayBeforeNextWave: 2
-  - waveName: Wave2
-    spawns:
-    - enemyPrefab: {fileID: 5499577465775078312, guid: c3d62ecae6509430d871389ab23891eb, type: 3}
-      routeIndex: 0
-      timeFromWaveStart: 0.1
-    - enemyPrefab: {fileID: 5499577465775078312, guid: c3d62ecae6509430d871389ab23891eb, type: 3}
-      routeIndex: 1
-      timeFromWaveStart: 1
-    - enemyPrefab: {fileID: 5499577465775078312, guid: c3d62ecae6509430d871389ab23891eb, type: 3}
-      routeIndex: 2
-      timeFromWaveStart: 1
-    - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-      routeIndex: 0
-      timeFromWaveStart: 2
-    - enemyPrefab: {fileID: 1059105655554080900, guid: 948e7fb80f46b46b590439b4571d2642, type: 3}
-      routeIndex: 1
-      timeFromWaveStart: 2
-    - enemyPrefab: {fileID: 1059105655554080900, guid: 948e7fb80f46b46b590439b4571d2642, type: 3}
-      routeIndex: 0
-      timeFromWaveStart: 3
-    - enemyPrefab: {fileID: 1059105655554080900, guid: 948e7fb80f46b46b590439b4571d2642, type: 3}
-      routeIndex: 0
-      timeFromWaveStart: 3
-    - enemyPrefab: {fileID: 1059105655554080900, guid: 948e7fb80f46b46b590439b4571d2642, type: 3}
-      routeIndex: 0
-      timeFromWaveStart: 5
-    - enemyPrefab: {fileID: 1059105655554080900, guid: 948e7fb80f46b46b590439b4571d2642, type: 3}
-      routeIndex: 1
-      timeFromWaveStart: 5
-    delayBeforeNextWave: 2
-  - waveName: Wave3
-    spawns:
-    - enemyPrefab: {fileID: 1734518220056264733, guid: edd98e030c1a445bfb38c8354255a51c, type: 3}
-      routeIndex: 0
-      timeFromWaveStart: 0.1
-    - enemyPrefab: {fileID: 1267072059790290196, guid: 4bdc48b7afb444b2db54c21041960fa6, type: 3}
-      routeIndex: 1
-      timeFromWaveStart: 1
-    - enemyPrefab: {fileID: 1267072059790290196, guid: 4bdc48b7afb444b2db54c21041960fa6, type: 3}
-      routeIndex: 2
-      timeFromWaveStart: 1
-    - enemyPrefab: {fileID: 1267072059790290196, guid: 4bdc48b7afb444b2db54c21041960fa6, type: 3}
-      routeIndex: 0
-      timeFromWaveStart: 2
-    - enemyPrefab: {fileID: 1267072059790290196, guid: 4bdc48b7afb444b2db54c21041960fa6, type: 3}
-      routeIndex: 1
-      timeFromWaveStart: 2
-    delayBeforeNextWave: 2
-  - waveName: Wave4
-    spawns:
-    - enemyPrefab: {fileID: 2155804248953280118, guid: 7f86e98debd154b099bb8720504da592, type: 3}
-      routeIndex: 0
-      timeFromWaveStart: 0.1
-    - enemyPrefab: {fileID: 1059105655554080900, guid: 948e7fb80f46b46b590439b4571d2642, type: 3}
-      routeIndex: 1
-      timeFromWaveStart: 1
-    - enemyPrefab: {fileID: 1267072059790290196, guid: 4bdc48b7afb444b2db54c21041960fa6, type: 3}
-      routeIndex: 2
-      timeFromWaveStart: 1
-    - enemyPrefab: {fileID: 5499577465775078312, guid: c3d62ecae6509430d871389ab23891eb, type: 3}
-      routeIndex: 0
-      timeFromWaveStart: 2
-    - enemyPrefab: {fileID: 5848397482713267585, guid: aa0fd7b90661d4f68b2256221ff69eb2, type: 3}
-      routeIndex: 1
-      timeFromWaveStart: 2
-    delayBeforeNextWave: 2
-  legacyRoutes:
-  - {fileID: 1366335554}
-  - {fileID: 1134020462}
-  - {fileID: 0}
-  legacyStartDelay: 1
 --- !u!4 &1611633352
 Transform:
   m_ObjectHideFlags: 0
@@ -11293,11 +11197,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3782966484762149069, guid: ac11cd74649834a4b9ebe6acffda93c1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.49
+      value: -8.78
       objectReference: {fileID: 0}
     - target: {fileID: 3782966484762149069, guid: ac11cd74649834a4b9ebe6acffda93c1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.15
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 3782966484762149069, guid: ac11cd74649834a4b9ebe6acffda93c1, type: 3}
       propertyPath: m_LocalPosition.z
