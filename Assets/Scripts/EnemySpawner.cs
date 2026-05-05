@@ -69,6 +69,7 @@ public class EnemySpawner : MonoBehaviour
             }
 
             Debug.Log($"[EnemySpawner] Wave {waveIndex} '{wave.waveName}' 開始", this);
+            GameManager.Instance?.UpdateWave(waveIndex + 1, level.waves.Length);
             yield return StartCoroutine(SpawnWave(wave));
 
             // 敵が全滅するまで待つ

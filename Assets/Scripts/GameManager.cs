@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [Header("Core References")]
     [SerializeField] private ScoreBoard scoreBoard;
     [SerializeField] private Money moneyUi;
+    [SerializeField] private Waves wavesUi;
 
     [Header("Result Panels")]
     [SerializeField] private GameObject gameOverPanel;
@@ -47,6 +48,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void UpdateWave(int current, int total)
+    {
+        if (wavesUi != null)
+        {
+            wavesUi.SetWave(current, total);
+        }
+    }
+
     public void InitializeGame()
     {
         isGameActive = true;
@@ -60,6 +69,11 @@ public class GameManager : MonoBehaviour
         if (moneyUi != null)
         {
             moneyUi.ResetMoney(initialMoney);
+        }
+
+        if (wavesUi != null)
+        {
+            wavesUi.ResetWave();
         }
 
         if (gameOverPanel != null)
