@@ -26,22 +26,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyData enemyData;
     private int maxHp;
 
-    // ===== 経路追従のゆらぎ（重なり防止） =====
-    [Header("経路追従のゆらぎ")]
-    [Tooltip("経路に対して垂直方向にどれだけずれるか（ワールド単位）。\n" +
-             "個体ごとに ±この値の範囲で1つ固定され、複数のEnemyが同じ経路を通っても重なりにくくなる。\n" +
-             "0にすると全Enemyが厳密に経路上を移動する。")]
-    [SerializeField] private float maxLateralOffset = 0.25f;
-
-    // 個体ごとに固定される値（Awakeで確定）
-    private float lateralOffset;
-
-    private void Awake()
-    {
-        // 経路と垂直な固定オフセットを個体ごとに決める
-        lateralOffset = Random.Range(-maxLateralOffset, maxLateralOffset);
-    }
-
     private void Start()
     {
         scoreBoard = FindAnyObjectByType<ScoreBoard>();
@@ -107,9 +91,6 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        // 現在のWPに、経路と垂直方向の固定オフセットを適用した目標位置
-        Vector3 offsetTarget = ComputeOffsetWaypoint(currentWaypointIndex);
-
         // 交戦中（攻撃コンポーネントが付いていて交戦状態）のときは移動しない
         bool isEngaged = attackController != null && attackController.IsEngaged;
 
@@ -117,12 +98,12 @@ public class EnemyController : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(
                 transform.position,
-                offsetTarget,
+                waypoints[currentWaypointIndex].position,
                 speed * Time.deltaTime
             );
         }
 
-        if (Vector2.Distance(transform.position, offsetTarget) < 0.05f)
+        if (Vector2.Distance(transform.position, waypoints[currentWaypointIndex].position) < 0.05f)
         {
             currentWaypointIndex++;
 
@@ -151,60 +132,7 @@ public class EnemyController : MonoBehaviour
         }
         Debug.Log($"[EnemyController] SetRoute: {route.name} waypoints={route.waypoints.Length}", this);
         waypoints = route.waypoints;
-        // 開始位置もWP0に対して垂直方向のオフセットを掛けた位置にする（重なり対策）
-        transform.position = ComputeOffsetWaypoint(0);
-    }
-
-    /// <summary>
-    /// 指定したWPに対して、経路と垂直方向の固定オフセットを足した位置を返す。
-    /// 個体ごとの lateralOffset によって左右にずれる。
-    /// </summary>
-    private Vector3 ComputeOffsetWaypoint(int index)
-    {
-        if (waypoints == null || index < 0 || index >= waypoints.Length || waypoints[index] == null)
-        {
-            return transform.position;
-        }
-        Vector3 wp = waypoints[index].position;
-        Vector3 segDir = GetSegmentDirection(index);
-        Vector3 perp = new Vector3(-segDir.y, segDir.x, 0f);
-        return wp + perp * lateralOffset;
-    }
-
-    /// <summary>
-    /// 指定したWPでの進行方向（次のWPへの単位ベクトル）を返す。
-    /// 最終WPの場合は1つ前のWPからの向きを使う。
-    /// </summary>
-    private Vector3 GetSegmentDirection(int index)
-    {
-        if (waypoints == null || waypoints.Length == 0)
-        {
-            return Vector3.right;
-        }
-
-        if (index < waypoints.Length - 1
-            && waypoints[index] != null
-            && waypoints[index + 1] != null)
-        {
-            Vector3 to = waypoints[index + 1].position - waypoints[index].position;
-            if (to.sqrMagnitude > 0.0001f)
-            {
-                return to.normalized;
-            }
-        }
-
-        if (index > 0
-            && waypoints[index] != null
-            && waypoints[index - 1] != null)
-        {
-            Vector3 to = waypoints[index].position - waypoints[index - 1].position;
-            if (to.sqrMagnitude > 0.0001f)
-            {
-                return to.normalized;
-            }
-        }
-
-        return Vector3.right;
+        transform.position = waypoints[0].position;
     }
 
     public void SetSpawner(EnemySpawner spawner)
