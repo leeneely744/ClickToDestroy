@@ -267,8 +267,8 @@ Transform:
   m_GameObject: {fileID: 4727945023960690855}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.267, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0.224, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8432308105574762519}
@@ -503,7 +503,6 @@ MonoBehaviour:
   projectileTravelTime: 0.2
   levelIndex: 1
   stats: {fileID: 11400000, guid: 07fc9c25a541d450fb7c98203169ff76, type: 2}
-  cost: 0
 --- !u!50 &5210512800167972289
 Rigidbody2D:
   serializedVersion: 5
