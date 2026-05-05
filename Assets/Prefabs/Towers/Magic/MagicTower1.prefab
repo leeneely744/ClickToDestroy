@@ -199,7 +199,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -6470460504253458178, guid: 153d7904e91554b238d316fae20f9c69, type: 3}
+  m_Sprite: {fileID: -855298285791758126, guid: 84bbcf1c6d1f9404386c8c566165bb34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -227,7 +227,6 @@ MonoBehaviour:
   projectileTravelTime: 0.5
   levelIndex: 0
   stats: {fileID: 11400000, guid: 07fc9c25a541d450fb7c98203169ff76, type: 2}
-  cost: 0
   nextLevelPrefab: {fileID: 2008618986784158227, guid: a46969f7a777e41518f402d435d504c1, type: 3}
 --- !u!50 &7264937288215518562
 Rigidbody2D:
