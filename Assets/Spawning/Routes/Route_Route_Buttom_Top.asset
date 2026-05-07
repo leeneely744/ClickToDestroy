@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a7773d4012314b1b9b18dd2cef1152c, type: 3}
-  m_Name: Route_Route_C
+  m_Name: Route_Route_Buttom_Top
   m_EditorClassIdentifier: Assembly-CSharp::TD.Spawning.RouteAsset
-  description: Auto-generated for scene Route 'Route_C'
+  description: Auto-generated for scene Route 'Route_Buttom_Top'

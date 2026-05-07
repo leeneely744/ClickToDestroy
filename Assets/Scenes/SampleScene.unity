@@ -2116,7 +2116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a076f811067045c4abbdebcaad514fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Route
-  asset: {fileID: 11400000, guid: b5b528869833e4bd6baa6580344cfaa2, type: 2}
+  asset: {fileID: 11400000, guid: 06936a5c15e1248a39c058085595ff81, type: 2}
   waypoints:
   - {fileID: 1421339238}
   - {fileID: 1619302636}
@@ -4550,7 +4550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a076f811067045c4abbdebcaad514fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Route
-  asset: {fileID: 11400000, guid: 6a3981a94a661409fab23ef7bfedaf65, type: 2}
+  asset: {fileID: 11400000, guid: fca854bcccb5e4b7b92a34d865726a73, type: 2}
   waypoints:
   - {fileID: 1904270684}
   - {fileID: 1866029220}
@@ -7555,7 +7555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a076f811067045c4abbdebcaad514fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Route
-  asset: {fileID: 11400000, guid: b5b528869833e4bd6baa6580344cfaa2, type: 2}
+  asset: {fileID: 11400000, guid: ac0929530094a4a8aa2c74197f069517, type: 2}
   waypoints:
   - {fileID: 36533782}
   - {fileID: 1697404095}
@@ -8183,7 +8183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a076f811067045c4abbdebcaad514fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Route
-  asset: {fileID: 11400000, guid: 6a3981a94a661409fab23ef7bfedaf65, type: 2}
+  asset: {fileID: 11400000, guid: 78325c27fb8e248b8991ef5bf0088a78, type: 2}
   waypoints:
   - {fileID: 714042334}
   - {fileID: 337025649}
@@ -8628,7 +8628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a076f811067045c4abbdebcaad514fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Route
-  asset: {fileID: 11400000, guid: e5e092312603f4142865242a066a5dba, type: 2}
+  asset: {fileID: 11400000, guid: 1cd19b5a888ef4f55848bac5465ee77c, type: 2}
   waypoints:
   - {fileID: 2067055449}
   - {fileID: 438409477}
@@ -9238,7 +9238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a076f811067045c4abbdebcaad514fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Route
-  asset: {fileID: 11400000, guid: e5e092312603f4142865242a066a5dba, type: 2}
+  asset: {fileID: 11400000, guid: 9e4d13482197441448455a3d10dc58a4, type: 2}
   waypoints:
   - {fileID: 2080693949}
   - {fileID: 1741308430}
@@ -10109,7 +10109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a076f811067045c4abbdebcaad514fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Route
-  asset: {fileID: 11400000, guid: b5b528869833e4bd6baa6580344cfaa2, type: 2}
+  asset: {fileID: 11400000, guid: c5aabe34ec6304356907cdb7dcc79715, type: 2}
   waypoints:
   - {fileID: 678982481}
   - {fileID: 1445104312}
@@ -11089,7 +11089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a076f811067045c4abbdebcaad514fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Route
-  asset: {fileID: 11400000, guid: e5e092312603f4142865242a066a5dba, type: 2}
+  asset: {fileID: 11400000, guid: 69414f54017484db9ba0e6d9d8106d3e, type: 2}
   waypoints:
   - {fileID: 1738682948}
   - {fileID: 1696474023}
@@ -13338,7 +13338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a076f811067045c4abbdebcaad514fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Route
-  asset: {fileID: 11400000, guid: 6a3981a94a661409fab23ef7bfedaf65, type: 2}
+  asset: {fileID: 11400000, guid: 7662ccf63c5394cb7815144664b3e857, type: 2}
   waypoints:
   - {fileID: 81746619}
   - {fileID: 1093928987}

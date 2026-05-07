@@ -10,18 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89f69c8cd51e44e6ea077b291ebc0596, type: 3}
-  m_Name: 01_Wave1
+  m_Name: 10_Wave10
   m_EditorClassIdentifier: Assembly-CSharp::TD.Spawning.WaveAsset
-  waveName: Wave1
+  waveName: Wave10
   groups:
-  - enemyPrefab: {fileID: 2155804248953280118, guid: 5965c0d22393404fa90b3a795720ab45, type: 3}
+  - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
     route: {fileID: 11400000, guid: 9e4d13482197441448455a3d10dc58a4, type: 2}
     startTime: 0.1
     count: 10
     interval: 0.5
-  - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
-    route: {fileID: 11400000, guid: 1cd19b5a888ef4f55848bac5465ee77c, type: 2}
+  - enemyPrefab: {fileID: 2155804248953280118, guid: c2485526b59240469769a3d1cf6da3c5, type: 3}
+    route: {fileID: 11400000, guid: 9e4d13482197441448455a3d10dc58a4, type: 2}
     startTime: 5.1
-    count: 5
-    interval: 0.5
+    count: 9
+    interval: 0.8
+  - enemyPrefab: {fileID: 2155804248953280118, guid: 981cd40e413a446fb01437a59fba546c, type: 3}
+    route: {fileID: 11400000, guid: 9e4d13482197441448455a3d10dc58a4, type: 2}
+    startTime: 12.3
+    count: 2
+    interval: 1.5
   delayBeforeNextWave: 2
