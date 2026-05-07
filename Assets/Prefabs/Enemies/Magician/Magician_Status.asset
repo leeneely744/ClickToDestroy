@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: Magician_Status
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHp: 100
-  attackPower: 4
   moveSpeed: 1
   isFlying: 0
   rewardMoney: 10
-  attackInterval: 1
+  physicalResistance: 0.0
+  magicalResistance: 0.0
+  meleeAttack:
+    damage: 4
+    attackInterval: 1
+    attackType: 1
+    isAreaAttack: 0
+    attackRange: 0
+  rangedAttack:
+    damage: 0
+    attackInterval: 0.0
+    attackType: 1
+    isAreaAttack: 0
+    attackRange: 0.0
   animatorOverride: {fileID: 22100000, guid: 362c36959df6a4599b370ddf34ba7084, type: 2}

@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: DarkKnight_Status
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHp: 800
-  attackPower: 50
   moveSpeed: 1
   isFlying: 0
   rewardMoney: 50
-  attackInterval: 1
+  physicalResistance: 0.0
+  magicalResistance: 0.0
+  meleeAttack:
+    damage: 50
+    attackInterval: 1
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0
+  rangedAttack:
+    damage: 0
+    attackInterval: 0.0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0.0
   animatorOverride: {fileID: 22100000, guid: 0f6fd4342a3da4454b1a5096ced9cddc, type: 2}

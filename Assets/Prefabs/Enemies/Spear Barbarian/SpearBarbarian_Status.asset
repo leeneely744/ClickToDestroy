@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: SpearBarbarian_Status
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHp: 1000
-  attackPower: 60
   moveSpeed: 0.8
   isFlying: 0
   rewardMoney: 50
-  attackInterval: 3.0
+  physicalResistance: 0.95
+  magicalResistance: 0.0
+  meleeAttack:
+    damage: 60
+    attackInterval: 3.0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0
+  rangedAttack:
+    damage: 100
+    attackInterval: 2.0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 5.0
   animatorOverride: {fileID: 22100000, guid: 5fef3a5c4c994f17b7082e2be8f54917, type: 2}

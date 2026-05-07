@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: SwordClibor_Status
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHp: 70
-  attackPower: 25
   moveSpeed: 1.2
   isFlying: 0
   rewardMoney: 8
-  attackInterval: 1.0
+  physicalResistance: 0.0
+  magicalResistance: 0.0
+  meleeAttack:
+    damage: 25
+    attackInterval: 1.0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0
+  rangedAttack:
+    damage: 0
+    attackInterval: 0.0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0.0
   animatorOverride: {fileID: 22100000, guid: b12d14c076e24928b28d37b1c20a0c82, type: 2}

@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: StoneClibor_Status
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHp: 160
-  attackPower: 8
   moveSpeed: 0.8
   isFlying: 0
   rewardMoney: 15
-  attackInterval: 1.0
+  physicalResistance: 0.5
+  magicalResistance: 0.0
+  meleeAttack:
+    damage: 8
+    attackInterval: 1.0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0
+  rangedAttack:
+    damage: 0
+    attackInterval: 0.0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0.0
   animatorOverride: {fileID: 22100000, guid: 821fac58762c4ee28ec0d92591920c37, type: 2}

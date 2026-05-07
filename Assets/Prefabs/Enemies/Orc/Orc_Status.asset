@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: Orc_Status
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHp: 600
-  attackPower: 20
   moveSpeed: 0.8
   isFlying: 0
   rewardMoney: 40
-  attackInterval: 1.0
+  physicalResistance: 0.6
+  magicalResistance: 0.0
+  meleeAttack:
+    damage: 20
+    attackInterval: 1.0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0
+  rangedAttack:
+    damage: 0
+    attackInterval: 0.0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0.0
   animatorOverride: {fileID: 22100000, guid: 63b30185ed0b49869fb2b210dd215b02, type: 2}

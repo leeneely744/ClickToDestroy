@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: Bat_Status
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHp: 90
-  attackPower: 0
   moveSpeed: 1.2
   isFlying: 1
   rewardMoney: 12
-  attackInterval: 0
+  physicalResistance: 0.0
+  magicalResistance: 0.0
+  meleeAttack:
+    damage: 0
+    attackInterval: 0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0
+  rangedAttack:
+    damage: 0
+    attackInterval: 0.0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0.0
   animatorOverride: {fileID: 22100000, guid: 90d49c9f0315e4648b13d1705ba0fde6, type: 2}

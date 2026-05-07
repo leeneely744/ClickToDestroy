@@ -2,17 +2,20 @@ using UnityEngine;
 
 public class EnemyAttackController : MonoBehaviour
 {
-    private float attackInterval = 1.5f;
-    private int defenderDamage = 10;
+    private AttackStats melee = new AttackStats { damage = 10, attackInterval = 1.5f };
+    private AttackStats ranged = new AttackStats();
 
     private IDefender engagedDefender;
     private float attackTimer;
     private bool isEngaged;
 
     private Animator animator;
-    private EnemyController enemy; // 死亡判定などに使用
+    private EnemyController enemy;
 
     public bool IsEngaged => isEngaged;
+
+    public AttackStats Melee  => melee;
+    public AttackStats Ranged => ranged;
 
     private void Awake()
     {
@@ -23,28 +26,23 @@ public class EnemyAttackController : MonoBehaviour
 
     private void Update()
     {
-        // 敵自身が死んでいるなら何もしない
         if (enemy != null && enemy.IsDead)
         {
             if (isEngaged) Disengage();
             return;
         }
 
-        // 交戦していない or 相手がいない/死んでいるなら解除
         if (!isEngaged || engagedDefender == null || engagedDefender.IsDead)
         {
-            if (isEngaged)
-            {
-                Disengage();
-            }
+            if (isEngaged) Disengage();
             return;
         }
 
         attackTimer += Time.deltaTime;
-        if (attackTimer >= attackInterval)
+        if (attackTimer >= melee.attackInterval)
         {
             attackTimer = 0f;
-            engagedDefender.TakeDamage(defenderDamage);
+            engagedDefender.TakeDamage(melee.damage);
         }
     }
 
@@ -72,12 +70,12 @@ public class EnemyAttackController : MonoBehaviour
 
     public void ApplyData(EnemyData data)
     {
-        if (data == null)
-        {
-            return;
-        }
+        if (data == null) return;
 
-        defenderDamage = data.attackPower;
-        attackInterval = data.attackInterval;
+        melee  = data.meleeAttack;
+        ranged = data.rangedAttack;
+
+        if (melee.attackInterval <= 0f)
+            melee.attackInterval = 1f;
     }
 }

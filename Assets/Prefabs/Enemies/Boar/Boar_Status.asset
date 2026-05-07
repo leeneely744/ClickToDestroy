@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: Boar_Status
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHp: 120
-  attackPower: 15
   moveSpeed: 2.0
   isFlying: 0
   rewardMoney: 12
-  attackInterval: 1.5
+  physicalResistance: 0.0
+  magicalResistance: 0.5
+  meleeAttack:
+    damage: 15
+    attackInterval: 1.5
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0
+  rangedAttack:
+    damage: 0
+    attackInterval: 0.0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0.0
   animatorOverride: {fileID: 22100000, guid: fd9b98cf205b45c8b4c5890e8f331f1e, type: 2}

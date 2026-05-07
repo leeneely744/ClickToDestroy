@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: Skeleton_Status
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHp: 120
-  attackPower: 15
   moveSpeed: 0.6
   isFlying: 0
   rewardMoney: 2
-  attackInterval: 1
+  physicalResistance: 0.0
+  magicalResistance: 0.0
+  meleeAttack:
+    damage: 15
+    attackInterval: 1
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0
+  rangedAttack:
+    damage: 0
+    attackInterval: 0.0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0.0
   animatorOverride: {fileID: 22100000, guid: 6e9c588caf5b34356b4a39f579ef5fd6, type: 2}

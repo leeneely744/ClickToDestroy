@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: Clibor_Status
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHp: 80
-  attackPower: 6
   moveSpeed: 0.8
   isFlying: 0
   rewardMoney: 9
-  attackInterval: 1
+  physicalResistance: 0.0
+  magicalResistance: 0.0
+  meleeAttack:
+    damage: 6
+    attackInterval: 1
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0
+  rangedAttack:
+    damage: 0
+    attackInterval: 0.0
+    attackType: 0
+    isAreaAttack: 0
+    attackRange: 0.0
   animatorOverride: {fileID: 22100000, guid: 805bb3beb70dc4d328bf788bf92999c8, type: 2}
