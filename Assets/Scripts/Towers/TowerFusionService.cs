@@ -40,33 +40,19 @@ public class TowerFusionService
     {
         recipe = null;
 
-        if (a == null || b == null)
-        {
-            return false;
-        }
+        if (a == null || b == null) return false;
 
         var statsA = a.Stats;
         var statsB = b.Stats;
-        if (statsA == null || statsB == null)
-        {
-            return false;
-        }
+        if (statsA == null || statsB == null) return false;
 
-        // ここでは levelIndex をそのまま使って TowerLevel を取得する。
-        // 必要に応じて「レベル3のみ合成可能」などのルールは呼び出し側 or TowerLevel 側で制御する。
         var levelA = GetLevel(statsA, a.levelIndex);
         var levelB = GetLevel(statsB, b.levelIndex);
-        if (levelA == null || levelB == null)
-        {
-            return false;
-        }
+        if (levelA == null || levelB == null) return false;
 
         string idA = levelA.towerId;
         string idB = levelB.towerId;
-        if (string.IsNullOrEmpty(idA) || string.IsNullOrEmpty(idB))
-        {
-            return false;
-        }
+        if (string.IsNullOrEmpty(idA) || string.IsNullOrEmpty(idB)) return false;
 
         foreach (var r in recipes)
         {
@@ -95,4 +81,3 @@ public class TowerFusionService
         return stats.levels[index];
     }
 }
-

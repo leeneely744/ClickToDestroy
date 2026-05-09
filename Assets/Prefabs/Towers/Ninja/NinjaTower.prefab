@@ -392,7 +392,7 @@ MonoBehaviour:
   maxSoldiers: 3
   initialLevelIndex: 0
   nextLevelPrefab: {fileID: 0}
-  guardianPrefab: {fileID: 7543451457492691273, guid: 371e37e29671d4fdfafe570181749a8b, type: 3}
+  guardianPrefab: {fileID: 854684784478994474, guid: d74f9b2e5a018c364f87d0253b9e16c8, type: 3}
   heightScaleY: 1
 --- !u!50 &4453985819093741378
 Rigidbody2D:

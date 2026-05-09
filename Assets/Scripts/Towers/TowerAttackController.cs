@@ -56,7 +56,6 @@ public class TowerAttackController : MonoBehaviour
         }
 
         attackTimer = 0f;
-        Debug.Log($"TowerAttackController: Attack enemy {enemiesInRange[0].name}");
         Attack(enemiesInRange[0]);
     }
 
@@ -86,10 +85,7 @@ public class TowerAttackController : MonoBehaviour
     /// 魔法や弓といったTowerの子オブジェクトがアニメーションを起こす場合と、砲台のようにTower本体がアニメーションを起こす場合がある。
     /// ここでは virtual メソッドとして定義し、必要に応じて派生クラスでオーバーライドできるようにする。
     /// </summary>
-    protected virtual void PlayAttackAnimation()
-    {
-        Debug.LogWarning($"PlayAttackAnimation not implemented in {name}");
-    }
+    protected virtual void PlayAttackAnimation() { }
 
     private void OnTriggerEnter2D(Collider2D col)
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 public class FusionManager : MonoBehaviour
 {
     public static FusionManager Instance { get; private set; }
-    
+
     private TowerFusionService fusionService;
 
     private void Awake()
@@ -17,19 +17,16 @@ public class FusionManager : MonoBehaviour
         Instance = this;
 
         fusionService = new TowerFusionService();
-        fusionService.LoadFromResources("TowerFusion"); // Assets/Resources/TowerFusion フォルダからレシピをロード
+        fusionService.LoadFromResources("TowerFusion");
     }
-    
+
     public bool TryFuse(TowerController source, TowerController target)
     {
-        bool can = fusionService.CanFuse(source, target, out TowerFusionRecipe recipe);
-        if (!can)
+        if (!fusionService.CanFuse(source, target, out TowerFusionRecipe recipe))
         {
             return false;
         }
 
-        // ここから合成処理
-        
         var targetPlace = target.GetTowerPlace();
         if (targetPlace == null)
         {

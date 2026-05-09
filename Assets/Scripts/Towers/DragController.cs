@@ -1,107 +1,85 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-/// <summary>
-/// タワーをドラッグ＆ドロップ可能にするための最小限のドラッグコントローラー。
-/// 現時点では、ドラッグ開始／ドラッグ中／ドラッグ終了のイベントを受け取り、
-/// Console にログを出すだけの実装にしておく。
-/// 実際の合成処理や座標移動は、後のステップで追加する。
-/// </summary>
 public class DragController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private TowerController tower;
-    private TowerFusionService fusionService;
     private FusionManager fusionManager;
     private Vector3 initialPosition;
+    private GameObject ghostObject;
 
     private void Awake()
     {
         tower = GetComponent<TowerController>();
-        if (tower == null)
-        {
-            Debug.LogWarning($"[DragController] TowerController not found on {name}. This object will still log drag events, but fusion logic will not work.");
-        }
-
-        fusionService = new TowerFusionService();
         fusionManager = FusionManager.Instance;
-        if (fusionManager == null)
-        {
-            Debug.LogError("[DragController] FusionManager instance not found in the scene. Fusion logic will not work.");
-        }
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public void OnBeginDrag(PointerEventData _)
     {
-        // ドラッグしたタワーを元の位置に戻すための、最初のポジションを取得
         initialPosition = transform.position;
+        CreateGhost();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (ghostObject == null || Camera.main == null) return;
+        var worldPos = Camera.main.ScreenToWorldPoint(eventData.position);
+        worldPos.z = 0f;
+        ghostObject.transform.position = worldPos;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        var position = eventData.position;
+        DestroyGhost();
 
-        if (Camera.main == null)
-        {
-            Debug.LogError("[DragController] OnEndDrag: Camera.main is null. Cannot raycast to find target tower.");
-            transform.position = initialPosition;
-            return;
-        }
-
-        if (tower == null)
-        {
-            Debug.LogError("[DragController] OnEndDrag: TowerController is null. Cannot perform fusion.");
-            transform.position = initialPosition;
-            return;
-        }
+        if (Camera.main == null || tower == null) return;
 
         if (fusionManager == null)
         {
-            // Awake でエラーを出しているが、念のためここでもチェック
             fusionManager = FusionManager.Instance;
-            if (fusionManager == null)
-            {
-                Debug.LogError("[DragController] OnEndDrag: FusionManager.Instance is still null. Fusion cannot be attempted.");
-                transform.position = initialPosition;
-                return;
-            }
+            if (fusionManager == null) return;
         }
 
-        // 画面座標 → ワールド座標（2D 用）。Z は 0 に固定。
-        var worldPos = Camera.main.ScreenToWorldPoint(position);
+        var worldPos = Camera.main.ScreenToWorldPoint(eventData.position);
         worldPos.z = 0f;
 
-        // 2D コライダーを想定して、Raycast でヒットを確認
         var hit2D = Physics2D.Raycast(worldPos, Vector2.zero);
-        if (hit2D.collider == null)
-        {
-            transform.position = initialPosition;
-            return;
-        }
+        if (hit2D.collider == null) return;
 
-        // コライダーが付いているのは多くの場合タワーの子オブジェクト（例: AttackRangeCircle）なので、
-        // 親階層までさかのぼって TowerController を探す。
         var targetTower = hit2D.collider.GetComponentInParent<TowerController>();
-        if (targetTower == null)
+        if (targetTower == null || targetTower == tower) return;
+
+        fusionManager.TryFuse(tower, targetTower);
+    }
+
+    private void CreateGhost()
+    {
+        ghostObject = new GameObject("DragGhost");
+
+        var sr = GetComponentInChildren<SpriteRenderer>();
+        if (sr != null)
         {
-            transform.position = initialPosition;
-            return;
+            ghostObject.transform.position = sr.transform.position;
+            ghostObject.transform.localScale = sr.transform.lossyScale;
+
+            var ghostSr = ghostObject.AddComponent<SpriteRenderer>();
+            ghostSr.sprite = sr.sprite;
+            ghostSr.color = new Color(1f, 1f, 1f, 0.5f);
+            ghostSr.sortingLayerID = sr.sortingLayerID;
+            ghostSr.sortingOrder = sr.sortingOrder + 10;
         }
-
-        if (targetTower == tower)
+        else
         {
-            transform.position = initialPosition;
-            return;
+            ghostObject.transform.position = transform.position;
         }
+    }
 
-        bool success = fusionManager.TryFuse(tower, targetTower);
-
-        if (!success)
+    private void DestroyGhost()
+    {
+        if (ghostObject != null)
         {
-            transform.position = initialPosition;
+            Destroy(ghostObject);
+            ghostObject = null;
         }
     }
 }
