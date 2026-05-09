@@ -19,6 +19,7 @@ public class GuardianTowerControllerBase : TowerController
     };
 
     private bool isMoveModeActive;
+    protected Vector3? savedGuardianCenter;
 
     protected override void Start()
     {
@@ -70,14 +71,20 @@ public class GuardianTowerControllerBase : TowerController
 
     protected List<Vector3> BuildInitialGuardianPositions()
     {
-        List<Vector3> positions = new List<Vector3>();
-        Transform anchorPoint = null;
-        if (CurrentTowerPlace != null)
+        Vector3 basePosition;
+        if (savedGuardianCenter.HasValue)
         {
-            anchorPoint = CurrentTowerPlace.transform.Find("InitialGuardianPoint");
+            basePosition = savedGuardianCenter.Value;
+        }
+        else
+        {
+            Transform anchorPoint = CurrentTowerPlace != null
+                ? CurrentTowerPlace.transform.Find("InitialGuardianPoint")
+                : null;
+            basePosition = anchorPoint != null ? anchorPoint.position : transform.position;
         }
 
-        Vector3 basePosition = anchorPoint != null ? anchorPoint.position : transform.position;
+        List<Vector3> positions = new List<Vector3>();
         for (int i = 0; i < MaxSoldiers; i++)
         {
             Vector2 offset = Random.insideUnitCircle * 0.5f;
@@ -103,10 +110,18 @@ public class GuardianTowerControllerBase : TowerController
         }
     }
 
+    protected override void OnUpgradeTo(TowerController newController)
+    {
+        if (!savedGuardianCenter.HasValue) return;
+        if (newController is GuardianTowerControllerBase newGuardian)
+        {
+            newGuardian.savedGuardianCenter = savedGuardianCenter;
+        }
+    }
+
     public void OnGuardianDestroyed(float delaySeconds = 2)
     {
-        // ガーディアンが破壊されたときに呼び出される
-        ScheduleGuardianSpawn(delaySeconds); // 指定された秒数後に再生成をスケジュール
+        ScheduleGuardianSpawn(delaySeconds);
     }
 
     public virtual void StartMoveMode()
@@ -167,6 +182,8 @@ public class GuardianTowerControllerBase : TowerController
         {
             return;
         }
+
+        savedGuardianCenter = targetPosition;
 
         var positions = new List<Vector3>();
         for (int i = 0; i < guardians.Length; i++)

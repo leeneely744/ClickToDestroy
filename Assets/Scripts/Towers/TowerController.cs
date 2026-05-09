@@ -189,6 +189,7 @@ public class TowerController : MonoBehaviour
         if (newController != null)
         {
             newController.SetTowerPlace(towerPlace);
+            OnUpgradeTo(newController);
         }
         else
         {
@@ -198,6 +199,10 @@ public class TowerController : MonoBehaviour
         Destroy(gameObject);
         return true;
     }
+
+    // GuardianTowerControllerBase でオーバーライドされる。
+    // savedGuardianCenter を引き継ぐための処理。
+    protected virtual void OnUpgradeTo(TowerController newController) { }
 
     protected virtual int InitialLevelIndex => 0;
 
