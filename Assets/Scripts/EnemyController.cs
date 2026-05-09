@@ -115,7 +115,6 @@ public class EnemyController : MonoBehaviour
 
             if (currentWaypointIndex >= waypoints.Length)
             {
-                Debug.Log($"[EnemyController] {gameObject.name} がゴールに到達。生存フレーム数でのindex={currentWaypointIndex}, waypoints={waypoints.Length}", this);
                 scoreBoard?.CalcHp(10);
                 NotifySpawnerRemoved();
                 Destroy(gameObject);
@@ -130,7 +129,6 @@ public class EnemyController : MonoBehaviour
             Debug.LogError($"[EnemyController] SetRoute: route または waypoints が無効です。route={route?.name ?? "null"}", this);
             return;
         }
-        Debug.Log($"[EnemyController] SetRoute: {route.name} waypoints={route.waypoints.Length}", this);
         waypoints = route.waypoints;
         transform.position = waypoints[0].position;
     }
@@ -146,7 +144,6 @@ public class EnemyController : MonoBehaviour
         UpdateHealthBar();
         if (hp <= 0)
         {
-            Debug.Log($"[EnemyController] {gameObject.name} が死亡（TakeDamage）", this);
             moneyController?.AddMoney(rewardMoney);
             NotifySpawnerRemoved();
 

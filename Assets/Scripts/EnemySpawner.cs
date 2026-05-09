@@ -34,8 +34,6 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        Debug.Log($"[EnemySpawner] Start: level={level?.name ?? "null"}", this);
-
         if (level == null)
         {
             Debug.LogWarning(
@@ -50,13 +48,11 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        Debug.Log($"[EnemySpawner] {level.waves.Length} 個の Wave を検出。RunWaves を開始します。", this);
         StartCoroutine(RunWaves());
     }
 
     private IEnumerator RunWaves()
     {
-        Debug.Log($"[EnemySpawner] RunWaves 開始: startDelay={level.startDelay}s", this);
         yield return new WaitForSeconds(level.startDelay);
 
         for (int waveIndex = 0; waveIndex < level.waves.Length; waveIndex++)
@@ -68,7 +64,6 @@ public class EnemySpawner : MonoBehaviour
                 continue;
             }
 
-            Debug.Log($"[EnemySpawner] Wave {waveIndex} '{wave.waveName}' 開始", this);
             GameManager.Instance?.UpdateWave(waveIndex + 1, level.waves.Length);
             yield return StartCoroutine(SpawnWave(wave));
 
@@ -78,7 +73,6 @@ public class EnemySpawner : MonoBehaviour
                 yield return null;
             }
 
-            Debug.Log($"[EnemySpawner] Wave {waveIndex} '{wave.waveName}' 完了。次まで {wave.delayBeforeNextWave}s 待機", this);
             yield return new WaitForSeconds(wave.delayBeforeNextWave);
         }
 
@@ -87,7 +81,6 @@ public class EnemySpawner : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log($"[EnemySpawner] 全 Wave 終了。HP={scoreBoard.CurrentHp} → GameClear 判定", this);
         if (scoreBoard.CurrentHp > 0)
         {
             GameManager.Instance?.HandleGameClear();
@@ -102,15 +95,11 @@ public class EnemySpawner : MonoBehaviour
             yield break;
         }
 
-        Debug.Log($"[EnemySpawner] Wave '{wave.waveName}' に {wave.groups.Length} グループあり", this);
-
         // SpawnGroup を 1 体ずつのスケジュールに展開してから時刻順にソートする。
         var schedule = new List<(float time, GameObject prefab, Route route)>();
         for (int gi = 0; gi < wave.groups.Length; gi++)
         {
-            Debug.Log($"[EnemySpawner] forループに入りました", this);
             var g = wave.groups[gi];
-            Debug.Log($"[EnemySpawner] Wave '{wave.waveName}' groups[{gi}]: g={g?.GetType().Name ?? "null"}, prefab={g?.enemyPrefab?.name ?? "(null or g is null)"}, route={g?.route?.name ?? "(null or g is null)"}", this);
 
             if (g == null)
             {
@@ -143,7 +132,6 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        Debug.Log($"[EnemySpawner] Wave '{wave.waveName}' スケジュール: {schedule.Count} 体", this);
         if (schedule.Count == 0)
         {
             Debug.LogWarning($"[EnemySpawner] Wave '{wave.waveName}' スケジュールが空（全グループ null でスキップされた）。敵が出現しません。", this);
@@ -181,7 +169,6 @@ public class EnemySpawner : MonoBehaviour
         }
 
         activeEnemies++;
-        Debug.Log($"[EnemySpawner] 敵スポーン: {prefab.name} at {enemy.transform.position}, activeEnemies={activeEnemies}", this);
     }
 
     public void NotifyEnemyRemoved(EnemyController enemy)
