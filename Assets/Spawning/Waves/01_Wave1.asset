@@ -19,7 +19,7 @@ MonoBehaviour:
     startTime: 0.1
     count: 10
     interval: 0.5
-  - enemyPrefab: {fileID: 2155804248953280118, guid: 413ddec8ef7f499b9d6ecdae2cbd1e68, type: 3}
+  - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
     route: {fileID: 11400000, guid: 1cd19b5a888ef4f55848bac5465ee77c, type: 2}
     startTime: 5.1
     count: 5
