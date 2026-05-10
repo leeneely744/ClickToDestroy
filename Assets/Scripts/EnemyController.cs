@@ -138,9 +138,13 @@ public class EnemyController : MonoBehaviour
         ownerSpawner = spawner;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, AttackType type = AttackType.Physical)
     {
-        hp -= damage;
+        float resistance = type == AttackType.Physical
+            ? (enemyData != null ? enemyData.physicalResistance : 0f)
+            : (enemyData != null ? enemyData.magicalResistance : 0f);
+        int finalDamage = Mathf.Max(1, Mathf.RoundToInt(damage * (1f - resistance)));
+        hp -= finalDamage;
         UpdateHealthBar();
         if (hp <= 0)
         {

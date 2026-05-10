@@ -140,7 +140,7 @@ public class GuardianController : MonoBehaviour, IDefender
         if (attackTimer >= attackInterval)
         {
             attackTimer = 0f;
-            target.TakeDamage(attackDamage);
+            target.TakeDamage(attackDamage, AttackType.Physical);
             target.EngageDefender(this);
             if (target.IsDead)
             {

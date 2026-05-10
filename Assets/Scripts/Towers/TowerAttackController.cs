@@ -92,7 +92,7 @@ public class TowerAttackController : MonoBehaviour
         if (col.CompareTag(Tags.Enemy))
         {
             EnemyController enemy = col.GetComponent<EnemyController>();
-            if (enemy != null && !enemiesInRange.Contains(enemy))
+            if (enemy != null && !enemy.IsFlying && !enemiesInRange.Contains(enemy))
             {
                 enemiesInRange.Add(enemy);
             }

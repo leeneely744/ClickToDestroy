@@ -5,6 +5,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float maxLifetime = 10f;
     public float speed = 5f;
     public int damage = 10;
+    public AttackType attackType = AttackType.Physical;
 
     [Header("Splash settings (for Cannon, etc.)")]
     [SerializeField] private float splashRadius = 0f; // 0 のときは範囲ダメージなし
@@ -61,7 +62,7 @@ public class Projectile : MonoBehaviour
         EnemyController enemy = target.GetComponent<EnemyController>();
         if (enemy != null)
         {
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage, attackType);
         }
 
         // 範囲ダメージ（Cannon など）を適用
@@ -95,7 +96,7 @@ public class Projectile : MonoBehaviour
             }
 
             int splashDamage = Mathf.RoundToInt(damage * splashDamageRate);
-            enemy.TakeDamage(splashDamage);
+            enemy.TakeDamage(splashDamage, attackType);
         }
     }
 
