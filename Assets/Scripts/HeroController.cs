@@ -184,6 +184,7 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
                 continue;
             }
 
+            enemy.EngageDefender(this);
             enemy.TakeDamage(attackDamage);
         }
 
@@ -217,7 +218,8 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         if (!enemiesInRange.Contains(enemy))
         {
             enemiesInRange.Add(enemy);
-            enemy.EngageDefender(this);
+            if (enemiesInRange.Count <= maxConcurrentTargets)
+                enemy.EngageDefender(this);
         }
     }
 

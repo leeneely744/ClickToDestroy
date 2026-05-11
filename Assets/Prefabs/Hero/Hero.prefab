@@ -184,9 +184,10 @@ MonoBehaviour:
   maxHp: 500
   attackDamage: 18
   attackInterval: 1
-  maxConcurrentTargets: 1
+  maxConcurrentTargets: 3
   refreshTime: 5
   healthBar: {fileID: 0}
+  canAttackFlying: 0
 --- !u!95 &8305769973835405284
 Animator:
   serializedVersion: 7

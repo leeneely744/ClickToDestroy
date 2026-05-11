@@ -9,6 +9,7 @@ public class GuardianController : MonoBehaviour, IDefender
     [SerializeField] private int maxHp = 100;
     [SerializeField] private int attackDamage = 10;
     [SerializeField] private float attackInterval = 1.0f;
+    [SerializeField] private int maxConcurrentTargets = 1;
     private float attackTimer;
     private bool hasMoveTarget;
     private Vector3 moveTarget;
@@ -64,8 +65,8 @@ public class GuardianController : MonoBehaviour, IDefender
             return;
         }
 
-        // すでにリストに含まれているか？
-        if (!currentTargets.Contains(enemy))
+        // すでにリストに含まれているか？足止め上限に達しているか？
+        if (!currentTargets.Contains(enemy) && currentTargets.Count < maxConcurrentTargets)
         {
             currentTargets.Add(enemy);
             enemy.EngageDefender(this);

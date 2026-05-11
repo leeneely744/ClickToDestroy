@@ -111,6 +111,7 @@ MonoBehaviour:
   maxHp: 100
   attackDamage: 10
   attackInterval: 1.5
+  maxConcurrentTargets: 2
   healthBar: {fileID: 0}
 --- !u!58 &4799263687086615139
 CircleCollider2D:
