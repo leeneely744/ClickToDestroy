@@ -6,7 +6,9 @@ using UnityEngine;
 /// </summary>
 public class MagicTowerController : TowerController
 {
+    [SerializeField] private int initialLevelIndex = 0;
     [SerializeField] private GameObject nextLevelPrefab;
 
+    protected override int InitialLevelIndex => initialLevelIndex;
     public override GameObject NextLevelPrefab => nextLevelPrefab;
 }

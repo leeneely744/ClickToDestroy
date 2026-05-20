@@ -350,8 +350,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6aa3dd5f7d8954ba79d48605ce30fb38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::MagicTowerController
+  initialLevelIndex: 2
   projectilePrefab: {fileID: 8683657668908243494, guid: 58d6bd9fd400d4406b6415fb3c14c2be, type: 3}
   firePoint: {fileID: 3076460527095253298}
   projectileTravelTime: 0.3
