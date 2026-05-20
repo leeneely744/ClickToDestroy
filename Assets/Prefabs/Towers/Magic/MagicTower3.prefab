@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: 1094430651213213338}
   - component: {fileID: 7327876594456491031}
   - component: {fileID: -7549354254914784362}
+  - component: {fileID: -1815500392537917586}
   m_Layer: 0
   m_Name: MagicTower3
   m_TagString: Untagged
@@ -397,6 +398,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChildAnimatorAttackController
   attackTriggerName: AttackTrigger
+--- !u!114 &-1815500392537917586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499013605453779945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96be6d542a7524ab2a63d66f575603c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragController
 --- !u!1 &1699106980367810468
 GameObject:
   m_ObjectHideFlags: 0
