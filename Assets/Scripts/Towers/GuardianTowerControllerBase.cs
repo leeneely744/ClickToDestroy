@@ -172,7 +172,7 @@ public class GuardianTowerControllerBase : TowerController
 
     protected virtual bool IsWithinMoveRange(Vector3 targetPosition)
     {
-        return Vector2.Distance(transform.position, targetPosition) <= AttackRange;
+        return Vector2.Distance(transform.position, targetPosition) <= AttackRangeWorldRadius;
     }
 
     protected virtual void MoveGuardiansTo(Vector3 targetPosition)

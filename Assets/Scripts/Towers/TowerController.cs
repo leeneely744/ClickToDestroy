@@ -32,6 +32,10 @@ public class TowerController : MonoBehaviour
 
     public TowerStats Stats => stats;
     protected float AttackRange => range;
+    protected float AttackRangeWorldRadius =>
+        rangeCollider != null
+            ? rangeCollider.radius * rangeCollider.transform.lossyScale.x
+            : range;
     public float AttackInterval => attackInterval;
     protected TowerPlace CurrentTowerPlace => towerPlace;
 
