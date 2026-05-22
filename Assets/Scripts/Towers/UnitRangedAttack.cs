@@ -81,10 +81,7 @@ public class UnitRangedAttack : MonoBehaviour
                 continue;
             }
 
-            if (enemy.IsFlying)
-            {
-                return enemy;
-            }
+            return enemy;
         }
 
         return null;

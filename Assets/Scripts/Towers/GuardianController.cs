@@ -46,26 +46,23 @@ public class GuardianController : MonoBehaviour, IDefender
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        // 敵であるか？
         if (!col.CompareTag(Tags.Enemy))
         {
             return;
         }
 
-        // すでに攻撃中か？
-        if (rangedAttack != null && rangedAttack.HasTarget)
-        {
-            return;
-        }
-
-        // EnemyController を取得
         EnemyController enemy = col.GetComponent<EnemyController>();
         if (enemy == null)
         {
             return;
         }
 
-        // すでにリストに含まれているか？足止め上限に達しているか？
+        // 仕様：近接攻撃は IsFlying=false の敵のみ対象
+        if (enemy.IsFlying)
+        {
+            return;
+        }
+
         if (!currentTargets.Contains(enemy) && currentTargets.Count < maxConcurrentTargets)
         {
             currentTargets.Add(enemy);
@@ -116,16 +113,15 @@ public class GuardianController : MonoBehaviour, IDefender
 
     private void HandleCombat()
     {
-        if (rangedAttack != null && rangedAttack.HasTarget)
+        if (currentTargets.Count == 0)
         {
-            UpdateAttackAnimation(false);
+            // 仕様：近接ターゲットがいないときは遠距離攻撃を有効化
+            if (rangedAttack) rangedAttack.enabled = true;
             return;
         }
 
-        if (currentTargets.Count == 0)
-        {
-            return;
-        }
+        // 仕様：近接攻撃と遠距離攻撃では常に近接を優先する
+        if (rangedAttack) rangedAttack.enabled = false;
 
         attackTimer += Time.deltaTime;
         EnemyController target = currentTargets[0];

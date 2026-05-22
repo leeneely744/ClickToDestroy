@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8815347450480796860}
   - component: {fileID: 8911034317049133746}
   - component: {fileID: 6928225460619767973}
-  - component: {fileID: 5286706416900249098}
   - component: {fileID: 858747134713181176}
   m_Layer: 0
   m_Name: Ninja
@@ -143,31 +142,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60b918d72a7214a4f81c0afb13e2093f, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::GuardianController
   moveSpeed: 6
   stopDistance: 0.05
   maxHp: 100
   attackDamage: 10
   attackInterval: 0.7
+  maxConcurrentTargets: 1
   healthBar: {fileID: 7155444571461199498}
---- !u!114 &5286706416900249098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 854684784478994474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5048c118bf24141b98094893078a3dd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UnitRangedAttack
-  attackInterval: 0.7
-  projectilePrefab: {fileID: 3239377013640706836, guid: c8a2e4f691b3d57802951a4c6e8f0b23, type: 3}
-  firePoint: {fileID: 0}
-  projectileTravelTime: 0
-  shotTriggerName: Shot
 --- !u!95 &858747134713181176
 Animator:
   serializedVersion: 7
@@ -185,7 +168,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -359,10 +342,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5048c118bf24141b98094893078a3dd4, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::UnitRangedAttack
   attackInterval: 1.5
-  projectilePrefab: {fileID: 1498279427015312657, guid: 4ef6469425dab4813bb7c1da8ae9b9db, type: 3}
+  projectilePrefab: {fileID: 3239377013640706836, guid: c8a2e4f691b3d57802951a4c6e8f0b23, type: 3}
   firePoint: {fileID: 2835153637933914678}
   projectileTravelTime: 0.5
   shotTriggerName: Shot
@@ -449,5 +432,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ea2d0f19f759438eb6376d5a1e0862c, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBarController
