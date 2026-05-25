@@ -19,6 +19,7 @@ public class GuardianController : MonoBehaviour, IDefender
     private int currentHp;
     private List<EnemyController> currentTargets = new List<EnemyController>();
     private Animator animator;
+    private GuardianSkill[] skills;
     [SerializeField] private HealthBarController healthBar;
 
     void Awake()
@@ -26,6 +27,7 @@ public class GuardianController : MonoBehaviour, IDefender
         ownerTower = GetComponentInParent<GuardianTowerControllerBase>();
         animator = GetComponent<Animator>();
         rangedAttack = GetComponentInChildren<UnitRangedAttack>();
+        skills = GetComponents<GuardianSkill>();
 
         currentHp = maxHp;
 
@@ -138,6 +140,7 @@ public class GuardianController : MonoBehaviour, IDefender
         {
             attackTimer = 0f;
             target.TakeDamage(attackDamage, AttackType.Physical);
+            foreach (var skill in skills) skill.OnAttack(target, attackDamage);
             target.EngageDefender(this);
             if (target.IsDead)
             {
