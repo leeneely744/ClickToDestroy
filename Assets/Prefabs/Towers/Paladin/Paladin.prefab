@@ -149,7 +149,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.3
+  m_Radius: 0.6
 --- !u!95 &1000000006000000001
 Animator:
   serializedVersion: 7
@@ -187,6 +187,9 @@ MonoBehaviour:
   chance: 0.15
   areaRadius: 1.5
   damageRatio: 0.8
+  effectPrefab: {fileID: 3059025421895758505, guid: 1ef10d11413a74ba88dbea2062b5f033, type: 3}
+  effectOffset: 0.5
+  effectSortingOrder: 5
 --- !u!1001 &1000000008000000001
 PrefabInstance:
   m_ObjectHideFlags: 0

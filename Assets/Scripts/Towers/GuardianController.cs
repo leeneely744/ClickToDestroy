@@ -14,6 +14,7 @@ public class GuardianController : MonoBehaviour, IDefender
     private bool hasMoveTarget;
     private Vector3 moveTarget;
     private bool isDead;
+    private bool facingRight = true;
     private GuardianTowerControllerBase ownerTower;
     private UnitRangedAttack rangedAttack;
     private int currentHp;
@@ -78,11 +79,17 @@ public class GuardianController : MonoBehaviour, IDefender
         hasMoveTarget = true;
     }
 
+    public bool FacingRight => facingRight;
+
     private void HandleMovement()
     {
         bool isWalking = hasMoveTarget;
         if (hasMoveTarget)
         {
+            float dx = moveTarget.x - transform.position.x;
+            if (Mathf.Abs(dx) > stopDistance)
+                facingRight = dx > 0;
+
             transform.position = Vector3.MoveTowards(transform.position, moveTarget, moveSpeed * Time.deltaTime);
             if (Vector3.Distance(transform.position, moveTarget) <= stopDistance)
             {
@@ -166,6 +173,9 @@ public class GuardianController : MonoBehaviour, IDefender
     }
 
     public bool IsDead => currentHp <= 0 || isDead;
+
+    // SkillCast アニメーションが完成したらここに animator.SetTrigger("SkillCast") を追加する
+    public void TriggerSkillAnimation() { }
 
     private void UpdateAttackAnimation(bool isAttacking)
     {
