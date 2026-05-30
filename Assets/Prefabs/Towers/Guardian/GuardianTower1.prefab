@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b58d316cbf7b2459883b9e73d1202b56, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::ClickHandler
 --- !u!1 &7073923618304257032
 GameObject:
@@ -381,13 +381,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c2e5a2a9c0bd4f9a9d3ad78e6c3c6f4, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::GuardianTowerController
   projectilePrefab: {fileID: 0}
   firePoint: {fileID: 0}
   projectileTravelTime: 0
+  levelIndex: 0
   stats: {fileID: 11400000, guid: 63fdd5cf1fa804d04ba0d3b3702692ec, type: 2}
-  cost: 0
   maxSoldiers: 3
   initialLevelIndex: 0
   nextLevelPrefab: {fileID: 8617787865134911707, guid: b1fdac0adfec245a4bbf04d7a6635bfa, type: 3}
@@ -401,7 +401,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7073923618304257032}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

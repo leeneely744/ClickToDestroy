@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6928225460619767973}
   - component: {fileID: 858747134713181176}
   - component: {fileID: 6470225733331181483}
+  - component: {fileID: 7385988493450696112}
   m_Layer: 0
   m_Name: HeavyInfantry
   m_TagString: Untagged
@@ -190,6 +191,20 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3239377013640706836, guid: 613df14516d63447d93b33a21d337aaf, type: 3}
   firePoint: {fileID: 2835153637933914678}
   projectileTravelTime: 0.5
+--- !u!114 &7385988493450696112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854684784478994474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3fae16f58a048c589f7f8f53fc1207, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::HeavyInfantryMeleeAreaSkill
+  areaRadius: 0.52
+  damageRatio: 1
 --- !u!1 &2867255954270482674
 GameObject:
   m_ObjectHideFlags: 0
