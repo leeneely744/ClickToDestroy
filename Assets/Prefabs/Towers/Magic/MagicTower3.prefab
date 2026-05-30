@@ -108,7 +108,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -352,12 +352,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa3dd5f7d8954ba79d48605ce30fb38, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::MagicTowerController
-  initialLevelIndex: 2
   projectilePrefab: {fileID: 8683657668908243494, guid: 58d6bd9fd400d4406b6415fb3c14c2be, type: 3}
   firePoint: {fileID: 3076460527095253298}
   projectileTravelTime: 0.3
   levelIndex: 0
   stats: {fileID: 11400000, guid: 911c8b1dc61934d689e798f6f2bece2f, type: 2}
+  initialLevelIndex: 2
   nextLevelPrefab: {fileID: 0}
 --- !u!50 &7327876594456491031
 Rigidbody2D:
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be02eb09bdd5f424985a32b04b7ec371, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::ChildAnimatorAttackController
   attackTriggerName: AttackTrigger
 --- !u!114 &-1815500392537917586
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96be6d542a7524ab2a63d66f575603c0, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DragController
 --- !u!1 &1699106980367810468
 GameObject:
@@ -519,7 +519,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -582,7 +582,7 @@ Transform:
   m_GameObject: {fileID: 5583806804658460390}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.04, y: 0.09, z: 0}
+  m_LocalPosition: {x: 0, y: -0.09, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -623,7 +623,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.7
 --- !u!114 &2383215476818770434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b58d316cbf7b2459883b9e73d1202b56, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::ClickHandler
 --- !u!1 &8473099455900591829
 GameObject:
@@ -744,7 +744,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
