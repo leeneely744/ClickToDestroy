@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b58d316cbf7b2459883b9e73d1202b56, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::ClickHandler
 --- !u!1 &2483834363720396215
 GameObject:
@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: -204603339942181064}
   - component: {fileID: 8524571272626270357}
   - component: {fileID: -5791748395418455500}
+  - component: {fileID: 8685225368593535006}
   m_Layer: 0
   m_Name: CannonTower3
   m_TagString: Untagged
@@ -346,14 +347,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7571e2a46bd0247108c8dde091830339, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::CannonTowerController
   projectilePrefab: {fileID: 6218696780523007966, guid: 4b50d294048fb462999b2d3390a0eb4a, type: 3}
   firePoint: {fileID: 1759327385394020954}
   projectileTravelTime: 0.5
   levelIndex: 2
   stats: {fileID: 11400000, guid: e941322ea97714a2795044e12a486bf5, type: 2}
-  cost: 0
   nextLevelPrefab: {fileID: 3119685022683578252, guid: 93f8fb107f5b24a8d86d0075b6b20e8c, type: 3}
 --- !u!95 &-204603339942181064
 Animator:
@@ -372,7 +372,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -414,6 +414,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0cd8c86369ee4a2bad2b9ecf825c9df, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SelfAnimatorAttackController
   attackTriggerName: isAttack
+--- !u!114 &8685225368593535006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8814583205318202462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96be6d542a7524ab2a63d66f575603c0, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DragController

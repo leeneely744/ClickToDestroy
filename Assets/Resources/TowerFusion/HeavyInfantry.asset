@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f424f002a9e145f5b57ea440371ef09, type: 3}
   m_Name: HeavyInfantry
   m_EditorClassIdentifier: Assembly-CSharp::TowerFusionRecipe
-  towerAId: CannonTower3
+  towerAId: cannon3
   towerBId: guardian3
   resultTowerPrefab: {fileID: 8832849947915313077, guid: 353ad03b8f77e481caf7f4d17bf899f9, type: 3}
