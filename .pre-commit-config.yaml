@@ -13,11 +13,3 @@ repos:
     hooks:
     -   id: gitleaks-system
         pass_filenames: false
--   repo: local
-    hooks:
-    -   id: auto-stage-fixes
-        name: Stage auto-fixed files
-        entry: bash -c 'git add -u'
-        language: system
-        pass_filenames: false
-        always_run: true
