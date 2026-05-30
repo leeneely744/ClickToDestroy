@@ -218,6 +218,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7265583691349568350}
   - component: {fileID: 4519437242429675567}
+  - component: {fileID: 5326339104457274382}
+  - component: {fileID: 7300136699661145799}
+  - component: {fileID: 1532738944528049553}
   m_Layer: 0
   m_Name: HeavyInfantryTower
   m_TagString: Untagged
@@ -301,6 +304,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5326339104457274382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8832849947915313077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c2e5a2a9c0bd4f9a9d3ad78e6c3c6f4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::GuardianTowerController
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  projectileTravelTime: 0
+  levelIndex: 0
+  stats: {fileID: 0}
+  maxSoldiers: 3
+  initialLevelIndex: 0
+  nextLevelPrefab: {fileID: 0}
+  guardianPrefab: {fileID: 854684784478994474, guid: 7192310f3888c49ec8d2f812a8b8366b, type: 3}
+  heightScaleY: 1
+--- !u!50 &7300136699661145799
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8832849947915313077}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &1532738944528049553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8832849947915313077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96be6d542a7524ab2a63d66f575603c0, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DragController
 --- !u!1 &9067837944873889670
 GameObject:
   m_ObjectHideFlags: 0
