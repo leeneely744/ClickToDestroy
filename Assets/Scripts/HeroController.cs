@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using Tags = Constants.Tags;
 
 [RequireComponent(typeof(Animator))]
-public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
+public class HeroController : MonoBehaviour, IDefender
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3f;
@@ -83,11 +83,6 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         TryAttack();
         HandleMovement();
         HandleHeroMoveInput();
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        isMoveMode = !isMoveMode;
     }
 
     public void Select()
