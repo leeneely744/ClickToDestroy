@@ -21,7 +21,7 @@ MonoBehaviour:
     interval: 0.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: c2485526b59240469769a3d1cf6da3c5, type: 3}
     route: {fileID: 11400000, guid: fca854bcccb5e4b7b92a34d865726a73, type: 2}
-    startTime: 10.1
+    startTime: 5.1
     count: 4
     interval: 0.8
   - enemyPrefab: {fileID: 2155804248953280118, guid: 981cd40e413a446fb01437a59fba546c, type: 3}
@@ -32,31 +32,66 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
     route: {fileID: 11400000, guid: 9e4d13482197441448455a3d10dc58a4, type: 2}
     startTime: 0.1
-    count: 35
+    count: 12
+    interval: 0.5
+  - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
+    route: {fileID: 11400000, guid: 69414f54017484db9ba0e6d9d8106d3e, type: 2}
+    startTime: 6.1
+    count: 10
+    interval: 0.5
+  - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
+    route: {fileID: 11400000, guid: 1cd19b5a888ef4f55848bac5465ee77c, type: 2}
+    startTime: 7.2
+    count: 13
     interval: 0.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: c2485526b59240469769a3d1cf6da3c5, type: 3}
     route: {fileID: 11400000, guid: 9e4d13482197441448455a3d10dc58a4, type: 2}
-    startTime: 17.6
+    startTime: 7.6
     count: 8
     interval: 0.8
   - enemyPrefab: {fileID: 2155804248953280118, guid: 413ddec8ef7f499b9d6ecdae2cbd1e68, type: 3}
     route: {fileID: 11400000, guid: 9e4d13482197441448455a3d10dc58a4, type: 2}
-    startTime: 24
-    count: 12
+    startTime: 2.3
+    count: 4
+    interval: 1
+  - enemyPrefab: {fileID: 2155804248953280118, guid: 413ddec8ef7f499b9d6ecdae2cbd1e68, type: 3}
+    route: {fileID: 11400000, guid: 9e4d13482197441448455a3d10dc58a4, type: 2}
+    startTime: 5.1
+    count: 8
     interval: 1
   - enemyPrefab: {fileID: 2155804248953280118, guid: 981cd40e413a446fb01437a59fba546c, type: 3}
     route: {fileID: 11400000, guid: 9e4d13482197441448455a3d10dc58a4, type: 2}
-    startTime: 36
+    startTime: 12
     count: 3
     interval: 1.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
     route: {fileID: 11400000, guid: ac0929530094a4a8aa2c74197f069517, type: 2}
     startTime: 0.1
-    count: 50
+    count: 10
+    interval: 0.5
+  - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
+    route: {fileID: 11400000, guid: 06936a5c15e1248a39c058085595ff81, type: 2}
+    startTime: 0.2
+    count: 10
+    interval: 0.5
+  - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
+    route: {fileID: 11400000, guid: c5aabe34ec6304356907cdb7dcc79715, type: 2}
+    startTime: 0.4
+    count: 10
+    interval: 0.5
+  - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
+    route: {fileID: 11400000, guid: ac0929530094a4a8aa2c74197f069517, type: 2}
+    startTime: 5
+    count: 10
+    interval: 0.5
+  - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
+    route: {fileID: 11400000, guid: 06936a5c15e1248a39c058085595ff81, type: 2}
+    startTime: 5
+    count: 10
     interval: 0.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: c2485526b59240469769a3d1cf6da3c5, type: 3}
     route: {fileID: 11400000, guid: ac0929530094a4a8aa2c74197f069517, type: 2}
-    startTime: 25.1
+    startTime: 2
     count: 6
     interval: 0.8
   delayBeforeNextWave: 2

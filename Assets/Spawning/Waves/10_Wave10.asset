@@ -21,12 +21,12 @@ MonoBehaviour:
     interval: 0.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: c2485526b59240469769a3d1cf6da3c5, type: 3}
     route: {fileID: 11400000, guid: 9e4d13482197441448455a3d10dc58a4, type: 2}
-    startTime: 5.1
+    startTime: 1.1
     count: 9
     interval: 0.8
   - enemyPrefab: {fileID: 2155804248953280118, guid: 981cd40e413a446fb01437a59fba546c, type: 3}
     route: {fileID: 11400000, guid: 9e4d13482197441448455a3d10dc58a4, type: 2}
-    startTime: 12.3
+    startTime: 2.3
     count: 2
     interval: 1.5
   delayBeforeNextWave: 2
