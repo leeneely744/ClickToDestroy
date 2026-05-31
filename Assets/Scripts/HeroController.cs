@@ -84,10 +84,16 @@ public class HeroController : MonoBehaviour, IPointerClickHandler, IDefender
         HandleMovement();
         HandleHeroMoveInput();
     }
-    
+
     public void OnPointerClick(PointerEventData eventData)
     {
         isMoveMode = !isMoveMode;
+    }
+
+    public void Select()
+    {
+        if (IsDead) return;
+        isMoveMode = true;
     }
 
     // 移動モードで移動先を指定する
