@@ -35,6 +35,9 @@ public class HeroController : MonoBehaviour, IDefender
     [SerializeField] private HealthBarController healthBar;
     [SerializeField] private bool canAttackFlying = true;
 
+    public event System.Action<bool> OnSelectStateChanged;
+    public event System.Action<bool> OnDeadStateChanged;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -89,6 +92,7 @@ public class HeroController : MonoBehaviour, IDefender
     {
         if (IsDead) return;
         isMoveMode = true;
+        OnSelectStateChanged?.Invoke(true);
     }
 
     // 移動モードで移動先を指定する
@@ -124,6 +128,7 @@ public class HeroController : MonoBehaviour, IDefender
         moveTarget = worldPosition;
         isMoving = true;
         isMoveMode = false;
+        OnSelectStateChanged?.Invoke(false);
     }
 
     private void HandleMovement()
@@ -256,6 +261,8 @@ public class HeroController : MonoBehaviour, IDefender
             isMoving = false;
             isMoveMode = false;
             enemiesInRange.Clear();
+            OnSelectStateChanged?.Invoke(false);
+            OnDeadStateChanged?.Invoke(true);
         }
 
         UpdateHealthBar();
@@ -280,6 +287,7 @@ public class HeroController : MonoBehaviour, IDefender
         SwitchDead(false);
         SwitchRunning(false);
 
+        OnDeadStateChanged?.Invoke(false);
         UpdateHealthBar();
     }
 
