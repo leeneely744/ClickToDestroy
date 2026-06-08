@@ -1,19 +1,23 @@
+using Coffee.UIEffects;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
+[RequireComponent(typeof(UIEffect))]
 public class HeroButton : MonoBehaviour
 {
     [SerializeField] private HeroController heroController;
-    [SerializeField] private GameObject heroButtonLight;
 
     private Button button;
+    private UIEffect uiEffect;
 
     void Awake()
     {
         if (heroController == null)
             heroController = FindAnyObjectByType<HeroController>();
         button = GetComponent<Button>();
+        uiEffect = GetComponent<UIEffect>();
+        uiEffect.enabled = false;
 
         if (heroController == null)
         {
@@ -21,23 +25,24 @@ public class HeroButton : MonoBehaviour
             return;
         }
 
-        if (heroButtonLight != null)
-            heroButtonLight.SetActive(false);
-
-        heroController.OnSelectStateChanged += OnHeroSelectChanged;
         heroController.OnDeadStateChanged += OnHeroDeadChanged;
+        button.onClick.AddListener(OnClick);
     }
 
     void OnDestroy()
     {
-        heroController.OnSelectStateChanged -= OnHeroSelectChanged;
         heroController.OnDeadStateChanged -= OnHeroDeadChanged;
+        button.onClick.RemoveListener(OnClick);
     }
 
-    private void OnHeroSelectChanged(bool isSelected)
+    private void OnClick()
     {
-        if (heroButtonLight != null)
-            heroButtonLight.SetActive(isSelected);
+        uiEffect.enabled = true;
+    }
+
+    public void DeactivateEffect()
+    {
+        uiEffect.enabled = false;
     }
 
     private void OnHeroDeadChanged(bool isDead)
