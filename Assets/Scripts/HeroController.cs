@@ -24,9 +24,7 @@ public class HeroController : MonoBehaviour, IDefender
     private float timeSinceLastAttack;
     private readonly List<EnemyController> enemiesInRange = new List<EnemyController>();
 
-    private Rigidbody2D rb;
     private Animator animator;
-    private Vector2 moveInput;
 
     private bool isMoving = false;
     private bool isMoveMode = false;
@@ -40,8 +38,6 @@ public class HeroController : MonoBehaviour, IDefender
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-
         if (animator == null)
         {
             animator = GetComponent<Animator>();
@@ -138,9 +134,6 @@ public class HeroController : MonoBehaviour, IDefender
             // 移動を開始したらすべての敵を攻撃対象から外す
             enemiesInRange.Clear();
 
-            Vector3 direction = (moveTarget - transform.position).normalized;
-            moveInput = new Vector2(direction.x, direction.y);
-
             SwitchRunning(true);
 
             transform.position = Vector3.MoveTowards(transform.position, moveTarget, moveSpeed * Time.deltaTime);
@@ -149,7 +142,6 @@ public class HeroController : MonoBehaviour, IDefender
             {
                 // 移動完了
                 isMoving = false;
-                moveInput = Vector2.zero;
                 SwitchRunning(false);
             }
         }
@@ -261,7 +253,6 @@ public class HeroController : MonoBehaviour, IDefender
             isMoving = false;
             isMoveMode = false;
             enemiesInRange.Clear();
-            OnSelectStateChanged?.Invoke(false);
             OnDeadStateChanged?.Invoke(true);
         }
 

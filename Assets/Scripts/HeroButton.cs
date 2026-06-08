@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,20 +5,14 @@ using UnityEngine.UI;
 public class HeroButton : MonoBehaviour
 {
     [SerializeField] private HeroController heroController;
-    [SerializeField] private Image buttonImage;
-    [SerializeField] private Color glowColor = new Color(1f, 0.9f, 0.3f);
-    [SerializeField] private float pulseSpeed = 3f;
+    [SerializeField] private GameObject heroButtonLight;
 
-    private Color normalColor;
-    private Coroutine pulseCoroutine;
     private Button button;
 
     void Awake()
     {
         if (heroController == null)
             heroController = FindAnyObjectByType<HeroController>();
-        if (buttonImage == null)
-            buttonImage = GetComponent<Image>();
         button = GetComponent<Button>();
 
         if (heroController == null)
@@ -28,7 +21,9 @@ public class HeroButton : MonoBehaviour
             return;
         }
 
-        normalColor = buttonImage.color;
+        if (heroButtonLight != null)
+            heroButtonLight.SetActive(false);
+
         heroController.OnSelectStateChanged += OnHeroSelectChanged;
         heroController.OnDeadStateChanged += OnHeroDeadChanged;
     }
@@ -39,28 +34,14 @@ public class HeroButton : MonoBehaviour
         heroController.OnDeadStateChanged -= OnHeroDeadChanged;
     }
 
+    private void OnHeroSelectChanged(bool isSelected)
+    {
+        if (heroButtonLight != null)
+            heroButtonLight.SetActive(isSelected);
+    }
+
     private void OnHeroDeadChanged(bool isDead)
     {
         button.interactable = !isDead;
-    }
-
-    private void OnHeroSelectChanged(bool isSelected)
-    {
-        if (pulseCoroutine != null)
-            StopCoroutine(pulseCoroutine);
-
-        if (isSelected)
-            pulseCoroutine = StartCoroutine(PulseEffect());
-        else
-            buttonImage.color = normalColor;
-    }
-
-    private IEnumerator PulseEffect()
-    {
-        while (true)
-        {
-            buttonImage.color = Color.Lerp(normalColor, glowColor, Mathf.PingPong(Time.time * pulseSpeed, 1f));
-            yield return null;
-        }
     }
 }
