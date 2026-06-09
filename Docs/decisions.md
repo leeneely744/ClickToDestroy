@@ -78,3 +78,64 @@ Route 側を増やすことで解消する方針とする。
 
 - 既存の `Projectile.cs`（タワー用）を流用する案 → ターゲットが `EnemyController` 固定のため不採用。`EnemyProjectile` を分離した。
 - 遠距離攻撃中も移動を続ける案 → `IsEngaged` を統一することで既存の移動停止ロジックをそのまま活用できるため、停止する方針を採用。
+
+---
+
+## タワーの遠距離攻撃システム: Projectile.cs + 飛行敵ターゲティングフラグ
+
+### 決定
+
+タワーの遠距離攻撃は `Projectile.cs` をプロジェクタイルとして統一し、飛行敵を攻撃できるかどうかは `TowerAttackController` の `canAttackFlying` フラグで制御する。
+
+### 構造
+
+**TowerAttackController**（`Assets/Scripts/Towers/TowerAttackController.cs`）
+
+タワーの攻撃責務を担うコンポーネント。`AttackRangeCircle` 子オブジェクトの `CircleCollider2D` トリガーで敵を検知し、`Projectile` を射出する。
+
+| フィールド | 説明 |
+|---|---|
+| `canAttackFlying` | `true` のとき `IsFlying=true` の敵もターゲットリストに追加する（Inspector で設定） |
+| `attackInterval` | 攻撃間隔（秒）。`TowerController.Start()` から `Configure()` で渡される |
+| `projectilePrefab` | 射出する弾の Prefab（`Projectile` コンポーネントを持つ） |
+| `firePoint` | 発射位置の Transform |
+
+**飛行敵ターゲティングのタワー別設定**
+
+| タワー | `canAttackFlying` | 理由 |
+|---|---|---|
+| BowTower（弓） | `true` | 弓矢は空中の敵にも届く |
+| CannonTower（砲台） | `false` | 砲弾は地上目標専用 |
+| その他 | `false`（デフォルト） | 明示的に設定するまで地上のみ |
+
+### 設定方法
+
+BowTower プレハブ（BowTower.prefab / BowTower2.prefab / BowTower3.prefab）の `TowerAttackController` コンポーネントで `Can Attack Flying` を ON にする。
+
+---
+
+## Ninja クナイ投げ: UnitRangedAttack による実装
+
+### 決定
+
+Ninja ユニットのクナイ投げは `GuardianSkill` のサブクラスではなく、`UnitRangedAttack` コンポーネントとして実装する。`GuardianSkill` は近接攻撃のヒット時にのみ発火するため、近接ターゲットがいない（＝飛行敵しかいない）状況をカバーできない。
+
+### 仕様
+
+- **コンポーネント**: `UnitRangedAttack`（`Assets/Scripts/Towers/UnitRangedAttack.cs`）を Ninja.prefab に直接アタッチ
+- **プロジェクタイル**: `Kunai.prefab`（`Assets/Prefabs/Towers/Ninja/Kunai.prefab`）
+- **飛行敵対応**: `UnitRangedAttack.OnTriggerEnter2D` には `IsFlying` フィルタなし → 飛行敵も自動的にターゲット対象
+- **近接との優先関係**: `GuardianController.HandleCombat` が近接ターゲットを持つ間は `UnitRangedAttack.enabled = false` にする（近接優先）。近接ターゲットがいなくなったら `enabled = true` に戻す
+
+### Inspector 設定（Ninja.prefab）
+
+| フィールド | 値 |
+|---|---|
+| `attackInterval` | 1.5s |
+| `projectilePrefab` | Kunai.prefab |
+| `projectileTravelTime` | 0.5s |
+| `shotTriggerName` | `"Shot"` |
+
+### 棄却した案
+
+- `GuardianSkill` サブクラスとして実装する案 → `OnAttack` フックは近接攻撃時のみ呼ばれるため、飛行敵専用の遠距離攻撃を実現できない。`UnitRangedAttack` は独立した Update ループを持ち、近接・飛行を問わず射程内の敵を攻撃できるため採用。
