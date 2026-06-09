@@ -16,6 +16,8 @@ public class TowerAttackController : MonoBehaviour
     private float projectileTravelTime = 0f;
     private readonly List<EnemyController> enemiesInRange = new List<EnemyController>();
 
+    [SerializeField] private bool canAttackFlying = false;
+
     public void Configure( float attackInterval, float range, GameObject projectilePrefab, Transform firePoint, float projectileTravelTime)
     {
         this.attackInterval = attackInterval;
@@ -92,7 +94,7 @@ public class TowerAttackController : MonoBehaviour
         if (col.CompareTag(Tags.Enemy))
         {
             EnemyController enemy = col.GetComponent<EnemyController>();
-            if (enemy != null && !enemy.IsFlying && !enemiesInRange.Contains(enemy))
+            if (enemy != null && (!enemy.IsFlying || canAttackFlying) && !enemiesInRange.Contains(enemy))
             {
                 enemiesInRange.Add(enemy);
             }
