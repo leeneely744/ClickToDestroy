@@ -14,6 +14,7 @@ public class UnitRangedAttack : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float projectileTravelTime = 0f;
     [SerializeField] private string shotTriggerName = "Shot";
+    [SerializeField] private bool canTargetFlying = false;
 
     private float attackTimer;
     private readonly List<EnemyController> enemiesInRange = new List<EnemyController>();
@@ -100,9 +101,10 @@ public class UnitRangedAttack : MonoBehaviour
             return;
         }
 
-        if (!enemiesInRange.Contains(enemy))
+        if (!enemy.IsFlying || canTargetFlying)
         {
-            enemiesInRange.Add(enemy);
+            if (!enemiesInRange.Contains(enemy))
+                enemiesInRange.Add(enemy);
         }
     }
 
