@@ -349,6 +349,7 @@ MonoBehaviour:
   firePoint: {fileID: 2835153637933914678}
   projectileTravelTime: 0.5
   shotTriggerName: Shot
+  canTargetFlying: 1
 --- !u!1001 &1395217012702626050
 PrefabInstance:
   m_ObjectHideFlags: 0
