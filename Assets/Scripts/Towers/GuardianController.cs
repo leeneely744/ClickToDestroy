@@ -112,6 +112,7 @@ public class GuardianController : MonoBehaviour, IDefender
         }
 
         isDead = true;
+        foreach (var skill in skills) skill.OnDeath();
         if (ownerTower != null)
         {
             ownerTower.OnGuardianDestroyed(ownerTower.AttackInterval);
@@ -162,6 +163,11 @@ public class GuardianController : MonoBehaviour, IDefender
         if (currentHp <= 0)
         {
             return;
+        }
+
+        foreach (var skill in skills)
+        {
+            if (skill.OnTakeDamage(damage)) return;
         }
 
         currentHp -= damage;

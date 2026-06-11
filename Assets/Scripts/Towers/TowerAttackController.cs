@@ -15,15 +15,19 @@ public class TowerAttackController : MonoBehaviour
     private Transform firePoint;
     private float projectileTravelTime = 0f;
     private readonly List<EnemyController> enemiesInRange = new List<EnemyController>();
+    private TowerSkill[] skills = new TowerSkill[0];
 
     [SerializeField] private bool canAttackFlying = false;
 
-    public void Configure( float attackInterval, float range, GameObject projectilePrefab, Transform firePoint, float projectileTravelTime)
+    public void Configure(float attackInterval, float range, GameObject projectilePrefab, Transform firePoint, float projectileTravelTime)
     {
         this.attackInterval = attackInterval;
         this.range = range;
 
         SetProjectile(projectilePrefab, firePoint, projectileTravelTime);
+
+        skills = GetComponents<TowerSkill>();
+        foreach (var skill in skills) skill.OnInitialize(this);
     }
 
     // 球を切り替えられるように別メソッド化
@@ -79,6 +83,8 @@ public class TowerAttackController : MonoBehaviour
         {
             p.SetTarget(target.transform, projectileTravelTime);
         }
+
+        foreach (var skill in skills) skill.OnAttack(target, p != null ? p.damage : 0);
 
         PlayAttackAnimation();
     }
