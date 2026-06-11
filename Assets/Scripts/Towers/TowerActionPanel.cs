@@ -10,6 +10,15 @@ public class TowerActionPanel : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI upgradeCostText;
     [SerializeField] private TMPro.TextMeshProUGUI sellRefundText;
     [SerializeField] private GameObject moveGuardianButton;
+    [SerializeField] private GameObject skill1Button;
+    [SerializeField] private TMPro.TextMeshProUGUI skill1NameText;
+    [SerializeField] private TMPro.TextMeshProUGUI skill1CostText;
+    [SerializeField] private GameObject skill2Button;
+    [SerializeField] private TMPro.TextMeshProUGUI skill2NameText;
+    [SerializeField] private TMPro.TextMeshProUGUI skill2CostText;
+    [SerializeField] private GameObject skill3Button;
+    [SerializeField] private TMPro.TextMeshProUGUI skill3NameText;
+    [SerializeField] private TMPro.TextMeshProUGUI skill3CostText;
 
     void Awake()
     {
@@ -52,6 +61,25 @@ public class TowerActionPanel : MonoBehaviour
             bool canMoveGuardians = towerController is GuardianTowerControllerBase;
             moveGuardianButton.SetActive(canMoveGuardians);
         }
+
+        // スキルボタン表示
+        var skills = towerController.GetSkills();
+        RefreshSkillButton(skill1Button, skill1NameText, skill1CostText, skills.Length > 0 ? skills[0] : null);
+        RefreshSkillButton(skill2Button, skill2NameText, skill2CostText, skills.Length > 1 ? skills[1] : null);
+        RefreshSkillButton(skill3Button, skill3NameText, skill3CostText, skills.Length > 2 ? skills[2] : null);
+    }
+
+    private void RefreshSkillButton(GameObject button, TMPro.TextMeshProUGUI nameText, TMPro.TextMeshProUGUI costText, TowerSkill skill)
+    {
+        if (button == null) return;
+        if (skill == null || skill.IsPurchased)
+        {
+            button.SetActive(false);
+            return;
+        }
+        button.SetActive(true);
+        if (nameText != null) nameText.text = skill.SkillName;
+        if (costText != null) costText.text = skill.Cost.ToString();
     }
 
     public void Hide()
@@ -74,7 +102,7 @@ public class TowerActionPanel : MonoBehaviour
             Debug.LogError("TowerController not found");
             return;
         }
-        
+
         towerController.UpgradeTower();
         gameObject.SetActive(false);
 
@@ -93,6 +121,27 @@ public class TowerActionPanel : MonoBehaviour
         gameObject.SetActive(false);
 
         Hide();
+    }
+
+    public void OnSkill1Click()
+    {
+        if (towerController == null) return;
+        if (towerController.TryPurchaseSkill(0))
+            RefreshSkillButton(skill1Button, skill1NameText, skill1CostText, null);
+    }
+
+    public void OnSkill2Click()
+    {
+        if (towerController == null) return;
+        if (towerController.TryPurchaseSkill(1))
+            RefreshSkillButton(skill2Button, skill2NameText, skill2CostText, null);
+    }
+
+    public void OnSkill3Click()
+    {
+        if (towerController == null) return;
+        if (towerController.TryPurchaseSkill(2))
+            RefreshSkillButton(skill3Button, skill3NameText, skill3CostText, null);
     }
 
     public void OnMoveGuardiansClick()

@@ -148,7 +148,7 @@ public class TowerController : MonoBehaviour
     {
         towerPlace = place;
     }
-    
+
     public void SellTower()
     {
         if (moneyController == null)
@@ -283,6 +283,15 @@ public class TowerController : MonoBehaviour
     {
         towerPlace.SetOccupied(false);
         Destroy(gameObject);
+    }
+
+    public virtual TowerSkill[] GetSkills() => GetComponents<TowerSkill>();
+
+    public bool TryPurchaseSkill(int index)
+    {
+        var skills = GetSkills();
+        if (index < 0 || index >= skills.Length) return false;
+        return skills[index].TryPurchase(moneyController);
     }
 
     /// <summary>
