@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using TMPro;
 
 public class TowerActionPanel : MonoBehaviour
@@ -7,6 +6,7 @@ public class TowerActionPanel : MonoBehaviour
     public static TowerActionPanel Instance;
     public GameObject nextLevelPrefab;
     private TowerController towerController;
+
     [SerializeField] private TMPro.TextMeshProUGUI upgradeCostText;
     [SerializeField] private TMPro.TextMeshProUGUI sellRefundText;
     [SerializeField] private GameObject moveGuardianButton;
@@ -19,6 +19,11 @@ public class TowerActionPanel : MonoBehaviour
     [SerializeField] private GameObject skill3Button;
     [SerializeField] private TMPro.TextMeshProUGUI skill3NameText;
     [SerializeField] private TMPro.TextMeshProUGUI skill3CostText;
+
+    [Header("Rows")]
+    [SerializeField] private GameObject rowTop;
+    [SerializeField] private GameObject rowMiddle;
+    [SerializeField] private GameObject rowBottom;
 
     void Awake()
     {
@@ -35,41 +40,30 @@ public class TowerActionPanel : MonoBehaviour
             return;
         }
 
-        // UIの中心を塔の位置に合わせる
         Vector3 screenPos = Camera.main.WorldToScreenPoint(towerController.transform.position);
         transform.position = screenPos;
         gameObject.SetActive(true);
 
-        // アップグレード金額表示
-        // TODO: 次のレベルのプレハブがない場合はアップグレード不可にする
-        int upgradeCost = towerController.GetUpgradeCost();
         if (upgradeCostText != null)
-        {
-            upgradeCostText.text = upgradeCost.ToString();
-        }
+            upgradeCostText.text = towerController.GetUpgradeCost().ToString();
 
-        // 売却金額表示
-        int sellRefund = towerController.GetSellValue();
         if (sellRefundText != null)
-        {
-            sellRefundText.text = sellRefund.ToString();
-        }
+            sellRefundText.text = towerController.GetSellValue().ToString();
 
-        // 衛兵移動ボタン表示
         if (moveGuardianButton != null)
-        {
-            bool canMoveGuardians = towerController is GuardianTowerControllerBase;
-            moveGuardianButton.SetActive(canMoveGuardians);
-        }
+            moveGuardianButton.SetActive(towerController is GuardianTowerControllerBase);
 
-        // スキルボタン表示
         var skills = towerController.GetSkills();
-        RefreshSkillButton(skill1Button, skill1NameText, skill1CostText, skills.Length > 0 ? skills[0] : null);
-        RefreshSkillButton(skill2Button, skill2NameText, skill2CostText, skills.Length > 1 ? skills[1] : null);
-        RefreshSkillButton(skill3Button, skill3NameText, skill3CostText, skills.Length > 2 ? skills[2] : null);
+        RefreshSkillButton(skill1Button, skill1CostText, skills.Length > 0 ? skills[0] : null);
+        RefreshSkillButton(skill2Button, skill2CostText, skills.Length > 1 ? skills[1] : null);
+        RefreshSkillButton(skill3Button, skill3CostText, skills.Length > 2 ? skills[2] : null);
+
+        RefreshRow(rowTop);
+        RefreshRow(rowMiddle);
+        RefreshRow(rowBottom);
     }
 
-    private void RefreshSkillButton(GameObject button, TMPro.TextMeshProUGUI nameText, TMPro.TextMeshProUGUI costText, IPurchasableSkill skill)
+    private void RefreshSkillButton(GameObject button, TMPro.TextMeshProUGUI costText, IPurchasableSkill skill)
     {
         if (button == null) return;
         if (skill == null || skill.IsPurchased)
@@ -81,6 +75,21 @@ public class TowerActionPanel : MonoBehaviour
         if (costText != null) costText.text = skill.Cost.ToString();
     }
 
+    // 子に activeSelf=true のものがなければ段ごと非表示にする
+    private void RefreshRow(GameObject row)
+    {
+        if (row == null) return;
+        foreach (Transform child in row.transform)
+        {
+            if (child.gameObject.activeSelf)
+            {
+                row.SetActive(true);
+                return;
+            }
+        }
+        row.SetActive(false);
+    }
+
     public void Hide()
     {
         if (towerController == null)
@@ -88,7 +97,6 @@ public class TowerActionPanel : MonoBehaviour
             Debug.LogError("TowerController not found");
             return;
         }
-        // 必ず攻撃範囲表示をオフにしてから towerController をクリアする
         towerController.TurnOffAttackRange();
         towerController = null;
         gameObject.SetActive(false);
@@ -101,10 +109,7 @@ public class TowerActionPanel : MonoBehaviour
             Debug.LogError("TowerController not found");
             return;
         }
-
         towerController.UpgradeTower();
-        gameObject.SetActive(false);
-
         Hide();
     }
 
@@ -115,10 +120,7 @@ public class TowerActionPanel : MonoBehaviour
             Debug.LogError("TowerController not found");
             return;
         }
-
         towerController.SellTower();
-        gameObject.SetActive(false);
-
         Hide();
     }
 
@@ -126,21 +128,30 @@ public class TowerActionPanel : MonoBehaviour
     {
         if (towerController == null) return;
         if (towerController.TryPurchaseSkill(0))
-            RefreshSkillButton(skill1Button, skill1NameText, skill1CostText, null);
+        {
+            skill1Button.SetActive(false);
+            RefreshRow(rowTop);
+        }
     }
 
     public void OnSkill2Click()
     {
         if (towerController == null) return;
         if (towerController.TryPurchaseSkill(1))
-            RefreshSkillButton(skill2Button, skill2NameText, skill2CostText, null);
+        {
+            skill2Button.SetActive(false);
+            RefreshRow(rowTop);
+        }
     }
 
     public void OnSkill3Click()
     {
         if (towerController == null) return;
         if (towerController.TryPurchaseSkill(2))
-            RefreshSkillButton(skill3Button, skill3NameText, skill3CostText, null);
+        {
+            skill3Button.SetActive(false);
+            RefreshRow(rowMiddle);
+        }
     }
 
     public void OnMoveGuardiansClick()
@@ -150,11 +161,9 @@ public class TowerActionPanel : MonoBehaviour
             Debug.LogError("TowerController not found");
             return;
         }
-
         if (towerController is GuardianTowerControllerBase guardianTower)
         {
             guardianTower.StartMoveMode();
-            gameObject.SetActive(false);
             Hide();
         }
         else
