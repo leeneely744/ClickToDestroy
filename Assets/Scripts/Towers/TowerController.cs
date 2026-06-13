@@ -285,9 +285,9 @@ public class TowerController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual TowerSkill[] GetSkills() => GetComponents<TowerSkill>();
+    public virtual IPurchasableSkill[] GetSkills() => GetComponents<TowerSkill>();
 
-    public bool TryPurchaseSkill(int index)
+    public virtual bool TryPurchaseSkill(int index)
     {
         var skills = GetSkills();
         if (index < 0 || index >= skills.Length) return false;

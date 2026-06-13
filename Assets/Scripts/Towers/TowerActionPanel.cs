@@ -69,7 +69,7 @@ public class TowerActionPanel : MonoBehaviour
         RefreshSkillButton(skill3Button, skill3NameText, skill3CostText, skills.Length > 2 ? skills[2] : null);
     }
 
-    private void RefreshSkillButton(GameObject button, TMPro.TextMeshProUGUI nameText, TMPro.TextMeshProUGUI costText, TowerSkill skill)
+    private void RefreshSkillButton(GameObject button, TMPro.TextMeshProUGUI nameText, TMPro.TextMeshProUGUI costText, IPurchasableSkill skill)
     {
         if (button == null) return;
         if (skill == null || skill.IsPurchased)
@@ -78,7 +78,6 @@ public class TowerActionPanel : MonoBehaviour
             return;
         }
         button.SetActive(true);
-        if (nameText != null) nameText.text = skill.SkillName;
         if (costText != null) costText.text = skill.Cost.ToString();
     }
 

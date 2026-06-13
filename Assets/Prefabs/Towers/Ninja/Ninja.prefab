@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8911034317049133746}
   - component: {fileID: 6928225460619767973}
   - component: {fileID: 858747134713181176}
+  - component: {fileID: 1981466285936612211}
   m_Layer: 0
   m_Name: Ninja
   m_TagString: Untagged
@@ -173,6 +174,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1981466285936612211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854684784478994474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65478508b706841aeb89338800e2ce72, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::NinjaDodgeSkill
+  skillName: KunaiShot
+  cost: 250
+  dodgeChance: 0.3
 --- !u!1 &2867255954270482674
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +249,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 34, y: 34, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1450249377723977960}

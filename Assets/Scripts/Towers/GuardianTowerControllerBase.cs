@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -122,6 +123,27 @@ public class GuardianTowerControllerBase : TowerController
     public void OnGuardianDestroyed(float delaySeconds = 2)
     {
         ScheduleGuardianSpawn(delaySeconds);
+    }
+
+    // GuardianPrefab の GuardianSkill をスキル一覧として返す
+    public override IPurchasableSkill[] GetSkills()
+    {
+        if (GuardianPrefab == null) return System.Array.Empty<IPurchasableSkill>();
+        return GuardianPrefab.GetComponents<GuardianSkill>().Cast<IPurchasableSkill>().ToArray();
+    }
+
+    // 購入後、現在シーンに存在する兵士にもスキルを伝播する
+    public override bool TryPurchaseSkill(int index)
+    {
+        if (!base.TryPurchaseSkill(index)) return false;
+
+        foreach (var guardian in GetComponentsInChildren<GuardianController>())
+        {
+            var guardianSkills = guardian.GetComponents<GuardianSkill>();
+            if (index < guardianSkills.Length)
+                guardianSkills[index].Activate();
+        }
+        return true;
     }
 
     public virtual void StartMoveMode()
