@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b58d316cbf7b2459883b9e73d1202b56, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::ClickHandler
 --- !u!1 &7137899177473367595
 GameObject:
@@ -382,13 +382,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c2e5a2a9c0bd4f9a9d3ad78e6c3c6f4, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::GuardianTower1Controller
   projectilePrefab: {fileID: 1498279427015312657, guid: 4ef6469425dab4813bb7c1da8ae9b9db, type: 3}
   firePoint: {fileID: 0}
   projectileTravelTime: 0
   levelIndex: 0
-  stats: {fileID: 11400000, guid: ca659478a1ef74a519a4d9de0bde6d5d, type: 2}
+  stats: {fileID: 11400000, guid: c447c90fd85a746aa8c409cc212aa461, type: 2}
   maxSoldiers: 3
   initialLevelIndex: 0
   nextLevelPrefab: {fileID: 0}
@@ -438,7 +438,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0

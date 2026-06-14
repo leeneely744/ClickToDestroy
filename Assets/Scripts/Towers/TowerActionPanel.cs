@@ -72,6 +72,7 @@ public class TowerActionPanel : MonoBehaviour
             return;
         }
         button.SetActive(true);
+        Debug.Log($"[RefreshSkillButton] button={button.name}, costText={(costText != null ? costText.name : "null")}, Cost={skill.Cost}");
         if (costText != null) costText.text = skill.Cost.ToString();
     }
 
