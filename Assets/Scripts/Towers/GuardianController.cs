@@ -179,6 +179,7 @@ public class GuardianController : MonoBehaviour, IDefender
     }
 
     public bool IsDead => currentHp <= 0 || isDead;
+    public bool IsInMeleeCombat => currentTargets.Count > 0;
 
     // SkillCast アニメーションが完成したらここに animator.SetTrigger("SkillCast") を追加する
     public void TriggerSkillAnimation() { }

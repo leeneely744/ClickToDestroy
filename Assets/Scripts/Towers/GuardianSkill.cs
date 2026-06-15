@@ -9,7 +9,7 @@ public abstract class GuardianSkill : MonoBehaviour, IPurchasableSkill
 
     public string SkillName => skillName;
     public int Cost => cost;
-    public bool IsPurchased => isPurchased;
+    public virtual bool IsPurchased => isPurchased;
 
     protected GuardianController Owner { get; private set; }
 

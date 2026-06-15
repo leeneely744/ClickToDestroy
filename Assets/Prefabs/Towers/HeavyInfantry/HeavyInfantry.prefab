@@ -187,6 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 755161cd5307640c8a900ae350eb07dc, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::HeavyInfantryRangedAreaSkill
+  skillName: ThrowBomb
+  cost: 500
   chance: 0.2
   projectilePrefab: {fileID: 3239377013640706836, guid: 613df14516d63447d93b33a21d337aaf, type: 3}
   firePoint: {fileID: 2835153637933914678}
@@ -203,6 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3fae16f58a048c589f7f8f53fc1207, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::HeavyInfantryMeleeAreaSkill
+  skillName:
+  cost: 0
   areaRadius: 0.52
   damageRatio: 1
 --- !u!1 &2867255954270482674

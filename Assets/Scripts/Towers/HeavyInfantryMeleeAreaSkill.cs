@@ -1,7 +1,13 @@
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class HeavyInfantryMeleeAreaSkill : GuardianSkill
 {
+    // 近接範囲攻撃は購入不要の常時発動パッシブ
+    public override bool IsPurchased => true;
+
     [SerializeField] private float areaRadius = 0.8f;
     [SerializeField, Range(0f, 1f)] private float damageRatio = 1f;
 
@@ -30,3 +36,17 @@ public class HeavyInfantryMeleeAreaSkill : GuardianSkill
         Gizmos.DrawWireSphere(transform.position, areaRadius);
     }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(HeavyInfantryMeleeAreaSkill))]
+public class HeavyInfantryMeleeAreaSkillEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        serializedObject.Update();
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("areaRadius"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("damageRatio"));
+        serializedObject.ApplyModifiedProperties();
+    }
+}
+#endif

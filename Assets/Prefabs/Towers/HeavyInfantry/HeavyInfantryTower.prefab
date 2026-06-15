@@ -320,7 +320,7 @@ MonoBehaviour:
   firePoint: {fileID: 0}
   projectileTravelTime: 0
   levelIndex: 0
-  stats: {fileID: 0}
+  stats: {fileID: 11400000, guid: df1542d7df98a452cba55f03fb8f4836, type: 2}
   maxSoldiers: 3
   initialLevelIndex: 0
   nextLevelPrefab: {fileID: 0}
