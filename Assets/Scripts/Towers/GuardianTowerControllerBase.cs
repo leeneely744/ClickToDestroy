@@ -125,19 +125,18 @@ public class GuardianTowerControllerBase : TowerController
         ScheduleGuardianSpawn(delaySeconds);
     }
 
-    // GuardianPrefab の GuardianSkill をスキル一覧として返す
+    // スポーン済みの兵士インスタンスからスキルを取得する。
+    // プレハブから取得すると TryPurchase で isPurchased がプレハブ本体に書き込まれ
+    // ゲーム再起動まで残り続けるため、必ずインスタンスから取得する。
     public override IPurchasableSkill[] GetSkills()
     {
-        if (GuardianPrefab == null)
-        {
-            Debug.LogWarning($"[GetSkills] GuardianPrefab is null on {name}");
-            return System.Array.Empty<IPurchasableSkill>();
-        }
-        var skills = GuardianPrefab.GetComponents<GuardianSkill>();
-        Debug.Log($"[GetSkills] GuardianPrefab={GuardianPrefab.name}, skill count={skills.Length}");
-        foreach (var s in skills)
-            Debug.Log($"[GetSkills]   skill={s.GetType().Name}, Cost={s.Cost}, IsPurchased={s.IsPurchased}");
-        return skills.Cast<IPurchasableSkill>().ToArray();
+        var guardian = GetComponentInChildren<GuardianController>();
+        if (guardian != null)
+            return guardian.GetComponents<GuardianSkill>().Cast<IPurchasableSkill>().ToArray();
+
+        // 兵士未スポーン時のフォールバック（コスト・名前の表示用）
+        if (GuardianPrefab == null) return System.Array.Empty<IPurchasableSkill>();
+        return GuardianPrefab.GetComponents<GuardianSkill>().Cast<IPurchasableSkill>().ToArray();
     }
 
     // 購入後、現在シーンに存在する兵士にもスキルを伝播する
