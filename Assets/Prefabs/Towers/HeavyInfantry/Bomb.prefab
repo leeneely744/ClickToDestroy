@@ -172,8 +172,9 @@ MonoBehaviour:
   speed: 5
   damage: 20
   attackType: 0
+  hitEffectPrefab: {fileID: 5048738503388493374, guid: 162ea68ead1f744fc84631eab867c750, type: 3}
   splashRadius: 1.5
   splashDamageRate: 0.8
   enemyLayerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0

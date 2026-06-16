@@ -101,11 +101,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f544acf02617425c9315207792a4c1f, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   maxLifetime: 10
   speed: 2
   damage: 11
+  attackType: 0
+  hitEffectPrefab: {fileID: 3850594398163737268, guid: 39e522bd249324d758fb59b397d4b241, type: 3}
   splashRadius: 0.7
   splashDamageRate: 0.3
   enemyLayerMask:

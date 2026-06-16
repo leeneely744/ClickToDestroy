@@ -7,6 +7,9 @@ public class Projectile : MonoBehaviour
     public int damage = 10;
     public AttackType attackType = AttackType.Physical;
 
+    [Header("Hit Effect")]
+    [SerializeField] private GameObject hitEffectPrefab;
+
     [Header("Splash settings (for Cannon, etc.)")]
     [SerializeField] private float splashRadius = 0f; // 0 のときは範囲ダメージなし
     [SerializeField, Range(0f, 1f)]
@@ -70,6 +73,9 @@ public class Projectile : MonoBehaviour
         {
             ApplySplashDamage(enemy);
         }
+
+        if (hitEffectPrefab != null)
+            Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
     }
