@@ -9,6 +9,8 @@ using Tags = Constants.Tags;
 public class TowerAttackController : MonoBehaviour
 {
     private float attackInterval;
+    private float? overrideInterval = null;
+    private float EffectiveInterval => overrideInterval ?? attackInterval;
     private float range;
     private float attackTimer = 0f;
     private GameObject projectilePrefab;
@@ -30,6 +32,9 @@ public class TowerAttackController : MonoBehaviour
         foreach (var skill in skills) skill.OnInitialize(this);
     }
 
+    public void SetAttackIntervalOverride(float val) => overrideInterval = val;
+    public void ClearAttackIntervalOverride() => overrideInterval = null;
+
     // 球を切り替えられるように別メソッド化
     public void SetProjectile(GameObject projectilePrefab, Transform firePoint, float projectileTravelTime)
     {
@@ -46,12 +51,12 @@ public class TowerAttackController : MonoBehaviour
 
     private void TryAttack()
     {
-        if (attackInterval <= 0f)
+        if (EffectiveInterval <= 0f)
         {
             return;
         }
 
-        if (attackTimer < attackInterval)
+        if (attackTimer < EffectiveInterval)
         {
             return;
         }
