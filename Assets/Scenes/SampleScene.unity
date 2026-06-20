@@ -10974,7 +10974,7 @@ MonoBehaviour:
   moveGuardianButton: {fileID: 1232268852}
   skill1Button: {fileID: 1819743455}
   skill1NameText: {fileID: 0}
-  skill1CostText: {fileID: 1878180077}
+  skill1CostText: {fileID: 398882954}
   skill2Button: {fileID: 2102186084}
   skill2NameText: {fileID: 0}
   skill2CostText: {fileID: 1878180077}
