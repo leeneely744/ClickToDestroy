@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6755be0f5804a9cabef6a0959026b1, type: 3}
+  m_Name: ElfArcherTowerStats
+  m_EditorClassIdentifier: Assembly-CSharp::TowerStats
+  levels:
+  - towerId: elfArchers
+    towerName: "エルフ弓兵部隊"
+    nextLevelPrefab: {fileID: 0}
+    cost: 0
+    sellRefund: 200
+    attackInterval: 0.2
+    range: 2
+    isFusionTower: 1
+    canBeFusionMaterial: 0
+    hasLevel: 1

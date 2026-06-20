@@ -16,6 +16,8 @@ public class Projectile : MonoBehaviour
     private float splashDamageRate = 0.5f; // 本体ダメージの何倍か（割合）
     [SerializeField] private LayerMask enemyLayerMask; // 範囲ダメージを与えたい敵がいるレイヤー
 
+    [SerializeField] private bool rotateToFlight = false;
+
     private Transform target;
     private float lifeTimer;
 
@@ -51,6 +53,12 @@ public class Projectile : MonoBehaviour
         // ターゲットへ移動
         Vector3 direction = (target.position - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
+
+        if (rotateToFlight)
+        {
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
 
         // 一定距離まで近づいたら命中扱い
         if (Vector3.Distance(transform.position, target.position) < 0.2f)
