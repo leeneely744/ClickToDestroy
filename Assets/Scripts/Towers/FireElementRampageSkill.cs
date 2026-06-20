@@ -19,19 +19,20 @@ public class FireElementRampageSkill : TowerSkill
 
     public override void OnAttack(EnemyController target, int attackDamage)
     {
-        if (!isRampaging && !isOnCooldown)
-            StartCoroutine(Rampage());
+        if (!IsPurchased || isRampaging || isOnCooldown) return;
+        StartCoroutine(Rampage());
     }
 
     private IEnumerator Rampage()
     {
         isRampaging = true;
         Owner.SetAttackIntervalOverride(rampageInterval);
-        if (animator != null) animator.SetTrigger("SkillTrigger");
+        if (animator != null) animator.SetBool("isSkillActive", true);
 
         yield return new WaitForSeconds(rampageDuration);
 
         Owner.ClearAttackIntervalOverride();
+        if (animator != null) animator.SetBool("isSkillActive", false);
         isRampaging = false;
 
         isOnCooldown = true;
