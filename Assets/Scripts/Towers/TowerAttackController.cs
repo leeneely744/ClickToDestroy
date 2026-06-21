@@ -19,6 +19,8 @@ public class TowerAttackController : MonoBehaviour
     private readonly List<EnemyController> enemiesInRange = new List<EnemyController>();
     private TowerSkill[] skills = new TowerSkill[0];
 
+    protected IReadOnlyList<EnemyController> EnemiesInRange => enemiesInRange;
+
     [SerializeField] private bool canAttackFlying = false;
 
     public void Configure(float attackInterval, float range, GameObject projectilePrefab, Transform firePoint, float projectileTravelTime)
