@@ -1,0 +1,325 @@
+fileFormatVersion: 2
+guid: 46bb7dff4242f4eff9163fb71cb55bea
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3619236560335700574
+    second: 0_Magician_Girl_Throwing_009_0
+  - first:
+      213: -4849191004797073021
+    second: 0_Magician_Girl_Throwing_009_1
+  - first:
+      213: 6390363460964887301
+    second: 0_Magician_Girl_Throwing_009_2
+  - first:
+      213: -1076661145990439283
+    second: 0_Magician_Girl_Throwing_009_3
+  - first:
+      213: -8819897010972744228
+    second: 0_Magician_Girl_Throwing_009_4
+  - first:
+      213: 2948109432036885024
+    second: 0_Magician_Girl_Throwing_009_5
+  - first:
+      213: 2998585046805141283
+    second: 0_Magician_Girl_Throwing_009_6
+  - first:
+      213: -3224183658612837194
+    second: 0_Magician_Girl_Throwing_009_7
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 500
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 0_Magician_Girl_Throwing_009_0
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 148
+        width: 434
+        height: 594
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ad751f1683e5cdc0800000000000000
+      internalID: -3619236560335700574
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 0_Magician_Girl_Throwing_009_1
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 721
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3890d07297634bcb0800000000000000
+      internalID: -4849191004797073021
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 0_Magician_Girl_Throwing_009_2
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 731
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50ba27cc5b12fa850800000000000000
+      internalID: 6390363460964887301
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 0_Magician_Girl_Throwing_009_3
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 627
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8e56c1646eee01f0800000000000000
+      internalID: -1076661145990439283
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 0_Magician_Girl_Throwing_009_4
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 578
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd5a079f56e699580800000000000000
+      internalID: -8819897010972744228
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 0_Magician_Girl_Throwing_009_5
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 560
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 022898f98e9c9e820800000000000000
+      internalID: 2948109432036885024
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 0_Magician_Girl_Throwing_009_6
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 538
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3275e9f763d1d9920800000000000000
+      internalID: 2998585046805141283
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 0_Magician_Girl_Throwing_009_7
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 511
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b433c18b066143d0800000000000000
+      internalID: -3224183658612837194
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    outline: []
+    customData:
+    physicsShape: []
+    bones: []
+    spriteID:
+    internalID: 0
+    vertices: []
+    indices:
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      0_Magician_Girl_Throwing_009_0: -3619236560335700574
+      0_Magician_Girl_Throwing_009_1: -4849191004797073021
+      0_Magician_Girl_Throwing_009_2: 6390363460964887301
+      0_Magician_Girl_Throwing_009_3: -1076661145990439283
+      0_Magician_Girl_Throwing_009_4: -8819897010972744228
+      0_Magician_Girl_Throwing_009_5: 2948109432036885024
+      0_Magician_Girl_Throwing_009_6: 2998585046805141283
+      0_Magician_Girl_Throwing_009_7: -3224183658612837194
+  mipmapLimitGroupName:
+  pSDRemoveMatte: 0
+  userData:
+  assetBundleName:
+  assetBundleVariant:
