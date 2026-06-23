@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
   - towerId: gravityMage
-    towerName: "重力魔法使い"
+    towerName: "\u91CD\u529B\u9B54\u6CD5\u4F7F\u3044"
     nextLevelPrefab: {fileID: 0}
     cost: 0
     sellRefund: 250
-    attackInterval: 1.5
+    attackInterval: 4
     range: 2
     isFusionTower: 1
     canBeFusionMaterial: 0

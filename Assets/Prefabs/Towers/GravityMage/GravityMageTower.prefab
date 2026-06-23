@@ -202,9 +202,9 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::GravityMageAttackController
   canAttackFlying: 0
-  damage: 10
-  roadShakeDuration: 0.25
-  roadShakeStrength: 0.06
+  damage: 70
+  roadShakeDuration: 1
+  roadShakeStrength: 0.1
 --- !u!114 &1006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b503000000000000000000000000b503, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::GravityMageFireSkill
-  skillName: "攻撃力UP"
+  skillName: "\u653B\u6483\u529BUP"
   cost: 400
   damageMultiplier: 2
   firePrefab: {fileID: 100, guid: b507000000000000000000000000b507, type: 3}
