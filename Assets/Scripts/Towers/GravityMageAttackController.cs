@@ -13,6 +13,7 @@ public class GravityMageAttackController : TowerAttackController
     private float damageMultiplier = 1f;
 
     public void SetDamageMultiplier(float multiplier) => damageMultiplier = multiplier;
+    public void DoubleRoadShakeStrength() => roadShakeStrength *= 2f;
 
     private void Awake()
     {

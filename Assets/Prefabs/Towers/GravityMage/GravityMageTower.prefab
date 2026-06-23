@@ -204,7 +204,7 @@ MonoBehaviour:
   canAttackFlying: 0
   damage: 70
   roadShakeDuration: 1
-  roadShakeStrength: 0.1
+  roadShakeStrength: 0.3
 --- !u!114 &1006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,8 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GravityMageFireSkill
   skillName: "\u653B\u6483\u529BUP"
   cost: 400
-  damageMultiplier: 2
-  firePrefab: {fileID: 100, guid: b507000000000000000000000000b507, type: 3}
+  damageMultiplier: 1.5
 --- !u!1 &2000
 GameObject:
   m_ObjectHideFlags: 0
