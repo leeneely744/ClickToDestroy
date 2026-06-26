@@ -14791,6 +14791,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3041425802671264223, guid: ac11cd74649834a4b9ebe6acffda93c1, type: 3}
+      propertyPath: healthBar
+      value:
+      objectReference: {fileID: 2142372952}
+    - target: {fileID: 3041425802671264223, guid: ac11cd74649834a4b9ebe6acffda93c1, type: 3}
+      propertyPath: heroButton
+      value:
+      objectReference: {fileID: 834642974}
+    - target: {fileID: 3041425802671264223, guid: ac11cd74649834a4b9ebe6acffda93c1, type: 3}
       propertyPath: maxConcurrentTargets
       value: 3
       objectReference: {fileID: 0}
@@ -17467,6 +17475,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2142372952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8360013263438516266, guid: ac11cd74649834a4b9ebe6acffda93c1, type: 3}
+  m_PrefabInstance: {fileID: 1863083715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ea2d0f19f759438eb6376d5a1e0862c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBarController
 --- !u!1001 &3445700903497685533
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -123,8 +123,7 @@ public class HeroController : MonoBehaviour, IDefender
         moveTarget = worldPosition;
         isMoving = true;
         isMoveMode = false;
-        if (heroButton != null)
-            heroButton.DeactivateEffect();
+        heroButton.DeactivateEffect();
     }
 
     private void HandleMovement()
