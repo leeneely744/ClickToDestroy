@@ -108,7 +108,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -222,12 +222,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa3dd5f7d8954ba79d48605ce30fb38, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::MagicTowerController
-  initialLevelIndex: 1
   projectilePrefab: {fileID: 8683657668908243494, guid: d67352712fc9f46db8d96e6126b7da74, type: 3}
   firePoint: {fileID: 4747791318048832225}
   projectileTravelTime: 0.4
   levelIndex: 0
   stats: {fileID: 11400000, guid: 911c8b1dc61934d689e798f6f2bece2f, type: 2}
+  initialLevelIndex: 1
   nextLevelPrefab: {fileID: 1499013605453779945, guid: 3023ed95807cd4d018f4f85a8060a1c8, type: 3}
 --- !u!50 &3691111417845034055
 Rigidbody2D:
@@ -266,8 +266,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be02eb09bdd5f424985a32b04b7ec371, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::ChildAnimatorAttackController
+  canAttackFlying: 1
   attackTriggerName: AttackTrigger
 --- !u!1 &3549987004200054331
 GameObject:
@@ -379,7 +380,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b58d316cbf7b2459883b9e73d1202b56, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::ClickHandler
 --- !u!1 &6703000952585556828
 GameObject:

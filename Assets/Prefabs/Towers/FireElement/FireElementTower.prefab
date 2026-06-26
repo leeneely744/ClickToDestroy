@@ -178,8 +178,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0cd8c86369ee4a2bad2b9ecf825c9df, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SelfAnimatorAttackController
-  canAttackFlying: 0
+  canAttackFlying: 1
   attackTriggerName: AttackTrigger
+--- !u!114 &1000000000000000008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000000000000000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe40a2b3c4d5e6f708192a3b4c5d6e7f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::FireElementRampageSkill
+  skillName: "\u9B54\u529B\u66B4\u8D70"
+  cost: 400
+  rampageInterval: 0.1
+  rampageDuration: 2
+  cooldown: 20
 --- !u!1 &2000000000000000001
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,19 +436,3 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &1000000000000000008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000000000000000001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe40a2b3c4d5e6f708192a3b4c5d6e7f, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::FireElementRampageSkill
-  skillName: "魔力暴走"
-  cost: 400
-  rampageInterval: 0.1
-  rampageDuration: 2

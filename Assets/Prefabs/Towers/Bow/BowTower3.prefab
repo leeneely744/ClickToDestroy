@@ -671,6 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be02eb09bdd5f424985a32b04b7ec371, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::ChildAnimatorAttackController
+  canAttackFlying: 1
   attackTriggerName: AttackTrigger
 --- !u!114 &187443262790037401
 MonoBehaviour:
