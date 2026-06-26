@@ -123,6 +123,11 @@ public class HeroController : MonoBehaviour, IDefender
         moveTarget = worldPosition;
         isMoving = true;
         isMoveMode = false;
+        if (heroButton == null)
+        {
+            Debug.LogError("[HeroController] HeroButton が設定されていません。Inspector を確認してください。", this);
+            return;
+        }
         heroButton.DeactivateEffect();
     }
 
