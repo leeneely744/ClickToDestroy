@@ -7,6 +7,7 @@ public class TowerActionPanel : MonoBehaviour
     public GameObject nextLevelPrefab;
     private TowerController towerController;
 
+    [SerializeField] private GameObject upgradeButton;
     [SerializeField] private TMPro.TextMeshProUGUI upgradeCostText;
     [SerializeField] private TMPro.TextMeshProUGUI sellRefundText;
     [SerializeField] private GameObject moveGuardianButton;
@@ -44,8 +45,11 @@ public class TowerActionPanel : MonoBehaviour
         transform.position = screenPos;
         gameObject.SetActive(true);
 
+        bool canUpgrade = towerController.NextLevelPrefab != null;
+        if (upgradeButton != null)
+            upgradeButton.SetActive(canUpgrade);
         if (upgradeCostText != null)
-            upgradeCostText.text = towerController.GetUpgradeCost().ToString();
+            upgradeCostText.text = canUpgrade ? towerController.GetUpgradeCost().ToString() : "";
 
         if (sellRefundText != null)
             sellRefundText.text = towerController.GetSellValue().ToString();
