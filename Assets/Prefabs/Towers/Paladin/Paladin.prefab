@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1000000002000000001}
   - component: {fileID: 1000000003000000001}
-  - component: {fileID: 1000000004000000001}
   - component: {fileID: 1000000005000000001}
+  - component: {fileID: 1000000004000000001}
   - component: {fileID: 1000000006000000001}
   - component: {fileID: 5224147895374007222}
   m_Layer: 0
@@ -95,25 +95,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1000000004000000001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000000001000000001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60b918d72a7214a4f81c0afb13e2093f, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::GuardianController
-  moveSpeed: 3
-  stopDistance: 0.05
-  maxHp: 150
-  attackDamage: 15
-  attackInterval: 1
-  maxConcurrentTargets: 2
-  healthBar: {fileID: 0}
 --- !u!58 &1000000005000000001
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -150,6 +131,25 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.6
+--- !u!114 &1000000004000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000000001000000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b918d72a7214a4f81c0afb13e2093f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::GuardianController
+  moveSpeed: 3
+  stopDistance: 0.05
+  maxHp: 150
+  attackDamage: 15
+  attackInterval: 1
+  maxConcurrentTargets: 2
+  healthBar: {fileID: 0}
 --- !u!95 &1000000006000000001
 Animator:
   serializedVersion: 7
@@ -184,10 +184,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0833c9eaab2b6489ea567c86206b0363, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::PaladinMagicAreaSkill
+  skillName: "\u8056\u5149\u7206\u767A"
+  cost: 150
   chance: 0.15
   areaRadius: 1.5
   damageRatio: 0.8
   effectPrefab: {fileID: 3059025421895758505, guid: 1ef10d11413a74ba88dbea2062b5f033, type: 3}
+  effectDuration: 1
   effectOffset: 0.5
   effectSortingOrder: 5
 --- !u!1001 &1000000008000000001

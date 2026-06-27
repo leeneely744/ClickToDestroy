@@ -10969,6 +10969,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::TowerActionPanel
   nextLevelPrefab: {fileID: 0}
+  upgradeButton: {fileID: 1728843914}
   upgradeCostText: {fileID: 439963737}
   sellRefundText: {fileID: 743683293}
   moveGuardianButton: {fileID: 1232268852}
