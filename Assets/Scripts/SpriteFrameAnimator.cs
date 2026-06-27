@@ -6,12 +6,13 @@ public class SpriteFrameAnimator : MonoBehaviour
 {
     [SerializeField] private Sprite[] frames;
     [SerializeField] private float fps = 12f;
+    [SerializeField] private bool loop = false;
 
     private void Start()
     {
         if (frames == null || frames.Length == 0)
         {
-            Destroy(gameObject);
+            if (!loop) Destroy(gameObject);
             return;
         }
         StartCoroutine(Play());
@@ -19,14 +20,17 @@ public class SpriteFrameAnimator : MonoBehaviour
 
     private IEnumerator Play()
     {
-        var renderer = GetComponent<SpriteRenderer>();
+        var spriteRenderer = GetComponent<SpriteRenderer>();
         float interval = 1f / fps;
 
-        foreach (var frame in frames)
+        do
         {
-            renderer.sprite = frame;
-            yield return new WaitForSeconds(interval);
-        }
+            foreach (var frame in frames)
+            {
+                spriteRenderer.sprite = frame;
+                yield return new WaitForSeconds(interval);
+            }
+        } while (loop);
 
         Destroy(gameObject);
     }

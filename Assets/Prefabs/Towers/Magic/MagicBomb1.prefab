@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5616903278731992547}
   - component: {fileID: 8920222284969929558}
   - component: {fileID: 8178243494021144041}
+  - component: {fileID: 1111111111111111111}
   m_Layer: 0
   m_Name: MagicBomb1
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.6624627, y: -0.9241688, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1229858627709956937, guid: 4c90fc04b790042658f3ae473882fa46, type: 3}
+  m_Sprite: {fileID: 3575782165344085261, guid: 768c3937c0517426cbf643ab575059a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -115,7 +116,8 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  rotateToFlight: 0
+  rotateToFlight: 1
+  rotationOffset: 180
 --- !u!58 &8920222284969929558
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -179,3 +181,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1111111111111111111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8683657668908243494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 807157c1a8aa246408af6868491e70c5, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFrameAnimator
+  frames:
+  - {fileID: 3575782165344085261, guid: 768c3937c0517426cbf643ab575059a6, type: 3}
+  - {fileID: -7453875211680367591, guid: d062ec9120fc34460855e4770e520222, type: 3}
+  - {fileID: -7718043490011811873, guid: ac273109eef8540f5b9fbfe7608d0afb, type: 3}
+  - {fileID: 6339692988390120373, guid: 1ab5b6283fca94017ada4bd2ac8deaae, type: 3}
+  - {fileID: -7548383683797577546, guid: c5ef290f702a84d7da40fa89c418309d, type: 3}
+  - {fileID: 1949400058013323989, guid: b64b8552692394bf693d2a898bd3fa52, type: 3}
+  - {fileID: -2839155646068237725, guid: af5317c50ebb4482185178a1e814263a, type: 3}
+  - {fileID: 2367926006336865736, guid: 5d742652ec9b141b682fec9f361e6f1d, type: 3}
+  - {fileID: 2542560183783248510, guid: 294438c604444444cad2dfc740955ab9, type: 3}
+  - {fileID: 6529337743344452832, guid: a1abc1923cd3249ed82225ecb8f9ccaf, type: 3}
+  - {fileID: -4335737953214204680, guid: 321eeffd613cd41ccb1beba4ee7b11cb, type: 3}
+  - {fileID: 1828911194289784811, guid: 81251fcd6bb9e41d48259513a9aa96b0, type: 3}
+  fps: 12
+  loop: 1

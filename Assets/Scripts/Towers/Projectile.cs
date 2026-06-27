@@ -17,6 +17,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private LayerMask enemyLayerMask; // 範囲ダメージを与えたい敵がいるレイヤー
 
     [SerializeField] private bool rotateToFlight = false;
+    [SerializeField] private float rotationOffset = 0f;
 
     private Transform target;
     private float lifeTimer;
@@ -56,7 +57,7 @@ public class Projectile : MonoBehaviour
 
         if (rotateToFlight)
         {
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
