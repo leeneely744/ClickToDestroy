@@ -20,6 +20,11 @@ public class FusionManager : MonoBehaviour
         fusionService.LoadFromResources("TowerFusion");
     }
 
+    public bool CanFuse(TowerController a, TowerController b, out TowerFusionRecipe recipe)
+    {
+        return fusionService.CanFuse(a, b, out recipe);
+    }
+
     public bool TryFuse(TowerController source, TowerController target)
     {
         if (!fusionService.CanFuse(source, target, out TowerFusionRecipe recipe))
