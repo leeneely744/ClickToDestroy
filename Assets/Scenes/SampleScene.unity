@@ -3597,7 +3597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac21fdf66f00d4aedaf572627113a49a, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::ScoreBoard
-  hp: 1000
+  hp: 100
   hpText: {fileID: 992885188}
 --- !u!1 &512268763
 GameObject:
@@ -6696,7 +6696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1422b5fcd6fb044b7827374afee8698c, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::Money
-  money: 8000
+  money: 1200
   moneyText: {fileID: 885598559}
 --- !u!1 &890384033
 GameObject:

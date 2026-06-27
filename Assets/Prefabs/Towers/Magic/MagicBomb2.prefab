@@ -103,16 +103,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f544acf02617425c9315207792a4c1f, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   maxLifetime: 2
   speed: 5
-  damage: 33
+  damage: 70
+  attackType: 0
+  hitEffectPrefab: {fileID: 0}
   splashRadius: 0
   splashDamageRate: 0.5
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  rotateToFlight: 0
 --- !u!58 &8920222284969929558
 CircleCollider2D:
   m_ObjectHideFlags: 0

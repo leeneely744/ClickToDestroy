@@ -18,20 +18,20 @@ MonoBehaviour:
     route: {fileID: 11400000, guid: 9e4d13482197441448455a3d10dc58a4, type: 2}
     startTime: 0.1
     count: 13
-    interval: 0.3
+    interval: 1.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: 5965c0d22393404fa90b3a795720ab45, type: 3}
     route: {fileID: 11400000, guid: ac0929530094a4a8aa2c74197f069517, type: 2}
-    startTime: 1.1
+    startTime: 1.2
     count: 6
-    interval: 0.5
+    interval: 3
   - enemyPrefab: {fileID: 2155804248953280118, guid: 5965c0d22393404fa90b3a795720ab45, type: 3}
     route: {fileID: 11400000, guid: c5aabe34ec6304356907cdb7dcc79715, type: 2}
-    startTime: 3
+    startTime: 2.7
     count: 6
-    interval: 0.5
+    interval: 2
   - enemyPrefab: {fileID: 2155804248953280118, guid: 5965c0d22393404fa90b3a795720ab45, type: 3}
     route: {fileID: 11400000, guid: 06936a5c15e1248a39c058085595ff81, type: 2}
-    startTime: 2.5
+    startTime: 2.4
     count: 6
-    interval: 0.5
+    interval: 2
   delayBeforeNextWave: 2
