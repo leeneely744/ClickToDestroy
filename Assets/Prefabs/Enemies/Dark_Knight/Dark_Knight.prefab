@@ -10,8 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 225436466700605373, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
       propertyPath: enemyData
-      value: 
+      value:
       objectReference: {fileID: 11400000, guid: c06997c10d28c4e259905d386dcfbac8, type: 2}
+    - target: {fileID: 3982574313250373904, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
+      propertyPath: m_Icon
+      value:
+      objectReference: {fileID: 2800000, guid: 6351afc75dabe45378336508a28a25b6, type: 3}
     - target: {fileID: 3982574313250373904, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
       propertyPath: m_Name
       value: Dark_Knight
@@ -86,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8744273516660118165, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
       propertyPath: m_Sprite
-      value: 
+      value:
       objectReference: {fileID: -7769845735376266373, guid: 82b1b0a7f79dc4ee8afdc7a0a8251e6a, type: 3}
     - target: {fileID: 8744273516660118165, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
       propertyPath: m_WasSpriteAssigned

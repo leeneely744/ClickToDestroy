@@ -6,6 +6,8 @@ public class EnemyProjectile : MonoBehaviour
     [SerializeField] private float speed = 8f;
     [Tooltip("この秒数を超えると自動消滅する（秒）")]
     [SerializeField] private float maxLifetime = 10f;
+    [SerializeField] private bool rotateToFlight = false;
+    [SerializeField] private float rotationOffset = 0f;
 
     private IDefender target;
     private int damage;
@@ -38,11 +40,14 @@ public class EnemyProjectile : MonoBehaviour
             return;
         }
 
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            targetMono.transform.position,
-            speed * Time.deltaTime
-        );
+        Vector3 direction = (targetMono.transform.position - transform.position).normalized;
+        transform.position += direction * speed * Time.deltaTime;
+
+        if (rotateToFlight)
+        {
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
 
         if (Vector3.Distance(transform.position, targetMono.transform.position) < 0.2f)
         {

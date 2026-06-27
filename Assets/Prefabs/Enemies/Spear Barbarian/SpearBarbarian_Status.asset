@@ -29,5 +29,5 @@ MonoBehaviour:
     attackInterval: 3
     attackType: 0
     isAreaAttack: 0
-    attackRange: 5
+    attackRange: 1.5
   animatorOverride: {fileID: 22100000, guid: 5fef3a5c4c994f17b7082e2be8f54917, type: 2}

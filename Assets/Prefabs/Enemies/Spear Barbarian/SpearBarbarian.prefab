@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 225436466700605373, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
       propertyPath: enemyData
-      value: 
+      value:
       objectReference: {fileID: 11400000, guid: 64146d1f2f264fa19d791ca2bc2b77f9, type: 2}
     - target: {fileID: 3480345430065870387, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
       propertyPath: rangedProjectilePrefab
-      value: 
+      value:
       objectReference: {fileID: 338595591037444539, guid: 1902e7dda882e4185affc70f4700e466, type: 3}
     - target: {fileID: 3480345430065870387, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
       propertyPath: defenderLayerMask.m_Bits
-      value: 64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3982574313250373904, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
       propertyPath: m_Name
@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8744273516660118165, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
       propertyPath: m_Sprite
-      value: 
+      value:
       objectReference: {fileID: 1121829388695147236, guid: af3faf60ec3a641e08509d9740bb73ea, type: 3}
     - target: {fileID: 8744273516660118165, guid: 398386ef37ca14b7d9cd4e6e5717501b, type: 3}
       propertyPath: m_WasSpriteAssigned
