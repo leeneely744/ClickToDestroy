@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Tags = Constants.Tags;
 
-public class TowerController : MonoBehaviour
+public class TowerController : MonoBehaviour, IStatusProvider
 {
     private CircleCollider2D rangeCollider;
     private List<EnemyController> enemiesInRange = new List<EnemyController>();
@@ -283,6 +283,24 @@ public class TowerController : MonoBehaviour
     {
         towerPlace.SetOccupied(false);
         Destroy(gameObject);
+    }
+
+    public StatusInfo GetStatusInfo()
+    {
+        var sr = GetComponent<SpriteRenderer>();
+        if (sr == null) sr = GetComponentInChildren<SpriteRenderer>();
+        var proj = projectilePrefab != null ? projectilePrefab.GetComponent<Projectile>() : null;
+        int? atk = proj != null ? proj.damage : (int?)null;
+        return new StatusInfo
+        {
+            displayName = !string.IsNullOrEmpty(towerName) ? towerName : gameObject.name.Replace("(Clone)", "").Trim(),
+            icon = sr != null ? sr.sprite : null,
+            maxHp = null,
+            getCurrentHp = null,
+            attackDamage = atk,
+            physicalResistance = null,
+            magicalResistance = null,
+        };
     }
 
     public virtual IPurchasableSkill[] GetSkills() => GetComponents<TowerSkill>();

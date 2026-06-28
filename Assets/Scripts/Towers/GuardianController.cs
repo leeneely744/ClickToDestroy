@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tags = Constants.Tags;
 
-public class GuardianController : MonoBehaviour, IDefender
+public class GuardianController : MonoBehaviour, IDefender, IStatusProvider
 {
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float stopDistance = 0.05f;
@@ -38,6 +38,32 @@ public class GuardianController : MonoBehaviour, IDefender
         }
 
         UpdateHealthBar();
+        RegisterClickHandlers();
+    }
+
+    private void RegisterClickHandlers()
+    {
+        foreach (var col in GetComponentsInChildren<Collider2D>())
+        {
+            if (col.GetComponent<StatusClickHandler>() == null)
+                col.gameObject.AddComponent<StatusClickHandler>();
+        }
+    }
+
+    public StatusInfo GetStatusInfo()
+    {
+        var sr = GetComponent<SpriteRenderer>();
+        if (sr == null) sr = GetComponentInChildren<SpriteRenderer>();
+        return new StatusInfo
+        {
+            displayName = gameObject.name.Replace("(Clone)", "").Trim(),
+            icon = sr != null ? sr.sprite : null,
+            maxHp = maxHp,
+            getCurrentHp = () => currentHp,
+            attackDamage = attackDamage > 0 ? attackDamage : (int?)null,
+            physicalResistance = null,
+            magicalResistance = null,
+        };
     }
 
     void Update()

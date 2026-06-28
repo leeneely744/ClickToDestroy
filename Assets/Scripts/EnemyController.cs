@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IStatusProvider
 {
     private ScoreBoard scoreBoard;
     private Money moneyController;
@@ -78,6 +78,42 @@ public class EnemyController : MonoBehaviour
         }
 
         UpdateHealthBar();
+        RegisterClickHandlers();
+    }
+
+    private void RegisterClickHandlers()
+    {
+        foreach (var col in GetComponentsInChildren<Collider2D>())
+        {
+            if (col.GetComponent<StatusClickHandler>() == null)
+                col.gameObject.AddComponent<StatusClickHandler>();
+        }
+    }
+
+    public StatusInfo GetStatusInfo()
+    {
+        var sr = GetComponentInChildren<SpriteRenderer>();
+        int? atk = null;
+        float? physDef = null;
+        float? magDef = null;
+        if (enemyData != null)
+        {
+            int maxDmg = Mathf.Max(enemyData.meleeAttack.damage, enemyData.rangedAttack.damage);
+            if (maxDmg > 0) atk = maxDmg;
+            if (enemyData.physicalResistance > 0f) physDef = enemyData.physicalResistance;
+            if (enemyData.magicalResistance > 0f) magDef = enemyData.magicalResistance;
+        }
+
+        return new StatusInfo
+        {
+            displayName = gameObject.name.Replace("(Clone)", "").Trim(),
+            icon = sr != null ? sr.sprite : null,
+            maxHp = maxHp,
+            getCurrentHp = () => hp,
+            attackDamage = atk,
+            physicalResistance = physDef,
+            magicalResistance = magDef,
+        };
     }
 
     private void FixedUpdate()

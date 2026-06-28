@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using Tags = Constants.Tags;
 
 [RequireComponent(typeof(Animator))]
-public class HeroController : MonoBehaviour, IDefender
+public class HeroController : MonoBehaviour, IDefender, IStatusProvider
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3f;
@@ -57,6 +57,32 @@ public class HeroController : MonoBehaviour, IDefender
         }
 
         UpdateHealthBar();
+        RegisterClickHandlers();
+    }
+
+    private void RegisterClickHandlers()
+    {
+        foreach (var col in GetComponentsInChildren<Collider2D>())
+        {
+            if (col.GetComponent<StatusClickHandler>() == null)
+                col.gameObject.AddComponent<StatusClickHandler>();
+        }
+    }
+
+    public StatusInfo GetStatusInfo()
+    {
+        var sr = GetComponent<SpriteRenderer>();
+        if (sr == null) sr = GetComponentInChildren<SpriteRenderer>();
+        return new StatusInfo
+        {
+            displayName = gameObject.name.Replace("(Clone)", "").Trim(),
+            icon = sr != null ? sr.sprite : null,
+            maxHp = maxHp,
+            getCurrentHp = () => currentHp,
+            attackDamage = attackDamage > 0 ? attackDamage : (int?)null,
+            physicalResistance = null,
+            magicalResistance = null,
+        };
     }
 
     void Update()

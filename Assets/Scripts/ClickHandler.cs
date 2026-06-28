@@ -15,6 +15,7 @@ public class ClickHandler : MonoBehaviour, IPointerClickHandler
         if (parentTower != null)
         {
             parentTower.OnSelected();
+            StatusPanel.Instance?.Show(parentTower);
         }
     }
 }
