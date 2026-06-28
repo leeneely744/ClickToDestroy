@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GuardianTowerControllerBase : TowerController
 {
@@ -170,8 +171,9 @@ public class GuardianTowerControllerBase : TowerController
             return;
         }
 
-        // スマホようにUIタッチも含めて無視する場合はInput.GetTouch(0).fingerIdを使う。
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        // Physics2DRaycaster も IsPointerOverGameObject に含まれるため、
+        // UI（GraphicRaycaster）のみをチェックして移動入力をブロックする。
+        if (IsPointerOverUI())
         {
             return;
         }
@@ -196,7 +198,20 @@ public class GuardianTowerControllerBase : TowerController
         else
         {
             ShowInvalidMoveFeedback(worldPosition);
+            ExitMoveMode();
         }
+    }
+
+    private bool IsPointerOverUI()
+    {
+        if (EventSystem.current == null) return false;
+        var pointer = new PointerEventData(EventSystem.current)
+        {
+            position = Mouse.current.position.ReadValue()
+        };
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointer, results);
+        return results.Any(r => r.module is GraphicRaycaster);
     }
 
     protected virtual bool IsWithinMoveRange(Vector3 targetPosition)
