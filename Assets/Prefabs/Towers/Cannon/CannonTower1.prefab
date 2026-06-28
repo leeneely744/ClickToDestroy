@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1900675336297484314}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.015, y: 0.023, z: 0}
+  m_LocalPosition: {x: -0.015, y: 0.023, z: -0.5}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b58d316cbf7b2459883b9e73d1202b56, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::ClickHandler
 --- !u!1 &2483834363720396215
 GameObject:
@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7571e2a46bd0247108c8dde091830339, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::CannonTowerController
   projectilePrefab: {fileID: 8839597572441139456, guid: 08558378276c2421e9448c18f07e4dc9, type: 3}
   firePoint: {fileID: 1759327385394020954}
@@ -372,7 +372,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -414,6 +414,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0cd8c86369ee4a2bad2b9ecf825c9df, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SelfAnimatorAttackController
   attackTriggerName: isAttack
