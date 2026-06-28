@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
   - towerId: HeavyInfantryTower
-    towerName: HeavyInfantryTower
+    towerName: 重装歩兵
     nextLevelPrefab: {fileID: 0}
     cost: 500
     sellRefund: 250

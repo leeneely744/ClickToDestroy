@@ -80,8 +80,8 @@ public class HeroController : MonoBehaviour, IDefender, IStatusProvider
             maxHp = maxHp,
             getCurrentHp = () => currentHp,
             attackDamage = attackDamage > 0 ? attackDamage : (int?)null,
-            physicalResistance = null,
-            magicalResistance = null,
+            physicalResistance = 0f,
+            magicalResistance = 0f,
         };
     }
 

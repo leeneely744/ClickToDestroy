@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
   - towerId: cannon1
-    towerName: beginnerCannon
+    towerName: 初級砲兵
     nextLevelPrefab: {fileID: 8814583205318202462, guid: f0c053285d703420095d198e40af24d3, type: 3}
     cost: 120
     sellRefund: 100
@@ -26,7 +26,7 @@ MonoBehaviour:
     hasLevel: 1
     guardianPrefab: {fileID: 0}
   - towerId: cannon2
-    towerName: TrainedCannon
+    towerName: 熟練砲兵
     nextLevelPrefab: {fileID: 8814583205318202462, guid: 164844deaa9944d73aa36771059842cc, type: 3}
     cost: 180
     sellRefund: 120
@@ -38,7 +38,7 @@ MonoBehaviour:
     hasLevel: 1
     guardianPrefab: {fileID: 0}
   - towerId: cannon3
-    towerName: GreatCannon
+    towerName: 大砲兵
     nextLevelPrefab: {fileID: 0}
     cost: 240
     sellRefund: 180

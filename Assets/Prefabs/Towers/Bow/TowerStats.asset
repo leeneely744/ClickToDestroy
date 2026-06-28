@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
   - towerId: bow1
-    towerName: beginner archer
+    towerName: 見習い弓兵
     nextLevelPrefab: {fileID: 9021238356020073785, guid: 1aebc18f924a249009bec42b39315d00, type: 3}
     cost: 100
     sellRefund: 90
@@ -26,7 +26,7 @@ MonoBehaviour:
     hasLevel: 1
     guardianPrefab: {fileID: 0}
   - towerId: bow2
-    towerName: trained archer
+    towerName: 熟練弓兵
     nextLevelPrefab: {fileID: 8427912772724200652, guid: f57451e6be7e444b086516409ec5ec63, type: 3}
     cost: 110
     sellRefund: 100
@@ -38,7 +38,7 @@ MonoBehaviour:
     hasLevel: 0
     guardianPrefab: {fileID: 0}
   - towerId: bow3
-    towerName: great archer
+    towerName: 百射の弓兵
     nextLevelPrefab: {fileID: 0}
     cost: 160
     sellRefund: 110

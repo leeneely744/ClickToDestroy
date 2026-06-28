@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
   - towerId: paladin
-    towerName: Saint Knight Tower
+    towerName: 聖騎士
     nextLevelPrefab: {fileID: 0}
     cost: 400
     sellRefund: 200

@@ -100,8 +100,8 @@ public class EnemyController : MonoBehaviour, IStatusProvider
         {
             int maxDmg = Mathf.Max(enemyData.meleeAttack.damage, enemyData.rangedAttack.damage);
             if (maxDmg > 0) atk = maxDmg;
-            if (enemyData.physicalResistance > 0f) physDef = enemyData.physicalResistance;
-            if (enemyData.magicalResistance > 0f) magDef = enemyData.magicalResistance;
+            physDef = enemyData.physicalResistance;
+            magDef = enemyData.magicalResistance;
         }
 
         return new StatusInfo

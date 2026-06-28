@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
   - towerId: magic1
-    towerName: Beginner Magician
+    towerName: 見習い魔法使い
     nextLevelPrefab: {fileID: 2008618986784158227, guid: a46969f7a777e41518f402d435d504c1, type: 3}
     cost: 100
     sellRefund: 80
@@ -25,7 +25,7 @@ MonoBehaviour:
     hasLevel: 1
     guardianPrefab: {fileID: 0}
   - towerId: magic2
-    towerName: Trained Magician
+    towerName: 熟練魔法使い
     nextLevelPrefab: {fileID: 1499013605453779945, guid: 3023ed95807cd4d018f4f85a8060a1c8, type: 3}
     cost: 140
     sellRefund: 100
@@ -36,7 +36,7 @@ MonoBehaviour:
     hasLevel: 1
     guardianPrefab: {fileID: 0}
   - towerId: magic3
-    towerName: Great Magician
+    towerName: 大魔法使い
     nextLevelPrefab: {fileID: 0}
     cost: 200
     sellRefund: 140

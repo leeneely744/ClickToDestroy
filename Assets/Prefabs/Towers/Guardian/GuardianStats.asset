@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerStats
   levels:
   - towerId: guardian1
-    towerName: GuardianTower1
+    towerName: 守護兵Lv1
     nextLevelPrefab: {fileID: 0}
     cost: 70
     sellRefund: 60
@@ -25,7 +25,7 @@ MonoBehaviour:
     hasLevel: 1
     guardianPrefab: {fileID: 3462640677572233118, guid: bf602f2d454a845d9853aaf3a866895c, type: 3}
   - towerId: guadian2
-    towerName: GuardianTower2
+    towerName: 守護兵Lv2
     nextLevelPrefab: {fileID: 0}
     cost: 120
     sellRefund: 70
@@ -36,7 +36,7 @@ MonoBehaviour:
     hasLevel: 1
     guardianPrefab: {fileID: 5031251932421842342, guid: cb7d3ed2343b843a4a04ee3c8beebc80, type: 3}
   - towerId: guardian3
-    towerName: GuardianTower3
+    towerName: 守護兵Lv3
     nextLevelPrefab: {fileID: 0}
     cost: 180
     sellRefund: 120
