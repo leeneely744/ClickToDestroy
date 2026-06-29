@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Tags = Constants.Tags;
 
 [RequireComponent(typeof(Animator))]
@@ -129,8 +131,7 @@ public class HeroController : MonoBehaviour, IDefender, IStatusProvider
             return;
         }
 
-        // スマホようにUIタッチも含めて無視する場合はInput.GetTouch(0).fingerIdを使う。
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        if (IsPointerOverUI())
         {
             return;
         }
@@ -155,6 +156,18 @@ public class HeroController : MonoBehaviour, IDefender, IStatusProvider
             return;
         }
         heroButton.DeactivateEffect();
+    }
+
+    private bool IsPointerOverUI()
+    {
+        if (EventSystem.current == null) return false;
+        var pointer = new PointerEventData(EventSystem.current)
+        {
+            position = Mouse.current.position.ReadValue()
+        };
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointer, results);
+        return results.Any(r => r.module is GraphicRaycaster);
     }
 
     private void HandleMovement()
