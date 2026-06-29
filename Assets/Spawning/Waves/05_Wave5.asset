@@ -20,23 +20,8 @@ MonoBehaviour:
     count: 4
     interval: 2.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
-    route: {fileID: 11400000, guid: 1cd19b5a888ef4f55848bac5465ee77c, type: 2}
-    startTime: 1
-    count: 4
-    interval: 2.5
-  - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
-    route: {fileID: 11400000, guid: 69414f54017484db9ba0e6d9d8106d3e, type: 2}
-    startTime: 0.4
-    count: 4
-    interval: 2.5
-  - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
     route: {fileID: 11400000, guid: 9e4d13482197441448455a3d10dc58a4, type: 2}
     startTime: 1.2
-    count: 4
-    interval: 2.5
-  - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
-    route: {fileID: 11400000, guid: 1cd19b5a888ef4f55848bac5465ee77c, type: 2}
-    startTime: 2.2
     count: 4
     interval: 2.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: 657be980a3c646408aa0fd955e6dd308, type: 3}
