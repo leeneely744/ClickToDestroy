@@ -101,6 +101,12 @@ public class GuardianController : MonoBehaviour, IDefender, IStatusProvider
 
     public void SetMoveTarget(Vector3 targetPosition)
     {
+        foreach (var enemy in currentTargets)
+        {
+            if (enemy != null) enemy.DisengageDefender();
+        }
+        currentTargets.Clear();
+        UpdateAttackAnimation(false);
         moveTarget = targetPosition;
         hasMoveTarget = true;
     }

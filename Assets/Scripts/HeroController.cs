@@ -175,6 +175,10 @@ public class HeroController : MonoBehaviour, IDefender, IStatusProvider
         if (isMoving)
         {
             // 移動を開始したらすべての敵を攻撃対象から外す
+            foreach (var enemy in enemiesInRange)
+            {
+                if (enemy != null) enemy.DisengageDefender();
+            }
             enemiesInRange.Clear();
 
             SwitchRunning(true);
