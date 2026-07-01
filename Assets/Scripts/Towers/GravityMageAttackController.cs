@@ -15,6 +15,9 @@ public class GravityMageAttackController : TowerAttackController
     public void SetDamageMultiplier(float multiplier) => damageMultiplier = multiplier;
     public void DoubleRoadShakeStrength() => roadShakeStrength *= 2f;
 
+    // StatusPanel に攻撃力を表示するための実装（projectile を使わない AoE タワー専用）
+    public override int? StatusDamage => damage;
+
     private void Awake()
     {
         spriteAnimator = GetComponent<GravityMageSpriteAnimator>();

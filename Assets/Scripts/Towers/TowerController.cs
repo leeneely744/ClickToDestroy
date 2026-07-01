@@ -290,7 +290,7 @@ public class TowerController : MonoBehaviour, IStatusProvider
         var sr = GetComponent<SpriteRenderer>();
         if (sr == null) sr = GetComponentInChildren<SpriteRenderer>();
         var proj = projectilePrefab != null ? projectilePrefab.GetComponent<Projectile>() : null;
-        int? atk = proj != null ? proj.damage : (int?)null;
+        int? atk = proj != null ? proj.damage : GetComponent<TowerAttackController>()?.StatusDamage;
         return new StatusInfo
         {
             displayName = !string.IsNullOrEmpty(towerName) ? towerName : gameObject.name.Replace("(Clone)", "").Trim(),

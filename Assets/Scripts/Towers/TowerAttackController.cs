@@ -37,6 +37,9 @@ public class TowerAttackController : MonoBehaviour
     public void SetAttackIntervalOverride(float val) => overrideInterval = val;
     public void ClearAttackIntervalOverride() => overrideInterval = null;
 
+    // StatusPanel に攻撃力を表示するための専用プロパティ。projectile を持たない派生クラスでオーバーライドする
+    public virtual int? StatusDamage => null;
+
     // 球を切り替えられるように別メソッド化
     public void SetProjectile(GameObject projectilePrefab, Transform firePoint, float projectileTravelTime)
     {
