@@ -16,7 +16,7 @@ public class GravityMageAttackController : TowerAttackController
     public void DoubleRoadShakeStrength() => roadShakeStrength *= 2f;
 
     // StatusPanel に攻撃力を表示するための実装（projectile を使わない AoE タワー専用）
-    public override int? StatusDamage => damage;
+    public override int? StatusDamage => Mathf.RoundToInt(damage * damageMultiplier);
 
     private void Awake()
     {
