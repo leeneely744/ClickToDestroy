@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   maxLifetime: 2
   speed: 8
-  damage: 15
+  damage: 25
   attackType: 0
   hitEffectPrefab: {fileID: 0}
   splashRadius: 0
@@ -179,3 +179,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   rotateToFlight: 1
+  rotationOffset: 0

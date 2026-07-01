@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::GravityMageAttackController
   canAttackFlying: 0
-  damage: 70
+  damage: 140
   roadShakeDuration: 1
   roadShakeStrength: 0.3
 --- !u!114 &1006
