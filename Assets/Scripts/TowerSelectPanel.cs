@@ -1,5 +1,5 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class TowerSelectPanel : MonoBehaviour
 {
@@ -13,6 +13,11 @@ public class TowerSelectPanel : MonoBehaviour
     [SerializeField] private GameObject cannonTowerPrefab;
     [SerializeField] private GameObject guardianTowerPrefab;
 
+    [SerializeField] private TextMeshProUGUI bowCostText;
+    [SerializeField] private TextMeshProUGUI magicCostText;
+    [SerializeField] private TextMeshProUGUI cannonCostText;
+    [SerializeField] private TextMeshProUGUI guardianCostText;
+
     void Awake()
     {
         Instance = this;
@@ -23,6 +28,19 @@ public class TowerSelectPanel : MonoBehaviour
         {
             Debug.LogError("Money component not found. Please place Money UI (with Money.cs) in the scene.");
         }
+
+        SetCostText(bowCostText, bowTowerPrefab);
+        SetCostText(magicCostText, magicTowerPrefab);
+        SetCostText(cannonCostText, cannonTowerPrefab);
+        SetCostText(guardianCostText, guardianTowerPrefab);
+    }
+
+    private void SetCostText(TextMeshProUGUI text, GameObject prefab)
+    {
+        if (text == null || prefab == null) return;
+        var controller = prefab.GetComponent<TowerController>();
+        if (controller == null) return;
+        text.text = controller.GetBuildCost().ToString();
     }
 
     public void Show(TowerPlace towerPlace)
