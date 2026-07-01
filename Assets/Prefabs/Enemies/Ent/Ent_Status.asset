@@ -16,18 +16,18 @@ MonoBehaviour:
   moveSpeed: 0.7
   isFlying: 0
   rewardMoney: 100
-  physicalResistance: 0.0
-  magicalResistance: 0.9
+  physicalResistance: 0
+  magicalResistance: 0.5
   meleeAttack:
     damage: 75
-    attackInterval: 1.0
+    attackInterval: 1
     attackType: 1
     isAreaAttack: 0
     attackRange: 0
   rangedAttack:
     damage: 0
-    attackInterval: 0.0
+    attackInterval: 0
     attackType: 1
     isAreaAttack: 0
-    attackRange: 0.0
+    attackRange: 0
   animatorOverride: {fileID: 22100000, guid: 64bc44257cdb431f8fb86d00283e0a57, type: 2}
