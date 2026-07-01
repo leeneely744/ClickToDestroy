@@ -13,6 +13,8 @@ public class DragController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     private TowerController hoveredTarget;
     private Color originalTargetColor;
 
+    [SerializeField] private float ghostScaleMultiplier = 1f;
+
     private static readonly Color FusionHighlightColor = new Color(0.3f, 1f, 0.3f, 1f);
 
     private void Awake()
@@ -122,7 +124,7 @@ public class DragController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         if (sr != null)
         {
             ghostObject.transform.position = sr.transform.position;
-            ghostObject.transform.localScale = sr.transform.lossyScale;
+            ghostObject.transform.localScale = sr.transform.lossyScale * ghostScaleMultiplier;
 
             ghostSr = ghostObject.AddComponent<SpriteRenderer>();
             ghostSr.sprite = sr.sprite;

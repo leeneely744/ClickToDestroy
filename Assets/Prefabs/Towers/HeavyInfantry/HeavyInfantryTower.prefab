@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96be6d542a7524ab2a63d66f575603c0, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DragController
+  ghostScaleMultiplier: 0.5
 --- !u!1 &9067837944873889670
 GameObject:
   m_ObjectHideFlags: 0
