@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 5000000000000000002}
   - component: {fileID: 5000000000000000003}
   - component: {fileID: 5000000000000000004}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AttackRangeCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

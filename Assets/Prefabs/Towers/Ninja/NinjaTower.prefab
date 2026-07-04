@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 1841338121856717144}
   - component: {fileID: 3724341318379239824}
   - component: {fileID: 3192518056761320386}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AttackRangeCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

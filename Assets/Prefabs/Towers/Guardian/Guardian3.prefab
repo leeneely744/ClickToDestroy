@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4256307638810944252}
   - component: {fileID: 4799263687086615139}
   - component: {fileID: 7247049718744871806}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Guardian3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60b918d72a7214a4f81c0afb13e2093f, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::GuardianController
   moveSpeed: 3
   stopDistance: 0.05
@@ -166,7 +166,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0

@@ -56,7 +56,12 @@ MonoBehaviour:
     interval: 1.5
   - enemyPrefab: {fileID: 2155804248953280118, guid: 20c7efa097e34c1e8f009e17d99d7620, type: 3}
     route: {fileID: 11400000, guid: ac0929530094a4a8aa2c74197f069517, type: 2}
+    startTime: 6.3
+    count: 10
+    interval: 3
+  - enemyPrefab: {fileID: 2155804248953280118, guid: 20c7efa097e34c1e8f009e17d99d7620, type: 3}
+    route: {fileID: 11400000, guid: ac0929530094a4a8aa2c74197f069517, type: 2}
     startTime: 6.1
-    count: 20
+    count: 10
     interval: 3
   delayBeforeNextWave: 2

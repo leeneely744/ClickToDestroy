@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1000000004000000001}
   - component: {fileID: 1000000006000000001}
   - component: {fileID: 5224147895374007222}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Paladin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

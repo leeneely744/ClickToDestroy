@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6928225460619767973}
   - component: {fileID: 858747134713181176}
   - component: {fileID: 1981466285936612211}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Ninja
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 4329915835601277520}
   - component: {fileID: 3246655150210984753}
   - component: {fileID: 6018437757949954482}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AttackRangeCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
