@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6928225460619767973}
   - component: {fileID: 858747134713181176}
   - component: {fileID: 6470225733331181483}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HeavyInfantry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7128771947952594558}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}

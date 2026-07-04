@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4473760598772253531}
   - component: {fileID: 5916962740624073502}
   - component: {fileID: 8211983066805463337}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AttackRangeCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96be6d542a7524ab2a63d66f575603c0, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DragController
-  ghostScaleMultiplier: 0.5
+  ghostScaleMultiplier: 1
 --- !u!1 &9067837944873889670
 GameObject:
   m_ObjectHideFlags: 0

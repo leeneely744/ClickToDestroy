@@ -95,7 +95,7 @@ public class DragController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
             if (ghostSr != null && recipe?.resultTowerPrefab != null)
             {
-                var resultSr = recipe.resultTowerPrefab.GetComponentInChildren<SpriteRenderer>();
+                var resultSr = FindBodySpriteRenderer(recipe.resultTowerPrefab.transform);
                 if (resultSr != null)
                     ghostSr.sprite = resultSr.sprite;
             }
@@ -120,7 +120,7 @@ public class DragController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     {
         ghostObject = new GameObject("DragGhost");
 
-        var sr = GetComponentInChildren<SpriteRenderer>();
+        var sr = FindBodySpriteRenderer(transform);
         if (sr != null)
         {
             ghostObject.transform.position = sr.transform.position;
@@ -137,6 +137,17 @@ public class DragController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         {
             ghostObject.transform.position = transform.position;
         }
+    }
+
+    // AttackRangeCircle は攻撃範囲表示用のオーバーレイなので、タワー本体の見た目としては採用しない
+    private static SpriteRenderer FindBodySpriteRenderer(Transform root)
+    {
+        foreach (var candidate in root.GetComponentsInChildren<SpriteRenderer>())
+        {
+            if (candidate.transform.name == "AttackRangeCircle") continue;
+            return candidate;
+        }
+        return null;
     }
 
     private void DestroyGhost()

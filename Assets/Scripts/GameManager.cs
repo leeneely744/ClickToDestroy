@@ -61,6 +61,9 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
         Time.timeScale = 1f;
 
+        // static な移動モード状態はシーンをまたいで残るため、リトライ時に必ずクリアする
+        MoveModeCoordinator.Clear();
+
         if (scoreBoard != null)
         {
             scoreBoard.ResetHp(initialHp);

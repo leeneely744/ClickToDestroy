@@ -149,7 +149,7 @@ MonoBehaviour:
   attackDamage: 15
   attackInterval: 1
   maxConcurrentTargets: 2
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 9075111843176101769}
 --- !u!95 &1000000006000000001
 Animator:
   serializedVersion: 7
@@ -271,3 +271,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4562253201063098372, guid: ef73574dcd01a41aeb45d199bb40aec3, type: 3}
   m_PrefabInstance: {fileID: 1000000008000000001}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9075111843176101769 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8075500134580479880, guid: ef73574dcd01a41aeb45d199bb40aec3, type: 3}
+  m_PrefabInstance: {fileID: 1000000008000000001}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ea2d0f19f759438eb6376d5a1e0862c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBarController

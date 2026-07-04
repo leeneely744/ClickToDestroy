@@ -281,7 +281,15 @@ public class TowerController : MonoBehaviour, IStatusProvider
 
     public void DestroyTower()
     {
-        towerPlace.SetOccupied(false);
+        if (towerPlace == null)
+        {
+            Debug.LogWarning($"[TowerController] DestroyTower: {name} に TowerPlace が設定されていません。スロット解放をスキップします。", this);
+        }
+        else
+        {
+            towerPlace.SetOccupied(false);
+        }
+
         Destroy(gameObject);
     }
 

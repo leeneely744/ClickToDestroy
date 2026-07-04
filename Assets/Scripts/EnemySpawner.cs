@@ -158,16 +158,24 @@ public class EnemySpawner : MonoBehaviour
     {
         var enemy = Instantiate(prefab, transform.position, Quaternion.identity);
         var controller = enemy.GetComponent<EnemyController>();
-        if (controller != null)
+        if (controller == null)
         {
-            controller.SetRoute(route);
-            controller.SetSpawner(this);
-        }
-        else
-        {
-            Debug.LogError($"[EnemySpawner] prefab '{prefab.name}' に EnemyController が見つかりません。", this);
+            Debug.LogError($"[EnemySpawner] prefab '{prefab.name}' に EnemyController が見つかりません。この敵は破棄します。", this);
+            Destroy(enemy);
+            return;
         }
 
+        if (!controller.SetRoute(route))
+        {
+            // SetRoute 側でエラーログ出力済み。
+            // カウントせずに破棄しないと activeEnemies が永久に減らず、ウェーブ進行がソフトロックする。
+            Destroy(enemy);
+            return;
+        }
+
+        controller.SetSpawner(this);
+
+        // 初期化に成功した敵だけをカウントする（NotifyEnemyRemoved と対で管理）
         activeEnemies++;
     }
 

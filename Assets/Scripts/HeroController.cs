@@ -115,7 +115,20 @@ public class HeroController : MonoBehaviour, IDefender, IStatusProvider
     public void Select()
     {
         if (IsDead) return;
+        MoveModeCoordinator.Activate(this, CancelMoveMode);
         isMoveMode = true;
+    }
+
+    // 他のユニットが移動モードを開始したときに MoveModeCoordinator から呼ばれる
+    private void CancelMoveMode()
+    {
+        isMoveMode = false;
+        if (heroButton == null)
+        {
+            Debug.LogWarning("[HeroController] HeroButton が設定されていません。Inspector を確認してください。", this);
+            return;
+        }
+        heroButton.DeactivateEffect();
     }
 
     // 移動モードで移動先を指定する
@@ -150,6 +163,7 @@ public class HeroController : MonoBehaviour, IDefender, IStatusProvider
         moveTarget = worldPosition;
         isMoving = true;
         isMoveMode = false;
+        MoveModeCoordinator.Deactivate(this);
         if (heroButton == null)
         {
             Debug.LogError("[HeroController] HeroButton が設定されていません。Inspector を確認してください。", this);
@@ -299,6 +313,7 @@ public class HeroController : MonoBehaviour, IDefender, IStatusProvider
             // スクリプト自体は有効なままにしておく。
             isMoving = false;
             isMoveMode = false;
+            MoveModeCoordinator.Deactivate(this);
             enemiesInRange.Clear();
             OnDeadStateChanged?.Invoke(true);
         }

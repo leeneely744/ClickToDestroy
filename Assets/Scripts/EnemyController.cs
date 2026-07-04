@@ -24,6 +24,10 @@ public class EnemyController : MonoBehaviour, IStatusProvider
     private EnemyAttackController attackController;
     [SerializeField] private HealthBarController healthBar;
     [SerializeField] private EnemyData enemyData;
+
+    [Tooltip("死亡アニメーションを再生してから GameObject を破棄するまでの秒数")]
+    [SerializeField] private float deathAnimationDuration = 1f;
+
     private int maxHp;
 
     private void Start()
@@ -158,15 +162,20 @@ public class EnemyController : MonoBehaviour, IStatusProvider
         }
     }
 
-    public void SetRoute(Route route)
+    /// <summary>
+    /// ルートを設定する。無効なルートの場合は false を返す。
+    /// 呼び出し側（EnemySpawner）は false のときこの敵を破棄してカウント対象から外すこと。
+    /// </summary>
+    public bool SetRoute(Route route)
     {
         if (route == null || route.waypoints == null || route.waypoints.Length == 0)
         {
             Debug.LogError($"[EnemyController] SetRoute: route または waypoints が無効です。route={route?.name ?? "null"}", this);
-            return;
+            return false;
         }
         waypoints = route.waypoints;
         transform.position = waypoints[0].position;
+        return true;
     }
 
     public void SetSpawner(EnemySpawner spawner)
@@ -176,6 +185,12 @@ public class EnemyController : MonoBehaviour, IStatusProvider
 
     public void TakeDamage(int damage, AttackType type = AttackType.Physical)
     {
+        // 死亡演出中の多重ダメージ（報酬の二重付与など）を防ぐ
+        if (IsDead)
+        {
+            return;
+        }
+
         float resistance = type == AttackType.Physical
             ? (enemyData != null ? enemyData.physicalResistance : 0f)
             : (enemyData != null ? enemyData.magicalResistance : 0f);
@@ -184,14 +199,40 @@ public class EnemyController : MonoBehaviour, IStatusProvider
         UpdateHealthBar();
         if (hp <= 0)
         {
-            moneyController?.AddMoney(rewardMoney);
-            NotifySpawnerRemoved();
+            Die();
+        }
+    }
 
-            if (animator != null)
-            {
-                animator.SetTrigger("Die");
-            }
+    /// <summary>
+    /// 死亡処理。報酬付与・スポナー通知のあと、コライダーと移動/攻撃を止めて
+    /// 死亡アニメーションを再生し、遅延付きで GameObject を破棄する。
+    /// </summary>
+    private void Die()
+    {
+        moneyController?.AddMoney(rewardMoney);
+        NotifySpawnerRemoved();
 
+        // タワーや兵士のターゲット・クリック判定から外れるようにコライダーを無効化
+        foreach (var col in GetComponentsInChildren<Collider2D>())
+        {
+            col.enabled = false;
+        }
+
+        // 交戦・移動を停止（enabled = false で FixedUpdate を止める）
+        if (attackController != null)
+        {
+            attackController.Disengage();
+            attackController.enabled = false;
+        }
+        enabled = false;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Die");
+            Destroy(gameObject, deathAnimationDuration);
+        }
+        else
+        {
             Destroy(gameObject);
         }
     }

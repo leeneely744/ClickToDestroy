@@ -23,6 +23,9 @@ public class GuardianController : MonoBehaviour, IDefender
     private GuardianSkill[] skills;
     [SerializeField] private HealthBarController healthBar;
 
+    [Tooltip("死亡アニメーションを再生してから GameObject を破棄するまでの秒数")]
+    [SerializeField] private float deathAnimationDuration = 1f;
+
     void Awake()
     {
         ownerTower = GetComponentInParent<GuardianTowerControllerBase>();
@@ -42,9 +45,16 @@ public class GuardianController : MonoBehaviour, IDefender
 
     void Update()
     {
+        HandleDeath();
+
+        // 死亡演出中は移動・戦闘処理を行わない
+        if (isDead)
+        {
+            return;
+        }
+
         HandleMovement();
         HandleCombat();
-        HandleDeath();
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -124,7 +134,21 @@ public class GuardianController : MonoBehaviour, IDefender
             ownerTower.OnGuardianDestroyed(ownerTower.AttackInterval);
         }
 
-        Destroy(gameObject);
+        // 交戦中の敵を解放してから死亡演出に入る
+        foreach (var enemy in currentTargets)
+        {
+            if (enemy != null) enemy.DisengageDefender();
+        }
+        currentTargets.Clear();
+
+        // 敵のターゲット・クリック判定から外れるようにコライダーを無効化
+        foreach (var col in GetComponentsInChildren<Collider2D>())
+        {
+            col.enabled = false;
+        }
+
+        // Die トリガーは TakeDamage 側で発火済み。アニメーションを見せてから破棄する。
+        Destroy(gameObject, animator != null ? deathAnimationDuration : 0f);
     }
 
     private void HandleCombat()

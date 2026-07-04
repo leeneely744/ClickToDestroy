@@ -156,12 +156,20 @@ public class GuardianTowerControllerBase : TowerController
 
     public virtual void StartMoveMode()
     {
+        MoveModeCoordinator.Activate(this, CancelMoveMode);
         isMoveModeActive = true;
+    }
+
+    // 他のユニットが移動モードを開始したときに MoveModeCoordinator から呼ばれる
+    private void CancelMoveMode()
+    {
+        isMoveModeActive = false;
     }
 
     protected virtual void ExitMoveMode()
     {
         isMoveModeActive = false;
+        MoveModeCoordinator.Deactivate(this);
     }
 
     private void HandleGuardianMoveInput()
