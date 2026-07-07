@@ -1,5 +1,6 @@
 public interface IPurchasableSkill
 {
+    string SkillName { get; }
     int Cost { get; }
     bool IsPurchased { get; }
 

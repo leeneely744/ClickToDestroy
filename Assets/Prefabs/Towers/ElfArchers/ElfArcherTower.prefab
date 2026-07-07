@@ -115,7 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea03000000000000000000000000a003, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::ElfArcherSpeedUpSkill
-  skillName: "連射速UP"
+  skillName: "\u9023\u5C04\u901FUP"
+  description: "\u3082\u3046\u4E00\u4EBA\u5897\u3084\u3059"
   cost: 300
   archer3: {fileID: 7000}
   boostedInterval: 0.15
@@ -463,7 +464,6 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &5003
-
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class TowerActionPanel : MonoBehaviour
@@ -6,6 +7,19 @@ public class TowerActionPanel : MonoBehaviour
     public static TowerActionPanel Instance;
     public GameObject nextLevelPrefab;
     private TowerController towerController;
+
+    [Header("Skill Purchase Confirmation")]
+    [Tooltip("スキルボタンが確認状態のときに表示するスプライト")]
+    [SerializeField] private Sprite confirmSprite;
+
+    // 確認状態のスキルボタン index。-1 = 通常状態
+    private int pendingConfirmIndex = -1;
+
+    private GameObject[] skillButtons;
+    private TMPro.TextMeshProUGUI[] skillNameTexts;
+    private TMPro.TextMeshProUGUI[] skillCostTexts;
+    private Image[] skillButtonImages;
+    private Sprite[] normalSprites;
 
     [SerializeField] private GameObject upgradeButton;
     [SerializeField] private TMPro.TextMeshProUGUI upgradeCostText;
@@ -29,11 +43,42 @@ public class TowerActionPanel : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
+        skillButtons = new[] { skill1Button, skill2Button, skill3Button };
+        skillNameTexts = new[] { skill1NameText, skill2NameText, skill3NameText };
+        skillCostTexts = new[] { skill1CostText, skill2CostText, skill3CostText };
+        skillButtonImages = new Image[skillButtons.Length];
+        normalSprites = new Sprite[skillButtons.Length];
+        for (int i = 0; i < skillButtons.Length; i++)
+        {
+            if (skillButtons[i] == null) continue;
+            skillButtonImages[i] = skillButtons[i].GetComponent<Image>();
+            if (skillButtonImages[i] == null)
+            {
+                Debug.LogWarning($"[TowerActionPanel] skill{i + 1}Button に Image がありません。確認スプライトの切替ができません。", this);
+                continue;
+            }
+            normalSprites[i] = skillButtonImages[i].sprite;
+        }
+
         gameObject.SetActive(false);
+    }
+
+    private void LateUpdate()
+    {
+        // StatusPanel が外クリック等で閉じられたら確認状態も解除する。
+        // EventSystem のクリック処理より後に走る LateUpdate で判定することで、
+        // 同一フレームの確認クリック（購入）を誤ってリセットしない。
+        if (pendingConfirmIndex >= 0 && StatusPanel.Instance != null && !StatusPanel.Instance.IsVisible)
+        {
+            ResetConfirmState();
+        }
     }
 
     public void Show(TowerController controller)
     {
+        ResetConfirmState();
+
         towerController = controller;
         if (towerController == null)
         {
@@ -58,16 +103,17 @@ public class TowerActionPanel : MonoBehaviour
             moveGuardianButton.SetActive(towerController is GuardianTowerControllerBase);
 
         var skills = towerController.GetSkills();
-        RefreshSkillButton(skill1Button, skill1CostText, skills.Length > 0 ? skills[0] : null);
-        RefreshSkillButton(skill2Button, skill2CostText, skills.Length > 1 ? skills[1] : null);
-        RefreshSkillButton(skill3Button, skill3CostText, skills.Length > 2 ? skills[2] : null);
+        for (int i = 0; i < skillButtons.Length; i++)
+        {
+            RefreshSkillButton(skillButtons[i], skillNameTexts[i], skillCostTexts[i], skills.Length > i ? skills[i] : null);
+        }
 
         RefreshRow(rowTop);
         RefreshRow(rowMiddle);
         RefreshRow(rowBottom);
     }
 
-    private void RefreshSkillButton(GameObject button, TMPro.TextMeshProUGUI costText, IPurchasableSkill skill)
+    private void RefreshSkillButton(GameObject button, TMPro.TextMeshProUGUI nameText, TMPro.TextMeshProUGUI costText, IPurchasableSkill skill)
     {
         if (button == null) return;
         if (skill == null || skill.IsPurchased)
@@ -76,7 +122,7 @@ public class TowerActionPanel : MonoBehaviour
             return;
         }
         button.SetActive(true);
-        Debug.Log($"[RefreshSkillButton] button={button.name}, costText={(costText != null ? costText.name : "null")}, Cost={skill.Cost}");
+        if (nameText != null) nameText.text = skill.SkillName;
         if (costText != null) costText.text = skill.Cost.ToString();
     }
 
@@ -97,6 +143,8 @@ public class TowerActionPanel : MonoBehaviour
 
     public void Hide()
     {
+        ResetConfirmState();
+
         if (towerController == null)
         {
             Debug.LogError("TowerController not found");
@@ -129,33 +177,84 @@ public class TowerActionPanel : MonoBehaviour
         Hide();
     }
 
-    public void OnSkill1Click()
+    // Button の onClick には従来どおりこの 3 メソッドを割り当てる
+    public void OnSkill1Click() => OnSkillButtonClick(0);
+    public void OnSkill2Click() => OnSkillButtonClick(1);
+    public void OnSkill3Click() => OnSkillButtonClick(2);
+
+    /// <summary>
+    /// スキルボタンの 2 段階購入フロー。
+    /// 1 クリック目: ボタンを確認状態にし、StatusPanel にスキルの説明を表示する。
+    /// 2 クリック目（確認状態のボタン）: 購入を実行する。
+    /// </summary>
+    private void OnSkillButtonClick(int index)
     {
         if (towerController == null) return;
-        if (towerController.TryPurchaseSkill(0))
+
+        var skills = towerController.GetSkills();
+        if (index < 0 || index >= skills.Length) return;
+
+        if (pendingConfirmIndex == index)
         {
-            skill1Button.SetActive(false);
-            RefreshRow(rowTop);
+            ConfirmPurchase(index);
+        }
+        else
+        {
+            EnterConfirmState(index, skills[index]);
         }
     }
 
-    public void OnSkill2Click()
+    private void EnterConfirmState(int index, IPurchasableSkill skill)
     {
-        if (towerController == null) return;
-        if (towerController.TryPurchaseSkill(1))
+        // 別のボタンが確認状態なら先に戻す
+        ResetConfirmState();
+        pendingConfirmIndex = index;
+
+        if (confirmSprite == null)
         {
-            skill2Button.SetActive(false);
-            RefreshRow(rowTop);
+            Debug.LogWarning("[TowerActionPanel] confirmSprite が設定されていません。Inspector で確認ボタン用スプライトを割り当ててください。", this);
+        }
+        else if (skillButtonImages[index] != null)
+        {
+            skillButtonImages[index].sprite = confirmSprite;
+        }
+
+        if (StatusPanel.Instance == null)
+        {
+            Debug.LogWarning("[TowerActionPanel] StatusPanel がシーンに存在しません。スキル説明を表示できません。", this);
+            return;
+        }
+        StatusPanel.Instance.ShowSkillInfo(skill);
+    }
+
+    private void ConfirmPurchase(int index)
+    {
+        ResetConfirmState();
+
+        if (!towerController.TryPurchaseSkill(index))
+        {
+            // 資金不足など。確認状態は解除済みなので通常状態に戻るだけ
+            return;
+        }
+
+        skillButtons[index].SetActive(false);
+        RefreshRow(index == 2 ? rowMiddle : rowTop);
+
+        if (StatusPanel.Instance != null)
+        {
+            StatusPanel.Instance.Hide();
         }
     }
 
-    public void OnSkill3Click()
+    private void ResetConfirmState()
     {
-        if (towerController == null) return;
-        if (towerController.TryPurchaseSkill(2))
+        if (pendingConfirmIndex < 0) return;
+
+        int index = pendingConfirmIndex;
+        pendingConfirmIndex = -1;
+        if (skillButtonImages != null && skillButtonImages[index] != null && normalSprites[index] != null)
         {
-            skill3Button.SetActive(false);
-            RefreshRow(rowMiddle);
+            skillButtonImages[index].sprite = normalSprites[index];
         }
     }
 

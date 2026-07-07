@@ -45,6 +45,9 @@ public class StatusPanel : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    /// <summary>パネルが表示中かどうか（TowerActionPanel の確認状態同期に使用）</summary>
+    public bool IsVisible => gameObject.activeSelf;
+
     public void Show(IStatusProvider provider)
     {
         currentInfo = provider.GetStatusInfo();
@@ -95,6 +98,37 @@ public class StatusPanel : MonoBehaviour
                 magicDefText.text = pct == 0 ? "魔防：なし" : $"魔防：{pct}%";
             }
         }
+
+        gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// スキル購入確認用の表示モード。NameText にスキル名だけを表示し、
+    /// ステータス系の行（HP・攻撃・防御）とアイコンは非表示にする。
+    /// </summary>
+    public void ShowSkillInfo(IPurchasableSkill skill)
+    {
+        if (skill == null)
+        {
+            Debug.LogError("[StatusPanel] ShowSkillInfo: skill が null です。", this);
+            return;
+        }
+
+        currentInfo = null;
+        // スキルは MonoBehaviour なので、タワー破棄時に providerObject が null になり自動で閉じる
+        providerObject = skill as Object;
+        justShown = true;
+
+        if (iconImage != null)
+            iconImage.enabled = false;
+
+        if (nameText != null)
+            nameText.text = skill.SkillName;
+
+        if (hpText != null) hpText.gameObject.SetActive(false);
+        if (attackText != null) attackText.gameObject.SetActive(false);
+        if (physDefText != null) physDefText.gameObject.SetActive(false);
+        if (magicDefText != null) magicDefText.gameObject.SetActive(false);
 
         gameObject.SetActive(true);
     }
