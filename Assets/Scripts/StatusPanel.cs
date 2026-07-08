@@ -45,9 +45,6 @@ public class StatusPanel : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    /// <summary>パネルが表示中かどうか（TowerActionPanel の確認状態同期に使用）</summary>
-    public bool IsVisible => gameObject.activeSelf;
-
     public void Show(IStatusProvider provider)
     {
         currentInfo = provider.GetStatusInfo();

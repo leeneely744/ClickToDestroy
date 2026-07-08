@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 
@@ -20,6 +21,7 @@ public class TowerActionPanel : MonoBehaviour
     private TMPro.TextMeshProUGUI[] skillCostTexts;
     private Image[] skillButtonImages;
     private Sprite[] normalSprites;
+    private Canvas parentCanvas;
 
     [SerializeField] private GameObject upgradeButton;
     [SerializeField] private TMPro.TextMeshProUGUI upgradeCostText;
@@ -61,15 +63,34 @@ public class TowerActionPanel : MonoBehaviour
             normalSprites[i] = skillButtonImages[i].sprite;
         }
 
+        parentCanvas = GetComponentInParent<Canvas>();
+
         gameObject.SetActive(false);
     }
 
-    private void LateUpdate()
+    private void Update()
     {
-        // StatusPanel が外クリック等で閉じられたら確認状態も解除する。
-        // EventSystem のクリック処理より後に走る LateUpdate で判定することで、
-        // 同一フレームの確認クリック（購入）を誤ってリセットしない。
-        if (pendingConfirmIndex >= 0 && StatusPanel.Instance != null && !StatusPanel.Instance.IsVisible)
+        // 確認状態のとき、確認ボタンの外を「押した」瞬間にキャンセルする。
+        // Button.onClick はマウスを離した瞬間に発火するため、
+        // 「押した位置がボタン内なら何もしない」ことで確認クリックと競合しない。
+        if (pendingConfirmIndex < 0) return;
+
+        var pointer = Pointer.current;
+        if (pointer == null || !pointer.press.wasPressedThisFrame) return;
+
+        var buttonObj = skillButtons[pendingConfirmIndex];
+        if (buttonObj == null || buttonObj.transform is not RectTransform buttonRect)
+        {
+            ResetConfirmState();
+            return;
+        }
+
+        Vector2 screenPos = pointer.position.ReadValue();
+        Camera uiCamera = parentCanvas != null && parentCanvas.renderMode != RenderMode.ScreenSpaceOverlay
+            ? parentCanvas.worldCamera
+            : null;
+
+        if (!RectTransformUtility.RectangleContainsScreenPoint(buttonRect, screenPos, uiCamera))
         {
             ResetConfirmState();
         }
