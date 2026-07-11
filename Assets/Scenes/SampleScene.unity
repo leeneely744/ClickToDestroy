@@ -2672,6 +2672,7 @@ GameObject:
   - component: {fileID: 350379628}
   - component: {fileID: 350379627}
   - component: {fileID: 350379626}
+  - component: {fileID: 350379629}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -2793,6 +2794,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350379624}
   m_CullTransparentMesh: 1
+--- !u!114 &350379629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350379624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed396d4fc9b88469ea11405cced1edc1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::HideOnWebGL
 --- !u!1 &351538024
 GameObject:
   m_ObjectHideFlags: 0
@@ -6171,6 +6184,7 @@ GameObject:
   - component: {fileID: 813502300}
   - component: {fileID: 813502299}
   - component: {fileID: 813502298}
+  - component: {fileID: 813502301}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -6292,6 +6306,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 813502296}
   m_CullTransparentMesh: 1
+--- !u!114 &813502301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813502296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed396d4fc9b88469ea11405cced1edc1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::HideOnWebGL
 --- !u!1 &813738064
 GameObject:
   m_ObjectHideFlags: 0
@@ -9452,7 +9478,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -118, y: -42}
+  m_AnchoredPosition: {x: -90, y: -42}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1160603084
@@ -12099,6 +12125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerActionPanel
   nextLevelPrefab: {fileID: 0}
   confirmSprite: {fileID: -6263334960378335505, guid: 1252789ae2b5640a9a2c5284cabb9785, type: 3}
+  sellButton: {fileID: 972716709}
   upgradeButton: {fileID: 1728843914}
   upgradeCostText: {fileID: 439963737}
   sellRefundText: {fileID: 743683293}
@@ -15386,7 +15413,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -118, y: -42}
+  m_AnchoredPosition: {x: -90, y: -42}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1794656882

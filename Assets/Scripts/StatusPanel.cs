@@ -100,27 +100,21 @@ public class StatusPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// スキル購入確認用の表示モード。NameText にスキル名だけを表示し、
+    /// 任意のテキストだけを NameText に表示するモード（購入・売却などの確認表示用）。
     /// ステータス系の行（HP・攻撃・防御）とアイコンは非表示にする。
+    /// owner が破棄されるとパネルは自動で閉じる。
     /// </summary>
-    public void ShowSkillInfo(IPurchasableSkill skill)
+    public void ShowText(string message, Object owner)
     {
-        if (skill == null)
-        {
-            Debug.LogError("[StatusPanel] ShowSkillInfo: skill が null です。", this);
-            return;
-        }
-
         currentInfo = null;
-        // スキルは MonoBehaviour なので、タワー破棄時に providerObject が null になり自動で閉じる
-        providerObject = skill as Object;
+        providerObject = owner;
         justShown = true;
 
         if (iconImage != null)
             iconImage.enabled = false;
 
         if (nameText != null)
-            nameText.text = skill.SkillName;
+            nameText.text = message;
 
         if (hpText != null) hpText.gameObject.SetActive(false);
         if (attackText != null) attackText.gameObject.SetActive(false);
