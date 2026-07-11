@@ -53,6 +53,9 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator RunWaves()
     {
+        // ヒーロー操作のヒント（初回のみ。表示中は timeScale = 0 なので startDelay の消化も止まる）
+        TutorialHintService.TryShow(TutorialHints.Hero);
+
         yield return new WaitForSeconds(level.startDelay);
 
         for (int waveIndex = 0; waveIndex < level.waves.Length; waveIndex++)
@@ -62,6 +65,12 @@ public class EnemySpawner : MonoBehaviour
             {
                 Debug.LogWarning($"[EnemySpawner] waves[{waveIndex}] が null です。スキップします。", this);
                 continue;
+            }
+
+            // 飛行敵を含むウェーブの開始直前に警告ヒント（初回のみ）
+            if (WaveContainsFlyingEnemy(wave))
+            {
+                TutorialHintService.TryShow(TutorialHints.Flying);
             }
 
             GameManager.Instance?.UpdateWave(waveIndex + 1, level.waves.Length);
@@ -182,5 +191,29 @@ public class EnemySpawner : MonoBehaviour
     public void NotifyEnemyRemoved(EnemyController enemy)
     {
         activeEnemies = Mathf.Max(0, activeEnemies - 1);
+    }
+
+    private static bool WaveContainsFlyingEnemy(WaveAsset wave)
+    {
+        if (wave.groups == null)
+        {
+            return false;
+        }
+
+        foreach (var g in wave.groups)
+        {
+            if (g?.enemyPrefab == null)
+            {
+                continue;
+            }
+
+            var controller = g.enemyPrefab.GetComponent<EnemyController>();
+            if (controller != null && controller.Data != null && controller.Data.isFlying)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

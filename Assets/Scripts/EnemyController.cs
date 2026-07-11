@@ -20,6 +20,11 @@ public class EnemyController : MonoBehaviour, IStatusProvider
     public bool IsDead => hp <= 0;
     public bool IsFlying => isFlying;
 
+    /// <summary>
+    /// 敵の定義データ。プレハブの状態でも参照できる（チュートリアルの飛行敵判定などに使用）。
+    /// </summary>
+    public EnemyData Data => enemyData;
+
     private Animator animator;
     private EnemyAttackController attackController;
     [SerializeField] private HealthBarController healthBar;

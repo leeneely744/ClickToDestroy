@@ -87,5 +87,40 @@ public class TowerSelectPanel : MonoBehaviour
             newTowerObject.GetComponent<TowerController>().SetTowerPlace(currentTowerPlace);
         }
         Hide();
+
+        // 兵士タワーを初めて建てたときのヒント
+        if (newTowerObject.GetComponent<GuardianTowerControllerBase>() != null)
+        {
+            TutorialHintService.TryShow(TutorialHints.GuardianMove);
+        }
+
+        // 合成可能なペアが盤面に初めて成立したときのヒント
+        CheckFusionHint();
+    }
+
+    private void CheckFusionHint()
+    {
+        if (TutorialHintService.HasSeen(TutorialHints.Fusion.Id))
+        {
+            return;
+        }
+
+        if (FusionManager.Instance == null)
+        {
+            return;
+        }
+
+        var towers = FindObjectsByType<TowerController>(FindObjectsSortMode.None);
+        for (int i = 0; i < towers.Length; i++)
+        {
+            for (int j = i + 1; j < towers.Length; j++)
+            {
+                if (FusionManager.Instance.CanFuse(towers[i], towers[j], out _))
+                {
+                    TutorialHintService.TryShow(TutorialHints.Fusion);
+                    return;
+                }
+            }
+        }
     }
 }

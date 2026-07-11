@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         InitializeGame();
+
+        // ゲームの目的と基本操作のヒント（初回のみ表示）
+        TutorialHintService.TryShow(TutorialHints.Intro);
     }
 
     private void CacheInitialValues()
@@ -63,6 +66,7 @@ public class GameManager : MonoBehaviour
 
         // static な移動モード状態はシーンをまたいで残るため、リトライ時に必ずクリアする
         MoveModeCoordinator.Clear();
+        TutorialHintService.ClearRuntimeState();
 
         if (scoreBoard != null)
         {

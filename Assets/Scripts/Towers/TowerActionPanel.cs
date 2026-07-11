@@ -134,9 +134,21 @@ public class TowerActionPanel : MonoBehaviour
             moveGuardianButton.SetActive(towerController is GuardianTowerControllerBase);
 
         var skills = towerController.GetSkills();
+        bool hasUnpurchasedSkill = false;
         for (int i = 0; i < SkillCount; i++)
         {
-            RefreshSkillButton(confirmButtons[i], skillNameTexts[i], skillCostTexts[i], skills.Length > i ? skills[i] : null);
+            var skill = skills.Length > i ? skills[i] : null;
+            RefreshSkillButton(confirmButtons[i], skillNameTexts[i], skillCostTexts[i], skill);
+            if (skill != null && !skill.IsPurchased)
+            {
+                hasUnpurchasedSkill = true;
+            }
+        }
+
+        // 購入可能なスキルを初めて目にしたときのヒント
+        if (hasUnpurchasedSkill)
+        {
+            TutorialHintService.TryShow(TutorialHints.Skill);
         }
 
         RefreshRow(rowTop);
