@@ -134,16 +134,6 @@ public class TowerController : MonoBehaviour, IStatusProvider
         }
     }
 
-    private void PlayAttackAnimation()
-    {
-        // ひとまず従来どおり、子オブジェクトについている ArcherAnimatorController に委譲するだけに戻す
-        var legacyArcher = GetComponentInChildren<ArcherAnimatorController>();
-        if (legacyArcher != null)
-        {
-            legacyArcher.PlayAttack();
-        }
-    }
-
     public void SetTowerPlace(TowerPlace place)
     {
         towerPlace = place;
