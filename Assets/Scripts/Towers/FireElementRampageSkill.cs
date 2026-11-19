@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using AnimatorParams = Constants.AnimatorParams;
 
 public class FireElementRampageSkill : TowerSkill
 {
@@ -27,12 +28,12 @@ public class FireElementRampageSkill : TowerSkill
     {
         isRampaging = true;
         Owner.SetAttackIntervalOverride(rampageInterval);
-        if (animator != null) animator.SetBool("isSkillActive", true);
+        if (animator != null) animator.SetBool(AnimatorParams.IsSkillActive, true);
 
         yield return new WaitForSeconds(rampageDuration);
 
         Owner.ClearAttackIntervalOverride();
-        if (animator != null) animator.SetBool("isSkillActive", false);
+        if (animator != null) animator.SetBool(AnimatorParams.IsSkillActive, false);
         isRampaging = false;
 
         isOnCooldown = true;

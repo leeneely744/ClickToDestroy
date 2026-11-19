@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Tags = Constants.Tags;
+using AnimatorParams = Constants.AnimatorParams;
 
 public class GuardianController : MonoBehaviour, IDefender
 {
@@ -116,7 +117,7 @@ public class GuardianController : MonoBehaviour, IDefender
 
         if (animator != null)
         {
-            animator.SetBool("isWalking", isWalking);
+            animator.SetBool(AnimatorParams.IsWalking, isWalking);
         }
     }
 
@@ -205,7 +206,7 @@ public class GuardianController : MonoBehaviour, IDefender
         UpdateHealthBar();
         if (currentHp <= 0 && animator != null)
         {
-            animator.SetTrigger("Die");
+            animator.SetTrigger(AnimatorParams.Die);
         }
     }
 
@@ -221,10 +222,10 @@ public class GuardianController : MonoBehaviour, IDefender
     {
         if (animator != null)
         {
-            animator.SetBool("isAttacking", isAttacking);
+            animator.SetBool(AnimatorParams.IsAttacking, isAttacking);
             if (isAttacking)
             {
-                animator.SetBool("isWalking", false);
+                animator.SetBool(AnimatorParams.IsWalking, false);
             }
         }
     }

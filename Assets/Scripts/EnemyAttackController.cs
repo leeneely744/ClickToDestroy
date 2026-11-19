@@ -1,4 +1,5 @@
 using UnityEngine;
+using AnimatorParams = Constants.AnimatorParams;
 
 public class EnemyAttackController : MonoBehaviour
 {
@@ -155,7 +156,7 @@ public class EnemyAttackController : MonoBehaviour
     private void UpdateAnimations()
     {
         if (animator == null) return;
-        animator.SetBool("isAttacking", IsEngaged);
+        animator.SetBool(AnimatorParams.IsAttacking, IsEngaged);
     }
 
     public void ApplyData(EnemyData data)

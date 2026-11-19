@@ -1,4 +1,5 @@
 using UnityEngine;
+using AnimatorParams = Constants.AnimatorParams;
 
 public class EnemyController : MonoBehaviour, IStatusProvider
 {
@@ -233,7 +234,7 @@ public class EnemyController : MonoBehaviour, IStatusProvider
 
         if (animator != null)
         {
-            animator.SetTrigger("Die");
+            animator.SetTrigger(AnimatorParams.Die);
             Destroy(gameObject, deathAnimationDuration);
         }
         else

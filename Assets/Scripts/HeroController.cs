@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Tags = Constants.Tags;
+using AnimatorParams = Constants.AnimatorParams;
 
 [RequireComponent(typeof(Animator))]
 public class HeroController : MonoBehaviour, IDefender, IStatusProvider
@@ -325,24 +326,17 @@ public class HeroController : MonoBehaviour, IDefender, IStatusProvider
 
     private void SwitchDead(bool isDead)
     {
-        animator.SetBool(AnimatorParams.IsDead, isDead);
+        animator.SetBool(AnimatorParams.HeroIsDead, isDead);
     }
 
     private void SwitchRunning(bool isRunning)
     {
-        animator.SetBool(AnimatorParams.IsRunning, isRunning);
+        animator.SetBool(AnimatorParams.HeroIsRunning, isRunning);
     }
 
     private void TriggerAttackAnimation()
     {
-        animator.SetTrigger(AnimatorParams.Attack);
-    }
-
-    private static class AnimatorParams
-    {
-        public const string IsDead = "IsDead";
-        public const string IsRunning = "IsRunning";
-        public const string Attack = "Attack";
+        animator.SetTrigger(AnimatorParams.HeroAttack);
     }
 
     private void UpdateHealthBar()
