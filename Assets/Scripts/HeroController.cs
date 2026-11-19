@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using Tags = Constants.Tags;
 
 [RequireComponent(typeof(Animator))]
@@ -139,26 +136,20 @@ public class HeroController : MonoBehaviour, IDefender, IStatusProvider
             return;
         }
 
-        if (Mouse.current == null || !Mouse.current.leftButton.wasPressedThisFrame)
+        if (!PointerInputUtils.WasLeftClickPressedThisFrame())
         {
             return;
         }
 
-        if (IsPointerOverUI())
+        if (PointerInputUtils.IsPointerOverUI())
         {
             return;
         }
 
-        Camera mainCamera = Camera.main;
-        if (mainCamera == null)
+        if (!PointerInputUtils.TryGetPointerWorldPosition(out Vector3 worldPosition, this))
         {
-            Debug.LogWarning("Main Camera not found while handling hero move input.");
             return;
         }
-
-        Vector2 screenPosition = Mouse.current.position.ReadValue();
-        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, mainCamera.nearClipPlane));
-        worldPosition.z = 0f;
 
         moveTarget = worldPosition;
         isMoving = true;
@@ -170,18 +161,6 @@ public class HeroController : MonoBehaviour, IDefender, IStatusProvider
             return;
         }
         heroButton.DeactivateEffect();
-    }
-
-    private bool IsPointerOverUI()
-    {
-        if (EventSystem.current == null) return false;
-        var pointer = new PointerEventData(EventSystem.current)
-        {
-            position = Mouse.current.position.ReadValue()
-        };
-        var results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointer, results);
-        return results.Any(r => r.module is GraphicRaycaster);
     }
 
     private void HandleMovement()

@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class GuardianTowerControllerBase : TowerController
 {
@@ -174,29 +171,21 @@ public class GuardianTowerControllerBase : TowerController
 
     private void HandleGuardianMoveInput()
     {
-        if (Mouse.current == null || !Mouse.current.leftButton.wasPressedThisFrame)
+        if (!PointerInputUtils.WasLeftClickPressedThisFrame())
         {
             return;
         }
 
-        // Physics2DRaycaster も IsPointerOverGameObject に含まれるため、
-        // UI（GraphicRaycaster）のみをチェックして移動入力をブロックする。
-        if (IsPointerOverUI())
+        if (PointerInputUtils.IsPointerOverUI())
         {
             return;
         }
 
-        Camera mainCamera = Camera.main;
-        if (mainCamera == null)
+        if (!PointerInputUtils.TryGetPointerWorldPosition(out Vector3 worldPosition, this))
         {
-            Debug.LogWarning("Main Camera not found while handling guardian move input.");
             ExitMoveMode();
             return;
         }
-
-        Vector2 screenPosition = Mouse.current.position.ReadValue();
-        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, mainCamera.nearClipPlane));
-        worldPosition.z = 0f;
 
         if (IsWithinMoveRange(worldPosition))
         {
@@ -208,18 +197,6 @@ public class GuardianTowerControllerBase : TowerController
             ShowInvalidMoveFeedback(worldPosition);
             ExitMoveMode();
         }
-    }
-
-    private bool IsPointerOverUI()
-    {
-        if (EventSystem.current == null) return false;
-        var pointer = new PointerEventData(EventSystem.current)
-        {
-            position = Mouse.current.position.ReadValue()
-        };
-        var results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointer, results);
-        return results.Any(r => r.module is GraphicRaycaster);
     }
 
     protected virtual bool IsWithinMoveRange(Vector3 targetPosition)
