@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// チュートリアルヒントの既読管理と表示キュー。
@@ -46,6 +47,18 @@ public static class TutorialHintService
         queue.Clear();
         isShowing = false;
     }
+
+    // シーン遷移時に runtime 状態（表示キュー・表示中フラグ）を自動クリアする。
+    // 既読の PlayerPrefs には触れないため、「一度表示したヒントは二度と出ない」挙動は維持される。
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void Bootstrap()
+    {
+        ClearRuntimeState();
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private static void OnSceneUnloaded(Scene _) => ClearRuntimeState();
 
     /// <summary>全ヒントを未読に戻す（動作確認用）。</summary>
     public static void ResetAll()

@@ -1,4 +1,6 @@
 using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 「移動先クリック待ち」モードをゲーム全体で同時に 1 つに限定するコーディネーター。
@@ -52,4 +54,16 @@ public static class MoveModeCoordinator
         activeOwner = null;
         cancelActive = null;
     }
+
+    // シーン遷移時に自動で状態をクリアする。static 状態はシーンをまたいで生存するため、
+    // 破棄済みオブジェクトへの参照を残さないよう、シーンアンロードのたびにリセットする。
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void Bootstrap()
+    {
+        Clear();
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private static void OnSceneUnloaded(Scene _) => Clear();
 }
