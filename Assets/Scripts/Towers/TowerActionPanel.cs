@@ -3,9 +3,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 
-public class TowerActionPanel : MonoBehaviour
+public class TowerActionPanel : Singleton<TowerActionPanel>
 {
-    public static TowerActionPanel Instance;
     public GameObject nextLevelPrefab;
     private TowerController towerController;
 
@@ -47,10 +46,8 @@ public class TowerActionPanel : MonoBehaviour
     [SerializeField] private GameObject rowMiddle;
     [SerializeField] private GameObject rowBottom;
 
-    void Awake()
+    protected override void OnSingletonAwake()
     {
-        Instance = this;
-
         confirmButtons = new[] { skill1Button, skill2Button, skill3Button, upgradeButton, sellButton };
         skillNameTexts = new[] { skill1NameText, skill2NameText, skill3NameText };
         skillCostTexts = new[] { skill1CostText, skill2CostText, skill3CostText };

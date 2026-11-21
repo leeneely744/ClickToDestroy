@@ -1,21 +1,11 @@
 using UnityEngine;
 
-public class FusionManager : MonoBehaviour
+public class FusionManager : Singleton<FusionManager>
 {
-    public static FusionManager Instance { get; private set; }
-
     private TowerFusionService fusionService;
 
-    private void Awake()
+    protected override void OnSingletonAwake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-
         fusionService = new TowerFusionService();
         fusionService.LoadFromResources("TowerFusion");
     }

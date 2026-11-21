@@ -16,10 +16,8 @@ using UnityEngine.InputSystem;
 //
 // グループ不要。全て StatusPanel の直下に並べる。
 // ======================================================
-public class StatusPanel : MonoBehaviour
+public class StatusPanel : Singleton<StatusPanel>
 {
-    public static StatusPanel Instance { get; private set; }
-
     [Header("Panel")]
     [SerializeField] private RectTransform panelRect;
 
@@ -38,9 +36,8 @@ public class StatusPanel : MonoBehaviour
     private bool justShown;
     private Canvas canvas;
 
-    private void Awake()
+    protected override void OnSingletonAwake()
     {
-        Instance = this;
         canvas = GetComponentInParent<Canvas>();
         gameObject.SetActive(false);
     }

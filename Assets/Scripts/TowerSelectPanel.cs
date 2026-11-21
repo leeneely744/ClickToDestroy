@@ -1,9 +1,8 @@
 using TMPro;
 using UnityEngine;
 
-public class TowerSelectPanel : MonoBehaviour
+public class TowerSelectPanel : Singleton<TowerSelectPanel>
 {
-    public static TowerSelectPanel Instance;
     private Vector3 currentSpawnPosition;
     private TowerPlace currentTowerPlace;
     private Money moneyController;
@@ -18,9 +17,8 @@ public class TowerSelectPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cannonCostText;
     [SerializeField] private TextMeshProUGUI guardianCostText;
 
-    void Awake()
+    protected override void OnSingletonAwake()
     {
-        Instance = this;
         gameObject.SetActive(false);
 
         moneyController = FindAnyObjectByType<Money>();

@@ -12,18 +12,15 @@ using UnityEngine;
 ///           ├── MessageText : TextMeshProUGUI → messageText に割当て
 ///           └── OkButton    : Button (onClick → OnCloseClick)
 /// </summary>
-public class TutorialHintPanel : MonoBehaviour
+public class TutorialHintPanel : Singleton<TutorialHintPanel>
 {
-    public static TutorialHintPanel Instance { get; private set; }
-
     [SerializeField] private TMP_Text messageText;
 
     private Action onClosed;
     private float previousTimeScale = 1f;
 
-    private void Awake()
+    protected override void OnSingletonAwake()
     {
-        Instance = this;
         gameObject.SetActive(false);
     }
 
