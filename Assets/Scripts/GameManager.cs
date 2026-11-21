@@ -1,10 +1,7 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager Instance { get; private set; }
-
     [Header("Core References")]
     [SerializeField] private ScoreBoard scoreBoard;
     [SerializeField] private Money moneyUi;
@@ -18,15 +15,8 @@ public class GameManager : MonoBehaviour
     private int initialMoney;
     private bool isGameActive;
 
-    private void Awake()
+    protected override void OnSingletonAwake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
         CacheInitialValues();
     }
 
@@ -63,10 +53,6 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = true;
         Time.timeScale = 1f;
-
-        // static な移動モード状態はシーンをまたいで残るため、リトライ時に必ずクリアする
-        MoveModeCoordinator.Clear();
-        TutorialHintService.ClearRuntimeState();
 
         if (scoreBoard != null)
         {
@@ -128,8 +114,12 @@ public class GameManager : MonoBehaviour
 
     public void RetryGame()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameFlow.RetryCurrentStage();
+    }
+
+    public void ReturnToStageSelect()
+    {
+        GameFlow.ReturnToStageSelect();
     }
 
     public void ExitGame()
